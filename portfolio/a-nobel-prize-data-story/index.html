@@ -1,0 +1,573 @@
+<!DOCTYPE html><!-- Last Published: Wed Aug 26 2026 09:33:56 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="www.storiesofdata.com" data-wf-page="65858d1142358b83e2700000" data-wf-site="6405ef20051268cd8ed6af48" lang="en"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect"/><title>A Nobel Prize Data Story - Power BI Project</title><meta content="An exploration into the Nobel Prize history with Power BI" name="description"/><meta content="A Nobel Prize Data Story - Power BI Project" property="og:title"/><meta content="An exploration into the Nobel Prize history with Power BI" property="og:description"/><meta content="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/65eec34a4a0b7ff56c04e22c_bold_portfolio_SoD_OGI.jpg" property="og:image"/><meta content="A Nobel Prize Data Story - Power BI Project" name="twitter:title"/><meta content="An exploration into the Nobel Prize history with Power BI" name="twitter:description"/><meta content="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/65eec34a4a0b7ff56c04e22c_bold_portfolio_SoD_OGI.jpg" name="twitter:image"/><meta property="og:type" content="website"/><meta content="summary_large_image" name="twitter:card"/><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="google-site-verification=JLjm6wIyTtC7Gv_0iXyLSNs_1KhYnHqZtgm2aDtLhR0" name="google-site-verification"/><link href="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/css/storiesofdata.webflow.shared.dcd2df6e1.css" rel="stylesheet" type="text/css"/><style>@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="2d6056ca-c599-6faf-6c71-c18d9358c1a4"] {display:none;}html.w-mod-js:not(.w-mod-ix) [data-w-id="132e568d-a115-6f04-c030-ad20e5b8e047"] {display:none;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f63551ea-8dcb-0872-c8e0-a23802d5cddf"] {display:none;}html.w-mod-js:not(.w-mod-ix) [data-w-id="60148d66-99d4-0211-82cc-8c798d015a81"] {display:none;}html.w-mod-js:not(.w-mod-ix) [data-w-id="13350fc0-4f96-125e-3222-72a14907e55b"] {display:none;}html.w-mod-js:not(.w-mod-ix) [data-w-id="f9b7ee40-8e87-9273-f477-2a8e0c51dc76"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcae"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9a"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc7"] {-webkit-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc8"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc9"] {opacity:1;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9e"] {-webkit-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;}}@media (max-width:991px) and (min-width:768px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc7"] {-webkit-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(50px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc8"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc9"] {opacity:1;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9e"] {-webkit-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(-300px, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;}}@media (max-width:767px) and (min-width:480px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc8"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc9"] {opacity:1;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9e"] {-webkit-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;}}@media (max-width:479px) {html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc8"] {opacity:0;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc9"] {opacity:1;}html.w-mod-js:not(.w-mod-ix) [data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9e"] {-webkit-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(nullpx, -100%, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0;}}</style><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect"/><script src="../../assets/ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic","Inconsolata:400,700"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/640b019094c46d81898b96d4_SoD_favicon.jpg" rel="shortcut icon" type="image/x-icon"/><link href="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/640b019587a187aca67a541a_SoD_webicon.jpg" rel="apple-touch-icon"/><script type="text/javascript">
+var _iub = _iub || [];
+_iub.csConfiguration = {"siteId":3966669,"cookiePolicyId":81160121,"lang":"en","storage":{"useSiteId":true}};
+</script>
+<script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3966669.js" async></script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/gpp/stub.js" async></script>
+<script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charset="UTF-8" async></script>
+
+
+<script src="../../assets/cdnjs.cloudflare.com/ajax/libs/bodymovin/5.6.10/lottie.min.js" async>
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script  async src="https://www.googletagmanager.com/gtag/js?id=G-BW55TZPSK3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-BW55TZPSK3');
+</script>
+
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "k1u65f5low");
+</script>
+
+<style>
+  
+  
+  /* Remove inner shadow from inputs on mobile iOS */
+textarea, input[type="text"],input[type="email"] {
+	-webkit-appearance: none !important;
+  -webkit-border-radius: 0 !important;
+}
+  
+  input[type=range] {
+  width: 150px;
+  margin: 5px 0;
+  background-color: transparent;
+  -webkit-appearance: none;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: #333333;
+  border: 0.2px solid #333333;
+  border-radius: 1.3px;
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  margin-top: -5.2px;
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #404040;
+}
+input[type=range]::-moz-range-track {
+  background: #333333;
+  border: 0.2px solid #333333;
+  border-radius: 1.3px;
+  width: 150px;
+  height: 5px;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 6px 0;
+  color: transparent;
+  width: 150px;
+  height: 5px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #262626;
+  border: 0.2px solid #333333;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #333333;
+  border: 0.2px solid #333333;
+  border-radius: 2.6px;
+}
+input[type=range]::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 0;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #333333;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #404040;
+}
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align:auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type=range] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+  
+</style>
+
+<!-- [Attributes by Finsweet] CMS Filter -->
+<script async src="../../assets/cdn.jsdelivr.net/npm/@finsweet/attributes-cmsfilter@1/cmsfilter.js"></script>
+<!-- [Attributes by Finsweet] CMS Nest -->
+<script async src="../../assets/cdn.jsdelivr.net/npm/@finsweet/attributes-cmsnest@1/cmsnest.js"></script>
+
+<style>
+input[type="checkbox"]:checked + span {
+    background-color:#00d18e;
+}
+
+.range-wrapper{
+ display: flex;
+ flex-direction: horizontal;
+ align-items: center;
+}
+
+
+
+/*slider CSS */
+input[type=range] {
+  margin: 6px 5px;
+  background-color: transparent;
+  -webkit-appearance: none;
+  accent-color: #00d18e;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  background: #333333;
+  border: 0;
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+}
+input[type=range]::-webkit-slider-thumb {
+  margin-top: -6px;
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 1px solid #00d18e;
+  border-radius: 15px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #333;
+}
+input[type=range]::-moz-range-track {
+  background: #333333;
+  border: 0;
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+}
+input[type=range]::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 1px solid #00d18e;
+  border-radius: 15px;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  background: transparent;
+  border-color: transparent;
+  border-width: 7px 0;
+  color: transparent;
+  width: 100%;
+  height: 3px;
+  cursor: pointer;
+}
+input[type=range]::-ms-fill-lower {
+  background: #00d18e;
+  border: 0;
+}
+input[type=range]::-ms-fill-upper {
+  background: #333333;
+  border: 0;
+}
+input[type=range]::-ms-thumb {
+  width: 15px;
+  height: 15px;
+  background: #00d18e;
+  border: 1px solid #00d18e;
+  border-radius: 15px;
+  cursor: pointer;
+  margin-top: 0px;
+  /*Needed to keep the Edge thumb centred*/
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #00d18e;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #333;
+}
+/*TODO: Use one of the selectors from https://stackoverflow.com/a/20541859/7077589 and figure out
+how to remove the virtical space around the range input in IE*/
+@supports (-ms-ime-align:auto) {
+  /* Pre-Chromium Edge only styles, selector taken from hhttps://stackoverflow.com/a/32202953/7077589 */
+  input[type=range] {
+    margin: 0;
+    /*Edge starts the margin from the thumb, not the track as other browsers do*/
+  }
+}
+
+output {
+	maring-left: 5px;
+	color: #828282;
+}
+
+</style></head><body class="cs-body"><div data-animation="default" class="case-study-nav w-nav" data-easing2="ease" data-easing="ease" data-collapse="medium" role="banner" data-no-scroll="1" data-duration="400" data-doc-height="1"><div class="cs-navbar-container"><a href="/" data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc98" class="cs-brand w-nav-brand"><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/640aea7c2e2b16ce3b0118ac_SoD_logo%20mark.svg" loading="lazy" alt="" class="brand-img"/><div data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9a" class="nav-tooltip logo"><div class="tooltip-text black">Go to storiesofdata.com homepage</div><div class="tooltip-triangle green logo"></div></div></a><div data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dc9e" class="navmenu"><div class="case-study-menu"><div class="menu-projects-list"><a href="/portfolio/a-nobel-prize-data-story" aria-current="page" class="projects-list-link w-inline-block w--current"><div fs-cmsfilter-field="name">A Nobel Prize Data Story</div></a><a href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">Multi Line Chart with Custom Tooltips</div></a><a href="/portfolio/category-comparison-bar-chart-power-bi-custom-visual" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">Category Comparison Bar Chart</div></a><a href="/portfolio/a-romanian-data-story" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">A Romanian Data Story</div></a><a href="/portfolio/btr-business-case-study" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">Power BI and Data Management for a US-based Construction Company</div></a><a href="/portfolio/chainformation-business-case-study" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">How a Swedish SaaS Leveraged Power BI Embedded for Data Analytics in Their Mature Product</div></a><a href="/portfolio/building-a-better-matrix-visual-with-deneb-in-power-bi" class="projects-list-link w-inline-block"><div fs-cmsfilter-field="name">Building a better matrix visual with Deneb in Power BI</div></a></div><div class="menu-projects-nav-wrapper"><div class="projects-nav menu"><div class="projects-nav-btn-wrapper"><a id="prev-project" data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcad" href="/portfolio/a-romanian-data-story" class="prev-proj-btn white w-button"></a><div data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcae" class="nav-tooltip"><div class="tooltip-text">Previous article</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + A</div></div><div class="tooltip-triangle"></div></div></div><div class="projects-count-wrapper"><div class="projects-count-text project">PROJECT</div><div class="projects-count-text current">1</div><div class="projects-count-text">/</div><div class="projects-count-text all">7</div></div><div class="projects-nav-btn-wrapper"><a id="next-project" data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcbf" href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual" class="next-proj-btn white w-button"></a><div style="opacity:0" class="nav-tooltip"><div class="tooltip-text">Next article</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + D</div></div><div class="tooltip-triangle"></div></div></div></div></div></div></div><div data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc7" class="brainmap-button w-nav-button"><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/641c5a4fff40dcc1ffe2d58e_brainmap%20open.svg" loading="lazy" data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc8" alt="" class="brainmap-open"/><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/641c5a4ffcbc24473aba2fc2_brainmap%20closed.svg" loading="lazy" data-w-id="621dd9b2-fe86-22bb-eb11-7b6acb10dcc9" alt="" class="brainmap-closed"/><div class="nav-tooltip toolbar"><div class="tooltip-text black">Open toolbar</div><div class="tooltip-triangle green"></div></div></div><div class="menu-overlay"></div></div></div><div class="case-study-secondary-navigation hide"><div class="views-nav"><div class="zoom-out-wrapper"><a id="zoom-out-gv" data-w-id="507e49a5-32a2-f0c3-496e-5833bc7fb5d4" href="#" class="zoom-out-btn gv w-button"></a><a id="zoom-out-mv" data-w-id="4156ac08-f0f4-b2b6-5105-b0c97c1e3efa" href="#" class="zoom-out-btn mv w-button"></a><div data-w-id="2d6056ca-c599-6faf-6c71-c18d9358c1a4" class="nav-tooltip zoom"><div class="tooltip-text">Less detail</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + Q</div></div><div class="tooltip-triangle"></div></div></div><div class="view-status-wrapper"><div class="progress-line"></div><div class="dot-wrapper"><div data-w-id="dd61ed95-0528-f1da-ad76-ed3614d099a2" class="pv-dot-wrapper"><a id="set-pv" data-w-id="339b1efc-9fb0-d0b1-eca5-52fa2f1077df" href="#" class="pv-dot-link w-inline-block"></a><div class="pv-dot"></div><div data-w-id="f63551ea-8dcb-0872-c8e0-a23802d5cddf" class="nav-tooltip dots"><div class="tooltip-text">Summary view</div><div class="tooltip-triangle"></div></div></div><div data-w-id="e7e9324e-4d24-5ac3-4394-f3a2e5b961bd" class="mv-dot-wrapper"><div class="mv-dot"></div><a id="set-mv" data-w-id="4eb196d8-6cff-d76f-97d6-6845f3d32a7a" href="#" class="mv-dot-link w-inline-block"></a><div data-w-id="60148d66-99d4-0211-82cc-8c798d015a81" class="nav-tooltip dots"><div class="tooltip-text">Key subjects view</div><div class="tooltip-triangle"></div></div></div><div data-w-id="3fc5ad6d-3b70-180e-9db2-aa7f34fba05e" class="gv-dot-wrapper"><div class="gv-dot"></div><a id="set-gv" data-w-id="d37dad6c-45c5-d85e-bf35-027c5854cbef" href="#" class="gv-dot-link w-inline-block"></a><div data-w-id="13350fc0-4f96-125e-3222-72a14907e55b" class="nav-tooltip dots"><div class="tooltip-text">Detailed view</div><div class="tooltip-triangle"></div></div></div></div></div><div class="zoom-in-wrapper"><a id="zoom-in-mv" data-w-id="493ef690-5456-b886-d36f-c99a51fb224d" href="#" class="zoom-in-btn mv w-button"></a><a id="zoom-in-gv" data-w-id="7f09f319-b5f4-bd12-52dc-90d4afa236bf" href="#" class="zoom-in-btn gv w-button"></a><div data-w-id="132e568d-a115-6f04-c030-ad20e5b8e047" class="nav-tooltip zoom"><div class="tooltip-text">More detail</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + S</div></div><div class="tooltip-triangle"></div></div></div><div data-w-id="76f9972a-b332-7428-17a9-193c2598a805" style="opacity:0;display:none" class="nav-tooltip cs-nav"><div class="tooltip-text black">You are viewing <strong>Summary view</strong>. You can go deeper into the project with this navigation.</div><div class="tooltip-triangle green"></div></div></div></div><div class="cs-planetary-wrapper"><div class="current-cs-thumbnail"><div class="pv-embedd-wrapper w-embed w-iframe"><iframe 
+sandbox="allow-scripts"
+title="A Nobel Prize Data Story Power BI Report" 
+src="https://app.powerbi.com/view?r=eyJrIjoiMDMwZjkxMmItYWUzZC00YTM1LWIwMjktYTNiMzhmOWJmMjRjIiwidCI6ImVlY2VlYzgxLTRiZTUtNGU4ZS1hM2VlLWQwYjMwYjVlMDM2YiIsImMiOjl9" 
+frameborder="0" 
+width="100%" 
+height="100%"
+allowFullScreen="true"
+>
+</iframe></div><a href="#" class="invisible-link w-inline-block"></a><div class="projects-nav"><div class="projects-nav-btn-wrapper"><a id="prev-project" data-w-id="f9b7ee40-8e87-9273-f477-2a8e0c51dc75" href="/portfolio/advanced-matrix-visual-built-with-deneb-in-power-bi" class="prev-proj-btn w-button"></a><div data-w-id="f9b7ee40-8e87-9273-f477-2a8e0c51dc76" class="nav-tooltip"><div class="tooltip-text">Previous article</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + A</div></div><div class="tooltip-triangle"></div></div></div><div class="projects-count-wrapper"><div class="projects-count-text project">PROJECT</div><div class="projects-count-text current">2 </div><div class="projects-count-text">/</div><div class="projects-count-text all">7</div></div><div class="projects-nav-btn-wrapper"><a id="next-project" data-w-id="f9b7ee40-8e87-9273-f477-2a8e0c51dc87" href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual" class="next-proj-btn w-button"></a><div style="opacity:0" class="nav-tooltip"><div class="tooltip-text">Next article</div><div class="tooltip-shortcut"><div class="tooltip-text shortcut">Ctrl + D</div></div><div class="tooltip-triangle"></div></div></div></div></div></div><div class="cs-mountaintop-wrapper"><div class="cs-mountaintop-content"><div class="sticky-mv"><div id="w-node-_5e619f59-3d68-0ff3-272b-adde2ee5dfbf-e2700000" class="sticky-img-mv nobel-intro"></div><div class="scrollable-content-mv"><h1 class="cs-title">A Nobel Prize Data Story</h1><div class="rich-text-block-4 w-richtext"><h2>How did the Nobel Prize come to be? </h2><p>According to its founder, Alfred Bernhard Nobel - a Swedish chemist, engineer, inventor, businessman, and philanthropist, who established it in 1895, it was for those</p><blockquote><strong>&quot;who shall have conferred the greatest benefit to humankind&quot;</strong></blockquote></div><div class="rich-text-block-4 w-richtext"><h3><strong>Has every year since its establishment seen a constant number of Nobel Prizes awarded?</strong></h3><p>Let&#x27;s dive deeper - a closer look at the history of the Nobel Prize reveals its attunement to major events that took place, namely the two world wars of the previous century, which saw a significant decrease (WWI) or, worse, a complete absence (WWII) of Nobel Prizes:</p></div></div></div><div class="mv-rich-text"><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4f54e757bb50f245be_Timeline-WWs.gif" loading="lazy" alt=""/><div class="rich-text-block-4 w-richtext"><h4><strong>What other changes does following Nobel Prize trends across the years reveal about potential directions the world is going in?</strong></h4><p>For starters, from the timeline above it can be immediately inferred that the number of prizes awarded has almost doubled since its beginnings, from an average of 7 prizes per year in its first half a decade, to over 12 in the past few years.</p></div><div class="rich-text-block-4 w-richtext"><h3><strong>Can you get a Nobel Prize in just about anything, or are there specific fields that get awards?</strong></h3><p>The 6 fields for the Nobel Prize awards are: Chemistry, Economic Sciences, Literature, Medicine, Peace, Physics.</p><p>‍</p></div><div class="rich-text-block-4 w-richtext"><h2><strong>Is it a global award, that can be earned by people across the world?</strong></h2><p>Yes, it is global, and below is a little preview of how the fields mentioned above are distributed as being most popular in certain parts of the world:</p><figure style="max-width:817px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f12af69b05eec7812aa_Chord.gif" loading="lazy" alt=""/></div></figure><figure style="max-width:1033px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4f10cb49f09af17b77_Age_groups.gif" loading="lazy" alt=""/></div></figure></div><div class="rich-text-block-4 w-richtext"><p>One of the first things that we can take away from the charts above, as relating to the last question asked, is that, especially in traditional sciences (Medicine, Physics, Chemistry), there has been a trend of laureates winning prizes later in life. If the average age of those who won an award in the first part of the previous century was around 50 years old, it is now over 65.</p><p>This is the other side of the coin for the fact that we have more, many more scientists in the world today than we did back then, and therefore the competition is much higher, therefore it takes longer to have a breakthrough that gets recognized.</p><figure style="max-width:1199px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5dcfcd53141edadb41_WorldMap-View.gif" loading="lazy" alt=""/></div></figure><figure style="max-width:1293px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4feec436baeb9fbc80_Award-Age.png" loading="lazy" alt=""/></div></figure><figure style="max-width:1289px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4f67399e195af9e7d2_Female-Laureates.png" loading="lazy" alt=""/></div></figure></div><div class="rich-text-block-4 w-richtext"><h2><strong>Laureates who stood ouT</strong></h2><p>‍</p></div><div class="_3col-image-wrapper"><div id="w-node-_6fb67db8-84a7-3289-6869-107816e8b38e-e2700000" class="laureate-block"><h3 class="h3-marginless">Oldest Laureate</h3><h4>John B. Goodenough</h4><p>Award Year: <span class="highlight">2019</span></p><p>Field: <span class="highlight">Chemistry</span></p><p>Country: <span class="highlight">Germany</span></p><p>Award Age: <span class="highlight">97</span></p></div><div id="w-node-_6fb67db8-84a7-3289-6869-107816e8b3a3-e2700000" class="laureate-block"><h3 class="h3-marginless">Youngest Laureate</h3><h4>Malala Yousafzai</h4><p>Award Year: <span class="highlight">2014</span></p><p>Field: <span class="highlight">Peace</span></p><p>Country: <span class="highlight">Pakistan</span></p><p>Award Age: <span class="highlight">17</span></p></div><div id="w-node-_6fb67db8-84a7-3289-6869-107816e8b3b8-e2700000" class="laureate-block"><h3 class="h3-marginless">First Female Awarded</h3><h4>MArie Curie</h4><p>Award Year: <span class="highlight">1903</span></p><p>Field: <span class="highlight">Physics</span></p><p>Country: <span class="highlight">Poland</span></p><p>Award Age: <span class="highlight">36</span></p></div></div><div class="rich-text-block-4 w-richtext"><figure style="max-width:810px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b54714712681ab7da_Multiple_prizes.png" loading="lazy" alt=""/></div></figure><p>‍</p><h2><strong>So, given all of this, what are my chances of being awarded a Nobel Prize in my lifetime?</strong></h2></div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b4618830e8aff45d7_playground.gif" loading="lazy" alt=""/></div></div></div><div class="cs-grassroot-wrapper"><div class="cs-grassroot-content"><div class="gv-sticky left"><div id="w-node-_7ba73313-c0f6-aecd-a2a4-a2afa8a55815-e2700000" class="stickyimg-gv nobel-prize"></div><div class="gv-sticky-content"><h1 class="cs-title">The Analysis</h1><div class="tags-wrapper"><div class="tag">data story</div><div class="tag">Power BI</div></div><div class="w-richtext"><h2><strong>How did the Nobel Prize come to be? </strong></h2><p><br/>In this section we will dive deeper in all the topics we analyzed about the Nobel prize laureates and we&#x27;ll do an exploratory analysis starting and we&#x27;ll answer the following questions.<br/><br/><strong>- Who can be awarded a Nobel Prize?</strong><br/><strong><br/>- How do the Nobel Prize awards look over the years?<br/><br/>- How long does it usually take to have an article awarded?<br/><br/>- How many women have won a Nobel Prize?<br/><br/>- What does it take to be awarded a Nobel Prize?</strong></p></div></div></div><div id="w-node-_1b997da7-60ee-867b-7d8e-b89d1cace6f5-e2700000" class="gv-richt-text"><div class="w-richtext"><h3><strong>Who can be awarded a Nobel Prize?</strong></h3><p>Let&#x27;s start with an overview of the laureates who were awarded a Nobel Prize in the past 3 years:</p><figure style="max-width:1393px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f123c14f55486cb23df_2022_laureates.gif" loading="lazy" alt=""/></div><figcaption>Laureates in 2022</figcaption></figure><p>‍</p><figure style="max-width:1393px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f12a8e81559728fa3a2_2021_laureates.gif" loading="lazy" alt=""/></div><figcaption>Laureates in 2021</figcaption></figure><p>‍</p><figure style="max-width:1393px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f1385c47537ea115d4f_2020_laureates.gif" loading="lazy" alt=""/></div><figcaption>Laureates in 2020</figcaption></figure><p>‍</p><h4>So, it&#x27;s not just people who can get awards, there are organizations too?</h4><p>Indeed, there are two types of laureates - people and organizations, but the former are far more numerous, as you can see below:</p></div><div class="laureate-block"><p>Laureates: <span class="highlight">959</span></p><p>Organizations: 30</p><p>Total Nobel Prizes: <span class="highlight">989</span></p><p>Total Prize Amount (SEK): <span class="highlight">6.33bn</span></p></div><div class="w-richtext"><figure class="w-richtext-align-center w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b2cbcd93e238ed34b_prize_portion.png" loading="lazy" alt=""/></div></figure><p>‍</p><p>‍</p><h3><strong>how do the nobel prize awards look over the years?</strong></h3><p>Let&#x27;s dive deeper - a closer look at the history of the Nobel Prize reveals the impact of 2 major events, namely, the two world wars of the previous century, which saw a significant decrease (WWI) or, worse, a complete absence (WWII) of awards as seen in the timeline below.</p><figure style="max-width:1379pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4f54e757bb50f245be_Timeline-WWs.gif" loading="lazy" alt=""/></div></figure><p>‍</p><h4><strong>What other changes does following Nobel Prize trends across the years reveal about potential directions the world is going in?</strong></h4><p>For starters, from the timeline above, we can see that the number of prizes awarded has almost doubled since its beginnings, from an average of 7 prizes per year in its first half a decade, to over 12 in the past few years.</p><p>‍</p><p><strong>Why is that? Is it easier to win a Nobel Prize today than it was back then?</strong></p><p>Not at all, on the contrary perhaps, as we will later see.</p><p>Instead, this could be explained by the fact that in the first half of the 20th century there were only around 1000 physicists, as Gustav Källstrand, a senior curator at the Nobel Museum, stated, while today there are an estimated one million out there. What this means is that there were far fewer people back then who could be awarded a Nobel Prize, and the numbers show that.</p><p>‍</p><h4><strong>Has this fact of there being fewer scientists in the world back then had any other implications on Nobel Prize trends?</strong></h4><p>Yes, let&#x27;s take a look at the two graphs below, a line chart revealing how the average laureate award age has changed through the years, and a bar chart showing fields and age groups with most laureates:</p><figure style="max-width:1293pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4feec436baeb9fbc80_Award-Age.png" loading="lazy" alt=""/></div></figure><p>‍</p><figure style="max-width:1033pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f4f10cb49f09af17b77_Age_groups.gif" loading="lazy" alt=""/></div></figure><p>‍</p><p>One of the first things that we can take away from the charts above, is that, especially in traditional sciences (Medicine, Physics, Chemistry), there has been a trend of laureates winning prizes later in life. If the average age of those who won an award in the first part of the previous century was around 50 years old, now the average is 65.</p><p>We have more, many more scientists in the world today than we did back then, and therefore the competition is much higher. <br/>‍</p><p><strong>Wait, so you don&#x27;t get a Nobel Prize immediately after your pioneering work is complete? Doesn&#x27;t making an important discovery automatically grant you an award the following year?</strong></p><p>‍</p><p>With thousands of people making discoveries every year, and a really high validation standard from the Nobel Prize committee, it can take many years for someone to win an award.</p><p>The violin graph below puts emphasis on just that - the average time between publishing an article and getting recognized with a Nobel Prize in traditional sciences:</p><figure style="max-width:1215pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b77257bb5f0a0d52f_violin_graph.gif" loading="lazy" alt=""/></div></figure><p>The average number of years between the publication of the article and getting an award in Chemistry and Medicine is 17 years, while in Physics it&#x27;s over 18 years.</p><p>‍</p><p><strong>So what&#x27;s up with these fields, and why do they see longer waiting times than the other three fields (Economic Sciences, Literature and Peace)?</strong></p><p>Once again, general events in the history of the last century show up in the Nobel Prize numbers, given that the first part of the 20th century saw a scientific revolution, especially with Physics being an incredibly rapidly-growing field (remember Einstein?).</p><p>Therefore, with the world and thus the Nobel committee being highly interested in it, they were fast at recognizing achievements so they could help advancing the field.</p><p>On the other hand, in the Field of Peace, the story is quite different, having laureates follow the reverse aging trend, as seen below.</p><figure style="max-width:1406pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b3d201a7869f29424_peace_award_age_trends.png" loading="lazy" alt=""/></div></figure><p>‍</p><p>A possible explanation of this shows perhaps another trend of the world today, where a fast recognition of breakthroughs that might help our world stay a stable place, so that we do not repeat the mistakes of our past, is deemed of utmost importance. </p><p>The Peace Prize Committee will not wait to see if a worthwhile peace measure will succeed completely over 20 years, but instead choose to reward it timely, so that such endeavors are encouraged.</p><p>Perhaps the most striking example of this is the story of the youngest laureate to win a Nobel Prize award to date, Malala Yousafzai, who was only 17 at the time of receiving her Nobel Prize award.</p><figure style="max-width:1031pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5aaf69b057327816b0_Gender-Malala.gif" loading="lazy" alt=""/></div></figure><p>‍</p><p><strong>Speaking of striking trends, and with the example of a female laureate above, what does the male to female ratio look like in the Nobel Prize world?</strong></p><p>Like with all the other trends, the subject of gender gaps across our history is also part of the Nobel Prize story. </p><p>So, despite all the present humanitarian efforts of the world to bridge these gaps, due to potential Nobel laureates having to wait years for a prize, the currently highly unbalanced pyramid below depicts how the world looked a few decades ago.</p><figure style="max-width:785pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f59dc178e102b5f9f5c_gender_pyramid.png" loading="lazy" alt=""/></div></figure><p>‍</p><p>However, this is changing, as you can see in the line chart below, which has largely been supported by the fields in which females see the highest representation, namely Literature and Peace:</p><figure style="max-width:1172pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5a5471475daf1ab7d8_Gender-Trends.gif" loading="lazy" alt=""/></div></figure><p>‍</p><p>Even though men are still much more numerous in science, diversity is improving and the backlog for prizes (prizes carrying over from the past) is clearing, which will likely slowly make room for more female representation in the Nobel Prize.</p><p>One story that stands out on this subject is that of Marie Curie, the first female awarded a Nobel Prize, in 1903. When she was not nominated for the prize that year, her husband and a fellow spontaneous radiation researcher protested and refused the award, which forced the panel, relying on a technicality, to accept her late submission from 1902.</p></div><div class="laureate-block"><h3 class="h3-marginless">First Female Awarded</h3><h4>MArie Curie</h4><p>Award Year: <span class="highlight">1903</span></p><p>Field: <span class="highlight">Physics</span></p><p>Country: <span class="highlight">Poland</span></p><p>Award Age: <span class="highlight">36</span></p></div><div><div class="w-richtext"><h4><strong>Who else stood out in the history of the Nobel Prize, apart from Malala Yousafzai and Marie Curie?</strong></h4><p>Below are a few other laureates who stood out for various reasons:</p></div></div><div class="_3col-image-wrapper"><div id="w-node-a32f539f-e991-486e-d649-afcad3cb5b75-e2700000" class="laureate-block"><h3 class="h3-marginless">Oldest Laureate</h3><h4>John B. Goodenough</h4><p>Award Year: <span class="highlight">2019</span></p><p>Field: <span class="highlight">Chemistry</span></p><p>Country: <span class="highlight">Germany</span></p><p>Award Age: <span class="highlight">97</span></p></div><div id="w-node-a32f539f-e991-486e-d649-afcad3cb5b8a-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prize in Chemistry</h3><h4>Jacobus H. van &#x27;t Hoff</h4><p>Award Year: <span class="highlight">1901</span></p><p>Field: <span class="highlight">Chemistry</span></p><p>Country: <span class="highlight">The Netherlands</span></p><p>Award Age: <span class="highlight">49</span></p></div><div id="w-node-_01532e85-1b56-9aa7-ca53-b27c6d4ffb90-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prize in Medicine</h3><h4>Emil von behring</h4><p>Award Year: <span class="highlight">1901</span></p><p>Field: <span class="highlight">Medicine</span></p><p>Country: <span class="highlight">Poland</span></p><p>Award Age: <span class="highlight">47</span></p></div><div id="w-node-a32f539f-e991-486e-d649-afcad3cb5b9f-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prize in Physics</h3><h4>Wilhelm conrad Röntgen</h4><p>Award Year: <span class="highlight">1901</span></p><p>Field: <span class="highlight">Physics</span></p><p>Country: <span class="highlight">Germany</span></p><p>Award Age: <span class="highlight">56</span></p></div><div id="w-node-_473780d2-0b48-2aeb-5716-6bb5c133e9c3-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prize in Peace</h3><h4>Frédéric Passy</h4><p>Award Year: <span class="highlight">1901</span></p><p>Field: <span class="highlight">Peace</span></p><p>Country: <span class="highlight">France</span></p><p>Award Age: <span class="highlight">79</span></p></div><div id="w-node-_700d859e-48e6-a64c-45c5-454b6d99ee41-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prize in Literature</h3><h4>Sully Prudhomme</h4><p>Award Year: <span class="highlight">1901</span></p><p>Field: <span class="highlight">Literature</span></p><p>Country: <span class="highlight">France</span></p><p>Award Age: <span class="highlight">62</span></p></div><div id="w-node-_669c2ff9-1c76-99ae-adbb-21b6ed54e378-e2700000" class="laureate-block"><h3 class="h3-marginless">First Nobel Prizes in economic Sciences</h3><h4>Jan Tinbergen</h4><p>Award Year: <span class="highlight">1969</span></p><p>Field: <span class="highlight">Economic Sciences</span></p><p>Country: <span class="highlight">The Netherlands</span></p><p>Award Age: <span class="highlight">66</span></p><h4>Ragnar Frisch</h4><p>Award Year: <span class="highlight">1969</span></p><p>Field: <span class="highlight">Economic Sciences</span></p><p>Country: <span class="highlight">Norway</span></p><p>Award Age: <span class="highlight">74</span></p></div><div id="w-node-e5925533-f799-17e1-08e7-568e1e3e85c3-e2700000" class="laureate-block"><h3 class="h3-marginless">Laureates who declined the award</h3><h4>Le Duc Tho</h4><p>Award Year: <span class="highlight">1973</span></p><p>Field: <span class="highlight">Peace</span></p><p>Country: <span class="highlight">Vietnam</span></p><p>Award Age: <span class="highlight">62</span></p><h4>JEan-Paul Sartre</h4><p>Award Year: <span class="highlight">1964</span></p><p>Field: <span class="highlight">Literature</span></p><p>Country: <span class="highlight">France</span></p><p>Award Age: <span class="highlight">59</span></p></div></div><div class="w-richtext"><p>‍</p><p>‍</p><figure style="max-width:810px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b54714712681ab7da_Multiple_prizes.png" loading="lazy" alt=""/></div></figure><p>‍</p><figure style="max-width:30%" class="w-richtext-align-floatright w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f591d360d42ef09828f_countries_Most_laureates.png" loading="lazy" alt=""/></div></figure><p>‍</p><h4><strong>It seems that people all over the world are able to be awarded a Nobel Prize, are there countries that stand out in terms of how many laureates they have had?</strong></h4><p>This can be looked from two different angles: we can simply assess the highest number of laureates in each country, which will yield the bar chart on the right:</p><p>Or, perhaps more accurately, we can look at the number of laureates per 10 million people from their own country:</p><figure style="max-width:1098px" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/6459ed7d705010ea2b1f08f9_world_map_density2.gif" loading="lazy" alt=""/></div></figure><p>‍</p><h3><strong>What does it take to be awarded a Nobel Prize?<br/>what is the motivation behind having your work recognized in such a way?</strong></h3><p>Certainly, a lot of spectacular work goes into making a breakthrough and being awarded a Nobel Prize. Behind all awards there are advancements in their respective fields, as well as a general contribution to the overall progress of the world. All this information, as well as lectures, photo gallery, and other resources, are available from the Nobel Prize Organization.</p><p>‍</p><figure style="max-width:1525pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/6459ed008cfb325508b314f8_motivation_with_search2.gif" loading="lazy" alt=""/></div></figure><p>‍</p><p>‍</p><p>All of this work entails the publication of (usually numerous) articles, out of which far fewer are deemed worthy of a Nobel Prize.</p><figure style="max-width:1405pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5e5dc1ef55f1ee5887_Articles_with_slicer.gif" loading="lazy" alt=""/></div></figure><p>‍</p><h2><strong>So, given all of this, what are my chances of being awarded a Nobel Prize in my lifetime?</strong></h2><p>You can play around a bit and see what other people with your specific background (from the same country, of the same gender and in the same age group) have won a Nobel Prize, and calculate your chances from there.</p><p>‍</p><figure style="max-width:1313pxpx" class="w-richtext-align-fullwidth w-richtext-figure-type-image"><div><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64493f5b4618830e8aff45d7_playground.gif" loading="lazy" alt=""/></div></figure><p>‍</p><p>‍</p><h2><strong>What motivated you to research this subject?</strong></h2><p>We were curious. We wanted to know about those who, in the silence of their laboratories and offices, or in the headlights of this world&#x27;s tumultuous tendencies, help us stay the course.</p><p>We have answered some of the questions we had, but also raised new ones.</p><p>Do you have any unanswered questions?</p><p>Our purpose was to also give birth to a project that can inform people on this particular subject.</p><p>So hopefully, you can take away your own bits that spark an interest in you from this story. Here&#x27;s some facts that we think our project can offer someone who is not familiar with the Nobel Prize:</p><p>‍</p><ul role="list"><li>The work behind this decade&#x27;s Nobel Prize winners, as well as their bio</li><li>Who in your country has won a Nobel Prize</li><li>How many women have won a Nobel Prize, and who was the first</li><li>The motivation behind every Nobel Prize awarded</li><li>Who is the youngest or oldest laureates by fields, or by country</li><li>Who has been awarded more than 1 Nobel Prize</li><li>The articles published by Nobel Prize laureates in Chemistry, Physics and Medicine</li><li>Who has been awarded a Nobel Prize in your country</li></ul><p>Data sources: <a href="https://www.nobelprize.org/about/developer-zone-2" target="_blank">https://www.nobelprize.org/about/developer-zone-2</a>, <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/6NJ5RN" target="_blank">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/6NJ5RN</a>, <a href="https://data.worldbank.org/indicator/SP.POP.TOTL" target="_blank">https://data.worldbank.org/indicator/SP.POP.TOTL</a></p><p>Authors: Vlad Mihanta, Andreea Cotfas, Bianca Banica</p></div></div><div class="scroll-overlay grassroot"></div></div></div><div class="white-background-wrapper"><div class="white-background"></div><div class="white-background-mv"></div><div class="white-background-gv"></div></div><div class="cookie-solution"><div fs-cc="banner" fs-cc-scroll="disable" class="cookie-banner"><div class="cookie-alogo-wrapper"><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/640aea7c2e2b16ce3b0118ac_SoD_logo%20mark.svg" loading="lazy" alt=""/></div><div><h3 class="h3-green">Cookie Consent</h3><p class="cookie-p">By using this website, you agree to the storing of cookies on your device to enhance site navigation, analyze site usage, and assist in our marketing efforts. View our <a href="/privacy-policy" class="pp-link">Privacy Policy</a> for more information.<br/></p><div fs-cc="manager"><a fs-cc="open-preferences" href="#" class="cookie-preferences-link">Preferences</a></div></div><div class="cookie-button-wrapper"><a fs-cc="deny" href="#" class="button white w-button">Deny</a><a fs-cc="allow" href="#" class="button w-button">Accept</a></div></div><div fs-cc-scroll="disable" fs-cc="preferences" class="cookie-preferences-popup-wrapper"><div class="cooki-preferences-popup"><div class="preferences-header"><h2 class="h2-white-2">Cookie Preferences</h2><a fs-cc="close" href="#" class="close-popup w-inline-block"><img src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/64635ffaea7395f6535aab74_icon_counter-plus.svg" loading="lazy" alt="" class="close-x"/></a></div><div class="cookie-preferences-content"><div><p>When you visit websites, they may store or retrieve data in your browser. This storage is often necessary for the basic functionality of the website. The storage may be used for marketing, analytics, and personalization of the site, such as storing your preferences. Privacy is important to us, so you have the option of disabling certain types of storage that may not be necessary for the basic functioning of the website. Blocking categories may impact your experience on the website. <a href="https://www.osano.com/legal/cookies" target="_blank">More Infomartion</a><br/></p><a fs-cc="allow" href="#" class="button w-button">Allow All</a><h3>Manage Consent Preferences<br/></h3><div class="consent-category"><div class="category-header"><h4 class="consent-h4">Essential</h4><h5>Always active</h5></div><p>These items are required to enable basic website functionality.<br/></p></div><div class="consent-category"><div class="category-header"><h4 class="consent-h4">Marketing<br/></h4><div class="html-embed w-embed"><style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #68bd9b;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #68bd9b;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+<label class="switch">
+  <input type="checkbox" fs-cc-checkbox="marketing">
+  <span class="slider round"></span>
+</label></div></div><p>These items are used to deliver advertising that is more relevant to you and your interests. They may also be used to limit the number of times you see an advertisement and measure the effectiveness of advertising campaigns. Advertising networks usually place them with the website operator’s permission.<br/></p></div><div class="consent-category"><div class="category-header"><h4 class="consent-h4">Personalization<br/></h4><div class="html-embed w-embed"><style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #68bd9b;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #68bd9b;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+<label class="switch">
+  <input type="checkbox" fs-cc-checkbox="personalization">
+  <span class="slider round"></span>
+</label></div></div><p>These items allow the website to remember choices you make (such as your user name, language, or the region you are in) and provide enhanced, more personal features. For example, a website may provide you with local weather reports or traffic news by storing data about your current location.<br/></p></div><div class="consent-category"><div class="category-header"><h4 class="consent-h4">Analytics</h4><div class="html-embed w-embed"><style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 5px;
+  bottom: 5px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #68bd9b;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #68bd9b;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 30px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+<label class="switch">
+  <input type="checkbox" fs-cc-checkbox="analytics">
+  <span class="slider round"></span>
+</label></div></div><p>These items help the website operator understand how its website performs, how visitors interact with the site, and whether there may be technical issues. This storage type usually doesn’t collect information that identifies a visitor.<br/></p></div></div></div><div class="cookie-button-wrapper-2 popup"><a fs-cc="deny" id="w-node-d9178e3a-a17e-b26b-f06b-e331cee63f5a-cee63f0e" href="#" class="button white faq w-button">Reject All</a><a fs-cc="submit" id="w-node-d9178e3a-a17e-b26b-f06b-e331cee63f5c-cee63f0e" href="#" class="button w-button">Confirm My Choices</a></div></div></div></div><script src="../../assets/d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8-daaeae5b.js" type="text/javascript"></script><script src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript"></script><script src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/js/webflow.schunk.24f0db4a4deef8b4.js" type="text/javascript"></script><script src="../../assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/js/webflow.4f6be90f.5e2faf1d532ccf01.js" type="text/javascript"></script><style>
+
+body::-webkit-scrollbar{
+    display: none;
+  }
+  
+/* Hide scrollbar for Chrome, Safari and Opera */
+.scrollable-content-mv::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important 
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.scrollable-content-mv {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+  overflow: -moz-scrollbars-none;
+  -ms-overflow-style: none;
+}
+
+</style>
+
+
+
+
+<!--Script for keyboard shortcuts -->
+<script>
+var levelState = 1;
+//level 1 = planetary view
+//level 2 = mountaintop view
+//level 3 = grassroot view
+
+function incrementLevelState(){
+	levelState++;
+  console.log(levelState);
+}
+
+function decrementLevelState(){
+	levelState--;
+  console.log(levelState);
+}
+
+function setPV(){
+	levelState=1;
+  console.log(levelState);
+}
+
+function setMV(){
+	levelState=2;
+  console.log(levelState);
+}
+
+function setGV(){
+	levelState=3;
+  console.log(levelState);
+}
+
+
+document.getElementById("zoom-in-mv").addEventListener("click", incrementLevelState);
+document.getElementById("zoom-in-gv").addEventListener("click", incrementLevelState);
+document.getElementById("zoom-out-mv").addEventListener("click", decrementLevelState);
+document.getElementById("zoom-out-gv").addEventListener("click", decrementLevelState);
+
+
+document.getElementById("set-pv").addEventListener("click", setPV);
+document.getElementById("set-mv").addEventListener("click", setMV);
+document.getElementById("set-gv").addEventListener("click", setGV);
+
+
+
+function shortcutForNextProj(){
+    document.getElementById('next-project').click();
+}
+
+function shortcutForPrevProj(){
+    document.getElementById('prev-project').click();
+}
+
+function shortcutForZoomInMV(){
+    document.getElementById('zoom-in-mv').click();
+}
+
+function shortcutForZoomInGV(){
+    document.getElementById('zoom-in-gv').click();
+}
+
+function shortcutForZoomOutMV(){
+    document.getElementById('zoom-out-mv').click();
+}
+
+function shortcutForZoomOutGV(){
+    document.getElementById('zoom-out-gv').click(); 
+}
+
+
+
+//Ctrl + Arrow-Right -> Next project
+document.addEventListener('keydown', (e) => {
+    if (e.key.toLowerCase() === 'd' && e.ctrlKey) {
+        e.preventDefault();
+        shortcutForNextProj();
+    } else if (e.key.toLowerCase() === 'a' && e.ctrlKey) {
+				e.preventDefault();
+				shortcutForPrevProj();
+    } else if (e.key.toLowerCase() === 's' && e.ctrlKey) {
+				e.preventDefault();
+        if (levelState == 1){
+        	shortcutForZoomInMV();
+        } else if (levelState == 2){
+        	shortcutForZoomInGV();
+        }
+    } else if (e.key.toLowerCase() === 'q' && e.ctrlKey) {
+				e.preventDefault();
+				if (levelState == 2){
+        	shortcutForZoomOutMV();
+        } else if (levelState == 3){
+        	shortcutForZoomOutGV();
+        }
+    }
+});
+
+
+
+
+</script>
+
+
+
+</body></html>
