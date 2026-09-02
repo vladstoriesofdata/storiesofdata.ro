@@ -1,0 +1,31 @@
+{
+  "name": "storiesofdata",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "cross-env PUBLIC_SITE_LOCALE=en PUBLIC_SITE_URL=http://localhost:4321 astro dev",
+    "dev:ro": "cross-env PUBLIC_SITE_LOCALE=ro PUBLIC_SITE_URL=http://localhost:4321 astro dev",
+    "build:com": "cross-env PUBLIC_SITE_LOCALE=en PUBLIC_SITE_URL=https://www.storiesofdata.com astro build --outDir dist/com",
+    "build:ro": "cross-env PUBLIC_SITE_LOCALE=ro PUBLIC_SITE_URL=https://www.storiesofdata.ro astro build --outDir dist/ro",
+    "build": "npm run build:com && npm run build:ro",
+    "preview:com": "astro preview --outDir dist/com",
+    "preview:ro": "astro preview --outDir dist/ro",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^6.0.3",
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^6.4.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "cross-env": "^10.1.0",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  }
+}
