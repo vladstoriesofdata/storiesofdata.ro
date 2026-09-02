@@ -34,7 +34,25 @@ SEED_PAGES = [
     f"{ORIGIN}/portfolio/btr-business-case-study",
     f"{ORIGIN}/portfolio/chainformation-business-case-study",
     f"{ORIGIN}/portfolio/building-a-better-matrix-visual-with-deneb-in-power-bi",
+    f"{ORIGIN}/articles/is-it-worth-hiring-a-microsoft-fabric-consultancy-in-2026",
+    f"{ORIGIN}/articles/full-pricing-breakdown-for-power-bi-fabric-and-power-bi-embedded-in-2026",
+    f"{ORIGIN}/articles/become-truly-data-driven-and-you-will-certainly-fail",
+    f"{ORIGIN}/articles/how-top-companies-capitalize-on-embedded-analytics",
+    f"{ORIGIN}/articles/microsoft-fabric-medallion-architecture-lessons-learned",
+    f"{ORIGIN}/data-stories/lines-on-maps-in-power-bi",
+    f"{ORIGIN}/data-stories/redesigning-linkedin-analytics",
 ]
+
+FORCE_REFRESH = {
+    f"{ORIGIN}/",
+    f"{ORIGIN}/articles/is-it-worth-hiring-a-microsoft-fabric-consultancy-in-2026",
+    f"{ORIGIN}/articles/full-pricing-breakdown-for-power-bi-fabric-and-power-bi-embedded-in-2026",
+    f"{ORIGIN}/articles/become-truly-data-driven-and-you-will-certainly-fail",
+    f"{ORIGIN}/articles/how-top-companies-capitalize-on-embedded-analytics",
+    f"{ORIGIN}/articles/microsoft-fabric-medallion-architecture-lessons-learned",
+    f"{ORIGIN}/data-stories/lines-on-maps-in-power-bi",
+    f"{ORIGIN}/data-stories/redesigning-linkedin-analytics",
+}
 
 DOWNLOAD_HOSTS = {
     "www.storiesofdata.com",
@@ -63,6 +81,7 @@ ATTR_RE = re.compile(
 ssl_ctx = ssl.create_default_context()
 lock = Lock()
 downloaded: dict[str, Path] = {}
+fresh_files: set[Path] = set()
 queued: set[str] = set()
 pending: list[str] = []
 failures: list[str] = []
@@ -242,9 +261,10 @@ def decode_text(data: bytes) -> str:
         return data.decode("latin-1")
 
 
-def process_url(url: str) -> tuple[str, Path | None, str, list[str]]:
+def process_url(url: str) -> tuple[str, Path | None, str, list[str], bool]:
     path = local_path_for(url)
-    if path.exists() and path.stat().st_size > 0:
+    fresh = url in FORCE_REFRESH or not path.exists() or path.stat().st_size == 0
+    if not fresh:
         data = path.read_bytes()
         content_type = ""
     else:
@@ -257,13 +277,16 @@ def process_url(url: str) -> tuple[str, Path | None, str, list[str]]:
         extra = extract_urls(decode_text(data))
     elif path.suffix.lower() == ".js" and "website-files.com" in url:
         extra = extract_urls(decode_text(data))
-    return url, path, content_type, extra
+    return url, path, content_type, extra, fresh
 
 
 def rewrite_files() -> None:
     log("Rewriting local URLs...")
     mapping: list[tuple[str, Path]] = sorted(downloaded.items(), key=lambda item: len(item[0]), reverse=True)
-    for url, path in list(downloaded.items()):
+    targets = {path for path in fresh_files if path.exists()}
+    if not targets:
+        targets = set(downloaded.values())
+    for path in targets:
         if not looks_text(path, "", path.read_bytes()[:300] if path.exists() else b""):
             continue
         original = decode_text(path.read_bytes())
@@ -274,8 +297,12 @@ def rewrite_files() -> None:
             if remote.startswith("https://"):
                 text = text.replace("http://" + remote[len("https://"):], href)
                 text = text.replace(remote.replace("https://", "//"), href)
+        text = re.sub(r' integrity="[^"]+"', "", text)
+        if path.suffix.lower() == ".html":
+            text = text.replace(' crossorigin="anonymous"', "")
         if text != original:
             path.write_text(text, encoding="utf-8", newline="\n")
+            log(f"  rewrote {path.relative_to(ROOT)}")
 
 
 def crawl() -> None:
@@ -296,10 +323,12 @@ def crawl() -> None:
             for future in as_completed(futures):
                 url = ""
                 try:
-                    url, path, _content_type, extra = future.result()
+                    url, path, _content_type, extra, fresh = future.result()
                     with lock:
                         downloaded[url] = path  # type: ignore[assignment]
-                    log(f"  OK {url}")
+                        if fresh:
+                            fresh_files.add(path)
+                    log(f"  {'NEW' if fresh else 'OK'} {url}")
                     for found in extra:
                         enqueue(found, url)
                         normalized = normalize_url(found, url)
