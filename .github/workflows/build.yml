@@ -1,0 +1,33 @@
+name: build
+on:
+  push:
+    branches: ["Prepare-for-production", "main"]
+  pull_request:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      PUBLIC_GA_ID: G-BW55TZPSK3
+      PUBLIC_CLARITY_ID: k1u65f5low
+      PUBLIC_IUBENDA_SITE_ID: "3966669"
+      PUBLIC_IUBENDA_POLICY_ID: "81160121"
+      PUBLIC_GOOGLE_SITE_VERIFICATION: JLjm6wIyTtC7Gv_0iXyLSNs_1KhYnHqZtgm2aDtLhR0
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-com
+          path: dist/com
+      - uses: actions/upload-artifact@v4
+        with:
+          name: site-ro
+          path: dist/ro
