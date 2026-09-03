@@ -14,6 +14,13 @@ test("seed article renders", async ({ page }) => {
   );
 });
 
+test("content images are served from the article path", async ({ request }) => {
+  const response = await request.get(
+    "/articles/how-to-turn-your-power-bi-reports-into-a-subscription-based-app/images/fea503ab.png",
+  );
+  expect(response.status()).toBe(200);
+});
+
 test("seed portfolio item renders", async ({ page }) => {
   await page.goto("/portfolio/a-romanian-data-story");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
