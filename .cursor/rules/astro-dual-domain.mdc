@@ -1,0 +1,33 @@
+---
+description: Stories of Data Astro dual-domain rebuild — locked decisions and current status
+alwaysApply: true
+---
+
+# Astro dual-domain site (current status)
+
+Work on branch `Prepare-for-production`. Do not re-scaffold Astro; it already lives at the repo root. The Webflow clone is under `legacy/` (reference only). Plan: `docs/superpowers/plans/2026-09-02-astro-dual-domain-site.md`. Tasks 1–14 are implemented.
+
+## Locked decisions
+
+- One Astro 6 **static** project. English → `.com`, Romanian → `.ro`. No Astro `i18n.domains`, no SSR.
+- Language switcher changes **domain**, not `/en` or `/ro`. Keep public paths (`/articles/...`, `/portfolio/...`, `/data-stories/...`).
+- English is source of truth. Every entry has `en.mdx` + `ro.mdx`. RO may be English with `translationStatus: untranslated` plus the banner.
+- `hreflang`: `en`, `ro`, `x-default` (x-default → `.com`).
+- Brand files in `src/assets/brand/`. Third-party IDs via `PUBLIC_*` env (see `.env.example`). Contact form disabled unless `PUBLIC_FORM_ENDPOINT` is set.
+
+## How to preview
+
+```powershell
+npm run dev          # English (.com locale) → http://localhost:4321
+npm run dev:ro       # Romanian locale on the same port
+npm run build        # dist/com and dist/ro
+npm run preview:com  # static English preview
+```
+
+The header RO/EN link points at live hosts, not localhost.
+
+## Known leftovers
+
+- Romanian copy still English. Terms body is empty (live `.com` `/terms-and-conditions` 404s).
+- Some portfolio pages are hero-only (Webflow had no unique long-form body).
+- Content images copy into `public/{articles,portfolio,data-stories}/` at build/dev time; those trees are gitignored.
