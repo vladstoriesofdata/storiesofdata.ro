@@ -155,7 +155,7 @@ package.json
 - Move: `index.html`, `articles/`, `portfolio/`, `data-stories/`, `privacy-policy/`, `assets/`, `scripts/` → `legacy/`
 - Keep: `.git/`, this plan file, existing git history
 
-- [ ] **Step 1: Create `legacy/` and move clone inputs**
+- [x] **Step 1: Create `legacy/` and move clone inputs**
 
 PowerShell (this machine):
 
@@ -166,7 +166,7 @@ Move-Item -Path index.html, articles, portfolio, data-stories, privacy-policy, a
 
 Expected: repo root no longer has `index.html`. `legacy/index.html` and `legacy/scripts/clone_site.py` exist. `docs/` stays at repo root.
 
-- [ ] **Step 2: Verify git still sees the moves**
+- [x] **Step 2: Verify git still sees the moves**
 
 ```powershell
 git status
@@ -174,7 +174,7 @@ git status
 
 Expected: renames/deletes of the cloned site, `legacy/` added. No surprise deletes of `.git`.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add -A
@@ -188,7 +188,7 @@ git commit -m "chore: move Webflow clone into legacy/ before Astro scaffold"
 **Files:**
 - Create: `package.json`, `astro.config.ts`, `tsconfig.json`, `.gitignore`, `.env.example`, `src/pages/index.astro`
 
-- [ ] **Step 1: Scaffold a minimal Astro 6 TypeScript project in-place**
+- [x] **Step 1: Scaffold a minimal Astro 6 TypeScript project in-place**
 
 Do **not** run the interactive wizard in a subdirectory. From repo root, after Task 1:
 
@@ -230,7 +230,7 @@ npm install astro @astrojs/mdx @astrojs/sitemap
 npm install -D typescript vitest @playwright/test cross-env
 ```
 
-- [ ] **Step 2: Add `.gitignore` and `.env.example`**
+- [x] **Step 2: Add `.gitignore` and `.env.example`**
 
 `.gitignore`:
 
@@ -257,7 +257,7 @@ PUBLIC_IUBENDA_POLICY_ID=81160121
 PUBLIC_GOOGLE_SITE_VERIFICATION=JLjm6wIyTtC7Gv_0iXyLSNs_1KhYnHqZtgm2aDtLhR0
 ```
 
-- [ ] **Step 3: Point `astro.config.ts` at a static site URL from env**
+- [x] **Step 3: Point `astro.config.ts` at a static site URL from env**
 
 ```ts
 import { defineConfig } from "astro/config";
@@ -275,7 +275,7 @@ export default defineConfig({
 
 Do **not** set `i18n.domains`. Do **not** set `output: "server"`.
 
-- [ ] **Step 4: Dev server smoke**
+- [x] **Step 4: Dev server smoke**
 
 ```powershell
 npm run dev
@@ -283,7 +283,7 @@ npm run dev
 
 Expected: `http://localhost:4321` serves the Astro starter. Stop the server after checking.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add package.json package-lock.json astro.config.ts tsconfig.json .gitignore .env.example src
@@ -299,7 +299,7 @@ git commit -m "chore: scaffold Astro 6 static project at repo root"
 - Test: `tests/unit/site.test.ts`
 - Create: `vitest.config.ts`
 
-- [ ] **Step 1: Write the failing tests**
+- [x] **Step 1: Write the failing tests**
 
 `vitest.config.ts`:
 
@@ -380,7 +380,7 @@ describe("peerUrl", () => {
 });
 ```
 
-- [ ] **Step 2: Run tests and confirm they fail**
+- [x] **Step 2: Run tests and confirm they fail**
 
 ```powershell
 npx vitest run tests/unit/site.test.ts
@@ -388,7 +388,7 @@ npx vitest run tests/unit/site.test.ts
 
 Expected: FAIL because `src/lib/site.ts` does not exist.
 
-- [ ] **Step 3: Implement `src/lib/site.ts`**
+- [x] **Step 3: Implement `src/lib/site.ts`**
 
 ```ts
 export type Locale = "en" | "ro";
@@ -459,7 +459,7 @@ export function hreflangLinks(
 }
 ```
 
-- [ ] **Step 4: Run tests and confirm they pass**
+- [x] **Step 4: Run tests and confirm they pass**
 
 ```powershell
 npx vitest run tests/unit/site.test.ts
@@ -467,7 +467,7 @@ npx vitest run tests/unit/site.test.ts
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add vitest.config.ts tests/unit/site.test.ts src/lib/site.ts
@@ -485,7 +485,7 @@ git commit -m "feat: add dual-domain site config helpers"
 - Create: `src/content/articles/microsoft-fabric-medallion-architecture-lessons-learned/en.mdx`
 - Create: `src/content/articles/microsoft-fabric-medallion-architecture-lessons-learned/ro.mdx`
 
-- [ ] **Step 1: Write collection helper tests**
+- [x] **Step 1: Write collection helper tests**
 
 `tests/unit/collections.test.ts`:
 
@@ -515,7 +515,7 @@ describe("isLocaleEntry", () => {
 });
 ```
 
-- [ ] **Step 2: Run tests and confirm they fail**
+- [x] **Step 2: Run tests and confirm they fail**
 
 ```powershell
 npx vitest run tests/unit/collections.test.ts
@@ -523,7 +523,7 @@ npx vitest run tests/unit/collections.test.ts
 
 Expected: FAIL because `src/lib/collections.ts` does not exist.
 
-- [ ] **Step 3: Implement helpers and the collection schema**
+- [x] **Step 3: Implement helpers and the collection schema**
 
 `src/lib/collections.ts`:
 
@@ -610,7 +610,7 @@ A practical account of migrating an older data platform to a Fabric medallion ar
 
 Seed `ro.mdx` with the same body and `translationStatus: untranslated`. Copy title/description from English for now.
 
-- [ ] **Step 4: Run unit tests**
+- [x] **Step 4: Run unit tests**
 
 ```powershell
 npx vitest run tests/unit/collections.test.ts
@@ -618,7 +618,7 @@ npx vitest run tests/unit/collections.test.ts
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/content.config.ts src/lib/collections.ts src/content/articles tests/unit/collections.test.ts
@@ -640,7 +640,7 @@ git commit -m "feat: add typed content collections for articles, portfolio, and 
 - Create: `src/styles/global.css`
 - Modify: `src/pages/index.astro`
 
-- [ ] **Step 1: Tokens + global CSS**
+- [x] **Step 1: Tokens + global CSS**
 
 `src/styles/tokens.css`:
 
@@ -672,7 +672,7 @@ a {
 }
 ```
 
-- [ ] **Step 2: SEO + layout**
+- [x] **Step 2: SEO + layout**
 
 `src/components/Seo.astro`:
 
@@ -795,7 +795,7 @@ const site = getSiteConfig(import.meta.env);
 </html>
 ```
 
-- [ ] **Step 3: Temporary homepage + 404**
+- [x] **Step 3: Temporary homepage + 404**
 
 `src/pages/index.astro`:
 
@@ -823,7 +823,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 ```
 
-- [ ] **Step 4: Build both locales**
+- [x] **Step 4: Build both locales**
 
 ```powershell
 npm run build
@@ -831,7 +831,7 @@ npm run build
 
 Expected: `dist/com/index.html` has `lang="en"` and hreflang to `.ro`. `dist/ro/index.html` has `lang="ro"` and hreflang to `.com`.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/layouts src/components src/pages src/styles
@@ -848,7 +848,7 @@ git commit -m "feat: add shared layout, SEO, and language switcher"
 - Create: `src/pages/articles/index.astro`
 - Create: `src/pages/articles/[slug].astro`
 
-- [ ] **Step 1: Dynamic article page**
+- [x] **Step 1: Dynamic article page**
 
 `src/pages/articles/[slug].astro`:
 
@@ -886,7 +886,7 @@ Listing page `src/pages/articles/index.astro` lists the same filtered collection
 
 `UntranslatedBanner.astro` English string: `This page is not translated yet.` Romanian string: `Această pagină nu este încă tradusă.` Pick copy from `site.locale`.
 
-- [ ] **Step 2: Build and inspect output**
+- [x] **Step 2: Build and inspect output**
 
 ```powershell
 npm run build:com
@@ -900,7 +900,7 @@ npm run build:ro
 
 Expected: the same path exists under `dist/ro/` and includes the untranslated banner.
 
-- [ ] **Step 3: Commit**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add src/pages/articles src/layouts/ArticleLayout.astro src/components/UntranslatedBanner.astro
@@ -915,7 +915,7 @@ git commit -m "feat: render article collection pages per locale"
 - Create: `playwright.config.ts`
 - Create: `tests/e2e/smoke.spec.ts`
 
-- [ ] **Step 1: Playwright config against the English preview**
+- [x] **Step 1: Playwright config against the English preview**
 
 `playwright.config.ts`:
 
@@ -933,7 +933,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 2: Write smoke tests**
+- [x] **Step 2: Write smoke tests**
 
 `tests/e2e/smoke.spec.ts`:
 
@@ -960,7 +960,7 @@ test("unknown path is 404", async ({ page }) => {
 });
 ```
 
-- [ ] **Step 3: Install browsers and run**
+- [x] **Step 3: Install browsers and run**
 
 ```powershell
 npx playwright install chromium
@@ -969,7 +969,7 @@ npx playwright test
 
 Expected: 3 passing tests.
 
-- [ ] **Step 4: Commit**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add playwright.config.ts tests/e2e/smoke.spec.ts
@@ -1053,10 +1053,10 @@ Seed:
 - `src/content/legal/privacy-policy/{en,ro}.mdx` — extract body from `legacy/privacy-policy/index.html`
 - `src/content/legal/terms-and-conditions/{en,ro}.mdx` — copy from live https://www.storiesofdata.com/terms-and-conditions if still missing locally
 
-- [ ] **Step 1: Add the four route files plus two legal pages, using the same `getCollection` + `isLocaleEntry` pattern as `src/pages/articles/[slug].astro`.**
-- [ ] **Step 2: Extend `tests/e2e/smoke.spec.ts` with one portfolio URL, one data-story URL, and `/privacy-policy`.**
-- [ ] **Step 3: Run `npx playwright test` — expected: all pass.**
-- [ ] **Step 4: Commit**
+- [x] **Step 1: Add the four route files plus two legal pages, using the same `getCollection` + `isLocaleEntry` pattern as `src/pages/articles/[slug].astro`.**
+- [x] **Step 2: Extend `tests/e2e/smoke.spec.ts` with one portfolio URL, one data-story URL, and `/privacy-policy`.**
+- [x] **Step 3: Run `npx playwright test` — expected: all pass.**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add src/pages/portfolio src/pages/data-stories src/pages/privacy-policy.astro src/pages/terms-and-conditions.astro src/content tests/e2e/smoke.spec.ts
@@ -1073,13 +1073,13 @@ git commit -m "feat: add portfolio, data-story, and legal routes"
 
 Do not invent new slugs. Use the exact folder names from `legacy/`.
 
-- [ ] **Step 1: Write a one-off extractor**
+- [x] **Step 1: Write a one-off extractor**
 
 `scripts/migrate-legacy-page.mjs` reads a `legacy/**/index.html`, pulls `<title>`, meta description, and the main article/case-study inner HTML (the node after the case-study nav; inspect `legacy/articles/microsoft-fabric-medallion-architecture-lessons-learned/index.html` for the real selector). It writes `src/content/<type>/<slug>/en.mdx` with that HTML inside the MDX body (HTML in MDX is valid). Then it copies the file to `ro.mdx` and sets `translationStatus: untranslated`.
 
 Copy images referenced by that page from `legacy/assets/...` into `src/content/<type>/<slug>/images/` and rewrite `src` to relative `./images/<name>`. Prefer a human-readable filename (from the suffix after `_` when present, otherwise keep the hash).
 
-- [ ] **Step 2: Run it for every leftover slug**
+- [x] **Step 2: Run it for every leftover slug**
 
 Work collection by collection. After each collection, `npm run build` must succeed.
 
@@ -1091,8 +1091,8 @@ Portfolio: 7 remaining after `a-romanian-data-story`.
 
 Data stories: 1 remaining (`redesigning-linkedin-analytics`).
 
-- [ ] **Step 3: Add a Playwright test that visits `/articles/` and asserts at least 6 links.**
-- [ ] **Step 4: Commit**
+- [x] **Step 3: Add a Playwright test that visits `/articles/` and asserts at least 6 links.**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add scripts/migrate-legacy-page.mjs src/content tests/e2e
@@ -1137,9 +1137,9 @@ const disabled = !endpoint;
 </form>
 ```
 
-- [ ] **Step 1: Add data modules and homepage section components; compose them in `index.astro`.**
-- [ ] **Step 2: Playwright: home contains Services, Team, and the contact form.**
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Add data modules and homepage section components; compose them in `index.astro`.**
+- [x] **Step 2: Playwright: home contains Services, Team, and the contact form.**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add src/data src/components/home src/components/ContactForm.astro src/pages/index.astro tests/e2e
@@ -1156,8 +1156,8 @@ git commit -m "feat: rebuild homepage from typed locale data"
 - Create: `public/robots.txt`
 - Modify: `src/layouts/BaseLayout.astro`
 
-- [ ] **Step 1: Load GA and Clarity only when their public env IDs are set.** Gate them behind Iubenda as the clone does (scripts already in `legacy/index.html` head). Pass `lang: site.locale` into `_iub.csConfiguration`.
-- [ ] **Step 2: `public/robots.txt`**
+- [x] **Step 1: Load GA and Clarity only when their public env IDs are set.** Gate them behind Iubenda as the clone does (scripts already in `legacy/index.html` head). Pass `lang: site.locale` into `_iub.csConfiguration`.
+- [x] **Step 2: `public/robots.txt`**
 
 ```
 User-agent: *
@@ -1181,8 +1181,8 @@ export const GET: APIRoute = ({ site }) => {
 
 Delete `public/robots.txt` if you add this endpoint so it cannot clash.
 
-- [ ] **Step 3: Confirm `dist/com/robots.txt` cites `.com` and `dist/ro/robots.txt` cites `.ro`.**
-- [ ] **Step 4: Commit**
+- [x] **Step 3: Confirm `dist/com/robots.txt` cites `.com` and `dist/ro/robots.txt` cites `.ro`.**
+- [x] **Step 4: Commit**
 
 ```powershell
 git add src/components/Analytics.astro src/components/CookieBanner.astro src/pages/robots.txt.ts src/layouts/BaseLayout.astro
@@ -1210,9 +1210,9 @@ Remove any remaining `webflow.js`, Webflow badge, `data-wf-*` attributes, and �
 
 Schema.org JSON-LD `url` and `logo` must use `getSiteConfig`, never `https://www.storiesofdata.com` on the `.ro` build.
 
-- [ ] **Step 1: Copy brand files and switch components to them.**
-- [ ] **Step 2: `rg "storiesofdata.com" src dist/ro` — the only allowed hits in `dist/ro` are hreflang/canonical-alternate/`peer` URLs, not body copy claiming the page *is* `.com`.**
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Copy brand files and switch components to them.**
+- [x] **Step 2: `rg "storiesofdata.com" src dist/ro` — the only allowed hits in `dist/ro` are hreflang/canonical-alternate/`peer` URLs, not body copy claiming the page *is* `.com`.**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add src/assets/brand public src
@@ -1258,9 +1258,9 @@ jobs:
 
 Do not add Azure/Cloudflare deploy secrets in this task. Shipping the two artifacts is the success criterion.
 
-- [ ] **Step 1: Add the workflow.**
-- [ ] **Step 2: Run `npm test`, `npx playwright test`, and `npm run build` locally — all must pass.**
-- [ ] **Step 3: Commit**
+- [x] **Step 1: Add the workflow.**
+- [x] **Step 2: Run `npm test`, `npx playwright test`, and `npm run build` locally — all must pass.**
+- [x] **Step 3: Commit**
 
 ```powershell
 git add .github/workflows/build.yml
@@ -1292,19 +1292,19 @@ Required behavior to match the clone:
 4. **Below 766px:** normal document scroll, no snap (Scrollify is currently gated on that media query).
 5. **Lottie graphics** play/resize on the homepage. Copy the JSON the clone uses; wire `lottie-web` (or the already-vendored `lottie.min.js`) as an island. On window resize, call `lottie.resize()` like the clone.
 
-- [ ] **Step 1: Inventory motion from the clone**
+- [x] **Step 1: Inventory motion from the clone**
 
 Open `legacy/index.html` and list every `.section`, every `data-w-id` interaction, and every `.lottie-animation*` node. Put that list in the commit message or a short comment at the top of `SectionSnap.ts`. Do not skip a graphic that is visible on the live homepage.
 
-- [ ] **Step 2: Implement section snap + nav move**
+- [x] **Step 2: Implement section snap + nav move**
 
 `SectionSnap.ts` should expose `initHomepageSnap()` and `moveTo(sectionName: string)`. Header/footer nav buttons call `moveTo`. Destroy/disable snap under `766px`.
 
-- [ ] **Step 3: Implement Lottie islands**
+- [x] **Step 3: Implement Lottie islands**
 
 Each homepage Lottie is a `LottieGraphic.astro` with `client:visible`, a JSON src from `src/assets/lottie/`, and autoplay/loop matching the clone.
 
-- [ ] **Step 4: Playwright**
+- [x] **Step 4: Playwright**
 
 `tests/e2e/homepage-motion.spec.ts` (viewport 1280×800):
 
@@ -1319,7 +1319,7 @@ npx playwright test tests/e2e/homepage-motion.spec.ts
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```powershell
 git add src/components/home src/pages/index.astro src/assets/lottie tests/e2e/homepage-motion.spec.ts
