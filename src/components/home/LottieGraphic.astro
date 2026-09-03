@@ -4,9 +4,16 @@ interface Props {
   loop?: boolean;
   autoplay?: boolean;
   class?: string;
+  when?: "desktop" | "mobile" | "always";
 }
 
-const { src, loop = false, autoplay = false, class: className } = Astro.props;
+const {
+  src,
+  loop = false,
+  autoplay = false,
+  class: className,
+  when = "always",
+} = Astro.props;
 ---
 <div
   class:list={["lottie-graphic", className]}
@@ -14,57 +21,12 @@ const { src, loop = false, autoplay = false, class: className } = Astro.props;
   data-src={src}
   data-loop={loop ? "1" : "0"}
   data-autoplay={autoplay ? "1" : "0"}
+  data-lottie-when={when}
 ></div>
 
 <script>
-  import lottie from "lottie-web";
-
-  function mount(node: HTMLElement): void {
-    if (node.dataset.lottieReady === "1") return;
-    const src = node.dataset.src;
-    if (!src) return;
-    node.dataset.lottieReady = "1";
-
-    const loop = node.dataset.loop === "1";
-    const autoplay = node.dataset.autoplay === "1";
-
-    const animation = lottie.loadAnimation({
-      container: node,
-      renderer: "svg",
-      loop,
-      autoplay,
-      path: src,
-    });
-
-    if (!autoplay) {
-      animation.addEventListener("DOMLoaded", () => {
-        animation.play();
-      });
-    }
-  }
-
-  function observe(): void {
-    const nodes = document.querySelectorAll<HTMLElement>("[data-lottie]:not([data-lottie-ready])");
-    if (!nodes.length) return;
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          if (entry.target instanceof HTMLElement) mount(entry.target);
-          io.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "80px" },
-    );
-
-    for (const node of nodes) io.observe(node);
-  }
-
-  observe();
-  window.addEventListener("resize", () => {
-    lottie.resize();
-  });
+  import { initLottieGraphics } from "./lottieGraphics";
+  initLottieGraphics();
 </script>
 
 <style>

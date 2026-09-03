@@ -24,24 +24,37 @@ test("desktop Services nav moves to services-and-products", async ({ page }) => 
 test("mobile does not apply section snap", async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 800 });
   await page.goto("/");
+  await page.waitForFunction(() => typeof window.__homepageMoveTo === "function");
 
-  const targetY = await page.evaluate(() => {
-    const second = document.querySelectorAll<HTMLElement>(".section")[1];
-    if (!second) return 240;
-    return window.scrollY + second.getBoundingClientRect().top - 220;
-  });
+  await expect(page.locator("html")).not.toHaveClass(/homepage-snap/);
 
-  await page.evaluate((y) => window.scrollTo(0, y), targetY);
-  await page.waitForTimeout(700);
+  await page.mouse.move(180, 360);
+  const startY = await page.evaluate(() => window.scrollY);
+  await page.mouse.wheel(0, 420);
+  await expect
+    .poll(async () => page.evaluate(() => window.scrollY))
+    .toBeGreaterThan(startY);
 
-  const after = await page.evaluate(() => window.scrollY);
-  expect(Math.abs(after - targetY)).toBeLessThan(40);
+  await expect
+    .poll(async () => {
+      const visible = await page.evaluate(
+        () =>
+          [...document.querySelectorAll<HTMLElement>(".section")].filter((el) => {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+          }).length,
+      );
+      if (visible > 1) return visible;
+      await page.mouse.wheel(0, 480);
+      return page.evaluate(
+        () =>
+          [...document.querySelectorAll<HTMLElement>(".section")].filter((el) => {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+          }).length,
+      );
+    })
+    .toBeGreaterThan(1);
 
-  const visibleCount = await page.evaluate(() =>
-    [...document.querySelectorAll<HTMLElement>(".section")].filter((el) => {
-      const rect = el.getBoundingClientRect();
-      return rect.top < window.innerHeight && rect.bottom > 0;
-    }).length,
-  );
-  expect(visibleCount).toBeGreaterThan(1);
+  await expect(page.locator("html")).not.toHaveClass(/homepage-snap/);
 });

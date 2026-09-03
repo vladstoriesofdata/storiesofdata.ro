@@ -15,10 +15,10 @@ const copy = home[site.locale];
   aria-labelledby="hero-heading"
 >
   <div class="section-lottie lottie-desktop" aria-hidden="true">
-    <LottieGraphic src={desktopIntro} loop={true} autoplay={true} />
+    <LottieGraphic src={desktopIntro} loop={true} autoplay={true} when="desktop" />
   </div>
   <div class="section-lottie lottie-mobile" aria-hidden="true">
-    <LottieGraphic src={mobileIntro} loop={false} autoplay={true} />
+    <LottieGraphic src={mobileIntro} loop={false} autoplay={true} when="mobile" />
   </div>
   <h1 id="hero-heading">{copy.hero.heading}</h1>
   <p class="lede">{copy.hero.lede}</p>

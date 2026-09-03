@@ -50,6 +50,7 @@ const DURATION_MS = 520;
 let snapEnabled = false;
 let animating = false;
 let started = false;
+let pendingSnap: HTMLElement | null = null;
 let disableSnap: (() => void) | null = null;
 
 declare global {
@@ -149,8 +150,14 @@ async function snapToElement(el: HTMLElement): Promise<void> {
   applyBackground(el.dataset.sectionName);
   animating = true;
   try {
-    await animateScroll(targetTop(el));
-    syncHash(el);
+    let target: HTMLElement | null = el;
+    while (target) {
+      applyBackground(target.dataset.sectionName);
+      await animateScroll(targetTop(target));
+      syncHash(target);
+      target = pendingSnap;
+      pendingSnap = null;
+    }
   } finally {
     animating = false;
   }
@@ -160,12 +167,16 @@ export function moveTo(sectionName: string): void {
   const el = findSection(sectionName);
   if (!el) return;
   applyBackground(el.dataset.sectionName);
-  if (snapEnabled) {
-    void snapToElement(el);
+  if (!snapEnabled) {
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
+    syncHash(el);
     return;
   }
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
-  syncHash(el);
+  if (animating) {
+    pendingSnap = el;
+    return;
+  }
+  void snapToElement(el);
 }
 
 function go(delta: number): void {
@@ -183,10 +194,17 @@ function enableSnap(): void {
 
   const onWheel = (event: WheelEvent) => {
     if (!snapEnabled) return;
-    event.preventDefault();
-    if (animating) return;
-    if (event.deltaY > 8) go(1);
-    else if (event.deltaY < -8) go(-1);
+    if (animating) {
+      event.preventDefault();
+      return;
+    }
+    if (event.deltaY > 8) {
+      event.preventDefault();
+      go(1);
+    } else if (event.deltaY < -8) {
+      event.preventDefault();
+      go(-1);
+    }
   };
 
   const onKey = (event: KeyboardEvent) => {
