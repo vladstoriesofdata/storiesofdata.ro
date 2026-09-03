@@ -45,3 +45,14 @@ test("unknown path is 404", async ({ page }) => {
   const response = await page.goto("/this-page-does-not-exist");
   expect(response?.status()).toBe(404);
 });
+
+test("home contains Services, Team, and the contact form", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.getByRole("heading", { name: "Services and products" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Our Team" })).toBeVisible();
+  const form = page.locator("#contact form");
+  await expect(form).toBeVisible();
+  await expect(form.locator('[name="name"]')).toBeVisible();
+  await expect(form.locator('[name="email"]')).toBeVisible();
+  await expect(form.locator('[name="message"]')).toBeVisible();
+});

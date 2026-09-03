@@ -1,0 +1,32 @@
+---
+import { getSiteConfig } from "../../lib/site";
+import { home } from "../../data/home";
+
+const site = getSiteConfig(import.meta.env);
+const copy = home[site.locale];
+---
+<section class="home-section" aria-labelledby="hero-heading">
+  <h1 id="hero-heading">{copy.hero.heading}</h1>
+  <p class="lede">{copy.hero.lede}</p>
+  {copy.hero.chapters.map((chapter) => (
+    <article>
+      <h2>{chapter.heading}</h2>
+      <h3>{chapter.subheading}</h3>
+      {chapter.paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </article>
+  ))}
+</section>
+
+<style>
+  .lede {
+    font-family: var(--font-sans);
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+
+  article + article {
+    margin-top: 2.5rem;
+  }
+</style>

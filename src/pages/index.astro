@@ -1,10 +1,41 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Hero from "../components/home/Hero.astro";
+import Services from "../components/home/Services.astro";
+import PortfolioStrip from "../components/home/PortfolioStrip.astro";
+import Team from "../components/home/Team.astro";
+import Testimonials from "../components/home/Testimonials.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { getSiteConfig } from "../lib/site";
+import { home } from "../data/home";
+
+const site = getSiteConfig(import.meta.env);
+const copy = home[site.locale];
 ---
-<BaseLayout
-  title="Microsoft Fabric and Power BI Consultancy Romania"
-  description="Stories of Data is a Microsoft Fabric and Power BI consultancy agency in Romania who have helped over 30 customers bring clarity to their data."
-  path="/"
->
-  <h1>Stories of Data</h1>
+<BaseLayout title={copy.title} description={copy.description} path="/">
+  <Hero />
+  <Services />
+  <PortfolioStrip />
+  <Team />
+  <Testimonials />
+  <section id="contact" class="home-section" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">{copy.contact.heading}</h2>
+    <p class="subheading">{copy.contact.subheading}</p>
+    <p>{copy.contact.body}</p>
+    <p>
+      <a href={`mailto:${copy.contact.email}`}>{copy.contact.email}</a>
+    </p>
+    <p>
+      <a href={`tel:${copy.contact.phoneHref}`}>{copy.contact.phone}</a>
+    </p>
+    <ContactForm />
+  </section>
 </BaseLayout>
+
+<style>
+  .subheading {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+</style>

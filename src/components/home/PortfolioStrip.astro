@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import { getSiteConfig } from "../../lib/site";
+import { entrySlug, isLocaleEntry } from "../../lib/collections";
+import { home } from "../../data/home";
+
+const site = getSiteConfig(import.meta.env);
+const copy = home[site.locale];
+const entries = (
+  await getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale))
+)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 4);
+---
+<section id="portfolio" class="home-section" aria-labelledby="portfolio-heading">
+  <h2 id="portfolio-heading">{copy.portfolio.heading}</h2>
+  <ul>
+    {entries.map((entry) => (
+      <li>
+        <a href={`/portfolio/${entrySlug(entry.id)}`}>{entry.data.title}</a>
+        <p>{entry.data.description}</p>
+      </li>
+    ))}
+  </ul>
+</section>

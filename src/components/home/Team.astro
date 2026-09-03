@@ -1,0 +1,36 @@
+---
+import { getSiteConfig } from "../../lib/site";
+import { team } from "../../data/team";
+
+const site = getSiteConfig(import.meta.env);
+const copy = team[site.locale];
+---
+<section id="team" class="home-section" aria-labelledby="team-heading">
+  <h2 id="team-heading">{copy.heading}</h2>
+  {copy.members.map((member) => (
+    <article>
+      <h3>{member.name}</h3>
+      <p class="role">{member.role}</p>
+      {member.bio.split("\n\n").map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+      <p>
+        <a href={`mailto:${member.email}`}>{member.email}</a>
+      </p>
+    </article>
+  ))}
+</section>
+
+<style>
+  article + article {
+    margin-top: 2rem;
+  }
+
+  .role {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+</style>

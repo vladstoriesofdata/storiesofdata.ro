@@ -1,0 +1,88 @@
+---
+import { getSiteConfig } from "../lib/site";
+import { home } from "../data/home";
+
+const site = getSiteConfig(import.meta.env);
+const copy = home[site.locale].form;
+const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
+const disabled = !endpoint;
+---
+<form method="POST" action={endpoint || "#contact"} aria-disabled={disabled}>
+  <label>
+    {copy.name}
+    <input name="name" required disabled={disabled} />
+  </label>
+  <label>
+    {copy.email}
+    <input type="email" name="email" required disabled={disabled} />
+  </label>
+  <label>
+    {copy.message}
+    <textarea
+      name="message"
+      required
+      disabled={disabled}
+      placeholder={copy.messagePlaceholder}></textarea>
+  </label>
+  <label class="privacy">
+    <input type="checkbox" name="privacy" required disabled={disabled} />
+    {copy.privacy}
+    <a href="/privacy-policy">{copy.privacyLink}</a>.
+  </label>
+  <button type="submit" disabled={disabled}>{copy.submit}</button>
+  {disabled && <p>{copy.unconfigured}</p>}
+</form>
+
+<style>
+  form {
+    display: grid;
+    gap: 1rem;
+    max-width: 36rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.35rem;
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+
+  .privacy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 400;
+  }
+
+  input:not([type="checkbox"]),
+  textarea {
+    font: inherit;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-ink);
+    color: var(--color-ink);
+    background: var(--color-paper);
+  }
+
+  textarea {
+    min-height: 8rem;
+  }
+
+  button {
+    justify-self: start;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    padding: 0.7rem 1.2rem;
+    border: 0;
+    background: var(--color-accent);
+    color: var(--color-ink);
+    cursor: pointer;
+  }
+
+  button:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+</style>

@@ -1,0 +1,40 @@
+---
+import { getSiteConfig } from "../../lib/site";
+import { testimonials } from "../../data/testimonials";
+
+const site = getSiteConfig(import.meta.env);
+const copy = testimonials[site.locale];
+---
+<section id="testimonials" class="home-section" aria-labelledby="testimonials-heading">
+  <h2 id="testimonials-heading">{copy.heading}</h2>
+  {copy.items.map((item) => (
+    <blockquote>
+      <p>{item.quote}</p>
+      <footer>
+        <cite>{item.name}</cite>
+        <span>{item.role}</span>
+        <a href={item.href}>{item.company}</a>
+      </footer>
+    </blockquote>
+  ))}
+</section>
+
+<style>
+  blockquote {
+    margin: 0 0 2rem;
+    padding: 0;
+  }
+
+  footer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+  }
+
+  cite {
+    font-style: normal;
+    font-weight: 600;
+  }
+</style>

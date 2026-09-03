@@ -1,0 +1,34 @@
+---
+import { getSiteConfig } from "../../lib/site";
+import { services } from "../../data/services";
+
+const site = getSiteConfig(import.meta.env);
+const copy = services[site.locale];
+---
+<section id="services" class="home-section" aria-labelledby="services-heading">
+  <h2 id="services-heading">{copy.heading}</h2>
+  {copy.items.map((item) => (
+    <article>
+      <h3>{item.title}</h3>
+      <h4>{item.benefitsHeading}</h4>
+      <ul>
+        {item.benefits.map((benefit) => (
+          <li>{benefit}</li>
+        ))}
+      </ul>
+      <h4>{item.helpHeading}</h4>
+      <ul>
+        {item.help.map((help) => (
+          <li>{help}</li>
+        ))}
+      </ul>
+    </article>
+  ))}
+  <a href="#contact">{copy.cta}</a>
+</section>
+
+<style>
+  article + article {
+    margin-top: 2rem;
+  }
+</style>

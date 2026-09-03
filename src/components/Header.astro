@@ -1,19 +1,23 @@
 ---
 import LanguageSwitch from "./LanguageSwitch.astro";
+import { getSiteConfig } from "../lib/site";
+import { navigation } from "../data/navigation";
 
 interface Props {
   path: string;
 }
 
 const { path } = Astro.props;
+const site = getSiteConfig(import.meta.env);
+const isHome = path === "/";
+const links = navigation[site.locale];
 ---
 <header>
   <a href="/">Stories of Data</a>
   <nav>
-    <a href="/#services">Services</a>
-    <a href="/articles">Articles</a>
-    <a href="/portfolio">Portfolio</a>
-    <a href="/#contact">Contact</a>
+    {links.map((item) => (
+      <a href={isHome ? item.homeHref : item.href}>{item.label}</a>
+    ))}
     <LanguageSwitch path={path} />
   </nav>
 </header>
