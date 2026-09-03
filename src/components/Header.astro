@@ -2,6 +2,7 @@
 import LanguageSwitch from "./LanguageSwitch.astro";
 import { getSiteConfig } from "../lib/site";
 import { navigation } from "../data/navigation";
+import logoBlack from "../assets/brand/logo-black.svg";
 
 interface Props {
   path: string;
@@ -13,7 +14,14 @@ const isHome = path === "/";
 const links = navigation[site.locale];
 ---
 <header>
-  <a href="/">Stories of Data</a>
+  <a href="/" class="brand">
+    <img
+      src={logoBlack.src}
+      alt={site.name}
+      width={logoBlack.width}
+      height={logoBlack.height}
+    />
+  </a>
   <nav>
     {links.map((item) => (
       <a href={isHome ? item.homeHref : item.href}>{item.label}</a>
@@ -21,3 +29,11 @@ const links = navigation[site.locale];
     <LanguageSwitch path={path} />
   </nav>
 </header>
+
+<style>
+  .brand img {
+    display: block;
+    height: 2.5rem;
+    width: auto;
+  }
+</style>

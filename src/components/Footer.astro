@@ -1,4 +1,28 @@
+---
+import { getSiteConfig } from "../lib/site";
+import logoBlack from "../assets/brand/logo-black.svg";
+
+const site = getSiteConfig(import.meta.env);
+---
 <footer>
-  <a href="/privacy-policy">Privacy policy</a>
-  <a href="/terms-and-conditions">Terms</a>
+  <a href="/" class="brand">
+    <img
+      src={logoBlack.src}
+      alt={site.name}
+      width={logoBlack.width}
+      height={logoBlack.height}
+    />
+  </a>
+  <nav>
+    <a href="/privacy-policy">Privacy policy</a>
+    <a href="/terms-and-conditions">Terms</a>
+  </nav>
 </footer>
+
+<style>
+  .brand img {
+    display: block;
+    height: 2.25rem;
+    width: auto;
+  }
+</style>
