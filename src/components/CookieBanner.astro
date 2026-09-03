@@ -1,0 +1,28 @@
+---
+import { getSiteConfig } from "../lib/site";
+
+const site = getSiteConfig(import.meta.env);
+const siteId = import.meta.env.PUBLIC_IUBENDA_SITE_ID;
+const policyId = import.meta.env.PUBLIC_IUBENDA_POLICY_ID;
+const enabled = Boolean(siteId && policyId);
+
+const siteIdValue = Number(siteId) || siteId;
+const policyIdValue = Number(policyId) || policyId;
+const configScript = enabled
+  ? `var _iub = _iub || [];
+_iub.csConfiguration = ${JSON.stringify({
+      siteId: siteIdValue,
+      cookiePolicyId: policyIdValue,
+      lang: site.locale,
+      storage: { useSiteId: true },
+    })};`
+  : "";
+---
+{enabled && (
+  <>
+    <script is:inline set:html={configScript} />
+    <script is:inline async src={`https://cs.iubenda.com/autoblocking/${siteId}.js`}></script>
+    <script is:inline async src="https://cdn.iubenda.com/cs/gpp/stub.js"></script>
+    <script is:inline async charset="UTF-8" src="https://cdn.iubenda.com/cs/iubenda_cs.js"></script>
+  </>
+)}

@@ -1,6 +1,8 @@
 ---
 import { getSiteConfig } from "../lib/site";
 import Seo from "../components/Seo.astro";
+import CookieBanner from "../components/CookieBanner.astro";
+import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
@@ -27,6 +29,8 @@ const site = getSiteConfig(import.meta.env);
       rel="stylesheet"
     />
     <Seo title={title} description={description} path={path} robots={robots} />
+    <CookieBanner />
+    <Analytics />
   </head>
   <body>
     <Header path={path} />
