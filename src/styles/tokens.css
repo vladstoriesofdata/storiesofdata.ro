@@ -1,7 +1,55 @@
+@font-face {
+  font-family: "Akrobat";
+  src: url("../assets/fonts/Akrobat-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akrobat";
+  src: url("../assets/fonts/Akrobat-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akrobat";
+  src: url("../assets/fonts/Akrobat-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akrobat";
+  src: url("../assets/fonts/Akrobat-ExtraBold.otf") format("opentype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Akrobat";
+  src: url("../assets/fonts/Akrobat-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-ink: #333333;
   --color-accent: #00d18e;
   --color-paper: #ffffff;
+  --color-canvas: #f3f3f3;
+  --color-canvas-2: #f7f7f7;
+  --color-rail: #333333;
+  --color-muted: #828282;
   --font-sans: "Montserrat", system-ui, sans-serif;
   --font-mono: "Inconsolata", ui-monospace, monospace;
+  --font-nav: "Akrobat", "Montserrat", sans-serif;
+  --nav-width: 200px;
+  --rail-width: 80px;
+  --snap-min: 766px;
 }

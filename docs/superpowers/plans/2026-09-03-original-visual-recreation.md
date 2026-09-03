@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 1)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 2)
 
-Do Task 1 only: Design tokens, Akrobat fonts, zoom icons.
-Do not start Task 2.
+Do Task 2 only: Homepage navigation data.
+Do not start Task 3.
 
-When finished: check off Task 1 in the plan, put Task 2’s handoff prompt into the plan’s “Next chat prompt” section, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 2 in the plan, put Task 3’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -67,7 +67,7 @@ When finished: check off Task 1 in the plan, put Task 2’s handoff prompt into 
 
 | Task | Title | Status |
 | --- | --- | --- |
-| 1 | Design tokens, Akrobat fonts, zoom icons | Todo |
+| 1 | Design tokens, Akrobat fonts, zoom icons | Done |
 | 2 | Homepage navigation data | Todo |
 | 3 | Tabs, Carousel, ViewZoom modules | Todo |
 | 4 | BaseLayout chrome + Header shells + language switch | Todo |
@@ -128,7 +128,7 @@ Visual reference (do not load as production CSS):
 - Modify: `src/styles/tokens.css`, `src/styles/global.css`, `.gitignore`
 - Test: none yet (assets + CSS variables only)
 
-- [ ] **Step 1: Ignore brainstorm artifacts**
+- [x] **Step 1: Ignore brainstorm artifacts**
 
 Append to `.gitignore`:
 
@@ -136,7 +136,7 @@ Append to `.gitignore`:
 .superpowers/
 ```
 
-- [ ] **Step 2: Copy fonts**
+- [x] **Step 2: Copy fonts**
 
 From `legacy/assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/` copy and rename:
 
@@ -148,7 +148,7 @@ From `legacy/assets/cdn.prod.website-files.com/6405ef20051268cd8ed6af48/` copy a
 | `6405f327d2eb320f356fb662_Akrobat-ExtraBold.otf` | `src/assets/fonts/Akrobat-ExtraBold.otf` |
 | `6405f327d2fd132e3c661198_Akrobat-Black.otf` | `src/assets/fonts/Akrobat-Black.otf` |
 
-- [ ] **Step 3: Copy zoom icons**
+- [x] **Step 3: Copy zoom icons**
 
 Same legacy folder (filenames contain spaces):
 
@@ -159,7 +159,7 @@ Same legacy folder (filenames contain spaces):
 | `641c7c6e101fcb387a702ae3_zoom out_active.svg` | `src/assets/brand/zoom-out-active.svg` |
 | `641c7c6e371b0d73d5a51df2_zoom out_inactive.svg` | `src/assets/brand/zoom-out-inactive.svg` |
 
-- [ ] **Step 4: Expand tokens**
+- [x] **Step 4: Expand tokens**
 
 Replace `src/styles/tokens.css` with:
 
@@ -223,11 +223,11 @@ Replace `src/styles/tokens.css` with:
 
 If `@font-face` in `tokens.css` fails to resolve from `global.css` import, move the `@font-face` blocks into `global.css` and keep `:root` in `tokens.css`.
 
-- [ ] **Step 5: Point global body at tokens only**
+- [x] **Step 5: Point global body at tokens only**
 
 Keep `global.css` importing `./tokens.css`. Do not restyle the header into a left rail yet.
 
-- [ ] **Step 6: Commit (include this plan with Task 1 checked and Next chat prompt replaced by Task 2’s handoff)**
+- [x] **Step 6: Commit (include this plan with Task 1 checked and Next chat prompt replaced by Task 2’s handoff)**
 
 ```
 git add .gitignore src/assets/fonts src/assets/brand/zoom-*.svg src/styles/tokens.css src/styles/global.css docs/superpowers/plans/2026-09-03-original-visual-recreation.md
