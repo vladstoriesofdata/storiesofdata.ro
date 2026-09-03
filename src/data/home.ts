@@ -16,6 +16,7 @@ export interface HomeCopy {
   };
   portfolio: {
     heading: string;
+    viewAll: string;
   };
   contact: {
     heading: string;
@@ -82,6 +83,7 @@ const en: HomeCopy = {
   },
   portfolio: {
     heading: "Portfolio",
+    viewAll: "See all portfolio",
   },
   contact: {
     heading: "Get in touch",

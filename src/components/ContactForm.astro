@@ -24,11 +24,13 @@ const disabled = !endpoint;
       disabled={disabled}
       placeholder={copy.messagePlaceholder}></textarea>
   </label>
-  <label class="privacy">
-    <input type="checkbox" name="privacy" required disabled={disabled} />
-    {copy.privacy}
+  <p class="privacy">
+    <label>
+      <input type="checkbox" name="privacy" required disabled={disabled} />
+      {copy.privacy}
+    </label>
     <a href="/privacy-policy">{copy.privacyLink}</a>.
-  </label>
+  </p>
   <button type="submit" disabled={disabled}>{copy.submit}</button>
   {disabled && <p>{copy.unconfigured}</p>}
 </form>
@@ -48,6 +50,16 @@ const disabled = !endpoint;
   }
 
   .privacy {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.35rem 0.5rem;
+    margin: 0;
+    font-family: var(--font-sans);
+    font-weight: 400;
+  }
+
+  .privacy label {
     display: flex;
     flex-wrap: wrap;
     align-items: center;

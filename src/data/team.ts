@@ -16,7 +16,7 @@ const en: TeamCopy = {
   heading: "Our Team",
   members: [
     {
-      name: "Vlad MihanȚa",
+      name: "Vlad Mihanta",
       role: "CEO AND FOUNDER",
       bio: "Coming from an entrepreneurial family, I’ve always wanted to have my own business. Stories of Data started out of my fascination with data. The fact that facets of the world can be represented and understood through data still amazes me, after 8 years in the industry.\n\nWith Stories of Data I strive to understand and express my understanding of the data we analyze in an accurate and beautiful way for everyone we work with.",
       email: "vlad@storiesofdata.com",
