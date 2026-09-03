@@ -8,5 +8,6 @@ interface Props {
 const { path } = Astro.props;
 const site = getSiteConfig(import.meta.env);
 const label = site.locale === "en" ? "RO" : "EN";
+const ariaLabel = site.locale === "en" ? "Switch to Romanian" : "Switch to English";
 ---
-<a href={peerUrl(path, site)} hreflang={site.peer.locale}>{label}</a>
+<a href={peerUrl(path, site)} hreflang={site.peer.locale} aria-label={ariaLabel}>{label}</a>

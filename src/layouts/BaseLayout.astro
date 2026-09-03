@@ -9,9 +9,10 @@ interface Props {
   title: string;
   description: string;
   path: string;
+  robots?: string;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, robots } = Astro.props;
 const site = getSiteConfig(import.meta.env);
 ---
 <!doctype html>
@@ -25,7 +26,7 @@ const site = getSiteConfig(import.meta.env);
       href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&family=Montserrat:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <Seo title={title} description={description} path={path} />
+    <Seo title={title} description={description} path={path} robots={robots} />
   </head>
   <body>
     <Header path={path} />
