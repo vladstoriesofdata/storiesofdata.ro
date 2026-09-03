@@ -14,6 +14,27 @@ test("seed article renders", async ({ page }) => {
   );
 });
 
+test("seed portfolio item renders", async ({ page }) => {
+  await page.goto("/portfolio/a-romanian-data-story");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "A Romanian Data Story",
+  );
+});
+
+test("seed data story renders", async ({ page }) => {
+  await page.goto("/data-stories/lines-on-maps-in-power-bi");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Lines on Maps in Power BI",
+  );
+});
+
+test("privacy policy renders", async ({ page }) => {
+  await page.goto("/privacy-policy");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Privacy policy",
+  );
+});
+
 test("unknown path is 404", async ({ page }) => {
   const response = await page.goto("/this-page-does-not-exist");
   expect(response?.status()).toBe(404);

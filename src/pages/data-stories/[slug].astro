@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from "astro:content";
+import { getSiteConfig } from "../../lib/site";
+import { entrySlug, isLocaleEntry } from "../../lib/collections";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
+import UntranslatedBanner from "../../components/UntranslatedBanner.astro";
+
+export async function getStaticPaths() {
+  const site = getSiteConfig(import.meta.env);
+  const entries = await getCollection("dataStories", (entry) =>
+    isLocaleEntry(entry.id, site.locale),
+  );
+  return entries.map((entry) => ({
+    params: { slug: entrySlug(entry.id) },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const path = `/data-stories/${entrySlug(entry.id)}`;
+---
+<ArticleLayout title={entry.data.title} description={entry.data.description} path={path}>
+  {entry.data.translationStatus === "untranslated" && <UntranslatedBanner />}
+  <h1>{entry.data.title}</h1>
+  <Content />
+</ArticleLayout>

@@ -1,0 +1,16 @@
+---
+import { getEntry, render } from "astro:content";
+import { getSiteConfig } from "../lib/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import UntranslatedBanner from "../components/UntranslatedBanner.astro";
+
+const site = getSiteConfig(import.meta.env);
+const entry = await getEntry("legal", `privacy-policy/${site.locale}`);
+if (!entry) throw new Error(`Missing legal/privacy-policy/${site.locale}.mdx`);
+const { Content } = await render(entry);
+---
+<BaseLayout title={entry.data.title} description={entry.data.description} path="/privacy-policy">
+  {entry.data.translationStatus === "untranslated" && <UntranslatedBanner />}
+  <h1>{entry.data.title}</h1>
+  <Content />
+</BaseLayout>

@@ -1,0 +1,21 @@
+---
+import { getCollection } from "astro:content";
+import { getSiteConfig } from "../../lib/site";
+import { entrySlug, isLocaleEntry } from "../../lib/collections";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+const site = getSiteConfig(import.meta.env);
+const entries = (
+  await getCollection("dataStories", (entry) => isLocaleEntry(entry.id, site.locale))
+).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<BaseLayout title="Data stories" description="Data stories from Stories of Data." path="/data-stories">
+  <h1>Data stories</h1>
+  <ul>
+    {entries.map((entry) => (
+      <li>
+        <a href={`/data-stories/${entrySlug(entry.id)}`}>{entry.data.title}</a>
+      </li>
+    ))}
+  </ul>
+</BaseLayout>
