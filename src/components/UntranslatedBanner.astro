@@ -1,0 +1,10 @@
+---
+import { getSiteConfig } from "../lib/site";
+
+const site = getSiteConfig(import.meta.env);
+const message =
+  site.locale === "ro"
+    ? "Această pagină nu este încă tradusă."
+    : "This page is not translated yet.";
+---
+<p>{message}</p>
