@@ -2,6 +2,7 @@
 import LanguageSwitch from "./LanguageSwitch.astro";
 import { getSiteConfig } from "../lib/site";
 import { navigation } from "../data/navigation";
+import { sectionNameFromHash } from "./home/SectionSnap";
 import logoBlack from "../assets/brand/logo-black.svg";
 
 interface Props {
@@ -13,7 +14,7 @@ const site = getSiteConfig(import.meta.env);
 const isHome = path === "/";
 const links = navigation[site.locale];
 ---
-<header>
+<header data-home={isHome ? "1" : undefined}>
   <a href="/" class="brand">
     <img
       src={logoBlack.src}
@@ -23,12 +24,29 @@ const links = navigation[site.locale];
     />
   </a>
   <nav>
-    {links.map((item) => (
-      <a href={isHome ? item.homeHref : item.href}>{item.label}</a>
-    ))}
+    {links.map((item) => {
+      const href = isHome ? item.homeHref : item.href;
+      const section = isHome ? sectionNameFromHash(item.homeHref) : undefined;
+      return (
+        <a href={href} data-section-target={section}>{item.label}</a>
+      );
+    })}
     <LanguageSwitch path={path} />
   </nav>
 </header>
+
+<script>
+  document.querySelector("header")?.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Element)) return;
+    const link = target.closest("a[data-section-target]");
+    if (!(link instanceof HTMLAnchorElement)) return;
+    const name = link.dataset.sectionTarget;
+    if (!name || typeof window.__homepageMoveTo !== "function") return;
+    event.preventDefault();
+    window.__homepageMoveTo(name);
+  });
+</script>
 
 <style>
   .brand img {

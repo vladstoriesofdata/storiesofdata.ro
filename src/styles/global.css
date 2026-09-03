@@ -52,3 +52,70 @@ nav {
   line-height: 1.6;
 }
 
+.section {
+  position: relative;
+}
+
+.section-lottie {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 0;
+  width: 100vw;
+  height: min(100%, 100dvh);
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 0.35;
+}
+
+.section > :not(.section-lottie) {
+  position: relative;
+  z-index: 1;
+}
+
+.background-anim-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.28;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.background-anim-wrapper.active {
+  opacity: 0;
+  visibility: hidden;
+}
+
+@media (min-width: 766px) {
+  .section {
+    min-height: 100dvh;
+    box-sizing: border-box;
+  }
+
+  html.homepage-snap,
+  html.homepage-snap body {
+    overflow: hidden;
+    height: 100%;
+    scrollbar-width: none;
+  }
+
+  html.homepage-snap::-webkit-scrollbar,
+  html.homepage-snap body::-webkit-scrollbar {
+    display: none;
+  }
+
+  html.homepage-snap header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--color-paper);
+  }
+
+  html.homepage-snap main,
+  html.homepage-snap footer {
+    position: relative;
+    z-index: 1;
+  }
+}
+

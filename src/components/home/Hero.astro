@@ -1,11 +1,25 @@
 ---
 import { getSiteConfig } from "../../lib/site";
 import { home } from "../../data/home";
+import LottieGraphic from "./LottieGraphic.astro";
+import desktopIntro from "../../assets/lottie/desktop-intro-loop.json?url";
+import mobileIntro from "../../assets/lottie/mobile-short-intro.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
 ---
-<section class="home-section" aria-labelledby="hero-heading">
+<section
+  id="what-we-do"
+  class="section home-section"
+  data-section-name="what-we-do"
+  aria-labelledby="hero-heading"
+>
+  <div class="section-lottie lottie-desktop" aria-hidden="true">
+    <LottieGraphic src={desktopIntro} loop={true} autoplay={true} />
+  </div>
+  <div class="section-lottie lottie-mobile" aria-hidden="true">
+    <LottieGraphic src={mobileIntro} loop={false} autoplay={true} />
+  </div>
   <h1 id="hero-heading">{copy.hero.heading}</h1>
   <p class="lede">{copy.hero.lede}</p>
   {copy.hero.chapters.map((chapter) => (
@@ -28,5 +42,19 @@ const copy = home[site.locale];
 
   article + article {
     margin-top: 2.5rem;
+  }
+
+  .lottie-desktop {
+    display: none;
+  }
+
+  @media (min-width: 766px) {
+    .lottie-desktop {
+      display: block;
+    }
+
+    .lottie-mobile {
+      display: none;
+    }
   }
 </style>

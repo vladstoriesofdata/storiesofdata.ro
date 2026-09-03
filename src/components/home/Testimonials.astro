@@ -5,7 +5,12 @@ import { testimonials } from "../../data/testimonials";
 const site = getSiteConfig(import.meta.env);
 const copy = testimonials[site.locale];
 ---
-<section id="testimonials" class="home-section" aria-labelledby="testimonials-heading">
+<section
+  id="testimonials"
+  class="section home-section"
+  data-section-name="testimonials"
+  aria-labelledby="testimonials-heading"
+>
   <h2 id="testimonials-heading">{copy.heading}</h2>
   {copy.items.map((item) => (
     <blockquote>

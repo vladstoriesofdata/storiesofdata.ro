@@ -6,19 +6,29 @@ import PortfolioStrip from "../components/home/PortfolioStrip.astro";
 import Team from "../components/home/Team.astro";
 import Testimonials from "../components/home/Testimonials.astro";
 import ContactForm from "../components/ContactForm.astro";
+import LottieGraphic from "../components/home/LottieGraphic.astro";
 import { getSiteConfig } from "../lib/site";
 import { home } from "../data/home";
+import steps from "../assets/lottie/steps-1-2-3-4-5.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
 ---
 <BaseLayout title={copy.title} description={copy.description} path="/">
+  <div class="background-anim-wrapper" aria-hidden="true">
+    <LottieGraphic src={steps} loop={false} autoplay={false} />
+  </div>
   <Hero />
   <Services />
   <PortfolioStrip />
   <Team />
   <Testimonials />
-  <section id="contact" class="home-section" aria-labelledby="contact-heading">
+  <section
+    id="contact"
+    class="section home-section"
+    data-section-name="contact"
+    aria-labelledby="contact-heading"
+  >
     <h2 id="contact-heading">{copy.contact.heading}</h2>
     <p class="subheading">{copy.contact.subheading}</p>
     <p>{copy.contact.body}</p>
@@ -31,6 +41,11 @@ const copy = home[site.locale];
     <ContactForm />
   </section>
 </BaseLayout>
+
+<script>
+  import { initHomepageSnap } from "../components/home/SectionSnap";
+  initHomepageSnap();
+</script>
 
 <style>
   .subheading {

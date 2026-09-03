@@ -5,7 +5,12 @@ import { services } from "../../data/services";
 const site = getSiteConfig(import.meta.env);
 const copy = services[site.locale];
 ---
-<section id="services" class="home-section" aria-labelledby="services-heading">
+<section
+  id="services"
+  class="section home-section"
+  data-section-name="services-and-products"
+  aria-labelledby="services-heading"
+>
   <h2 id="services-heading">{copy.heading}</h2>
   {copy.items.map((item) => (
     <article>

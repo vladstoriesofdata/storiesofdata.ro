@@ -3,6 +3,8 @@ import { getCollection } from "astro:content";
 import { getSiteConfig } from "../../lib/site";
 import { entrySlug, isLocaleEntry } from "../../lib/collections";
 import { home } from "../../data/home";
+import LottieGraphic from "./LottieGraphic.astro";
+import portfolioZoom from "../../assets/lottie/portfolio-zoom.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
@@ -12,7 +14,15 @@ const entries = (
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 4);
 ---
-<section id="portfolio" class="home-section" aria-labelledby="portfolio-heading">
+<section
+  id="portfolio"
+  class="section home-section"
+  data-section-name="portfolio"
+  aria-labelledby="portfolio-heading"
+>
+  <div class="section-lottie" aria-hidden="true">
+    <LottieGraphic src={portfolioZoom} loop={false} autoplay={false} />
+  </div>
   <h2 id="portfolio-heading">{copy.portfolio.heading}</h2>
   <ul>
     {entries.map((entry) => (
