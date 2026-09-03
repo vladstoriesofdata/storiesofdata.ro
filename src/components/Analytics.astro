@@ -1,6 +1,9 @@
 ---
-const gaId = import.meta.env.PUBLIC_GA_ID;
-const clarityId = import.meta.env.PUBLIC_CLARITY_ID;
+const iubendaEnabled = Boolean(
+  import.meta.env.PUBLIC_IUBENDA_SITE_ID && import.meta.env.PUBLIC_IUBENDA_POLICY_ID,
+);
+const gaId = iubendaEnabled ? import.meta.env.PUBLIC_GA_ID : "";
+const clarityId = iubendaEnabled ? import.meta.env.PUBLIC_CLARITY_ID : "";
 const googleVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 const gaConfigScript = gaId
