@@ -1,0 +1,19 @@
+---
+import LanguageSwitch from "./LanguageSwitch.astro";
+
+interface Props {
+  path: string;
+}
+
+const { path } = Astro.props;
+---
+<header>
+  <a href="/">Stories of Data</a>
+  <nav>
+    <a href="/#services">Services</a>
+    <a href="/articles">Articles</a>
+    <a href="/portfolio">Portfolio</a>
+    <a href="/#contact">Contact</a>
+    <LanguageSwitch path={path} />
+  </nav>
+</header>

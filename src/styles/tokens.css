@@ -1,0 +1,7 @@
+:root {
+  --color-ink: #333333;
+  --color-accent: #00d18e;
+  --color-paper: #ffffff;
+  --font-sans: "Montserrat", system-ui, sans-serif;
+  --font-mono: "Inconsolata", ui-monospace, monospace;
+}
