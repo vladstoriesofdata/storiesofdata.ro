@@ -35,6 +35,12 @@ test("privacy policy renders", async ({ page }) => {
   );
 });
 
+test("articles index lists at least six articles", async ({ page }) => {
+  await page.goto("/articles/");
+  const links = page.locator('a[href^="/articles/"]');
+  expect(await links.count()).toBeGreaterThanOrEqual(6);
+});
+
 test("unknown path is 404", async ({ page }) => {
   const response = await page.goto("/this-page-does-not-exist");
   expect(response?.status()).toBe(404);
