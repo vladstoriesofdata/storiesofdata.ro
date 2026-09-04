@@ -227,7 +227,7 @@
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 20px;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 54px;
   font-weight: 900;
 }
@@ -237,7 +237,7 @@
   text-transform: uppercase;
   margin-top: 0;
   margin-bottom: 5px;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: 24px;
   font-weight: 900;
 }
@@ -461,14 +461,16 @@
   margin-left: 15px;
 }
 
+@media (min-width: 1440px) {
+  [data-view-zoom] .cs-title {
+    font-size: 70px;
+  }
+}
+
 @media (max-width: 765px) {
   [data-view-zoom] .cs-planetary-wrapper {
     height: 100vh;
     padding: 30px 30px 150px;
-  }
-
-  [data-view-zoom] .cs-title {
-    font-size: 32px;
   }
 
   [data-view-zoom] .cs-mountaintop-wrapper {
@@ -500,5 +502,11 @@
 
   [data-view-zoom] .pv-info-wrapper {
     padding: 15px 10px;
+  }
+}
+
+@media (max-width: 479px) {
+  [data-view-zoom] .cs-title {
+    font-size: 32px;
   }
 }

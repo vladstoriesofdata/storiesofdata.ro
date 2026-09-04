@@ -1,0 +1,49 @@
+---
+import type { ImageMetadata } from "astro";
+import type { CoverFit } from "../../data/covers";
+
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  cover: ImageMetadata;
+  fit?: CoverFit;
+  slide?: boolean;
+  hidden?: boolean;
+}
+
+const { href, title, description, cover, fit = "contain", slide = false, hidden = false } = Astro.props;
+---
+<a
+  class="portfolio-card"
+  href={href}
+  data-slide={slide ? "1" : undefined}
+  hidden={hidden ? true : undefined}
+>
+  <div class="portfolio-card-cover" data-fit={fit}>
+    <img src={cover.src} alt="" width={cover.width} height={cover.height} />
+  </div>
+  <div class="portfolio-card-copy">
+    <div class="portfolio-card-text">
+      <h3 class="portfolio-card-title">{title}</h3>
+      <p class="portfolio-card-description" set:html={description.replace(/\n/g, "<br/>")} />
+    </div>
+    <span class="portfolio-card-more">
+      MORE DETAILS
+      <svg
+        class="portfolio-card-more-icon"
+        width="11"
+        height="18"
+        viewBox="0 0 11 18"
+        fill="none"
+        aria-hidden="true"
+      >
+        <path
+          d="M1.51367 1.61035L8.8155 8.91218L1.51367 16.214"
+          stroke="currentColor"
+          stroke-width="3"
+        />
+      </svg>
+    </span>
+  </div>
+</a>

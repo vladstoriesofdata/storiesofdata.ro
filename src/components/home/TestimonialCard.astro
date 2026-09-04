@@ -1,0 +1,45 @@
+---
+import type { ImageMetadata } from "astro";
+import type { Testimonial } from "../../data/testimonials";
+
+interface Props {
+  item: Testimonial;
+  photo: ImageMetadata;
+  logo: ImageMetadata;
+}
+
+const { item, photo, logo } = Astro.props;
+---
+<blockquote class="testimonial-card">
+  <p class="testimonial-quote">{item.quote}</p>
+  <footer class="testimonial-meta">
+    <div class="testimonial-person-wrapper">
+      <img
+        class="testimonial-person-img"
+        src={photo.src}
+        alt=""
+        width={photo.width}
+        height={photo.height}
+      />
+      <div class="testimonial-person">
+        <cite class="testimonial-name">{item.name}</cite>
+        <span class="testimonial-role">{item.role}</span>
+      </div>
+    </div>
+    <a
+      class="testimonial-logo-link"
+      href={item.href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={item.company}
+    >
+      <img
+        class="testimonial-logo-img"
+        src={logo.src}
+        alt=""
+        width={logo.width}
+        height={logo.height}
+      />
+    </a>
+  </footer>
+</blockquote>

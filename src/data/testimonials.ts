@@ -6,6 +6,18 @@ export interface Testimonial {
   role: string;
   company: string;
   href: string;
+  person: "jess" | "joshua" | "timo";
+  logo: "balancepoint" | "flex" | "flowtraders";
+}
+
+export interface TestimonialMapPin {
+  id: string;
+  company: string;
+  location: string;
+  size: string;
+  top: string;
+  left: string;
+  compact?: boolean;
 }
 
 export interface TestimonialsCopy {
@@ -23,6 +35,8 @@ const en: TestimonialsCopy = {
       role: "managing partner",
       company: "Balance Point",
       href: "https://www.isolvedhcm.com/welcome/balancepoint",
+      person: "jess",
+      logo: "balancepoint",
     },
     {
       quote:
@@ -31,6 +45,8 @@ const en: TestimonialsCopy = {
       role: "founder",
       company: "Flex Academies",
       href: "https://flexacademies.com/",
+      person: "joshua",
+      logo: "flex",
     },
     {
       quote:
@@ -39,9 +55,30 @@ const en: TestimonialsCopy = {
       role: "head of it",
       company: "Flow Traders",
       href: "https://www.flowtraders.com/",
+      person: "timo",
+      logo: "flowtraders",
     },
   ],
 };
+
+/** Client locations on the testimonials world map (clone positions). */
+export const testimonialMapPins: TestimonialMapPin[] = [
+  { id: "chainformation", company: "Chainformation", location: "Malmo, Sweden", size: "0.55em", top: "18.5%", left: "53.2%", compact: true },
+  { id: "flow-traders", company: "Flow traders", location: "Amsterdam, NL", size: "0.35em", top: "19.8%", left: "51.5%", compact: true },
+  { id: "ecosulis", company: "Ecosulis", location: "London, UK", size: "0.5em", top: "19.55%", left: "49.7%", compact: true },
+  { id: "spie", company: "Spie", location: "zurich, switzerland", size: "0.35em", top: "21.5%", left: "52.65%", compact: true },
+  { id: "bi-samurai", company: "BI Samurai", location: "olten, switzerland", size: "0.3em", top: "21.5%", left: "52.2%", compact: true },
+  { id: "fintechos", company: "FintechOS", location: "Bucharest, Romania", size: "0.55em", top: "21.95%", left: "56.3%", compact: true },
+  { id: "novoinsights", company: "Novo Insights", location: "Elmhurst, IL, US", size: "0.5em", top: "21.5%", left: "28.6%", compact: true },
+  { id: "umojo", company: "umojo", location: "Chicago, US", size: "1em", top: "22%", left: "27.5%", compact: true },
+  { id: "jdmedical", company: "JD Medical Services", location: "Dalton GA, US", size: "0.7em", top: "23.4%", left: "28%", compact: true },
+  { id: "balancepoint", company: "Balance PoinT", location: "Glen Rock, NJ, US", size: "1em", top: "23.1%", left: "31.8%", compact: true },
+  { id: "flexacademies", company: "flex academies", location: "Washington DC, US", size: "0.8em", top: "24.2%", left: "30.8%", compact: true },
+  { id: "cpa", company: "360 CPA", location: "Athens, GA, US", size: "0.8em", top: "24.2%", left: "28.8%", compact: true },
+  { id: "missiondrivenfinance", company: "Mission Driven Finance", location: "San Diego, US", size: "1em", top: "26%", left: "21%" },
+  { id: "brightquery", company: "BrightQuery", location: "Irvine, CA, US", size: "1.3em", top: "24.8%", left: "19.3%", compact: true },
+  { id: "downhome", company: "Downhome Solutions", location: "Seattle, WA, US", size: "1.7em", top: "21%", left: "18.2%" },
+];
 
 /** Romanian copy pending; English until translated. */
 export const testimonials: Record<Locale, TestimonialsCopy> = {

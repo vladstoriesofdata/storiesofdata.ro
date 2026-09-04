@@ -38,6 +38,62 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-SemiBold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-BoldItalic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/PublicSans-Black.otf") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --color-ink: #333333;
   --color-accent: #00d18e;
@@ -46,9 +102,10 @@
   --color-canvas-2: #f7f7f7;
   --color-rail: #333333;
   --color-muted: #828282;
-  --font-sans: "Montserrat", system-ui, sans-serif;
-  --font-mono: "Inconsolata", ui-monospace, monospace;
-  --font-nav: "Akrobat", "Montserrat", sans-serif;
+  --font-sans: "Public Sans", sans-serif;
+  --font-display: "Akrobat", sans-serif;
+  --font-nav: var(--font-display);
+  --font-mono: var(--font-sans);
   --nav-width: 200px;
   --rail-width: 80px;
   --snap-min: 766px;
