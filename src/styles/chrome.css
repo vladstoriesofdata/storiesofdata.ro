@@ -84,6 +84,10 @@
   padding: 0.4rem 0;
 }
 
+.site-header.home-chrome nav a[aria-current="true"] {
+  color: var(--color-accent);
+}
+
 .site-header.work-chrome {
   box-sizing: border-box;
   display: flex;
@@ -129,15 +133,140 @@ body[data-chrome="doc"] main {
     padding-left: var(--rail-width);
   }
 
-  html.homepage-snap header.home-chrome {
+  html.homepage-snap header.home-chrome,
+  html.homepage-snap header.site-header.home-chrome {
     position: fixed;
     top: 0;
     left: 0;
+    z-index: 20;
+    width: var(--nav-width);
+    height: 100vh;
     background: transparent;
   }
 }
 
+.hero-section {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 5rem 5% 3.125rem;
+}
+
+.hero-section .section-lottie {
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  opacity: 1;
+}
+
+.hero-heading,
+.hero-lede {
+  margin: 0;
+  font-family: var(--font-nav);
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.hero-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-heading-light {
+  color: #646464;
+  font-weight: 400;
+}
+
+.hero-lede {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-lede-accent {
+  color: var(--color-accent);
+}
+
+.hero-chapter-heading {
+  margin: 0;
+  color: var(--color-ink);
+  font-family: var(--font-nav);
+  font-size: 1.625rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: none;
+}
+
+.hero-chapter-subheading {
+  width: 100%;
+  margin: 0.9rem 0 0;
+  color: var(--color-accent);
+  font-family: var(--font-nav);
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.hero-chapter-text {
+  margin-top: 1.875rem;
+}
+
+.hero-chapter-text p {
+  margin: 0 0 1rem;
+  font-family: var(--font-mono);
+  line-height: 1.15;
+}
+
+@media (min-width: 766px) {
+  .hero-section {
+    min-height: 100dvh;
+    padding-bottom: 50px;
+  }
+
+  .hero-heading,
+  .hero-lede {
+    font-size: 3.875rem;
+  }
+
+  .hero-chapter-heading {
+    font-size: 2.375rem;
+  }
+
+  .hero-chapter-subheading {
+    width: 50%;
+  }
+
+  .hero-chapter-text {
+    column-count: 2;
+    column-gap: 30px;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-heading,
+  .hero-lede {
+    font-size: 4.5625rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-heading,
+  .hero-lede {
+    font-size: 5.25rem;
+  }
+}
+
 @media (max-width: 765px) {
+  .hero-intro,
+  .hero-lede-section {
+    min-height: calc(100dvh - 4rem);
+  }
+
   .site-header.home-chrome {
     position: sticky;
     top: 0;

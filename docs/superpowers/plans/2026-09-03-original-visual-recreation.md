@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 5)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 6)
 
-Do Task 5 only: HomeChrome CSS + What we do / Hero.
-Do not start Task 6.
+Do Task 6 only: Services tabs UI.
+Do not start Task 7.
 
-When finished: check off Task 5 in the plan, put Task 6’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 6 in the plan, put Task 7’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -71,7 +71,7 @@ When finished: check off Task 5 in the plan, put Task 6’s handoff prompt into 
 | 2 | Homepage navigation data | Done |
 | 3 | Tabs, Carousel, ViewZoom modules | Done |
 | 4 | BaseLayout chrome + Header shells + language switch | Done |
-| 5 | HomeChrome CSS + What we do / Hero | Todo |
+| 5 | HomeChrome CSS + What we do / Hero | Done |
 | 6 | Services tabs UI | Todo |
 | 7 | Portfolio strip tabs + carousel | Todo |
 | 8 | Team, testimonials, contact footer | Todo |
@@ -753,21 +753,21 @@ When finished: check off Task 5 in the plan, put Task 6’s handoff prompt into 
 - Modify: `src/components/home/Hero.astro`, `src/styles/chrome.css`, `src/pages/index.astro` if needed
 - Test: `tests/e2e/homepage-motion.spec.ts` still passes
 
-- [ ] **Step 1: Match hero to `legacy/index.html` first viewport**
+- [x] **Step 1: Match hero to `legacy/index.html` first viewport**
 
 `Hero.astro` section `data-section-name="what-we-do"` stays. Desktop: Lottie full-bleed behind content (`opacity` as on live site, not the current 0.35 wash unless the clone uses that). Headline sits bottom of the viewport: “The specialized” heavy, “data analytics team” lighter — split `copy.hero.heading` in the component if needed rather than changing `home.ts` copy strings (do not rewrite business meaning).
 
 Chapters: do not dump all chapters into the first viewport. Follow `legacy/index.html`: extra `.section` blocks for later what-we-do chapters **or** in-section scroll inside `#what-we-do`. Prefer extra `.section` elements with `data-section-name` values already listed in `SectionSnap.ts` comments (`to-shape`, `we-build-applications`, …) **only if** you also extend `HASH_TO_SECTION` so they are reachable. If that would break the six-item nav, keep chapters inside `#what-we-do` as sequential full-viewport slides that snap as separate `.section` nodes but share nav highlight “what we do” (same `data-section-name="what-we-do"` is invalid if snap requires unique names). **Decision for this task:** use unique `data-section-name` values from the clone for extra slides, and keep nav “what we do” pointing at the first one. Extra slides are not separate nav items.
 
-- [ ] **Step 2: Chrome polish**
+- [x] **Step 2: Chrome polish**
 
 Active nav link: `color: var(--color-accent)` when that section is current. Header on home is `position: fixed; z-index: 20` (clone navbar). Sticky header from `global.css` homepage-snap rules must not become a top bar on desktop.
 
-- [ ] **Step 3: Verify in the browser** at `http://localhost:4321` desktop 1280 and mobile 375. Compare to https://www.storiesofdata.com/#what-we-do (ignore cookie modal).
+- [x] **Step 3: Verify in the browser** at `http://localhost:4321` desktop 1280 and mobile 375. Compare to https://www.storiesofdata.com/#what-we-do (ignore cookie modal).
 
 Run: `npx playwright test tests/e2e/homepage-motion.spec.ts`
 
-- [ ] **Step 4: Commit with plan update + Next chat prompt → Task 6**
+- [x] **Step 4: Commit with plan update + Next chat prompt → Task 6**
 
 ```
 git commit -m "feat: restyle homepage what-we-do hero to match original"

@@ -7,10 +7,43 @@ import mobileIntro from "../../assets/lottie/mobile-short-intro.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
+
+const CHAPTER_SECTIONS = [
+  "we-build-applications",
+  "we-embed-analytics",
+  "we-design-visualizations",
+  "we-are-power-bi-experts",
+] as const;
+
+function splitHeroHeading(heading: string): { heavy: string; light: string } {
+  const lightMatch = heading.match(/data analytics team\s*$/i);
+  if (!lightMatch || lightMatch.index === undefined) {
+    return { heavy: heading, light: "" };
+  }
+  return {
+    heavy: heading.slice(0, lightMatch.index).trim(),
+    light: heading.slice(lightMatch.index).trim(),
+  };
+}
+
+function splitHeroLede(lede: string): { before: string; accent: string; after: string } {
+  const match = lede.match(/clarity/i);
+  if (!match || match.index === undefined) {
+    return { before: lede, accent: "", after: "" };
+  }
+  return {
+    before: lede.slice(0, match.index).trim(),
+    accent: lede.slice(match.index, match.index + match[0].length),
+    after: lede.slice(match.index + match[0].length).trim(),
+  };
+}
+
+const headingParts = splitHeroHeading(copy.hero.heading);
+const ledeParts = splitHeroLede(copy.hero.lede);
 ---
 <section
   id="what-we-do"
-  class="section home-section"
+  class="section hero-section hero-intro"
   data-section-name="what-we-do"
   aria-labelledby="hero-heading"
 >
@@ -20,30 +53,46 @@ const copy = home[site.locale];
   <div class="section-lottie lottie-mobile" aria-hidden="true">
     <LottieGraphic src={mobileIntro} loop={false} autoplay={true} when="mobile" />
   </div>
-  <h1 id="hero-heading">{copy.hero.heading}</h1>
-  <p class="lede">{copy.hero.lede}</p>
-  {copy.hero.chapters.map((chapter) => (
-    <article>
-      <h2>{chapter.heading}</h2>
-      <h3>{chapter.subheading}</h3>
-      {chapter.paragraphs.map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
-    </article>
-  ))}
+  <h1 id="hero-heading" class="hero-heading">
+    <span class="hero-heading-heavy">{headingParts.heavy}</span>
+    {headingParts.light && <span class="hero-heading-light">{headingParts.light}</span>}
+  </h1>
 </section>
 
+<section
+  id="to-shape"
+  class="section hero-section hero-lede-section"
+  data-section-name="to-shape"
+  aria-labelledby="hero-lede"
+>
+  <p id="hero-lede" class="hero-lede">
+    {ledeParts.before && <span class="hero-lede-before">{ledeParts.before}</span>}
+    {ledeParts.accent && <span class="hero-lede-accent">{ledeParts.accent}</span>}
+    {ledeParts.after && <span class="hero-lede-after">{ledeParts.after}</span>}
+  </p>
+</section>
+
+{copy.hero.chapters.map((chapter, index) => {
+  const name = CHAPTER_SECTIONS[index] ?? `what-we-do-${index + 1}`;
+  return (
+    <section
+      id={name}
+      class="section hero-section hero-chapter"
+      data-section-name={name}
+      aria-labelledby={`${name}-heading`}
+    >
+      <h2 id={`${name}-heading`} class="hero-chapter-heading">{chapter.heading}</h2>
+      <h3 class="hero-chapter-subheading">{chapter.subheading}</h3>
+      <div class="hero-chapter-text">
+        {chapter.paragraphs.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+    </section>
+  );
+})}
+
 <style>
-  .lede {
-    font-family: var(--font-sans);
-    font-size: 1.5rem;
-    font-weight: 600;
-  }
-
-  article + article {
-    margin-top: 2.5rem;
-  }
-
   .lottie-desktop {
     display: none;
   }

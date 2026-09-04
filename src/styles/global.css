@@ -105,7 +105,7 @@ nav {
     display: none;
   }
 
-  html.homepage-snap header {
+  html.homepage-snap header:not(.home-chrome) {
     position: sticky;
     top: 0;
     z-index: 20;

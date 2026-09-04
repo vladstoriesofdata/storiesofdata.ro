@@ -5,8 +5,8 @@
  *   what-we-do, to-shape, we-build-applications, we-embed-analytics,
  *   we-design-visualizations, we-are-power-bi-experts, services-and-products,
  *   portfolio, our-team, testimonials, contact
- * This rebuild snaps the six nav-level blocks: what-we-do, services-and-products,
- * our-team, portfolio, testimonials, contact.
+ * Nav still has six items. Extra what-we-do chapter slides snap individually
+ * (to-shape, we-build-applications, …) and keep the “what we do” nav highlight.
  *
  * data-w-id interactions noted but not restored as Webflow IX2:
  *   2026ea46-… navbar, c1469a58-… menu lottie, 1a6b2ab7-… mobile intro,
@@ -36,6 +36,11 @@ const BACKGROUND_ACTIVE = new Set([
 
 export const HASH_TO_SECTION: Record<string, string> = {
   "what-we-do": "what-we-do",
+  "to-shape": "to-shape",
+  "we-build-applications": "we-build-applications",
+  "we-embed-analytics": "we-embed-analytics",
+  "we-design-visualizations": "we-design-visualizations",
+  "we-are-power-bi-experts": "we-are-power-bi-experts",
   services: "services-and-products",
   "services-and-products": "services-and-products",
   team: "our-team",
@@ -44,6 +49,20 @@ export const HASH_TO_SECTION: Record<string, string> = {
   testimonials: "testimonials",
   contact: "contact",
 };
+
+const WHAT_WE_DO_SECTIONS = new Set([
+  "what-we-do",
+  "to-shape",
+  "we-build-applications",
+  "we-embed-analytics",
+  "we-design-visualizations",
+  "we-are-power-bi-experts",
+]);
+
+export function navTargetForSection(sectionName: string): string {
+  if (WHAT_WE_DO_SECTIONS.has(sectionName)) return "what-we-do";
+  return sectionName;
+}
 
 const DURATION_MS = 520;
 
@@ -119,6 +138,20 @@ function applyBackground(sectionName: string | undefined): void {
   wrapper.classList.toggle("active", BACKGROUND_ACTIVE.has(sectionName));
 }
 
+function syncNav(sectionName: string | undefined): void {
+  const target = sectionName ? navTargetForSection(sectionName) : undefined;
+  document.querySelectorAll<HTMLAnchorElement>("header.home-chrome a[data-section-target]").forEach((link) => {
+    const on = Boolean(target) && link.dataset.sectionTarget === target;
+    if (on) link.setAttribute("aria-current", "true");
+    else link.removeAttribute("aria-current");
+  });
+}
+
+function onActiveSection(sectionName: string | undefined): void {
+  applyBackground(sectionName);
+  syncNav(sectionName);
+}
+
 function currentIndex(): number {
   const list = sections();
   let best = 0;
@@ -164,12 +197,12 @@ function animateScroll(top: number, duration = DURATION_MS): Promise<void> {
 }
 
 async function snapToElement(el: HTMLElement): Promise<void> {
-  applyBackground(el.dataset.sectionName);
+  onActiveSection(el.dataset.sectionName);
   animating = true;
   try {
     let target: HTMLElement | null = el;
     while (target) {
-      applyBackground(target.dataset.sectionName);
+      onActiveSection(target.dataset.sectionName);
       await animateScroll(targetTop(target));
       syncHash(target);
       target = pendingSnap;
@@ -183,7 +216,7 @@ async function snapToElement(el: HTMLElement): Promise<void> {
 export function moveTo(sectionName: string): void {
   const el = findSection(sectionName);
   if (!el) return;
-  applyBackground(el.dataset.sectionName);
+  onActiveSection(el.dataset.sectionName);
   if (!snapEnabled) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
     syncHash(el);
@@ -244,7 +277,7 @@ function enableSnap(): void {
 
   window.addEventListener("wheel", onWheel, { passive: false });
   window.addEventListener("keydown", onKey);
-  applyBackground(sections()[currentIndex()]?.dataset.sectionName);
+  onActiveSection(sections()[currentIndex()]?.dataset.sectionName);
 
   disableSnap = () => {
     window.removeEventListener("wheel", onWheel);
@@ -287,5 +320,7 @@ export function initHomepageSnap(): void {
   const initial = sectionNameFromHash(location.hash);
   if (initial) {
     requestAnimationFrame(() => moveTo(initial));
+  } else {
+    onActiveSection(sections()[currentIndex()]?.dataset.sectionName);
   }
 }
