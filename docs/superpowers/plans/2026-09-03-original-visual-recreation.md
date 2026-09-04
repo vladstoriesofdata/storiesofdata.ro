@@ -44,19 +44,8 @@ This plan is executed **one task per new chat**. The user pastes the **Next chat
 
 ## Next chat prompt
 
-Copy everything in the block below into a **new** chat:
-
 ```
-Work on branch `Prepare-for-production` at c:\Misc\storiesofdata.ro\storiesofdata.ro.
-
-You are executing ONE task from the visual recreation plan, then stopping.
-
-Read and follow:
-- docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 11)
-
-Do Task 11 only: Playwright coverage and smoke-test updates.
-This is the last task. When finished: check off Task 11, set Next chat prompt to the all-done message in the handoff protocol, commit, paste that message, and stop.
+All visual-recreation plan tasks are done. Do not start new restyle work unless asked.
 ```
 
 ---
@@ -75,7 +64,7 @@ This is the last task. When finished: check off Task 11, set Next chat prompt to
 | 8 | Team, testimonials, contact footer | Done |
 | 9 | WorkChrome rail, menu, indexes, article layout | Done |
 | 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Done |
-| 11 | Playwright coverage and smoke-test updates | Todo |
+| 11 | Playwright coverage and smoke-test updates | Done |
 
 ---
 
@@ -1090,7 +1079,7 @@ This is the last task. When finished: check off Task 11, set Next chat prompt to
 - Modify: `tests/e2e/smoke.spec.ts`, `tests/e2e/homepage-motion.spec.ts`
 - Create: `tests/e2e/homepage-tabs.spec.ts`, `tests/e2e/work-zoom.spec.ts`
 
-- [ ] **Step 1: Adjust smoke tests**
+- [x] **Step 1: Adjust smoke tests**
 
 `tests/e2e/smoke.spec.ts`:
 
@@ -1099,7 +1088,7 @@ This is the last task. When finished: check off Task 11, set Next chat prompt to
 - Portfolio/data-story pages: do **not** require a visible `h1` that duplicates zoom titles. Assert `data-view-zoom` exists on `/portfolio/a-romanian-data-story` and does **not** exist on `/articles/microsoft-fabric-medallion-architecture-lessons-learned`.
 - Nav: homepage header has `what we do` and has no Articles link.
 
-- [ ] **Step 2: Homepage tabs e2e**
+- [x] **Step 2: Homepage tabs e2e**
 
 Create `tests/e2e/homepage-tabs.spec.ts`:
 
@@ -1130,7 +1119,7 @@ test("portfolio tabs swap carousel cards", async ({ page }) => {
 
 Fix locators if IDs differ; keep the assertions.
 
-- [ ] **Step 3: Zoom e2e**
+- [x] **Step 3: Zoom e2e**
 
 Create `tests/e2e/work-zoom.spec.ts`:
 
@@ -1155,7 +1144,7 @@ test("articles do not have zoom controls", async ({ page }) => {
 });
 ```
 
-- [ ] **Step 4: Run e2e**
+- [x] **Step 4: Run e2e**
 
 Run: `npx playwright test`
 
@@ -1163,7 +1152,7 @@ Expected: all pass. If preview build is slow, that is normal (`playwright.config
 
 Fix product code if tests fail for real UI bugs; do not weaken assertions that encode the spec.
 
-- [ ] **Step 5: Commit with plan: Task 11 Done, Next chat prompt = all-done message**
+- [x] **Step 5: Commit with plan: Task 11 Done, Next chat prompt = all-done message**
 
 ```
 git commit -m "test: cover original nav, portfolio tabs, and work-page zoom"

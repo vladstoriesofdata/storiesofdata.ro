@@ -4,7 +4,7 @@ test("desktop Services nav moves to services-and-products", async ({ page }) => 
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
   await page.waitForFunction(() => typeof window.__homepageMoveTo === "function");
-  await page.locator("header").getByRole("link", { name: "Services" }).click();
+  await page.locator("header").getByRole("link", { name: /services/i }).click();
 
   const section = page.locator('[data-section-name="services-and-products"]');
   await expect
