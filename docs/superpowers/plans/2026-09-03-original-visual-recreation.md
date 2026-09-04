@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 3)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 4)
 
-Do Task 3 only: Tabs, Carousel, ViewZoom modules.
-Do not start Task 4.
+Do Task 4 only: BaseLayout chrome + Header shells + language switch.
+Do not start Task 5.
 
-When finished: check off Task 3 in the plan, put Task 4’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 4 in the plan, put Task 5’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -69,7 +69,7 @@ When finished: check off Task 3 in the plan, put Task 4’s handoff prompt into 
 | --- | --- | --- |
 | 1 | Design tokens, Akrobat fonts, zoom icons | Done |
 | 2 | Homepage navigation data | Done |
-| 3 | Tabs, Carousel, ViewZoom modules | Todo |
+| 3 | Tabs, Carousel, ViewZoom modules | Done |
 | 4 | BaseLayout chrome + Header shells + language switch | Todo |
 | 5 | HomeChrome CSS + What we do / Hero | Todo |
 | 6 | Services tabs UI | Todo |
@@ -374,7 +374,7 @@ When finished: check off Task 3 in the plan, put Task 4’s handoff prompt into 
 
 Preferred split (no new dependency): export pure helpers and test those. `init*` can be thin wrappers used later.
 
-- [ ] **Step 1: Failing tests for view order**
+- [x] **Step 1: Failing tests for view order**
 
 Create `tests/unit/view-zoom.test.ts`:
 
@@ -463,11 +463,11 @@ describe("carousel indexes", () => {
 });
 ```
 
-- [ ] **Step 2: Run tests — expect FAIL**
+- [x] **Step 2: Run tests — expect FAIL**
 
 Run: `npm test -- tests/unit/view-zoom.test.ts tests/unit/tabs.test.ts tests/unit/carousel.test.ts`
 
-- [ ] **Step 3: Implement modules**
+- [x] **Step 3: Implement modules**
 
 `src/components/work/ViewZoom.ts`:
 
@@ -647,11 +647,11 @@ export function initCarousel(root: ParentNode = document): void {
 }
 ```
 
-- [ ] **Step 4: Run tests — expect PASS**
+- [x] **Step 4: Run tests — expect PASS**
 
 Run: `npm test`
 
-- [ ] **Step 5: Commit with plan update + Next chat prompt → Task 4**
+- [x] **Step 5: Commit with plan update + Next chat prompt → Task 4**
 
 ```
 git commit -m "feat: add tabs, carousel, and work-view zoom helpers"
