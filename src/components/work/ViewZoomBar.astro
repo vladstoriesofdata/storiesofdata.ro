@@ -1,0 +1,35 @@
+<nav class="views-nav" aria-label="View length">
+  <button type="button" class="views-nav-zoom" data-zoom-out title="Less detail" aria-label="Less detail"></button>
+  <div class="view-status-wrapper">
+    <div class="progress-line" aria-hidden="true"></div>
+    <div class="dot-wrapper">
+      <button
+        type="button"
+        class="views-nav-dot pv-dot"
+        data-zoom-view="summary"
+        title="Summary view"
+        aria-label="Summary view"
+      ></button>
+      <button
+        type="button"
+        class="views-nav-dot mv-dot"
+        data-zoom-view="subjects"
+        title="Key subjects view"
+        aria-label="Key subjects view"
+      ></button>
+      <button
+        type="button"
+        class="views-nav-dot gv-dot"
+        data-zoom-view="detail"
+        title="Detailed view"
+        aria-label="Detailed view"
+      ></button>
+    </div>
+  </div>
+  <button type="button" class="views-nav-zoom" data-zoom-in title="More detail" aria-label="More detail"></button>
+</nav>
+
+<script>
+  import { initViewZoom } from "./ViewZoom";
+  initViewZoom();
+</script>

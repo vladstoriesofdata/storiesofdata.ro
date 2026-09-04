@@ -1,0 +1,504 @@
+/* Cloned work-page class names. Scoped; not a dump of the Webflow stylesheet. */
+
+[data-view-zoom] {
+  position: relative;
+  min-height: 100vh;
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+}
+
+[data-view-zoom] .legacy-html {
+  min-height: 100vh;
+}
+
+[data-view-zoom] [hidden],
+[data-view-zoom] .hide {
+  display: none !important;
+}
+
+[data-view-zoom] .cs-planetary-wrapper {
+  box-sizing: border-box;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+  padding: 50px 50px 90px 70px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-view-zoom] .cs-planetary-wrapper.show {
+  display: block;
+}
+
+[data-view-zoom] .cs-planetary-wrapper._175-height {
+  height: 175vh;
+  min-height: 100vh;
+}
+
+[data-view-zoom] .cs-mountaintop-wrapper {
+  box-sizing: border-box;
+  z-index: 500;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  height: 100vh;
+  display: none;
+}
+
+[data-view-zoom] .cs-mountaintop-wrapper.show {
+  display: flex;
+}
+
+[data-view-zoom] .cs-grassroot-wrapper {
+  box-sizing: border-box;
+  z-index: 5;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  position: relative;
+  overflow: auto;
+}
+
+[data-view-zoom] .cs-grassroot-wrapper.show {
+  display: flex;
+}
+
+[data-view-zoom] .cs-grassroot-wrapper.analytics-blogpost.show {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  display: block;
+}
+
+[data-view-zoom] .current-cs-thumbnail {
+  background-color: var(--color-paper);
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+[data-view-zoom] .current-cs-thumbnail.transparent-bg {
+  background-color: transparent;
+}
+
+[data-view-zoom] .current-cs-thumbnail-link {
+  background-color: var(--color-paper);
+  cursor: pointer;
+  flex-direction: column;
+  flex: none;
+  justify-content: space-between;
+  height: 100%;
+  text-decoration: none;
+  display: flex;
+}
+
+[data-view-zoom] .current-cs-thumbnail-link.transparent-bg {
+  background-color: transparent;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-view-zoom] .pv-embedd-wrapper,
+[data-view-zoom] .w-embed.w-iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  flex: 1;
+  position: relative;
+}
+
+[data-view-zoom] .pv-embedd-wrapper iframe,
+[data-view-zoom] .w-embed.w-iframe iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+[data-view-zoom] .pv-info-wrapper {
+  padding: 20px 30px 10px;
+}
+
+[data-view-zoom] .pv-cover-wrapper {
+  z-index: 5;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  min-width: 100%;
+  max-width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+}
+
+[data-view-zoom] .pv-cover-wrapper.template {
+  background-image: url("../assets/work/cover-template.svg");
+}
+
+[data-view-zoom] .pv-cover-wrapper.template.pv-cover-lines-on-map {
+  background-image: url("../assets/work/correct-gif-arcgis.gif");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+[data-view-zoom] .pv-cover-wrapper.transparent-bg {
+  flex-flow: column;
+  justify-content: center;
+  align-items: stretch;
+  width: 75vw;
+  min-width: auto;
+  max-height: 75vh;
+}
+
+[data-view-zoom] .pv-bg-video {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 75vh;
+}
+
+[data-view-zoom] .display-none {
+  display: none;
+}
+
+[data-view-zoom] .projects-nav {
+  z-index: 15;
+  align-items: center;
+  display: flex;
+  position: absolute;
+  bottom: 30px;
+  left: 40px;
+}
+
+[data-view-zoom] .projects-nav-btn-wrapper {
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+[data-view-zoom] .prev-proj-btn,
+[data-view-zoom] .next-proj-btn {
+  background-color: transparent;
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: auto;
+  width: 20px;
+  height: 20px;
+  padding: 15px;
+  border: 0;
+  text-indent: -9999px;
+  overflow: hidden;
+}
+
+[data-view-zoom] .prev-proj-btn {
+  background-image: url("../assets/work/nav-arrow-left.svg");
+}
+
+[data-view-zoom] .next-proj-btn {
+  background-image: url("../assets/work/nav-arrow-right.svg");
+}
+
+[data-view-zoom] .projects-count-wrapper {
+  display: flex;
+}
+
+[data-view-zoom] .projects-count-text {
+  font-family: var(--font-nav);
+  font-size: 19px;
+  font-weight: 900;
+}
+
+[data-view-zoom] .projects-count-text.current {
+  margin-left: 5px;
+}
+
+[data-view-zoom] .nav-tooltip {
+  display: none;
+}
+
+[data-view-zoom] .cs-title {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-family: var(--font-sans);
+  font-size: 54px;
+  font-weight: 900;
+}
+
+[data-view-zoom] .cs-title-small {
+  color: var(--color-accent);
+  text-transform: uppercase;
+  margin-top: 0;
+  margin-bottom: 5px;
+  font-family: var(--font-sans);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+[data-view-zoom] .tags-wrapper {
+  margin-bottom: 30px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+[data-view-zoom] .tags-wrapper.thumbnail {
+  margin-bottom: 0;
+}
+
+[data-view-zoom] .tag {
+  color: var(--color-accent);
+  margin-right: 7px;
+  font-family: var(--font-nav);
+  font-weight: 600;
+}
+
+[data-view-zoom] .cs-mountaintop-content {
+  z-index: 500;
+  background-color: var(--color-paper);
+  width: 84%;
+  height: 90vh;
+  margin-top: 5vh;
+  margin-bottom: 90px;
+  margin-right: 3%;
+  padding-bottom: 30px;
+  position: relative;
+  overflow: auto;
+}
+
+[data-view-zoom] .cs-grassroot-content {
+  z-index: 5;
+  background-color: var(--color-paper);
+  width: 100%;
+  position: relative;
+}
+
+[data-view-zoom] .gv-richt-text {
+  background-color: var(--color-paper);
+  padding: 45px 12%;
+}
+
+[data-view-zoom] .sticky-mv {
+  grid-column-gap: 30px;
+  background-color: var(--color-paper);
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-between;
+  align-items: start;
+  width: 100%;
+  display: grid;
+}
+
+[data-view-zoom] .scrollable-content-mv {
+  z-index: 2;
+  margin-top: 30px;
+  padding-bottom: 75px;
+  padding-right: 30px;
+  position: relative;
+}
+
+[data-view-zoom] .sticky-img-mv {
+  background-image: url("../assets/work/placeholder1.jpg");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+[data-view-zoom] .sticky-img-mv.nobel-intro {
+  background-image: url("../assets/work/Alfred-Quote-Planetary.png");
+  background-position: 50% 0;
+  background-size: contain;
+  position: static;
+}
+
+[data-view-zoom] .sticky-img-mv.multiline-chart {
+  background-image: url("../assets/work/Screenshot-2020-11-28-165735-1.png");
+  background-position: 50% 0;
+  background-size: contain;
+}
+
+[data-view-zoom] .sticky-img-mv.btr-intro {
+  background-image: url("../assets/work/BTR-Storiesofdata.png");
+  background-size: contain;
+}
+
+[data-view-zoom] .sticky-img-mv.chainformation {
+  background-image: url("../assets/work/Chainformation-Storiesofdata.png"),
+    linear-gradient(to bottom, var(--color-canvas-2), var(--color-canvas-2));
+  background-position: 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: contain, auto;
+}
+
+[data-view-zoom] .gv-sticky {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+[data-view-zoom] .gv-sticky.right {
+  grid-template-columns: 1fr 2fr;
+}
+
+[data-view-zoom] .stickyimg-gv {
+  background-image: url("../assets/work/placeholder1.jpg");
+  background-position: 50%;
+  background-size: cover;
+  max-height: 100vh;
+  position: sticky;
+  top: 0;
+}
+
+[data-view-zoom] .stickyimg-gv.nobel-prize {
+  background-image: url("../assets/work/AlfredNobel2.jpg");
+  background-size: contain;
+}
+
+[data-view-zoom] .stickyimg-gv.lines-on-maps {
+  background-image: url("../assets/work/Screenshot-2020-11-28-165735-1.png");
+  background-position: 50% 0;
+  background-size: contain;
+}
+
+[data-view-zoom] .stickyimg-gv.chainformation {
+  background-image: url("../assets/work/Chainformation-Storiesofdata.png"),
+    linear-gradient(to bottom, var(--color-canvas-2), var(--color-canvas-2));
+  background-position: 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: contain, auto;
+}
+
+[data-view-zoom] .stickyimg-gv.btr-vase-study {
+  background-image: url("../assets/work/BTR-Storiesofdata.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+[data-view-zoom] .gv-sticky-content {
+  background-color: var(--color-paper);
+  margin-top: 50px;
+  padding-left: 30px;
+  padding-right: 45px;
+}
+
+[data-view-zoom] .gv-sticky-content.linkedin {
+  z-index: 1;
+  padding-left: 50px;
+  position: relative;
+}
+
+[data-view-zoom] .mv-richtext {
+  padding: 30px;
+}
+
+[data-view-zoom] .invisible-link,
+[data-view-zoom] .tags-hidden {
+  display: none;
+}
+
+[data-view-zoom] .linkedin-analytics {
+  font-size: 20px;
+}
+
+[data-view-zoom] img {
+  max-width: 100%;
+  height: auto;
+}
+
+.legacy-html .w-richtext:before,
+.legacy-html .w-richtext:after {
+  content: " ";
+  display: table;
+}
+
+.legacy-html .w-richtext:after {
+  clear: both;
+}
+
+.legacy-html .w-richtext figure {
+  max-width: 60%;
+  position: relative;
+}
+
+.legacy-html .w-richtext figure img {
+  width: 100%;
+}
+
+.legacy-html .w-richtext figure.w-richtext-align-fullwidth {
+  text-align: center;
+  clear: both;
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.legacy-html .w-richtext figure.w-richtext-align-center {
+  clear: both;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.legacy-html .w-richtext figure.w-richtext-align-floatleft {
+  float: left;
+  clear: none;
+  margin-right: 15px;
+}
+
+.legacy-html .w-richtext figure.w-richtext-align-floatright {
+  float: right;
+  clear: none;
+  margin-left: 15px;
+}
+
+@media (max-width: 765px) {
+  [data-view-zoom] .cs-planetary-wrapper {
+    height: 100vh;
+    padding: 30px 30px 150px;
+  }
+
+  [data-view-zoom] .cs-title {
+    font-size: 32px;
+  }
+
+  [data-view-zoom] .cs-mountaintop-wrapper {
+    height: auto;
+    min-height: 80vh;
+  }
+
+  [data-view-zoom] .cs-mountaintop-content {
+    width: auto;
+    height: auto;
+    margin: 1rem;
+  }
+
+  [data-view-zoom] .gv-richt-text {
+    padding: 24px 1.25rem;
+  }
+
+  [data-view-zoom] .sticky-mv,
+  [data-view-zoom] .gv-sticky,
+  [data-view-zoom] .gv-sticky.right {
+    grid-template-columns: 1fr;
+  }
+
+  [data-view-zoom] .projects-nav {
+    position: fixed;
+    bottom: 25px;
+    left: 10px;
+  }
+
+  [data-view-zoom] .pv-info-wrapper {
+    padding: 15px 10px;
+  }
+}

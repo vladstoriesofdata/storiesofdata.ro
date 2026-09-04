@@ -53,12 +53,10 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 10)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 11)
 
-Do Task 10 only: Restore zoom HTML, legacy-work CSS, ViewZoom UI.
-Do not start Task 11.
-
-When finished: check off Task 10 in the plan, put Task 11’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+Do Task 11 only: Playwright coverage and smoke-test updates.
+This is the last task. When finished: check off Task 11, set Next chat prompt to the all-done message in the handoff protocol, commit, paste that message, and stop.
 ```
 
 ---
@@ -76,7 +74,7 @@ When finished: check off Task 10 in the plan, put Task 11’s handoff prompt int
 | 7 | Portfolio strip tabs + carousel | Done |
 | 8 | Team, testimonials, contact footer | Done |
 | 9 | WorkChrome rail, menu, indexes, article layout | Done |
-| 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Todo |
+| 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Done |
 | 11 | Playwright coverage and smoke-test updates | Todo |
 
 ---
@@ -1001,7 +999,7 @@ When finished: check off Task 10 in the plan, put Task 11’s handoff prompt int
 - Modify: `src/content/portfolio/**/{en,ro}.mdx`, `src/content/data-stories/**/{en,ro}.mdx` as needed
 - Optional create: `scripts/restore-zoom-wrappers.mjs` (run once, commit MDX output)
 
-- [ ] **Step 1: Restore wrappers from legacy**
+- [x] **Step 1: Restore wrappers from legacy**
 
 For each slug under `legacy/portfolio/*/index.html` and `legacy/data-stories/*/index.html`, the page contains `.cs-planetary-wrapper`, `.cs-mountaintop-wrapper`, `.cs-grassroot-wrapper`. Current MDX often has planetary (+ maybe grassroot) only.
 
@@ -1015,7 +1013,7 @@ Do not pull `<head>` or `case-study-nav`. Fix image paths so they stay `./images
 
 If a wrapper is empty in legacy, keep the empty wrapper.
 
-- [ ] **Step 2: ViewZoomBar + init**
+- [x] **Step 2: ViewZoomBar + init**
 
 Only on `path` matching `/portfolio/` or `/data-stories/` slugs (not `/articles/`). Wrap content:
 
@@ -1045,7 +1043,7 @@ initViewZoom();
 
 Default view summary: hide mountaintop and grassroot until zoom.
 
-- [ ] **Step 3: `legacy-work.css`**
+- [x] **Step 3: `legacy-work.css`**
 
 Import from BaseLayout when `chrome==="work"` or always (file should be unused on home). Scope under `[data-view-zoom]` and `.legacy-html`.
 
@@ -1053,17 +1051,17 @@ Port from the shared Webflow CSS **only** rules for: `.cs-planetary-wrapper`, `.
 
 Do not copy the entire `storiesofdata.webflow.shared.*.css` file.
 
-- [ ] **Step 4: Articles**
+- [x] **Step 4: Articles**
 
 Confirm `/articles/[slug]` has **no** `data-view-zoom` and no ViewZoomBar.
 
-- [ ] **Step 5: Browser-check**
+- [x] **Step 5: Browser-check**
 
 Open `/portfolio/a-romanian-data-story`: summary card first; zoom in twice to longer copy; Ctrl+Q back. Open `/articles/is-it-worth-hiring-a-microsoft-fabric-consultancy-in-2026`: no zoom bar.
 
 Empty zoom level: remain on that level (helpers already clamp).
 
-- [ ] **Step 6: Commit with plan update + Next chat prompt → Task 11**
+- [x] **Step 6: Commit with plan update + Next chat prompt → Task 11**
 
 ```
 git commit -m "feat: restore portfolio three-level zoom from the original site"
