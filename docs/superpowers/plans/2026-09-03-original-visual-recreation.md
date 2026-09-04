@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 9)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 10)
 
-Do Task 9 only: WorkChrome rail, menu, indexes, article layout.
-Do not start Task 10.
+Do Task 10 only: Restore zoom HTML, legacy-work CSS, ViewZoom UI.
+Do not start Task 11.
 
-When finished: check off Task 9 in the plan, put Task 10’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 10 in the plan, put Task 11’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -75,7 +75,7 @@ When finished: check off Task 9 in the plan, put Task 10’s handoff prompt into
 | 6 | Services tabs UI | Done |
 | 7 | Portfolio strip tabs + carousel | Done |
 | 8 | Team, testimonials, contact footer | Done |
-| 9 | WorkChrome rail, menu, indexes, article layout | Todo |
+| 9 | WorkChrome rail, menu, indexes, article layout | Done |
 | 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Todo |
 | 11 | Playwright coverage and smoke-test updates | Todo |
 
@@ -948,13 +948,13 @@ When finished: check off Task 9 in the plan, put Task 10’s handoff prompt into
 - Modify: `src/components/Header.astro`, `src/layouts/ArticleLayout.astro`, index and `[slug]` pages under articles/portfolio/data-stories, `src/styles/chrome.css`
 - Create: `src/components/work/WorkMenu.astro` if the menu markup is large
 
-- [ ] **Step 1: Work menu data**
+- [x] **Step 1: Work menu data**
 
 In Header (or WorkMenu), `getCollection` for articles, portfolio, dataStories (locale-filtered). Render three groups: projects (`/portfolio/...`), articles (`/articles/...`), case studies (`/data-stories/...`). Current page link gets `aria-current="page"`.
 
 Slide-out: button `aria-expanded`, panel `hidden` until open, overlay click closes. Match clone: panel to the right of the 80px rail, dark background.
 
-- [ ] **Step 2: ArticleLayout**
+- [x] **Step 2: ArticleLayout**
 
 `chrome="work"`. Include a visually hidden `<h1>{title}</h1>` **only if** the MDX does not already output an `h1` (portfolio MDX often uses `h2`/`h3` inside wrappers). Smoke tests currently require an `h1` on some slugs — keep one accessible heading with the frontmatter title if missing.
 
@@ -962,13 +962,13 @@ Untranslated banner in the content column (`margin` so it is not under the rail)
 
 Do not add ViewZoom UI yet.
 
-- [ ] **Step 3: Indexes**
+- [x] **Step 3: Indexes**
 
 `/articles`, `/portfolio`, `/data-stories` use `chrome="work"` and a simple list of links. Not in homepage nav.
 
-- [ ] **Step 4: Browser-check** open an article (long-form, no zoom control), open a portfolio slug, open `/articles`. Menu lists siblings. EN/RO in the rail still uses `peerUrl`.
+- [x] **Step 4: Browser-check** open an article (long-form, no zoom control), open a portfolio slug, open `/articles`. Menu lists siblings. EN/RO in the rail still uses `peerUrl`.
 
-- [ ] **Step 5: Commit with plan update + Next chat prompt → Task 10**
+- [x] **Step 5: Commit with plan update + Next chat prompt → Task 10**
 
 ```
 git commit -m "feat: restore work-page dark rail and sibling menu"

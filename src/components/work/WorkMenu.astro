@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+import { getSiteConfig } from "../../lib/site";
+import { entrySlug, isLocaleEntry } from "../../lib/collections";
+
+interface Props {
+  path: string;
+}
+
+interface MenuLink {
+  href: string;
+  title: string;
+}
+
+const { path } = Astro.props;
+const site = getSiteConfig(import.meta.env);
+
+function byPubDateDesc<T extends { data: { pubDate: Date } }>(entries: T[]): T[] {
+  return [...entries].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+}
+
+function isCurrent(href: string): boolean {
+  const norm = (value: string) => value.replace(/\/$/, "") || "/";
+  return norm(href) === norm(path);
+}
+
+function toLinks(
+  entries: { id: string; data: { title: string; pubDate: Date } }[],
+  hrefBase: string,
+): MenuLink[] {
+  return byPubDateDesc(entries).map((entry) => ({
+    href: `${hrefBase}/${entrySlug(entry.id)}`,
+    title: entry.data.title,
+  }));
+}
+
+const [portfolio, articles, dataStories] = await Promise.all([
+  getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale)),
+  getCollection("articles", (entry) => isLocaleEntry(entry.id, site.locale)),
+  getCollection("dataStories", (entry) => isLocaleEntry(entry.id, site.locale)),
+]);
+
+const groups = [
+  { id: "projects", label: "Projects", links: toLinks(portfolio, "/portfolio") },
+  { id: "articles", label: "Articles", links: toLinks(articles, "/articles") },
+  { id: "case-studies", label: "Case studies", links: toLinks(dataStories, "/data-stories") },
+];
+---
+<div class="work-menu" id="work-menu" hidden>
+  <button type="button" class="work-menu-overlay" aria-label="Close menu"></button>
+  <nav class="work-menu-panel" aria-label="Work">
+    {groups.map((group) => (
+      <section class="work-menu-group" aria-labelledby={`work-menu-${group.id}`}>
+        <h2 id={`work-menu-${group.id}`}>{group.label}</h2>
+        <ul>
+          {group.links.map((link) => (
+            <li>
+              <a href={link.href} aria-current={isCurrent(link.href) ? "page" : undefined}>
+                {link.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))}
+  </nav>
+</div>

@@ -5,10 +5,13 @@ interface Props {
   title: string;
   description: string;
   path: string;
+  contentClass?: string;
 }
 
-const { title, description, path } = Astro.props;
+const { title, description, path, contentClass } = Astro.props;
 ---
 <BaseLayout title={title} description={description} path={path} chrome="work">
-  <slot />
+  <div class:list={["work-content", contentClass]}>
+    <slot />
+  </div>
 </BaseLayout>

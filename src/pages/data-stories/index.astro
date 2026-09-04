@@ -9,7 +9,7 @@ const entries = (
   await getCollection("dataStories", (entry) => isLocaleEntry(entry.id, site.locale))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<ArticleLayout title="Data stories" description="Data stories from Stories of Data." path="/data-stories">
+<ArticleLayout title="Data stories" description="Data stories from Stories of Data." path="/data-stories" contentClass="work-index">
   <h1>Data stories</h1>
   <ul>
     {entries.map((entry) => (

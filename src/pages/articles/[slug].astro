@@ -20,8 +20,8 @@ const { entry } = Astro.props;
 const { Content } = await render(entry);
 const path = `/articles/${entrySlug(entry.id)}`;
 ---
-<ArticleLayout title={entry.data.title} description={entry.data.description} path={path}>
+<ArticleLayout title={entry.data.title} description={entry.data.description} path={path} contentClass="work-article">
   {entry.data.translationStatus === "untranslated" && <UntranslatedBanner />}
-  <h1>{entry.data.title}</h1>
+  <h1 class="visually-hidden">{entry.data.title}</h1>
   <Content />
 </ArticleLayout>

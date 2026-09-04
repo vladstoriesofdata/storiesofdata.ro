@@ -1,5 +1,6 @@
 ---
 import LanguageSwitch from "./LanguageSwitch.astro";
+import WorkMenu from "./work/WorkMenu.astro";
 import { getSiteConfig } from "../lib/site";
 import { navigation } from "../data/navigation";
 import { sectionNameFromHash } from "./home/SectionSnap";
@@ -62,18 +63,30 @@ const links = navigation[site.locale];
 )}
 
 {chrome === "work" && (
-  <header class="site-header work-chrome">
-    <a href="/" class="brand">
-      <img
-        src={logoMark.src}
-        alt={site.name}
-        width={logoMark.width}
-        height={logoMark.height}
-      />
-    </a>
-    <LanguageSwitch path={path} />
-    <button type="button" class="work-menu-toggle" aria-expanded="false">menu</button>
-  </header>
+  <>
+    <header class="site-header work-chrome">
+      <div class="work-chrome-top">
+        <a href="/" class="brand">
+          <img
+            src={logoMark.src}
+            alt={site.name}
+            width={logoMark.width}
+            height={logoMark.height}
+          />
+        </a>
+        <LanguageSwitch path={path} />
+      </div>
+      <button
+        type="button"
+        class="work-menu-toggle"
+        aria-expanded="false"
+        aria-controls="work-menu"
+      >
+        menu
+      </button>
+    </header>
+    <WorkMenu path={path} />
+  </>
 )}
 
 {chrome === "doc" && (
@@ -110,4 +123,20 @@ const links = navigation[site.locale];
     button.setAttribute("aria-expanded", String(open));
     header.classList.toggle("is-open", open);
   });
+
+  const workToggle = document.querySelector(".work-menu-toggle");
+  const workMenu = document.querySelector("#work-menu");
+  const workOverlay = document.querySelector(".work-menu-overlay");
+
+  const setWorkMenuOpen = (open: boolean) => {
+    if (!(workToggle instanceof HTMLButtonElement) || !(workMenu instanceof HTMLElement)) return;
+    workToggle.setAttribute("aria-expanded", String(open));
+    workMenu.hidden = !open;
+  };
+
+  workToggle?.addEventListener("click", () => {
+    if (!(workToggle instanceof HTMLButtonElement)) return;
+    setWorkMenuOpen(workToggle.getAttribute("aria-expanded") !== "true");
+  });
+  workOverlay?.addEventListener("click", () => setWorkMenuOpen(false));
 </script>
