@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 8)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 9)
 
-Do Task 8 only: Team, testimonials, contact footer.
-Do not start Task 9.
+Do Task 9 only: WorkChrome rail, menu, indexes, article layout.
+Do not start Task 10.
 
-When finished: check off Task 8 in the plan, put Task 9’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 9 in the plan, put Task 10’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -74,7 +74,7 @@ When finished: check off Task 8 in the plan, put Task 9’s handoff prompt into 
 | 5 | HomeChrome CSS + What we do / Hero | Done |
 | 6 | Services tabs UI | Done |
 | 7 | Portfolio strip tabs + carousel | Done |
-| 8 | Team, testimonials, contact footer | Todo |
+| 8 | Team, testimonials, contact footer | Done |
 | 9 | WorkChrome rail, menu, indexes, article layout | Todo |
 | 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Todo |
 | 11 | Playwright coverage and smoke-test updates | Todo |
@@ -907,17 +907,17 @@ When finished: check off Task 8 in the plan, put Task 9’s handoff prompt into 
 - Modify: `src/components/ContactForm.astro` styles to pill button / clone form fields
 - Test: `tests/e2e/smoke.spec.ts` still finds Services heading, Our Team, contact form
 
-- [ ] **Step 1: Team layout** — photos, name, uppercase role, bio, mailto. Lottie stays. Match clone team section.
+- [x] **Step 1: Team layout** — photos, name, uppercase role, bio, mailto. Lottie stays. Match clone team section.
 
-- [ ] **Step 2: Testimonials** — `data-carousel` of quotes, name, company link. Not a stacked list on desktop.
+- [x] **Step 2: Testimonials** — `data-carousel` of quotes, name, company link. Not a stacked list on desktop.
 
-- [ ] **Step 3: Contact section** — dark full-viewport (`background: var(--color-rail); color: var(--color-paper)`). White logo optional inside section. Form, email, phone. Privacy + terms links here (homepage has no Doc footer). Switch home header logo to `logo-white.svg` when contact is active if clone does (can be CSS `header.home-chrome.is-on-dark` toggled in `SectionSnap` or a small script watching `data-section-name="contact"`). If that risks snap regressions, skip logo swap and only darken the section; note it in the commit message.
+- [x] **Step 3: Contact section** — dark full-viewport (`background: var(--color-rail); color: var(--color-paper)`). White logo optional inside section. Form, email, phone. Privacy + terms links here (homepage has no Doc footer). Switch home header logo to `logo-white.svg` when contact is active if clone does (can be CSS `header.home-chrome.is-on-dark` toggled in `SectionSnap` or a small script watching `data-section-name="contact"`). If that risks snap regressions, skip logo swap and only darken the section; note it in the commit message.
 
-- [ ] **Step 4: Browser-check** team, testimonials carousel, contact contrast, form still disabled without endpoint.
+- [x] **Step 4: Browser-check** team, testimonials carousel, contact contrast, form still disabled without endpoint.
 
 Run: `npx playwright test tests/e2e/smoke.spec.ts tests/e2e/homepage-motion.spec.ts`
 
-- [ ] **Step 5: Commit with plan update + Next chat prompt → Task 9**
+- [x] **Step 5: Commit with plan update + Next chat prompt → Task 9**
 
 ```
 git commit -m "feat: restyle team, testimonials, and contact to match original"

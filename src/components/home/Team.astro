@@ -3,44 +3,55 @@ import { getSiteConfig } from "../../lib/site";
 import { team } from "../../data/team";
 import LottieGraphic from "./LottieGraphic.astro";
 import connectedDots from "../../assets/lottie/connected-dots-loop.json?url";
+import teamVlad from "../../assets/brand/team-vlad.png";
+import teamIrinel from "../../assets/brand/team-irinel.png";
+import iconEmail from "../../assets/brand/icon-email.svg";
 
 const site = getSiteConfig(import.meta.env);
 const copy = team[site.locale];
+
+const photos = {
+  vlad: teamVlad,
+  irinel: teamIrinel,
+} as const;
 ---
 <section
   id="team"
-  class="section home-section"
+  class="section home-section team-section"
   data-section-name="our-team"
   aria-labelledby="team-heading"
 >
   <div class="section-lottie" aria-hidden="true">
     <LottieGraphic src={connectedDots} loop={false} autoplay={false} />
   </div>
-  <h2 id="team-heading">{copy.heading}</h2>
-  {copy.members.map((member) => (
-    <article>
-      <h3>{member.name}</h3>
-      <p class="role">{member.role}</p>
-      {member.bio.split("\n\n").map((paragraph) => (
-        <p>{paragraph}</p>
-      ))}
-      <p>
-        <a href={`mailto:${member.email}`}>{member.email}</a>
-      </p>
-    </article>
-  ))}
+  <h2 id="team-heading" class="team-heading">{copy.heading}</h2>
+  <div class="team-grid">
+    {copy.members.map((member) => {
+      const photo = photos[member.photo];
+      return (
+        <article class="team-member">
+          <div class="team-member-info">
+            <img
+              class="team-member-photo"
+              src={photo.src}
+              alt=""
+              width={photo.width}
+              height={photo.height}
+            />
+            <div class="team-member-names">
+              <h3 class="team-member-name">{member.name}</h3>
+              <p class="team-member-role">{member.role}</p>
+            </div>
+          </div>
+          {member.bio.split("\n\n").map((paragraph) => (
+            <p class="team-member-bio">{paragraph}</p>
+          ))}
+          <a class="team-member-email" href={`mailto:${member.email}`}>
+            <img src={iconEmail.src} alt="" width="25" height="25" />
+            {member.email}
+          </a>
+        </article>
+      );
+    })}
+  </div>
 </section>
-
-<style>
-  article + article {
-    margin-top: 2rem;
-  }
-
-  .role {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-</style>

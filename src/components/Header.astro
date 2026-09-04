@@ -4,6 +4,7 @@ import { getSiteConfig } from "../lib/site";
 import { navigation } from "../data/navigation";
 import { sectionNameFromHash } from "./home/SectionSnap";
 import logoBlack from "../assets/brand/logo-black.svg";
+import logoWhite from "../assets/brand/logo-white.svg";
 import logoMark from "../assets/brand/logo-mark.svg";
 
 type Chrome = "home" | "work" | "doc";
@@ -23,10 +24,19 @@ const links = navigation[site.locale];
     <div class="home-chrome-top">
       <a href="/" class="brand">
         <img
+          class="brand-logo brand-logo-black"
           src={logoBlack.src}
           alt={site.name}
           width={logoBlack.width}
           height={logoBlack.height}
+        />
+        <img
+          class="brand-logo brand-logo-white"
+          src={logoWhite.src}
+          alt=""
+          width={logoWhite.width}
+          height={logoWhite.height}
+          aria-hidden="true"
         />
       </a>
       <LanguageSwitch path={path} />

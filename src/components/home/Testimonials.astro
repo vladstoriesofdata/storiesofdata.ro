@@ -7,39 +7,45 @@ const copy = testimonials[site.locale];
 ---
 <section
   id="testimonials"
-  class="section home-section"
+  class="section home-section testimonials-section"
   data-section-name="testimonials"
   aria-labelledby="testimonials-heading"
 >
-  <h2 id="testimonials-heading">{copy.heading}</h2>
-  {copy.items.map((item) => (
-    <blockquote>
-      <p>{item.quote}</p>
-      <footer>
-        <cite>{item.name}</cite>
-        <span>{item.role}</span>
-        <a href={item.href}>{item.company}</a>
-      </footer>
-    </blockquote>
-  ))}
+  <h2 id="testimonials-heading" class="testimonials-heading">{copy.heading}</h2>
+  <div class="testimonials-carousel" data-carousel>
+    {copy.items.map((item, index) => (
+      <blockquote class="testimonial-card" data-slide hidden={index !== 0}>
+        <p class="testimonial-quote">{item.quote}</p>
+        <footer class="testimonial-meta">
+          <div class="testimonial-person">
+            <cite class="testimonial-name">{item.name}</cite>
+            <span class="testimonial-role">{item.role}</span>
+          </div>
+          <a class="testimonial-company" href={item.href} target="_blank" rel="noreferrer">
+            {item.company}
+          </a>
+        </footer>
+      </blockquote>
+    ))}
+    {copy.items.length > 1 && (
+      <div class="testimonials-carousel-controls">
+        <button type="button" class="testimonials-carousel-btn" data-carousel-prev>
+          Previous
+        </button>
+        <div class="testimonials-carousel-dots">
+          {copy.items.map((item, index) => (
+            <button
+              type="button"
+              class="testimonials-carousel-dot"
+              data-carousel-dot={String(index)}
+              aria-label={`Show testimonial from ${item.name}`}
+            />
+          ))}
+        </div>
+        <button type="button" class="testimonials-carousel-btn" data-carousel-next>
+          Next
+        </button>
+      </div>
+    )}
+  </div>
 </section>
-
-<style>
-  blockquote {
-    margin: 0 0 2rem;
-    padding: 0;
-  }
-
-  footer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1rem;
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-  }
-
-  cite {
-    font-style: normal;
-    font-weight: 600;
-  }
-</style>

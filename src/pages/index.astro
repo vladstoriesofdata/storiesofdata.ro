@@ -10,6 +10,9 @@ import LottieGraphic from "../components/home/LottieGraphic.astro";
 import { getSiteConfig } from "../lib/site";
 import { home } from "../data/home";
 import steps from "../assets/lottie/steps-1-2-3-4-5.json?url";
+import logoWhite from "../assets/brand/logo-white.svg";
+import iconEmail from "../assets/brand/icon-email.svg";
+import iconPhone from "../assets/brand/icon-phone.svg";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
@@ -25,20 +28,41 @@ const copy = home[site.locale];
   <Testimonials />
   <section
     id="contact"
-    class="section home-section"
+    class="section home-section contact-section"
     data-section-name="contact"
     aria-labelledby="contact-heading"
   >
-    <h2 id="contact-heading">{copy.contact.heading}</h2>
-    <p class="subheading">{copy.contact.subheading}</p>
-    <p>{copy.contact.body}</p>
-    <p>
-      <a href={`mailto:${copy.contact.email}`}>{copy.contact.email}</a>
-    </p>
-    <p>
-      <a href={`tel:${copy.contact.phoneHref}`}>{copy.contact.phone}</a>
-    </p>
-    <ContactForm />
+    <div class="contact-grid">
+      <div class="contact-copy">
+        <p class="contact-kicker">{copy.contact.heading}</p>
+        <h2 id="contact-heading" class="contact-heading">{copy.contact.subheading}</h2>
+        <p class="contact-body">{copy.contact.body}</p>
+        <img
+          class="contact-logo"
+          src={logoWhite.src}
+          alt={site.name}
+          width={logoWhite.width}
+          height={logoWhite.height}
+        />
+      </div>
+      <div class="contact-panel">
+        <div class="contact-channels">
+          <a class="contact-channel" href={`mailto:${copy.contact.email}`}>
+            <img src={iconEmail.src} alt="" width="25" height="25" />
+            {copy.contact.email}
+          </a>
+          <a class="contact-channel" href={`tel:${copy.contact.phoneHref}`}>
+            <img src={iconPhone.src} alt="" width="25" height="25" />
+            {copy.contact.phone}
+          </a>
+        </div>
+        <ContactForm />
+        <nav class="contact-legal" aria-label="Legal">
+          <a href="/privacy-policy">Privacy policy</a>
+          <a href="/terms-and-conditions">Terms</a>
+        </nav>
+      </div>
+    </div>
   </section>
 </BaseLayout>
 
@@ -51,10 +75,3 @@ const copy = home[site.locale];
   initCarousel();
 </script>
 
-<style>
-  .subheading {
-    font-family: var(--font-sans);
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-</style>

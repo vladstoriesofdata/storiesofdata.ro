@@ -147,9 +147,16 @@ function syncNav(sectionName: string | undefined): void {
   });
 }
 
+function syncDarkHeader(sectionName: string | undefined): void {
+  const header = document.querySelector("header.home-chrome");
+  if (!(header instanceof HTMLElement)) return;
+  header.classList.toggle("is-on-dark", sectionName === "contact");
+}
+
 function onActiveSection(sectionName: string | undefined): void {
   applyBackground(sectionName);
   syncNav(sectionName);
+  syncDarkHeader(sectionName);
 }
 
 function currentIndex(): number {
