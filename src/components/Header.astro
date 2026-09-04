@@ -4,36 +4,81 @@ import { getSiteConfig } from "../lib/site";
 import { navigation } from "../data/navigation";
 import { sectionNameFromHash } from "./home/SectionSnap";
 import logoBlack from "../assets/brand/logo-black.svg";
+import logoMark from "../assets/brand/logo-mark.svg";
+
+type Chrome = "home" | "work" | "doc";
 
 interface Props {
   path: string;
+  chrome?: Chrome;
 }
 
-const { path } = Astro.props;
+const { path, chrome = "doc" } = Astro.props;
 const site = getSiteConfig(import.meta.env);
-const isHome = path === "/";
 const links = navigation[site.locale];
 ---
-<header data-home={isHome ? "1" : undefined}>
-  <a href="/" class="brand">
-    <img
-      src={logoBlack.src}
-      alt={site.name}
-      width={logoBlack.width}
-      height={logoBlack.height}
-    />
-  </a>
-  <nav>
-    {links.map((item) => {
-      const href = isHome ? item.homeHref : item.href;
-      const section = isHome ? sectionNameFromHash(item.homeHref) : undefined;
-      return (
-        <a href={href} data-section-target={section}>{item.label}</a>
-      );
-    })}
+
+{chrome === "home" && (
+  <header class="site-header home-chrome">
+    <div class="home-chrome-top">
+      <a href="/" class="brand">
+        <img
+          src={logoBlack.src}
+          alt={site.name}
+          width={logoBlack.width}
+          height={logoBlack.height}
+        />
+      </a>
+      <LanguageSwitch path={path} />
+    </div>
+    <button
+      type="button"
+      class="home-menu-toggle"
+      aria-expanded="false"
+      aria-controls="home-nav"
+    >
+      menu
+    </button>
+    <nav id="home-nav">
+      {links.map((item) => {
+        const href = item.homeHref;
+        const section = sectionNameFromHash(item.homeHref);
+        return (
+          <a href={href} data-section-target={section}>{item.label}</a>
+        );
+      })}
+    </nav>
+  </header>
+)}
+
+{chrome === "work" && (
+  <header class="site-header work-chrome">
+    <a href="/" class="brand">
+      <img
+        src={logoMark.src}
+        alt={site.name}
+        width={logoMark.width}
+        height={logoMark.height}
+      />
+    </a>
     <LanguageSwitch path={path} />
-  </nav>
-</header>
+    <button type="button" class="work-menu-toggle" aria-expanded="false">menu</button>
+  </header>
+)}
+
+{chrome === "doc" && (
+  <header class="site-header doc-chrome">
+    <a href="/" class="brand">
+      <img
+        src={logoBlack.src}
+        alt={site.name}
+        width={logoBlack.width}
+        height={logoBlack.height}
+      />
+    </a>
+    <LanguageSwitch path={path} />
+  </header>
+)}
 
 <script>
   document.querySelector("header")?.addEventListener("click", (event) => {
@@ -46,12 +91,13 @@ const links = navigation[site.locale];
     event.preventDefault();
     window.__homepageMoveTo(name);
   });
-</script>
 
-<style>
-  .brand img {
-    display: block;
-    height: 2.5rem;
-    width: auto;
-  }
-</style>
+  document.querySelector(".home-menu-toggle")?.addEventListener("click", () => {
+    const header = document.querySelector("header.home-chrome");
+    const button = document.querySelector(".home-menu-toggle");
+    if (!(header instanceof HTMLElement) || !(button instanceof HTMLButtonElement)) return;
+    const open = button.getAttribute("aria-expanded") !== "true";
+    button.setAttribute("aria-expanded", String(open));
+    header.classList.toggle("is-open", open);
+  });
+</script>

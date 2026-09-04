@@ -2,14 +2,14 @@
 import { getCollection } from "astro:content";
 import { getSiteConfig } from "../../lib/site";
 import { entrySlug, isLocaleEntry } from "../../lib/collections";
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
 const site = getSiteConfig(import.meta.env);
 const entries = (
   await getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<BaseLayout title="Portfolio" description="Portfolio from Stories of Data." path="/portfolio">
+<ArticleLayout title="Portfolio" description="Portfolio from Stories of Data." path="/portfolio">
   <h1>Portfolio</h1>
   <ul>
     {entries.map((entry) => (
@@ -18,4 +18,4 @@ const entries = (
       </li>
     ))}
   </ul>
-</BaseLayout>
+</ArticleLayout>

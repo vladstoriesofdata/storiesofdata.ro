@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 4)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 5)
 
-Do Task 4 only: BaseLayout chrome + Header shells + language switch.
-Do not start Task 5.
+Do Task 5 only: HomeChrome CSS + What we do / Hero.
+Do not start Task 6.
 
-When finished: check off Task 4 in the plan, put Task 5’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 5 in the plan, put Task 6’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -70,7 +70,7 @@ When finished: check off Task 4 in the plan, put Task 5’s handoff prompt into 
 | 1 | Design tokens, Akrobat fonts, zoom icons | Done |
 | 2 | Homepage navigation data | Done |
 | 3 | Tabs, Carousel, ViewZoom modules | Done |
-| 4 | BaseLayout chrome + Header shells + language switch | Todo |
+| 4 | BaseLayout chrome + Header shells + language switch | Done |
 | 5 | HomeChrome CSS + What we do / Hero | Todo |
 | 6 | Services tabs UI | Todo |
 | 7 | Portfolio strip tabs + carousel | Todo |
@@ -682,7 +682,7 @@ When finished: check off Task 4 in the plan, put Task 5’s handoff prompt into 
 - Modify: `src/layouts/BaseLayout.astro`, `src/layouts/ArticleLayout.astro`, `src/components/Header.astro`, `src/components/LanguageSwitch.astro`, `src/components/Footer.astro`, `src/pages/index.astro`, `src/pages/privacy-policy.astro`, `src/pages/terms-and-conditions.astro`, `src/pages/404.astro`, `src/pages/articles/index.astro`, `src/pages/articles/[slug].astro`, `src/pages/portfolio/index.astro`, `src/pages/portfolio/[slug].astro`, `src/pages/data-stories/index.astro`, `src/pages/data-stories/[slug].astro`
 - Create: `src/styles/chrome.css`
 
-- [ ] **Step 1: Add `chrome` prop to BaseLayout**
+- [x] **Step 1: Add `chrome` prop to BaseLayout**
 
 ```ts
 type Chrome = "home" | "work" | "doc";
@@ -692,11 +692,11 @@ Default `chrome` to `"doc"`. Pass it to `Header` and `body data-chrome={chrome}`
 
 Set `chrome="home"` on `src/pages/index.astro`. Set `chrome="work"` via `ArticleLayout` for all article/portfolio/data-story pages **and** their index pages. Legal + 404 stay `doc`.
 
-- [ ] **Step 2: Language switch shows EN and RO**
+- [x] **Step 2: Language switch shows EN and RO**
 
 `LanguageSwitch.astro` must render both labels. Current locale is a `<span>` (not a link), peer locale is the existing `peerUrl` `<a>`. Current locale uses `color: var(--color-accent)`. `aria-current="true"` on the current span.
 
-- [ ] **Step 3: Header shells**
+- [x] **Step 3: Header shells**
 
 `Header.astro` takes `chrome` + `path`.
 
@@ -704,7 +704,7 @@ Set `chrome="home"` on `src/pages/index.astro`. Set `chrome="work"` via `Article
 - `work`: `<header class="site-header work-chrome">` — logo-mark → `/`, `LanguageSwitch`. Menu list can be a placeholder `<button type="button" aria-expanded="false">menu</button>` until Task 9. Do not use the homepage section list as the work rail labels.
 - `doc`: compact top bar, logo-black → `/`, `LanguageSwitch`, no section nav.
 
-- [ ] **Step 4: Minimal chrome.css so home is a left rail on desktop**
+- [x] **Step 4: Minimal chrome.css so home is a left rail on desktop**
 
 Use `legacy` `.navbar` as spec: fixed left, `width: var(--nav-width)`, `height: 100vh`, transparent background. Logo top, nav bottom, `font-family: var(--font-nav)`, `text-transform: uppercase`, `font-weight: 900`. Main content `margin-left: var(--nav-width)` when `body[data-chrome="home"]` and `min-width: 766px`.
 
@@ -714,7 +714,7 @@ Work chrome: `body[data-chrome="work"]` `padding-left: var(--rail-width)` on des
 
 Doc chrome: normal top header, `max-width: 48rem` main.
 
-- [ ] **Step 5: Verify**
+- [x] **Step 5: Verify**
 
 Run: `npm run dev` and open `/`, `/privacy-policy`, `/articles/microsoft-fabric-medallion-architecture-lessons-learned`.
 
@@ -722,7 +722,7 @@ Expect: homepage left nav (desktop), no Articles, EN/RO pair; legal still readab
 
 Run: `npx playwright test tests/e2e/homepage-motion.spec.ts tests/e2e/smoke.spec.ts` and fix selectors if header structure broke them (prefer `header .home-chrome` or `getByRole('link', { name: /services/i })`).
 
-- [ ] **Step 6: Commit with plan update + Next chat prompt → Task 5**
+- [x] **Step 6: Commit with plan update + Next chat prompt → Task 5**
 
 ```
 git commit -m "feat: add home, work, and doc chrome shells"

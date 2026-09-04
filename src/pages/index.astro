@@ -14,7 +14,7 @@ import steps from "../assets/lottie/steps-1-2-3-4-5.json?url";
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
 ---
-<BaseLayout title={copy.title} description={copy.description} path="/">
+<BaseLayout title={copy.title} description={copy.description} path="/" chrome="home">
   <div class="background-anim-wrapper" aria-hidden="true">
     <LottieGraphic src={steps} loop={false} autoplay={false} />
   </div>

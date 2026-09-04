@@ -79,12 +79,29 @@ function findSection(name: string): HTMLElement | null {
 
 function headerOffset(): number {
   const header = document.querySelector("header");
-  return header instanceof HTMLElement ? header.offsetHeight : 0;
+  if (!(header instanceof HTMLElement)) return 0;
+  if (header.classList.contains("home-chrome") && window.matchMedia(SNAP_MQ).matches) {
+    return 0;
+  }
+  return header.offsetHeight;
+}
+
+function scrollY(): number {
+  return window.scrollY || document.body.scrollTop || document.documentElement.scrollTop;
+}
+
+function scrollToY(top: number): void {
+  window.scrollTo(0, top);
+  document.body.scrollTop = top;
+  document.documentElement.scrollTop = top;
 }
 
 function targetTop(el: HTMLElement): number {
-  const raw = window.scrollY + el.getBoundingClientRect().top - headerOffset();
-  const max = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+  const raw = scrollY() + el.getBoundingClientRect().top - headerOffset();
+  const max = Math.max(
+    0,
+    Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight,
+  );
   return Math.max(0, Math.min(raw, max));
 }
 
@@ -122,23 +139,23 @@ function easeInOut(t: number): number {
 
 function animateScroll(top: number, duration = DURATION_MS): Promise<void> {
   return new Promise((resolve) => {
-    const start = window.scrollY;
+    const start = scrollY();
     const delta = top - start;
     if (Math.abs(delta) < 1) {
-      window.scrollTo(0, top);
+      scrollToY(top);
       resolve();
       return;
     }
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
-      window.scrollTo(0, top);
+      scrollToY(top);
       resolve();
       return;
     }
     const t0 = performance.now();
     const frame = (now: number) => {
       const p = Math.min(1, (now - t0) / duration);
-      window.scrollTo(0, start + delta * easeInOut(p));
+      scrollToY(start + delta * easeInOut(p));
       if (p < 1) requestAnimationFrame(frame);
       else resolve();
     };

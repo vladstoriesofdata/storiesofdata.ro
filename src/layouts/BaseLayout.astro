@@ -6,15 +6,19 @@ import Analytics from "../components/Analytics.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import "../styles/global.css";
+import "../styles/chrome.css";
+
+type Chrome = "home" | "work" | "doc";
 
 interface Props {
   title: string;
   description: string;
   path: string;
   robots?: string;
+  chrome?: Chrome;
 }
 
-const { title, description, path, robots } = Astro.props;
+const { title, description, path, robots, chrome = "doc" } = Astro.props;
 const site = getSiteConfig(import.meta.env);
 ---
 <!doctype html>
@@ -33,11 +37,11 @@ const site = getSiteConfig(import.meta.env);
     <CookieBanner />
     <Analytics />
   </head>
-  <body>
-    <Header path={path} />
+  <body data-chrome={chrome}>
+    <Header path={path} chrome={chrome} />
     <main>
       <slot />
     </main>
-    <Footer />
+    {chrome === "doc" && <Footer />}
   </body>
 </html>
