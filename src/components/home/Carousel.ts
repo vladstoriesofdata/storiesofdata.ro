@@ -18,6 +18,10 @@ export function initCarousel(root: ParentNode = document): void {
         slide.hidden = i !== index;
       });
       carousel.dataset.carouselIndex = String(index);
+      carousel.querySelectorAll<HTMLElement>("[data-carousel-dot]").forEach((dot) => {
+        const on = dot.dataset.carouselDot === String(index);
+        dot.setAttribute("aria-current", on ? "true" : "false");
+      });
     };
 
     carousel.querySelector("[data-carousel-next]")?.addEventListener("click", (event) => {

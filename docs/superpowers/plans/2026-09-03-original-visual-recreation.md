@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 7)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 8)
 
-Do Task 7 only: Portfolio strip tabs + carousel.
-Do not start Task 8.
+Do Task 8 only: Team, testimonials, contact footer.
+Do not start Task 9.
 
-When finished: check off Task 7 in the plan, put Task 8’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 8 in the plan, put Task 9’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -73,7 +73,7 @@ When finished: check off Task 7 in the plan, put Task 8’s handoff prompt into 
 | 4 | BaseLayout chrome + Header shells + language switch | Done |
 | 5 | HomeChrome CSS + What we do / Hero | Done |
 | 6 | Services tabs UI | Done |
-| 7 | Portfolio strip tabs + carousel | Todo |
+| 7 | Portfolio strip tabs + carousel | Done |
 | 8 | Team, testimonials, contact footer | Todo |
 | 9 | WorkChrome rail, menu, indexes, article layout | Todo |
 | 10 | Restore zoom HTML, legacy-work CSS, ViewZoom UI | Todo |
@@ -846,9 +846,9 @@ When finished: check off Task 7 in the plan, put Task 8’s handoff prompt into 
 - Modify: `src/components/home/PortfolioStrip.astro`, `src/pages/index.astro`
 - Modify: `src/styles/chrome.css`
 
-- [ ] **Step 1: Load three collections** in `PortfolioStrip.astro` (already loads portfolio). Also `getCollection("articles")` and `getCollection("dataStories")`, filter with `isLocaleEntry`, sort by `pubDate` desc.
+- [x] **Step 1: Load three collections** in `PortfolioStrip.astro` (already loads portfolio). Also `getCollection("articles")` and `getCollection("dataStories")`, filter with `isLocaleEntry`, sort by `pubDate` desc.
 
-- [ ] **Step 2: Markup**
+- [x] **Step 2: Markup**
 
 Section `id="portfolio"` `data-section-name="portfolio"`. Keep Lottie. `data-tabs` pills: Portfolio / Articles / Case Studies (`data-tab="portfolio"|"articles"|"case-studies"`). Default selected: Portfolio.
 
@@ -860,7 +860,7 @@ Each panel is `data-carousel` with cards as `[data-slide]` links:
 
 Card: title + description + “MORE DETAILS”. Prev/next buttons `data-carousel-prev` / `data-carousel-next`. Optional dots.
 
-- [ ] **Step 3: Init**
+- [x] **Step 3: Init**
 
 ```ts
 import { initCarousel } from "../components/home/Carousel";
@@ -870,11 +870,11 @@ initCarousel();
 
 (Tabs already imported in Task 6.)
 
-- [ ] **Step 4: Style** — light canvas background `#f7f7f7`, pill tabs like clone `.portfolio-tabs`, cards as white panels. Match `legacy/index.html` portfolio section.
+- [x] **Step 4: Style** — light canvas background `#f7f7f7`, pill tabs like clone `.portfolio-tabs`, cards as white panels. Match `legacy/index.html` portfolio section.
 
-- [ ] **Step 5: Browser-check** click Articles tab, cards change to article titles; Case Studies shows data-stories titles; carousel next wraps.
+- [x] **Step 5: Browser-check** click Articles tab, cards change to article titles; Case Studies shows data-stories titles; carousel next wraps.
 
-- [ ] **Step 6: Commit with plan update + Next chat prompt → Task 8**
+- [x] **Step 6: Commit with plan update + Next chat prompt → Task 8**
 
 ```
 git commit -m "feat: restore homepage portfolio tabs and carousel"

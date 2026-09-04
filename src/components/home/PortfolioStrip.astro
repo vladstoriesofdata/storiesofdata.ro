@@ -8,31 +8,130 @@ import portfolioZoom from "../../assets/lottie/portfolio-zoom.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
-const entries = (
-  await getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale))
-)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 4);
+
+function byPubDateDesc<T extends { data: { pubDate: Date } }>(entries: T[]): T[] {
+  return [...entries].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+}
+
+const tabs = [
+  {
+    id: "portfolio",
+    label: "Portfolio",
+    hrefBase: "/portfolio",
+    entries: byPubDateDesc(
+      await getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale)),
+    ),
+  },
+  {
+    id: "articles",
+    label: "Articles",
+    hrefBase: "/articles",
+    entries: byPubDateDesc(
+      await getCollection("articles", (entry) => isLocaleEntry(entry.id, site.locale)),
+    ),
+  },
+  {
+    id: "case-studies",
+    label: "Case Studies",
+    hrefBase: "/data-stories",
+    entries: byPubDateDesc(
+      await getCollection("dataStories", (entry) => isLocaleEntry(entry.id, site.locale)),
+    ),
+  },
+] as const;
 ---
 <section
   id="portfolio"
-  class="section home-section"
+  class="section home-section portfolio-section"
   data-section-name="portfolio"
   aria-labelledby="portfolio-heading"
 >
   <div class="section-lottie" aria-hidden="true">
     <LottieGraphic src={portfolioZoom} loop={false} autoplay={false} />
   </div>
-  <h2 id="portfolio-heading">{copy.portfolio.heading}</h2>
-  <ul>
-    {entries.map((entry) => (
-      <li>
-        <a href={`/portfolio/${entrySlug(entry.id)}`}>{entry.data.title}</a>
-        <p>{entry.data.description}</p>
-      </li>
+  <h2 id="portfolio-heading" class="visually-hidden">{copy.portfolio.heading}</h2>
+  <div class="portfolio-tabs" data-tabs>
+    <div class="portfolio-tablist" role="tablist" aria-label={copy.portfolio.heading}>
+      {tabs.map((tab, index) => {
+        const selected = index === 0;
+        return (
+          <button
+            type="button"
+            class="portfolio-tab"
+            role="tab"
+            id={`portfolio-tab-${tab.id}`}
+            data-tab={tab.id}
+            aria-selected={selected ? "true" : "false"}
+            aria-controls={`portfolio-panel-${tab.id}`}
+            tabindex={selected ? 0 : -1}
+          >
+            {tab.label}
+          </button>
+        );
+      })}
+    </div>
+    {tabs.map((tab, index) => (
+      <div
+        class="portfolio-panel"
+        role="tabpanel"
+        id={`portfolio-panel-${tab.id}`}
+        data-tab-panel={tab.id}
+        aria-labelledby={`portfolio-tab-${tab.id}`}
+        hidden={index !== 0}
+      >
+        <div class="portfolio-carousel" data-carousel>
+          {tab.entries.map((entry, slideIndex) => (
+            <a
+              class="portfolio-card"
+              data-slide
+              href={`${tab.hrefBase}/${entrySlug(entry.id)}`}
+              hidden={slideIndex !== 0}
+            >
+              <div class="portfolio-card-copy">
+                <h3 class="portfolio-card-title">{entry.data.title}</h3>
+                <p class="portfolio-card-description">{entry.data.description}</p>
+              </div>
+              <span class="portfolio-card-more">
+                MORE DETAILS
+                <svg
+                  class="portfolio-card-more-icon"
+                  width="11"
+                  height="18"
+                  viewBox="0 0 11 18"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M1.51367 1.61035L8.8155 8.91218L1.51367 16.214"
+                    stroke="currentColor"
+                    stroke-width="3"
+                  />
+                </svg>
+              </span>
+            </a>
+          ))}
+          {tab.entries.length > 1 && (
+            <div class="portfolio-carousel-controls">
+              <button type="button" class="portfolio-carousel-btn" data-carousel-prev>
+                Previous
+              </button>
+              <div class="portfolio-carousel-dots">
+                {tab.entries.map((entry, slideIndex) => (
+                  <button
+                    type="button"
+                    class="portfolio-carousel-dot"
+                    data-carousel-dot={String(slideIndex)}
+                    aria-label={`Show ${entry.data.title}`}
+                  />
+                ))}
+              </div>
+              <button type="button" class="portfolio-carousel-btn" data-carousel-next>
+                Next
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
     ))}
-  </ul>
-  <p>
-    <a href="/portfolio">{copy.portfolio.viewAll}</a>
-  </p>
+  </div>
 </section>

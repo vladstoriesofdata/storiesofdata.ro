@@ -373,6 +373,192 @@ body[data-chrome="doc"] main {
   color: var(--color-accent);
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.portfolio-section {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: stretch;
+  max-width: none;
+  margin: 0;
+  padding: 10% 5%;
+  background: var(--color-canvas-2);
+  color: var(--color-ink);
+}
+
+.portfolio-section .section-lottie {
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+  opacity: 1;
+}
+
+.portfolio-tabs {
+  width: 100%;
+}
+
+.portfolio-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.portfolio-tab {
+  color: var(--color-muted);
+  text-align: left;
+  text-transform: none;
+  white-space: nowrap;
+  background: var(--color-paper);
+  border: 0;
+  border-radius: 20px;
+  flex: none;
+  margin: 0 20px 10px 0;
+  padding: 12px 30px 14px;
+  box-shadow: 0 1px 3px #0003;
+  font-family: var(--font-nav);
+  font-size: 2.375rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.portfolio-tab:hover,
+.portfolio-tab[aria-selected="true"] {
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+.portfolio-panel {
+  padding: 1.5rem 0 0;
+}
+
+.portfolio-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.portfolio-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1rem;
+  max-width: 36rem;
+  min-height: 10rem;
+  padding: 15px;
+  background: var(--color-paper);
+  color: inherit;
+  text-decoration: none;
+  transition: box-shadow 0.2s;
+}
+
+.portfolio-card[hidden] {
+  display: none;
+}
+
+.portfolio-card:hover {
+  box-shadow: 0 0 20px 0 #0003;
+}
+
+.portfolio-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.portfolio-card-title {
+  margin: 0;
+  color: var(--color-accent);
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.portfolio-card-description {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1.15;
+}
+
+.portfolio-card-more {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-ink);
+  font-family: var(--font-nav);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.portfolio-card-more-icon {
+  width: 7px;
+  height: auto;
+}
+
+.portfolio-carousel-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  max-width: 36rem;
+}
+
+.portfolio-carousel-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-ink);
+  font-family: var(--font-nav);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.portfolio-carousel-btn:hover {
+  color: var(--color-accent);
+}
+
+.portfolio-carousel-dots {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.portfolio-carousel-dot {
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #c8c8c8;
+  cursor: pointer;
+}
+
+.portfolio-carousel-dot[aria-current="true"] {
+  background: var(--color-ink);
+}
+
 @media (min-width: 766px) {
   .services-section {
     min-height: 100dvh;
@@ -384,12 +570,25 @@ body[data-chrome="doc"] main {
   .services-panel-grid {
     grid-template-columns: 1fr 1fr;
   }
+
+  .portfolio-section {
+    min-height: 100dvh;
+    width: calc(100% + var(--nav-width));
+    margin-left: calc(-1 * var(--nav-width));
+    padding: 5% 5% 5% calc(var(--nav-width) + 5%);
+  }
 }
 
 @media (max-width: 765px) {
   .hero-intro,
   .hero-lede-section {
     min-height: calc(100dvh - 4rem);
+  }
+
+  .portfolio-tab {
+    font-size: 1.5rem;
+    margin-right: 10px;
+    padding: 10px 18px 12px;
   }
 
   .site-header.home-chrome {
