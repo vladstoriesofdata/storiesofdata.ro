@@ -78,13 +78,20 @@ nav {
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.28;
+  opacity: 1;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .background-anim-wrapper.active {
   opacity: 0;
   visibility: hidden;
+}
+
+@media (max-width: 765px) {
+  .background-anim-wrapper {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @media (min-width: 766px) {

@@ -48,7 +48,13 @@ const ledeParts = splitHeroLede(copy.hero.lede);
   aria-labelledby="hero-heading"
 >
   <div class="section-lottie lottie-desktop" aria-hidden="true">
-    <LottieGraphic src={desktopIntro} loop={true} autoplay={true} when="desktop" />
+    <LottieGraphic
+      src={desktopIntro}
+      loop={true}
+      autoplay={true}
+      when="desktop"
+      preserveAspectRatio="xMidYMid slice"
+    />
   </div>
   <div class="section-lottie lottie-mobile" aria-hidden="true">
     <LottieGraphic src={mobileIntro} loop={false} autoplay={true} when="mobile" />

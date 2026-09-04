@@ -36,6 +36,31 @@ function destroyNode(node: HTMLElement): void {
   node.replaceChildren();
 }
 
+function clampProgress(progress: number): number {
+  if (Number.isNaN(progress)) return 0;
+  return Math.min(1, Math.max(0, progress));
+}
+
+export function frameForProgress(totalFrames: number, progress: number): number {
+  const frames = Math.max(0, totalFrames - 1);
+  return clampProgress(progress) * frames;
+}
+
+function applyProgress(node: HTMLElement, animation: AnimationItem, progress: number): void {
+  const t = clampProgress(progress);
+  node.dataset.lottieProgress = String(t);
+  animation.goToAndStop(frameForProgress(animation.totalFrames, t), true);
+}
+
+export function setLottieProgress(progress: number, root: ParentNode = document): void {
+  const t = clampProgress(progress);
+  for (const node of root.querySelectorAll<HTMLElement>('[data-lottie][data-scrub="1"]')) {
+    node.dataset.lottieProgress = String(t);
+    const animation = instances.get(node);
+    if (animation?.isLoaded) applyProgress(node, animation, t);
+  }
+}
+
 function mountNode(node: HTMLElement): void {
   if (!shouldMount(node) || instances.has(node)) return;
   const src = node.dataset.src;
@@ -44,14 +69,27 @@ function mountNode(node: HTMLElement): void {
   node.dataset.lottieReady = "1";
   const loop = node.dataset.loop === "1";
   const autoplay = node.dataset.autoplay === "1";
+  const scrub = node.dataset.scrub === "1";
   const animation = lottie.loadAnimation({
     container: node,
     renderer: "svg",
     loop,
-    autoplay,
+    autoplay: autoplay && !scrub,
     path: src,
+    rendererSettings: {
+      preserveAspectRatio: node.dataset.preserveAspectRatio || "xMidYMid meet",
+      hideOnTransparent: true,
+    },
   });
   instances.set(node, animation);
+
+  if (scrub) {
+    animation.addEventListener("DOMLoaded", () => {
+      if (instances.get(node) !== animation) return;
+      applyProgress(node, animation, Number(node.dataset.lottieProgress ?? 0));
+    });
+    return;
+  }
 
   if (!autoplay) {
     animation.addEventListener("DOMLoaded", () => {

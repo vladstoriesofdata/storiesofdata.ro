@@ -25,6 +25,8 @@
  *   SoD_Menu.json (navbar hamburger — no hamburger in this header)
  *   okay.json is not referenced by legacy/index.html
  */
+import { setLottieProgress } from "./lottieGraphics";
+
 export const SNAP_MQ = "(min-width: 766px)";
 
 const BACKGROUND_ACTIVE = new Set([
@@ -33,6 +35,22 @@ const BACKGROUND_ACTIVE = new Set([
   "testimonials",
   "contact",
 ]);
+
+const STEPS_SECTIONS = [
+  "what-we-do",
+  "to-shape",
+  "we-build-applications",
+  "we-embed-analytics",
+  "we-design-visualizations",
+  "we-are-power-bi-experts",
+] as const;
+
+export function stepsProgressForSection(sectionName: string | undefined): number {
+  if (!sectionName) return 0;
+  const index = STEPS_SECTIONS.indexOf(sectionName as (typeof STEPS_SECTIONS)[number]);
+  if (index === -1) return 1;
+  return index / (STEPS_SECTIONS.length - 1);
+}
 
 export const HASH_TO_SECTION: Record<string, string> = {
   "what-we-do": "what-we-do",
@@ -138,6 +156,10 @@ function applyBackground(sectionName: string | undefined): void {
   wrapper.classList.toggle("active", BACKGROUND_ACTIVE.has(sectionName));
 }
 
+function applyStepsProgress(progress: number): void {
+  setLottieProgress(progress);
+}
+
 function syncNav(sectionName: string | undefined): void {
   const target = sectionName ? navTargetForSection(sectionName) : undefined;
   document.querySelectorAll<HTMLAnchorElement>("header.home-chrome a[data-section-target]").forEach((link) => {
@@ -153,10 +175,11 @@ function syncDarkHeader(sectionName: string | undefined): void {
   header.classList.toggle("is-on-dark", sectionName === "contact");
 }
 
-function onActiveSection(sectionName: string | undefined): void {
+function onActiveSection(sectionName: string | undefined, options?: { scrub?: boolean }): void {
   applyBackground(sectionName);
   syncNav(sectionName);
   syncDarkHeader(sectionName);
+  if (options?.scrub !== false) applyStepsProgress(stepsProgressForSection(sectionName));
 }
 
 function currentIndex(): number {
@@ -177,25 +200,34 @@ function easeInOut(t: number): number {
   return t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2;
 }
 
-function animateScroll(top: number, duration = DURATION_MS): Promise<void> {
+function animateScroll(
+  top: number,
+  duration = DURATION_MS,
+  onProgress?: (progress: number) => void,
+): Promise<void> {
   return new Promise((resolve) => {
     const start = scrollY();
     const delta = top - start;
+    const finish = (progress: number) => {
+      onProgress?.(progress);
+      resolve();
+    };
     if (Math.abs(delta) < 1) {
       scrollToY(top);
-      resolve();
+      finish(1);
       return;
     }
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduced) {
       scrollToY(top);
-      resolve();
+      finish(1);
       return;
     }
     const t0 = performance.now();
     const frame = (now: number) => {
       const p = Math.min(1, (now - t0) / duration);
       scrollToY(start + delta * easeInOut(p));
+      onProgress?.(p);
       if (p < 1) requestAnimationFrame(frame);
       else resolve();
     };
@@ -204,14 +236,21 @@ function animateScroll(top: number, duration = DURATION_MS): Promise<void> {
 }
 
 async function snapToElement(el: HTMLElement): Promise<void> {
-  onActiveSection(el.dataset.sectionName);
   animating = true;
   try {
+    let fromName = sections()[currentIndex()]?.dataset.sectionName;
     let target: HTMLElement | null = el;
     while (target) {
-      onActiveSection(target.dataset.sectionName);
-      await animateScroll(targetTop(target));
+      const toName = target.dataset.sectionName;
+      onActiveSection(toName, { scrub: false });
+      const fromProgress = stepsProgressForSection(fromName);
+      const toProgress = stepsProgressForSection(toName);
+      await animateScroll(targetTop(target), DURATION_MS, (progress) => {
+        applyStepsProgress(fromProgress + (toProgress - fromProgress) * progress);
+      });
+      applyStepsProgress(toProgress);
       syncHash(target);
+      fromName = toName;
       target = pendingSnap;
       pendingSnap = null;
     }
@@ -223,7 +262,7 @@ async function snapToElement(el: HTMLElement): Promise<void> {
 export function moveTo(sectionName: string): void {
   const el = findSection(sectionName);
   if (!el) return;
-  onActiveSection(el.dataset.sectionName);
+  onActiveSection(el.dataset.sectionName, { scrub: !snapEnabled });
   if (!snapEnabled) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
     syncHash(el);

@@ -3,6 +3,8 @@ interface Props {
   src: string;
   loop?: boolean;
   autoplay?: boolean;
+  scrub?: boolean;
+  preserveAspectRatio?: string;
   class?: string;
   when?: "desktop" | "mobile" | "always";
 }
@@ -11,6 +13,8 @@ const {
   src,
   loop = false,
   autoplay = false,
+  scrub = false,
+  preserveAspectRatio,
   class: className,
   when = "always",
 } = Astro.props;
@@ -21,6 +25,8 @@ const {
   data-src={src}
   data-loop={loop ? "1" : "0"}
   data-autoplay={autoplay ? "1" : "0"}
+  data-scrub={scrub ? "1" : "0"}
+  data-preserve-aspect-ratio={preserveAspectRatio}
   data-lottie-when={when}
 ></div>
 

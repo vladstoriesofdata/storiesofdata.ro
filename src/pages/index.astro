@@ -19,7 +19,7 @@ const copy = home[site.locale];
 ---
 <BaseLayout title={copy.title} description={copy.description} path="/" chrome="home">
   <div class="background-anim-wrapper" aria-hidden="true">
-    <LottieGraphic src={steps} loop={false} autoplay={false} />
+    <LottieGraphic src={steps} loop={false} autoplay={false} scrub={true} />
   </div>
   <Hero />
   <Services />
