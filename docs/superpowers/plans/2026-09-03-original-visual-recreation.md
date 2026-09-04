@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 2)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 3)
 
-Do Task 2 only: Homepage navigation data.
-Do not start Task 3.
+Do Task 3 only: Tabs, Carousel, ViewZoom modules.
+Do not start Task 4.
 
-When finished: check off Task 2 in the plan, put Task 3’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 3 in the plan, put Task 4’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -68,7 +68,7 @@ When finished: check off Task 2 in the plan, put Task 3’s handoff prompt into 
 | Task | Title | Status |
 | --- | --- | --- |
 | 1 | Design tokens, Akrobat fonts, zoom icons | Done |
-| 2 | Homepage navigation data | Todo |
+| 2 | Homepage navigation data | Done |
 | 3 | Tabs, Carousel, ViewZoom modules | Todo |
 | 4 | BaseLayout chrome + Header shells + language switch | Todo |
 | 5 | HomeChrome CSS + What we do / Hero | Todo |
@@ -259,7 +259,7 @@ When finished: check off Task 2 in the plan, put Task 3’s handoff prompt into 
 - Modify: `src/data/navigation.ts`
 - Create: `tests/unit/navigation.test.ts`
 
-- [ ] **Step 1: Write the failing test**
+- [x] **Step 1: Write the failing test**
 
 Create `tests/unit/navigation.test.ts`:
 
@@ -297,13 +297,13 @@ describe("navigation", () => {
 });
 ```
 
-- [ ] **Step 2: Run test to verify it fails**
+- [x] **Step 2: Run test to verify it fails**
 
 Run: `npm test -- tests/unit/navigation.test.ts`
 
 Expected: FAIL (Articles still present / labels capitalized).
 
-- [ ] **Step 3: Update `src/data/navigation.ts`**
+- [x] **Step 3: Update `src/data/navigation.ts`**
 
 ```ts
 import type { Locale } from "../lib/site";
@@ -330,7 +330,7 @@ export const navigation: Record<Locale, NavItem[]> = {
 };
 ```
 
-- [ ] **Step 4: Run tests**
+- [x] **Step 4: Run tests**
 
 Run: `npm test -- tests/unit/navigation.test.ts`
 
@@ -340,7 +340,7 @@ Also run: `npx playwright test tests/e2e/homepage-motion.spec.ts`
 
 The Services link name is still “services” (case-insensitive role match). If the test fails on exact name `"Services"`, change it to `/services/i` in that spec in this task.
 
-- [ ] **Step 5: Commit with plan checkboxes + Next chat prompt → Task 3**
+- [x] **Step 5: Commit with plan checkboxes + Next chat prompt → Task 3**
 
 ```
 git commit -m "feat: restore original homepage nav items without Articles"
