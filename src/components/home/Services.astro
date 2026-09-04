@@ -4,36 +4,74 @@ import { services } from "../../data/services";
 
 const site = getSiteConfig(import.meta.env);
 const copy = services[site.locale];
+
+function serviceTabId(title: string): string {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
 ---
 <section
   id="services"
-  class="section home-section"
+  class="section home-section services-section"
   data-section-name="services-and-products"
   aria-labelledby="services-heading"
 >
   <h2 id="services-heading">{copy.heading}</h2>
-  {copy.items.map((item) => (
-    <article>
-      <h3>{item.title}</h3>
-      <h4>{item.benefitsHeading}</h4>
-      <ul>
-        {item.benefits.map((benefit) => (
-          <li>{benefit}</li>
-        ))}
-      </ul>
-      <h4>{item.helpHeading}</h4>
-      <ul>
-        {item.help.map((help) => (
-          <li>{help}</li>
-        ))}
-      </ul>
-    </article>
-  ))}
-  <a href="#contact">{copy.cta}</a>
+  <div class="services-tabs" data-tabs>
+    <div class="services-tablist" role="tablist" aria-label={copy.heading}>
+      {copy.items.map((item, index) => {
+        const id = serviceTabId(item.title);
+        const selected = index === 0;
+        return (
+          <button
+            type="button"
+            class="services-tab"
+            role="tab"
+            id={`services-tab-${id}`}
+            data-tab={id}
+            aria-selected={selected ? "true" : "false"}
+            aria-controls={`services-panel-${id}`}
+            tabindex={selected ? 0 : -1}
+          >
+            {item.title}
+          </button>
+        );
+      })}
+    </div>
+    {copy.items.map((item, index) => {
+      const id = serviceTabId(item.title);
+      return (
+        <div
+          class="services-panel"
+          role="tabpanel"
+          id={`services-panel-${id}`}
+          data-tab-panel={id}
+          aria-labelledby={`services-tab-${id}`}
+          hidden={index !== 0}
+        >
+          <div class="services-panel-grid">
+            <div class="services-block">
+              <h3>{item.benefitsHeading}</h3>
+              <ul>
+                {item.benefits.map((benefit) => (
+                  <li>{benefit}</li>
+                ))}
+              </ul>
+            </div>
+            <div class="services-block">
+              <h3>{item.helpHeading}</h3>
+              <ul>
+                {item.help.map((help) => (
+                  <li>{help}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+  </div>
+  <a class="pill-button" href="#contact">{copy.cta}</a>
 </section>
-
-<style>
-  article + article {
-    margin-top: 2rem;
-  }
-</style>

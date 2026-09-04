@@ -53,12 +53,12 @@ You are executing ONE task from the visual recreation plan, then stopping.
 
 Read and follow:
 - docs/superpowers/specs/2026-09-03-original-visual-recreation-design.md
-- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 6)
+- docs/superpowers/plans/2026-09-03-original-visual-recreation.md (Chat handoff protocol + Task 7)
 
-Do Task 6 only: Services tabs UI.
-Do not start Task 7.
+Do Task 7 only: Portfolio strip tabs + carousel.
+Do not start Task 8.
 
-When finished: check off Task 6 in the plan, put Task 7’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
+When finished: check off Task 7 in the plan, put Task 8’s handoff prompt into “Next chat prompt”, commit code + plan, paste the Next chat prompt in your reply, and stop.
 ```
 
 ---
@@ -72,7 +72,7 @@ When finished: check off Task 6 in the plan, put Task 7’s handoff prompt into 
 | 3 | Tabs, Carousel, ViewZoom modules | Done |
 | 4 | BaseLayout chrome + Header shells + language switch | Done |
 | 5 | HomeChrome CSS + What we do / Hero | Done |
-| 6 | Services tabs UI | Todo |
+| 6 | Services tabs UI | Done |
 | 7 | Portfolio strip tabs + carousel | Todo |
 | 8 | Team, testimonials, contact footer | Todo |
 | 9 | WorkChrome rail, menu, indexes, article layout | Todo |
@@ -798,11 +798,11 @@ When finished: check off Task 6 in the plan, put Task 7’s handoff prompt into 
 - Modify: `src/components/home/Services.astro`, `src/pages/index.astro` (script)
 - Modify: `src/styles/chrome.css`
 
-- [ ] **Step 1: Markup**
+- [x] **Step 1: Markup**
 
 One `data-section-name="services-and-products"` section. Heading “Services and products”. `data-tabs` with four `[role=tab]` using `item.title` from `src/data/services.ts`. One visible `[role=tabpanel]` at a time with benefits + help lists. CTA link `#contact` class pill button (`border-radius: 40px`, `background: var(--color-accent)`, `font-family: var(--font-nav)`, uppercase).
 
-- [ ] **Step 2: Init tabs**
+- [x] **Step 2: Init tabs**
 
 In `src/pages/index.astro` script, after snap init:
 
@@ -811,11 +811,11 @@ import { initTabs } from "../components/home/Tabs";
 initTabs();
 ```
 
-- [ ] **Step 3: Style from clone `.portfolio-tabs` / services tab look** — white pills, shadow `0 1px 3px #0003`, current tab darker text. One viewport on desktop.
+- [x] **Step 3: Style from clone `.portfolio-tabs` / services tab look** — white pills, shadow `0 1px 3px #0003`, current tab darker text. One viewport on desktop.
 
-- [ ] **Step 4: Browser-check** `/#services`. Click each tab; panel text changes; others hidden.
+- [x] **Step 4: Browser-check** `/#services`. Click each tab; panel text changes; others hidden.
 
-- [ ] **Step 5: Commit with plan update + Next chat prompt → Task 7**
+- [x] **Step 5: Commit with plan update + Next chat prompt → Task 7**
 
 ```
 git commit -m "feat: restore homepage services as tabs"

@@ -261,6 +261,131 @@ body[data-chrome="doc"] main {
   }
 }
 
+.services-section {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  max-width: none;
+  margin: 0;
+  padding: 10% 5%;
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+.services-section h2 {
+  margin: 0;
+  color: var(--color-paper);
+  font-family: var(--font-nav);
+  font-size: 2.375rem;
+  font-weight: 900;
+  line-height: 1;
+  text-transform: none;
+}
+
+.services-tabs {
+  margin-top: 30px;
+}
+
+.services-tablist {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.services-tab {
+  color: var(--color-muted);
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: var(--color-paper);
+  border: 0;
+  border-radius: 20px;
+  flex: none;
+  margin: 0 20px 10px 0;
+  padding: 12px 30px 14px;
+  box-shadow: 0 1px 3px #0003;
+  font-family: var(--font-nav);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.services-tab:hover,
+.services-tab[aria-selected="true"] {
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+.services-panel {
+  padding: 3% 0;
+}
+
+.services-panel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px 30px;
+}
+
+.services-block h3 {
+  margin: 0 0 0.75rem;
+  color: var(--color-paper);
+  font-family: var(--font-nav);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.services-block ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+.services-block li {
+  color: var(--color-ink);
+  font-family: var(--font-mono);
+  line-height: 1.35;
+}
+
+.pill-button {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 0.75rem 2.5rem;
+  border: 1px solid var(--color-accent);
+  border-radius: 40px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font-family: var(--font-nav);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.services-section .pill-button {
+  align-self: flex-start;
+  border-color: var(--color-paper);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+.services-section .pill-button:hover {
+  color: var(--color-accent);
+}
+
+@media (min-width: 766px) {
+  .services-section {
+    min-height: 100dvh;
+    width: calc(100% + var(--nav-width));
+    margin-left: calc(-1 * var(--nav-width));
+    padding: 5% 5% 5% calc(var(--nav-width) + 5%);
+  }
+
+  .services-panel-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 765px) {
   .hero-intro,
   .hero-lede-section {
