@@ -109,4 +109,20 @@
   --nav-width: 200px;
   --rail-width: 80px;
   --snap-min: 766px;
+  --content-inset: 5vw;
+  --nav-pad: calc(0.2 * var(--nav-width));
+  --nav-pad-x: var(--nav-pad);
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --content-inset: 10vw;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --content-inset: 15vw;
+    --nav-pad-x: calc(0.4 * var(--nav-width));
+  }
 }

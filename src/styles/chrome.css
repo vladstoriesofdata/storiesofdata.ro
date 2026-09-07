@@ -70,7 +70,7 @@
   width: var(--nav-width);
   min-width: 0;
   height: 100vh;
-  padding: 2.5rem 1.5rem 3rem;
+  padding: var(--nav-pad) var(--nav-pad-x);
   background: transparent;
   font-family: var(--font-nav);
 }
@@ -96,7 +96,7 @@
   font-weight: 900;
   text-transform: uppercase;
   text-decoration: none;
-  padding: 0.4rem 0;
+  padding: 10px;
 }
 
 .site-header.home-chrome nav a[aria-current="true"] {
@@ -305,7 +305,7 @@ body[data-chrome="doc"] main {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 5rem 5% 3.125rem;
+  padding: 5rem var(--content-inset) 3.125rem;
 }
 
 .hero-intro {
@@ -326,7 +326,7 @@ body[data-chrome="doc"] main {
   .hero-intro {
     width: calc(100% + var(--nav-width));
     margin-left: calc(-1 * var(--nav-width));
-    padding-left: calc(var(--nav-width) + 5%);
+    padding-left: calc(var(--nav-width) + var(--content-inset));
   }
 
   .hero-intro .section-lottie {
@@ -459,7 +459,7 @@ body[data-chrome="doc"] main {
   align-items: stretch;
   max-width: none;
   margin: 0;
-  padding: 10% 5%;
+  padding: 10% var(--content-inset);
   background: var(--color-accent);
   color: var(--color-ink);
 }
@@ -582,7 +582,7 @@ body[data-chrome="doc"] main {
   align-items: stretch;
   max-width: none;
   margin: 0;
-  padding: 10% 5%;
+  padding: 10% var(--content-inset);
   background: var(--color-canvas-2);
   color: var(--color-ink);
 }
@@ -802,7 +802,7 @@ body[data-chrome="doc"] main {
   align-items: stretch;
   max-width: none;
   margin: 0;
-  padding: 10% 5%;
+  padding: 10% var(--content-inset);
   background: var(--color-canvas-2);
   color: var(--color-ink);
 }
@@ -1164,7 +1164,7 @@ body[data-chrome="doc"] main {
   align-items: stretch;
   max-width: none;
   margin: 0;
-  padding: 10% 5%;
+  padding: 10% var(--content-inset);
   background: var(--color-rail);
   color: var(--color-paper);
 }
@@ -1353,7 +1353,7 @@ body[data-chrome="doc"] main {
     min-height: 100dvh;
     width: calc(100% + var(--nav-width));
     margin-left: calc(-1 * var(--nav-width));
-    padding: 5% 5% 5% calc(var(--nav-width) + 5%);
+    padding: 5% var(--content-inset) 5% calc(var(--nav-width) + var(--content-inset));
   }
 
   .services-panel-grid {
@@ -1367,7 +1367,7 @@ body[data-chrome="doc"] main {
     min-height: 100dvh;
     width: calc(100% + var(--nav-width));
     margin-left: calc(-1 * var(--nav-width));
-    padding: 5% 5% 5% calc(var(--nav-width) + 5%);
+    padding: 5% var(--content-inset) 5% calc(var(--nav-width) + var(--content-inset));
   }
 
   .team-grid {
