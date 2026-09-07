@@ -1,7 +1,7 @@
 ---
 import LanguageSwitch from "./LanguageSwitch.astro";
 import WorkMenu from "./work/WorkMenu.astro";
-import { getSiteConfig } from "../lib/site";
+import { getSiteConfig, withBase } from "../lib/site";
 import { navigation } from "../data/navigation";
 import { sectionNameFromHash } from "./home/SectionSnap";
 import logoBlack from "../assets/brand/logo-black.svg";
@@ -18,12 +18,13 @@ interface Props {
 const { path, chrome = "doc" } = Astro.props;
 const site = getSiteConfig(import.meta.env);
 const links = navigation[site.locale];
+const homeHref = withBase("/", import.meta.env.BASE_URL);
 ---
 
 {chrome === "home" && (
   <header class="site-header home-chrome">
     <div class="home-chrome-top">
-      <a href="/" class="brand">
+      <a href={homeHref} class="brand">
         <img
           class="brand-logo brand-logo-black"
           src={logoBlack.src}
@@ -66,7 +67,7 @@ const links = navigation[site.locale];
   <>
     <header class="site-header work-chrome">
       <div class="work-chrome-top">
-        <a href="/" class="brand">
+        <a href={homeHref} class="brand">
           <img
             src={logoMark.src}
             alt={site.name}
@@ -91,7 +92,7 @@ const links = navigation[site.locale];
 
 {chrome === "doc" && (
   <header class="site-header doc-chrome">
-    <a href="/" class="brand">
+    <a href={homeHref} class="brand">
       <img
         src={logoBlack.src}
         alt={site.name}

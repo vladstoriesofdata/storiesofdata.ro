@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { getSiteConfig } from "../../lib/site";
+import { getSiteConfig, withBase } from "../../lib/site";
 import { entrySlug, isLocaleEntry } from "../../lib/collections";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
@@ -14,7 +14,7 @@ const entries = (
   <ul>
     {entries.map((entry) => (
       <li>
-        <a href={`/data-stories/${entrySlug(entry.id)}`}>{entry.data.title}</a>
+        <a href={withBase(`/data-stories/${entrySlug(entry.id)}`, import.meta.env.BASE_URL)}>{entry.data.title}</a>
       </li>
     ))}
   </ul>

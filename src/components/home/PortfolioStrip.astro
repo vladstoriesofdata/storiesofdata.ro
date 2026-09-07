@@ -1,6 +1,6 @@
 ---
 import { home } from "../../data/home";
-import { getSiteConfig } from "../../lib/site";
+import { getSiteConfig, withBase } from "../../lib/site";
 import { PORTFOLIO_STRIP_TABS } from "../../data/portfolioStrip";
 import LottieGraphic from "./LottieGraphic.astro";
 import PortfolioCard from "./PortfolioCard.astro";
@@ -67,7 +67,7 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
             <div class="portfolio-grid" data-slide hidden={pageIndex !== 0}>
               {page.map((entry) => (
                 <PortfolioCard
-                  href={`${entry.hrefBase}/${entry.slug}`}
+                  href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
                   title={entry.title}
                   description={entry.description}
                   cover={entry.cover}
@@ -100,7 +100,7 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
         <div class="portfolio-carousel portfolio-carousel-mobile" data-carousel>
           {tab.items.map((entry, slideIndex) => (
             <PortfolioCard
-              href={`${entry.hrefBase}/${entry.slug}`}
+              href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
               title={entry.title}
               description={entry.description}
               cover={entry.cover}

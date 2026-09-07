@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { getSiteConfig, hreflangLinks, peerUrl } from "../../src/lib/site";
+import {
+  absoluteAssetUrl,
+  getSiteConfig,
+  hreflangLinks,
+  peerUrl,
+  withBase,
+} from "../../src/lib/site";
 
 const enEnv = {
   PUBLIC_SITE_LOCALE: "en",
@@ -57,6 +63,49 @@ describe("peerUrl", () => {
   it("points English pages at the .ro host", () => {
     expect(peerUrl("/portfolio/btr-business-case-study", getSiteConfig(enEnv))).toBe(
       "https://www.storiesofdata.ro/portfolio/btr-business-case-study",
+    );
+  });
+});
+
+describe("withBase", () => {
+  it("leaves root-relative paths unchanged when base is /", () => {
+    expect(withBase("/privacy-policy")).toBe("/privacy-policy");
+    expect(withBase("/")).toBe("/");
+    expect(withBase("/#contact")).toBe("/#contact");
+  });
+
+  it("prefixes paths for a GitHub Pages project site", () => {
+    expect(withBase("/", "/storiesofdata.ro")).toBe("/storiesofdata.ro");
+    expect(withBase("/articles/example", "/storiesofdata.ro/")).toBe(
+      "/storiesofdata.ro/articles/example",
+    );
+    expect(withBase("/#contact", "/storiesofdata.ro")).toBe(
+      "/storiesofdata.ro/#contact",
+    );
+  });
+
+  it("does not prefix hashes or absolute URLs", () => {
+    expect(withBase("#contact", "/storiesofdata.ro")).toBe("#contact");
+    expect(withBase("https://www.storiesofdata.ro", "/storiesofdata.ro")).toBe(
+      "https://www.storiesofdata.ro",
+    );
+  });
+});
+
+describe("absoluteAssetUrl", () => {
+  it("resolves hashed assets against the site origin", () => {
+    expect(absoluteAssetUrl("/_astro/og.jpg", getSiteConfig(enEnv))).toBe(
+      "https://www.storiesofdata.com/_astro/og.jpg",
+    );
+  });
+
+  it("does not double the GitHub Pages repo path", () => {
+    const pages = getSiteConfig({
+      PUBLIC_SITE_LOCALE: "en",
+      PUBLIC_SITE_URL: "https://vladstoriesofdata.github.io/storiesofdata.ro",
+    });
+    expect(absoluteAssetUrl("/storiesofdata.ro/_astro/og.jpg", pages)).toBe(
+      "https://vladstoriesofdata.github.io/storiesofdata.ro/_astro/og.jpg",
     );
   });
 });

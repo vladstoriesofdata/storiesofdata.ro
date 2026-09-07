@@ -1,5 +1,5 @@
 ---
-import { getSiteConfig, hreflangLinks, absoluteUrl } from "../lib/site";
+import { getSiteConfig, hreflangLinks, absoluteUrl, absoluteAssetUrl } from "../lib/site";
 import logoBlack from "../assets/brand/logo-black.svg";
 import ogDefault from "../assets/brand/og-default.jpg";
 
@@ -14,8 +14,8 @@ const { title, description, path, robots } = Astro.props;
 const site = getSiteConfig(import.meta.env);
 const canonical = absoluteUrl(path, site);
 const alternates = hreflangLinks(path, site);
-const ogImage = absoluteUrl(ogDefault.src, site);
-const logoUrl = absoluteUrl(logoBlack.src, site);
+const ogImage = absoluteAssetUrl(ogDefault.src, site);
+const logoUrl = absoluteAssetUrl(logoBlack.src, site);
 const organization = {
   "@context": "https://schema.org",
   "@type": "Organization",

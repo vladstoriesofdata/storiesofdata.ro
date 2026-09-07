@@ -1,5 +1,5 @@
 ---
-import { getSiteConfig } from "../lib/site";
+import { getSiteConfig, withBase } from "../lib/site";
 import Seo from "../components/Seo.astro";
 import CookieBanner from "../components/CookieBanner.astro";
 import Analytics from "../components/Analytics.astro";
@@ -27,7 +27,7 @@ const site = getSiteConfig(import.meta.env);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/favicon.jpg" type="image/jpeg" />
+    <link rel="icon" href={withBase("/favicon.jpg", import.meta.env.BASE_URL)} type="image/jpeg" />
     <Seo title={title} description={description} path={path} robots={robots} />
     <CookieBanner />
     <Analytics />

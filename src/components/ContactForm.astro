@@ -1,5 +1,5 @@
 ---
-import { getSiteConfig } from "../lib/site";
+import { getSiteConfig, withBase } from "../lib/site";
 import { home } from "../data/home";
 
 const site = getSiteConfig(import.meta.env);
@@ -29,7 +29,7 @@ const disabled = !endpoint;
       <input type="checkbox" name="privacy" required disabled={disabled} />
       {copy.privacy}
     </label>
-    <a href="/privacy-policy">{copy.privacyLink}</a>.
+    <a href={withBase("/privacy-policy", import.meta.env.BASE_URL)}>{copy.privacyLink}</a>.
   </p>
   <button class="pill-button contact-submit" type="submit" disabled={disabled}>{copy.submit}</button>
   {disabled && <p class="contact-unconfigured">{copy.unconfigured}</p>}

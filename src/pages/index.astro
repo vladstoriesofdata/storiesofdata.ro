@@ -7,7 +7,7 @@ import Team from "../components/home/Team.astro";
 import Testimonials from "../components/home/Testimonials.astro";
 import ContactForm from "../components/ContactForm.astro";
 import LottieGraphic from "../components/home/LottieGraphic.astro";
-import { getSiteConfig } from "../lib/site";
+import { getSiteConfig, withBase } from "../lib/site";
 import { home } from "../data/home";
 import steps from "../assets/lottie/steps-1-2-3-4-5.json?url";
 import logoWhite from "../assets/brand/logo-white.svg";
@@ -58,8 +58,8 @@ const copy = home[site.locale];
         </div>
         <ContactForm />
         <nav class="contact-legal" aria-label="Legal">
-          <a href="/privacy-policy">Privacy policy</a>
-          <a href="/terms-and-conditions">Terms</a>
+          <a href={withBase("/privacy-policy", import.meta.env.BASE_URL)}>Privacy policy</a>
+          <a href={withBase("/terms-and-conditions", import.meta.env.BASE_URL)}>Terms</a>
           <p class="contact-copyright">© Stories of Data 2026</p>
         </nav>
       </div>

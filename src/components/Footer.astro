@@ -1,11 +1,12 @@
 ---
-import { getSiteConfig } from "../lib/site";
+import { getSiteConfig, withBase } from "../lib/site";
 import logoBlack from "../assets/brand/logo-black.svg";
 
 const site = getSiteConfig(import.meta.env);
+const homeHref = withBase("/", import.meta.env.BASE_URL);
 ---
 <footer>
-  <a href="/" class="brand">
+  <a href={homeHref} class="brand">
     <img
       src={logoBlack.src}
       alt={site.name}
@@ -14,8 +15,8 @@ const site = getSiteConfig(import.meta.env);
     />
   </a>
   <nav>
-    <a href="/privacy-policy">Privacy policy</a>
-    <a href="/terms-and-conditions">Terms</a>
+    <a href={withBase("/privacy-policy", import.meta.env.BASE_URL)}>Privacy policy</a>
+    <a href={withBase("/terms-and-conditions", import.meta.env.BASE_URL)}>Terms</a>
   </nav>
   <p class="copyright">© Stories of Data 2026</p>
 </footer>

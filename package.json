@@ -11,6 +11,7 @@
     "build:com": "cross-env PUBLIC_SITE_LOCALE=en PUBLIC_SITE_URL=https://www.storiesofdata.com astro build --outDir dist/com",
     "build:ro": "cross-env PUBLIC_SITE_LOCALE=ro PUBLIC_SITE_URL=https://www.storiesofdata.ro astro build --outDir dist/ro",
     "build": "npm run build:com && npm run build:ro",
+    "build:pages": "cross-env PUBLIC_SITE_LOCALE=en PUBLIC_SITE_URL=https://vladstoriesofdata.github.io/storiesofdata.ro PUBLIC_BASE_PATH=/storiesofdata.ro astro build",
     "preview:com": "astro preview --outDir dist/com",
     "preview:ro": "astro preview --outDir dist/ro",
     "test": "vitest run",

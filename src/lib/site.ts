@@ -48,6 +48,29 @@ export function absoluteUrl(path: string, site: SiteConfig): string {
   return joinUrl(site.url, path);
 }
 
+export function withBase(path: string, base = "/"): string {
+  if (
+    path.startsWith("#") ||
+    path.startsWith("mailto:") ||
+    path.startsWith("tel:") ||
+    path.startsWith("http://") ||
+    path.startsWith("https://")
+  ) {
+    return path;
+  }
+
+  const prefix = base.replace(/\/+$/, "");
+  const normalizedPrefix = prefix === "" || prefix === "/" ? "" : prefix;
+  if (path === "/") return normalizedPrefix || "/";
+  const suffix = path.startsWith("/") ? path : `/${path}`;
+  return `${normalizedPrefix}${suffix}`;
+}
+
+export function absoluteAssetUrl(src: string, site: SiteConfig): string {
+  if (src.startsWith("http://") || src.startsWith("https://")) return src;
+  return new URL(src, `${new URL(site.url).origin}/`).href;
+}
+
 export function peerUrl(path: string, site: SiteConfig): string {
   return joinUrl(site.peer.url, path);
 }
