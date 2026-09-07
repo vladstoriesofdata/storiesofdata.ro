@@ -60,11 +60,21 @@ const copy = home[site.locale];
         <nav class="contact-legal" aria-label="Legal">
           <a href="/privacy-policy">Privacy policy</a>
           <a href="/terms-and-conditions">Terms</a>
+          <p class="contact-copyright">© Stories of Data 2026</p>
         </nav>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .contact-copyright {
+    margin: 0 0 0 auto;
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 10px;
+  }
+</style>
 
 <script>
   import { initHomepageSnap } from "../components/home/SectionSnap";

@@ -17,6 +17,7 @@ const site = getSiteConfig(import.meta.env);
     <a href="/privacy-policy">Privacy policy</a>
     <a href="/terms-and-conditions">Terms</a>
   </nav>
+  <p class="copyright">© Stories of Data 2026</p>
 </footer>
 
 <style>
@@ -24,5 +25,14 @@ const site = getSiteConfig(import.meta.env);
     display: block;
     height: 2.25rem;
     width: auto;
+  }
+
+  .copyright {
+    flex-basis: 100%;
+    margin: 0;
+    color: inherit;
+    font-family: var(--font-display);
+    font-size: 10px;
+    text-align: right;
   }
 </style>
