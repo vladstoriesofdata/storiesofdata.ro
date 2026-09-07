@@ -254,7 +254,9 @@ function minifyHtml(html) {
 }
 
 function wrapForMdx(html) {
-  return `<div class="legacy-html" set:html={${JSON.stringify(html)}} />`;
+  return `import LegacyHtml from "../../../components/LegacyHtml.astro";
+
+<LegacyHtml html={${JSON.stringify(html)}} />`;
 }
 
 function yamlQuote(value) {

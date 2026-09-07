@@ -1,0 +1,11 @@
+---
+import { resolveLegacyImages } from "../lib/resolveLegacyImages";
+
+interface Props {
+  html: string;
+}
+
+const { html } = Astro.props;
+const resolved = resolveLegacyImages(html, Astro.url.pathname);
+---
+<div class="legacy-html" set:html={resolved} />

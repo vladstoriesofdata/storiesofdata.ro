@@ -9,6 +9,7 @@ const base = process.env.PUBLIC_BASE_PATH || "/";
 export default defineConfig({
   site: new URL(siteUrl).origin,
   base,
+  trailingSlash: "always",
   output: "static",
   integrations: [mdx(), sitemap(), copyContentImages()],
 });
