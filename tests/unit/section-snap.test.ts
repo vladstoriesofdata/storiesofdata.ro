@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { frameForProgress } from "../../src/components/home/lottieGraphics";
-import { stepsProgressForSection } from "../../src/components/home/SectionSnap";
+import { headerToneForSection, stepsProgressForSection } from "../../src/components/home/SectionSnap";
 
 describe("stepsProgressForSection", () => {
   it("keeps the morphing steps graphic at the start on the first viewport", () => {
@@ -22,6 +22,19 @@ describe("stepsProgressForSection", () => {
   it("holds the last frame on services and later sections", () => {
     expect(stepsProgressForSection("services-and-products")).toBe(1);
     expect(stepsProgressForSection("portfolio")).toBe(1);
+  });
+});
+
+describe("headerToneForSection", () => {
+  it("uses a light current-item color on the green services section", () => {
+    expect(headerToneForSection("services-and-products")).toBe("accent");
+  });
+
+  it("keeps the dark contact header and default elsewhere", () => {
+    expect(headerToneForSection("contact")).toBe("dark");
+    expect(headerToneForSection("portfolio")).toBe("default");
+    expect(headerToneForSection("what-we-do")).toBe("default");
+    expect(headerToneForSection(undefined)).toBe("default");
   });
 });
 

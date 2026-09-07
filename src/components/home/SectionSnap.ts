@@ -82,6 +82,14 @@ export function navTargetForSection(sectionName: string): string {
   return sectionName;
 }
 
+export type HeaderTone = "default" | "accent" | "dark";
+
+export function headerToneForSection(sectionName: string | undefined): HeaderTone {
+  if (sectionName === "contact") return "dark";
+  if (sectionName === "services-and-products") return "accent";
+  return "default";
+}
+
 const DURATION_MS = 520;
 
 let snapEnabled = false;
@@ -169,16 +177,18 @@ function syncNav(sectionName: string | undefined): void {
   });
 }
 
-function syncDarkHeader(sectionName: string | undefined): void {
+function syncHeaderTone(sectionName: string | undefined): void {
   const header = document.querySelector("header.home-chrome");
   if (!(header instanceof HTMLElement)) return;
-  header.classList.toggle("is-on-dark", sectionName === "contact");
+  const tone = headerToneForSection(sectionName);
+  header.classList.toggle("is-on-dark", tone === "dark");
+  header.classList.toggle("is-on-accent", tone === "accent");
 }
 
 function onActiveSection(sectionName: string | undefined, options?: { scrub?: boolean }): void {
   applyBackground(sectionName);
   syncNav(sectionName);
-  syncDarkHeader(sectionName);
+  syncHeaderTone(sectionName);
   if (options?.scrub !== false) applyStepsProgress(stepsProgressForSection(sectionName));
 }
 

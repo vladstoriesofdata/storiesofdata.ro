@@ -19,6 +19,20 @@ test("desktop Services nav moves to services-and-products", async ({ page }) => 
     .toBe(true);
 
   await expect(section).toHaveAttribute("data-section-name", "services-and-products");
+
+  const header = page.locator("header.home-chrome");
+  const servicesLink = header.getByRole("link", { name: /services/i });
+  await expect(servicesLink).toHaveAttribute("aria-current", "true");
+  await expect(header).toHaveClass(/is-on-accent/);
+  await expect(servicesLink).toHaveCSS("color", "rgb(255, 255, 255)");
+  await expect(header.locator(".language-switch [aria-current='true']")).toHaveCSS(
+    "color",
+    "rgb(255, 255, 255)",
+  );
+
+  await page.evaluate(() => window.__homepageMoveTo?.("portfolio"));
+  await expect(header).not.toHaveClass(/is-on-accent/);
+  await expect(header.getByRole("link", { name: /portfolio/i })).toHaveCSS("color", "rgb(0, 209, 142)");
 });
 
 test("mobile does not apply section snap", async ({ page }) => {

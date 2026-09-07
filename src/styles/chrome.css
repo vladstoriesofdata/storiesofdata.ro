@@ -1427,6 +1427,14 @@ body[data-chrome="doc"] main {
     color: var(--color-accent);
   }
 
+  .home-chrome.is-on-accent nav a[aria-current="true"] {
+    color: var(--color-paper);
+  }
+
+  .home-chrome.is-on-accent .language-switch [aria-current="true"] {
+    color: var(--color-paper);
+  }
+
   .home-chrome.is-on-dark .language-switch a {
     color: var(--color-paper);
   }
