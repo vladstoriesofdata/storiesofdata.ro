@@ -22,6 +22,12 @@ export function prevView(current: WorkView): WorkView {
   return VIEW_ORDER[Math.max(i - 1, 0)];
 }
 
+export function initialView(
+  summaryEl: { classList: { contains(token: string): boolean } } | null,
+): WorkView {
+  return summaryEl?.classList.contains("hide") ? "subjects" : "summary";
+}
+
 export function applyView(root: ParentNode, view: WorkView): void {
   for (const name of VIEW_ORDER) {
     const el = root.querySelector(wrapperSelector(name));
@@ -36,8 +42,9 @@ export function applyView(root: ParentNode, view: WorkView): void {
 export function initViewZoom(root: ParentNode = document): void {
   const host = root.querySelector("[data-view-zoom]");
   if (!(host instanceof HTMLElement)) return;
-  let view: WorkView = "summary";
+  let view: WorkView = initialView(host.querySelector(wrapperSelector("summary")));
   applyView(host, view);
+  host.dataset.view = view;
 
   const sync = () => {
     applyView(host, view);

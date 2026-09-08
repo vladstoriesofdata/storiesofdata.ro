@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   VIEW_ORDER,
+  initialView,
   nextView,
   prevView,
   wrapperSelector,
@@ -27,5 +28,11 @@ describe("ViewZoom helpers", () => {
     expect(wrapperSelector("summary")).toBe(".cs-planetary-wrapper");
     expect(wrapperSelector("subjects")).toBe(".cs-mountaintop-wrapper");
     expect(wrapperSelector("detail")).toBe(".cs-grassroot-wrapper");
+  });
+
+  it("starts on subjects when the summary wrapper is already hidden", () => {
+    expect(initialView({ classList: { contains: (token: string) => token === "hide" } })).toBe("subjects");
+    expect(initialView({ classList: { contains: () => false } })).toBe("summary");
+    expect(initialView(null)).toBe("summary");
   });
 });

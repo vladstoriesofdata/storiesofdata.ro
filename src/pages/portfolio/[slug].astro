@@ -26,6 +26,6 @@ const path = `/portfolio/${entrySlug(entry.id)}`;
   <h1 class="visually-hidden">{entry.data.title}</h1>
   <div data-view-zoom data-view="summary">
     <Content />
-    <ViewZoomBar />
+    {entry.data.zoom && <ViewZoomBar />}
   </div>
 </ArticleLayout>

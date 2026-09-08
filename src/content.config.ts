@@ -12,6 +12,7 @@ function pageSchema() {
     updatedDate: z.coerce.date().optional(),
     translationStatus,
     tags: z.array(z.string()).default([]),
+    zoom: z.boolean().default(true),
   });
 }
 
