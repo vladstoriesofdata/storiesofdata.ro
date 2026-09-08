@@ -1,23 +1,35 @@
 ---
 import { getCollection, render } from "astro:content";
 import { getSiteConfig } from "../../lib/site";
-import { entrySlug, isLocaleEntry } from "../../lib/collections";
+import {
+  adjacentNav,
+  byPubDateDesc,
+  entrySlug,
+  isLocaleEntry,
+  pagerKindLabel,
+} from "../../lib/collections";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import UntranslatedBanner from "../../components/UntranslatedBanner.astro";
 import ViewZoomBar from "../../components/work/ViewZoomBar.astro";
+import PostPager from "../../components/work/PostPager.astro";
 
 export async function getStaticPaths() {
   const site = getSiteConfig(import.meta.env);
   const entries = await getCollection("portfolio", (entry) =>
     isLocaleEntry(entry.id, site.locale),
   );
+  const ordered = byPubDateDesc(entries);
   return entries.map((entry) => ({
     params: { slug: entrySlug(entry.id) },
-    props: { entry },
+    props: {
+      entry,
+      nav: adjacentNav(ordered, entry.id, "/portfolio"),
+      kindLabel: pagerKindLabel("portfolio", site.locale),
+    },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, nav, kindLabel } = Astro.props;
 const { Content } = await render(entry);
 const path = `/portfolio/${entrySlug(entry.id)}`;
 ---
@@ -28,4 +40,5 @@ const path = `/portfolio/${entrySlug(entry.id)}`;
     <Content />
     {entry.data.zoom && <ViewZoomBar />}
   </div>
+  {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
 </ArticleLayout>

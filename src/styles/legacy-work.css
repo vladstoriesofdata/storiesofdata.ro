@@ -167,12 +167,7 @@
 }
 
 [data-view-zoom] .projects-nav {
-  z-index: 15;
-  align-items: center;
-  display: flex;
-  position: absolute;
-  bottom: 30px;
-  left: 40px;
+  display: none;
 }
 
 [data-view-zoom] .projects-nav-btn-wrapper {

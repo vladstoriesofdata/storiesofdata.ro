@@ -1,0 +1,23 @@
+---
+import { withBase } from "../../lib/site";
+import type { AdjacentNav } from "../../lib/collections";
+
+interface Props {
+  nav: AdjacentNav;
+  kindLabel: string;
+}
+
+const { nav, kindLabel } = Astro.props;
+const prevHref = withBase(nav.prev.href, import.meta.env.BASE_URL);
+const nextHref = withBase(nav.next.href, import.meta.env.BASE_URL);
+---
+<nav class="post-pager" aria-label="Post navigation">
+  <a class="post-pager-btn prev" href={prevHref} aria-label="Previous">Previous</a>
+  <p class="post-pager-count">
+    <span class="post-pager-kind">{kindLabel}</span>
+    <span class="post-pager-index">{nav.index}</span>
+    <span>/</span>
+    <span class="post-pager-total">{nav.total}</span>
+  </p>
+  <a class="post-pager-btn next" href={nextHref} aria-label="Next">Next</a>
+</nav>
