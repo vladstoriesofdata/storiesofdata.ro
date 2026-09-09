@@ -22,7 +22,7 @@ test("language switch points at the Romanian domain", async ({ page }) => {
 });
 
 test("seed article renders without zoom", async ({ page }) => {
-  await page.goto("/articles/microsoft-fabric-medallion-architecture-lessons-learned");
+  await page.goto("/articles/microsoft-fabric-medallion-architecture-lessons-learned/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Microsoft Fabric Medallion Architecture",
   );
@@ -37,17 +37,17 @@ test("content images are served from the article path", async ({ request }) => {
 });
 
 test("seed portfolio item has three-level zoom", async ({ page }) => {
-  await page.goto("/portfolio/a-romanian-data-story");
+  await page.goto("/portfolio/a-romanian-data-story/");
   await expect(page.locator("[data-view-zoom]")).toBeVisible();
 });
 
 test("seed data story renders with zoom", async ({ page }) => {
-  await page.goto("/data-stories/lines-on-maps-in-power-bi");
+  await page.goto("/data-stories/lines-on-maps-in-power-bi/");
   await expect(page.locator("[data-view-zoom]")).toBeVisible();
 });
 
 test("privacy policy renders", async ({ page }) => {
-  await page.goto("/privacy-policy");
+  await page.goto("/privacy-policy/");
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Privacy policy",
   );
