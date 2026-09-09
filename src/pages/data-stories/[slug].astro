@@ -11,6 +11,7 @@ import {
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 import UntranslatedBanner from "../../components/UntranslatedBanner.astro";
 import ViewZoomBar from "../../components/work/ViewZoomBar.astro";
+import ScrollScrubLottie from "../../components/work/ScrollScrubLottie.astro";
 import PostPager from "../../components/work/PostPager.astro";
 
 export async function getStaticPaths() {
@@ -39,6 +40,9 @@ const path = `/data-stories/${entrySlug(entry.id)}`;
   <div data-view-zoom data-view="summary">
     <Content />
     {entry.data.zoom && <ViewZoomBar />}
+    {entrySlug(entry.id) === "redesigning-linkedin-analytics" && (
+      <ScrollScrubLottie />
+    )}
   </div>
   {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
 </ArticleLayout>

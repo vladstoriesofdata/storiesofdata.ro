@@ -45,6 +45,42 @@ test("LinkedIn story hides zoom and shows the long article", async ({ page }) =>
   await expect(page.locator(".cs-grassroot-wrapper.analytics-blogpost")).toBeVisible();
 });
 
+test("LinkedIn story keeps copy on the left and scrubs images on the right", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/data-stories/redesigning-linkedin-analytics/");
+
+  const title = page.locator(".gv-sticky-content.linkedin .cs-title");
+  const visual = page.locator(".stickyimg-gv.analytics-anim");
+  await expect(title).toBeVisible();
+  await expect(visual).toBeVisible();
+  await expect(visual).toHaveAttribute("data-scrub", "1");
+
+  const titleBox = await title.boundingBox();
+  const visualBox = await visual.boundingBox();
+  expect(titleBox).toBeTruthy();
+  expect(visualBox).toBeTruthy();
+  expect(visualBox!.x).toBeGreaterThan(titleBox!.x + titleBox!.width / 2);
+
+  await expect(visual.locator("svg")).toBeVisible({ timeout: 20_000 });
+  await expect
+    .poll(async () => Number(await visual.getAttribute("data-lottie-progress")) || 0)
+    .toBeCloseTo(0, 1);
+
+  await page.evaluate(() => {
+    window.scrollTo(0, document.documentElement.scrollHeight * 0.5);
+  });
+  await expect
+    .poll(async () => Number(await visual.getAttribute("data-lottie-progress")))
+    .toBeGreaterThan(0.3);
+});
+
+test("LinkedIn story is desktop-only on a phone viewport", async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 800 });
+  await page.goto("/data-stories/redesigning-linkedin-analytics/");
+  await expect(page.locator(".cs-grassroot-wrapper.analytics-blogpost")).toBeHidden();
+  await expect(page.locator(".warning-mobile-wrapper")).toBeVisible();
+});
+
 function contains(parent: { x: number; y: number; width: number; height: number }, child: { x: number; y: number; width: number; height: number }) {
   return (
     child.x >= parent.x - 1 &&

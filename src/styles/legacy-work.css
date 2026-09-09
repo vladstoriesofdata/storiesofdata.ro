@@ -70,6 +70,7 @@
   height: auto;
   min-height: 100vh;
   display: block;
+  overflow: visible;
 }
 
 [data-view-zoom] .current-cs-thumbnail {
@@ -328,12 +329,32 @@
 
 [data-view-zoom] .stickyimg-gv.analytics-anim {
   z-index: 0;
+  background-image: none;
   transform-origin: 50% 55%;
+  width: 55%;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 45%;
   transform: scale(1.5);
+}
+
+[data-view-zoom] .stickyimg-gv.analytics-anim svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+[data-view-zoom] .section-3 {
+  height: 300px;
+}
+
+[data-view-zoom] .warning-mobile-wrapper {
+  display: none;
+}
+
+[data-view-zoom] .centered {
+  text-align: center;
 }
 
 [data-view-zoom] .sticky-mv {
@@ -517,6 +538,11 @@
   [data-view-zoom] .cs-title {
     font-size: 70px;
   }
+
+  [data-view-zoom] .stickyimg-gv.analytics-anim {
+    transform-origin: 50% 45%;
+    transform: scale(1.63);
+  }
 }
 
 @media (max-width: 765px) {
@@ -549,6 +575,28 @@
   [data-view-zoom] .gv-sticky,
   [data-view-zoom] .gv-sticky.right {
     grid-template-columns: 1fr;
+  }
+
+  [data-view-zoom] .cs-grassroot-wrapper.analytics-blogpost {
+    display: none;
+  }
+
+  [data-view-zoom] .warning-mobile-wrapper {
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 70vh;
+    padding: 2rem;
+    display: flex;
+  }
+
+  [data-view-zoom] .stickyimg-gv.analytics-anim {
+    position: static;
+    width: 100%;
+    height: auto;
+    transform: none;
   }
 
   [data-view-zoom] .projects-nav {
