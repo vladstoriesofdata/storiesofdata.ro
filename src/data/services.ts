@@ -58,8 +58,8 @@ const en: ServicesCopy = {
       ],
       helpHeading: "we help with",
       help: [
-        "Designing and developing custom visuals for Power BI using D3 & Typescript",
-        "Designing and developing personalized visuals for Power using BI Samurai’s HTML Visual and Deneb",
+        'Designing and developing custom visuals for Power BI using D3 & Typescript. Here are the visuals we already created:<br/>- <a href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual/" target="_blank" class="services-link">Multi Line Chart with Tooltips</a><br/>- <a href="/portfolio/category-comparison-bar-chart-power-bi-custom-visual/" target="_blank" class="services-link">Category Comparison Bar Chart</a>',
+        'Designing and developing personalized visuals for Power using <a href="https://bisamurai.com/product/html-vizcreator-cert-visual-for-power-bi/" target="_blank" rel="noreferrer" class="services-link">BI Samurai’s HTML Visual</a> and <a href="https://deneb-viz.github.io/" target="_blank" rel="noreferrer" class="services-link">Deneb</a>.',
       ],
     },
     {

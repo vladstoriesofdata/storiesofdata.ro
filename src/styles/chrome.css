@@ -388,27 +388,35 @@ body[data-chrome="doc"] main {
 .hero-heading,
 .hero-lede {
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-ink);
   font-family: var(--font-display);
-  font-size: 73px;
-  font-weight: 900;
+  font-size: 70px;
+  font-weight: 400;
   line-height: 1.1em;
 }
 
-.hero-heading {
+.hero-heading-row,
+.hero-lede-row {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
 }
 
-.hero-heading-light {
-  color: #646464;
+.hero-heading-heavy,
+.hero-lede-heavy,
+.hero-lede-accent {
+  font-size: 73px;
+  font-weight: 900;
+}
+
+.hero-heading-light,
+.hero-lede-light {
+  color: var(--color-ink);
   font-weight: 400;
-}
-
-.hero-lede {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
 }
 
 .hero-lede-accent {
@@ -445,6 +453,19 @@ body[data-chrome="doc"] main {
   line-height: 115%;
 }
 
+.hero-chapter-text strong {
+  font-weight: 700;
+}
+
+.hero-chapter-text a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.hero-chapter-subheading em {
+  font-style: italic;
+}
+
 @media (min-width: 766px) {
   .hero-section {
     min-height: 100dvh;
@@ -464,6 +485,12 @@ body[data-chrome="doc"] main {
 @media (min-width: 1440px) {
   .hero-heading,
   .hero-lede {
+    font-size: 80px;
+  }
+
+  .hero-heading-heavy,
+  .hero-lede-heavy,
+  .hero-lede-accent {
     font-size: 84px;
   }
 }
@@ -471,6 +498,12 @@ body[data-chrome="doc"] main {
 @media (max-width: 991px) {
   .hero-heading,
   .hero-lede {
+    font-size: 60px;
+  }
+
+  .hero-heading-heavy,
+  .hero-lede-heavy,
+  .hero-lede-accent {
     font-size: 62px;
   }
 }
@@ -478,6 +511,12 @@ body[data-chrome="doc"] main {
 @media (max-width: 767px) {
   .hero-heading,
   .hero-lede {
+    font-size: 46px;
+  }
+
+  .hero-heading-heavy,
+  .hero-lede-heavy,
+  .hero-lede-accent {
     font-size: 48px;
   }
 
@@ -491,6 +530,11 @@ body[data-chrome="doc"] main {
 }
 
 @media (max-width: 479px) {
+  .hero-heading,
+  .hero-lede {
+    font-size: 44px;
+  }
+
   .hero-chapter-heading {
     font-size: 26px;
   }
@@ -584,6 +628,14 @@ body[data-chrome="doc"] main {
   color: var(--color-ink);
   font-family: var(--font-sans);
   line-height: 115%;
+}
+
+.services-link {
+  color: var(--color-rail);
+}
+
+.services-link:hover {
+  color: var(--color-paper);
 }
 
 .pill-button {

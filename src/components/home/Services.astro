@@ -64,7 +64,7 @@ function serviceTabId(title: string): string {
               <h3>{item.helpHeading}</h3>
               <ul>
                 {item.help.map((help) => (
-                  <li>{help}</li>
+                  <li set:html={help} />
                 ))}
               </ul>
             </div>

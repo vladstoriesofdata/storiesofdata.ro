@@ -72,9 +72,11 @@ const ledeParts = splitHeroLede(copy.hero.lede);
   aria-labelledby="hero-lede"
 >
   <p id="hero-lede" class="hero-lede">
-    {ledeParts.before && <span class="hero-lede-before">{ledeParts.before}</span>}
-    {ledeParts.accent && <span class="hero-lede-accent">{ledeParts.accent}</span>}
-    {ledeParts.after && <span class="hero-lede-after">{ledeParts.after}</span>}
+    <span class="hero-lede-row">
+      {ledeParts.before && <span class="hero-lede-heavy">{ledeParts.before}</span>}
+      {ledeParts.accent && <span class="hero-lede-accent">{ledeParts.accent}</span>}
+    </span>
+    {ledeParts.after && <span class="hero-lede-light">{ledeParts.after}</span>}
   </p>
 </section>
 
@@ -88,10 +90,10 @@ const ledeParts = splitHeroLede(copy.hero.lede);
       aria-labelledby={`${name}-heading`}
     >
       <h2 id={`${name}-heading`} class="hero-chapter-heading">{chapter.heading}</h2>
-      <h3 class="hero-chapter-subheading">{chapter.subheading}</h3>
+      <h3 class="hero-chapter-subheading" set:html={chapter.subheading} />
       <div class="hero-chapter-text">
         {chapter.paragraphs.map((paragraph) => (
-          <p>{paragraph}</p>
+          <p set:html={paragraph} />
         ))}
       </div>
     </section>
