@@ -22,6 +22,7 @@ export interface TestimonialMapPin {
 
 export interface TestimonialsCopy {
   heading: string;
+  translationNote?: string;
   items: Testimonial[];
 }
 
@@ -61,6 +62,43 @@ const en: TestimonialsCopy = {
   ],
 };
 
+const ro: TestimonialsCopy = {
+  heading: "Mărturii",
+  translationNote: "Mărturiile au fost traduse din limba engleză.",
+  items: [
+    {
+      quote:
+        "Lucrăm împreună de patru ani. Este remarcabil că am reușit să construim o relație profesională online cu cineva care ne-a adus atât de multă eficiență în procese. La început, aveam nevoie de cineva care să privească activitatea noastră dintr-un unghi nou, ca un nou început. Vlad ne-a oferit atât expertiză tehnică aprofundată, cât și talent pentru design. Rezultatul a fost un produs care mi-a depășit așteptările. Este foarte capabil și competent, iar atunci când solicitările noastre i-au depășit cunoștințele, s-a străduit să învețe în continuare și să ne ofere soluții potrivite nevoilor noastre.",
+      name: "Jess Cary",
+      role: "partener executiv",
+      company: "Balance Point",
+      href: "https://www.isolvedhcm.com/welcome/balancepoint",
+      person: "jess",
+      logo: "balancepoint",
+    },
+    {
+      quote:
+        "Lucrez cu Stories of Data din 2017. De la o colaborare pe termen scurt cu un contractor independent până la o soluție pe termen lung, Stories of Data a devenit parte integrantă din echipa noastră din SUA. Totul a început cu nevoia de ajutor pentru o foaie de calcul Excel și s-a transformat într-o colaborare care acoperă datele, marketingul, logistica și multe altele pentru compania noastră. Nu mi-aș fi imaginat niciodată cât de mult avea să ajungă afacerea noastră să se bazeze pe Stories of Data, iar acum nu-mi pot imagina activitatea fără această echipă.",
+      name: "Joshua Chernikoff",
+      role: "fondator",
+      company: "Flex Academies",
+      href: "https://flexacademies.com/",
+      person: "joshua",
+      logo: "flex",
+    },
+    {
+      quote:
+        "Motivele pentru care mie îmi place să lucrez cu Vlad sunt aceleași care au făcut ca ultima lui colaborare cu Flow Traders să fie un succes. Comunică foarte bine și ascultă cu atenție nevoile clientului. Știe ce poate livra, își respectă întotdeauna angajamentele și face constant mai mult decât i se cere. De asemenea, a înțeles foarte repede ce avea nevoie de la el grupul divers de traderi și a dus proiectul la bun sfârșit, deși a primit foarte puține îndrumări. Îl recomand cu încredere pe Vlad Mihanta oricui își dorește ca treaba să fie făcută bine din prima. Livrează de fiecare dată!",
+      name: "Timo Pentner",
+      role: "director IT",
+      company: "Flow Traders",
+      href: "https://www.flowtraders.com/",
+      person: "timo",
+      logo: "flowtraders",
+    },
+  ],
+};
+
 /** Client locations on the testimonials world map (clone positions). */
 export const testimonialMapPins: TestimonialMapPin[] = [
   { id: "chainformation", company: "Chainformation", location: "Malmo, Sweden", size: "0.55em", top: "18.5%", left: "53.2%", compact: true },
@@ -80,8 +118,7 @@ export const testimonialMapPins: TestimonialMapPin[] = [
   { id: "downhome", company: "Downhome Solutions", location: "Seattle, WA, US", size: "1.7em", top: "21%", left: "18.2%" },
 ];
 
-/** Romanian copy pending; English until translated. */
 export const testimonials: Record<Locale, TestimonialsCopy> = {
   en,
-  ro: en,
+  ro,
 };

@@ -105,8 +105,74 @@ const en: HomeCopy = {
   },
 };
 
-/** Romanian copy pending; English until translated. */
+const ro: HomeCopy = {
+  title: "Consultanță Microsoft Fabric și Power BI în România",
+  description:
+    "Stories of Data este o agenție de consultanță Microsoft Fabric și Power BI din România, care a ajutat peste 30 de clienți să obțină claritate din datele lor.",
+  hero: {
+    heading: "Echipa specializată în analiza datelor",
+    lede: "Aducem claritate în proiectele tale Microsoft Fabric",
+    chapters: [
+      {
+        heading: "Pune datele să lucreze pentru tine:",
+        subheading: "construim aplicații bazate pe date",
+        paragraphs: [
+          "Avem instrumentele și procesele necesare pentru a-ți <strong>transforma datele în produse valoroase</strong>, precum platforme pentru urmărirea investițiilor, monetizarea seturilor de date și transformarea modelelor Excel în aplicații ușor de folosit.",
+          "<strong>Soluțiile noastre bazate pe date integrează datele în logica de business</strong>, permițând analize și perspective mai aprofundate. Te ajutăm să-ți transformi serviciile în produse, mai ales pe cele care folosesc volume mari de date, cum ar fi serviciile financiare, contabile și de analiză.",
+        ],
+      },
+      {
+        heading: "Crește valoarea produsului tău SaaS cu date pe care utilizatorii chiar le folosesc",
+        subheading:
+          "Construim soluții de analiză contextuală care fac raportarea utilă și îi determină pe clienți să revină pentru noi perspective",
+        paragraphs: [
+          "Te ajutăm să<strong> valorifici puterea datelor din platforme terțe existente și produse ale startup-urilor. </strong>Prin integrarea unor vizualizări de date personalizate în aceste platforme, le oferim utilizatorilor posibilitatea de a înțelege date complexe și de a lua decizii informate.",
+          'Soluția noastră de analiză contextuală face datele ușor accesibile și de interpretat, fără ca utilizatorii să fie nevoiți să le exporte, <strong>crescând astfel valoarea generală a platformei.</strong><br/>Descoperă platforma noastră demonstrativă care folosește analiza contextuală: <a href="https://embedsy.io/" target="_blank" rel="noreferrer"><strong>embedsy.io</strong></a>',
+        ],
+      },
+      {
+        heading: "Vizualizează ceea ce până acum nu puteai",
+        subheading: "Creăm vizualizări personalizate care te ajută să-ți spui povestea într-un mod unic",
+        paragraphs: [
+          "Proiectăm vizualizări de date personalizate, care oferă <strong>modalități noi și inovatoare de a analiza și interpreta datele.</strong> Îi ajutăm pe clienții noștri să obțină perspective valoroase asupra activității lor, astfel încât să poată lua decizii mai bine fundamentate.",
+          "Fie că ai nevoie de un dashboard cu indicatori de performanță în timp real sau de o vizualizare personalizată care evidențiază tendințe și tipare esențiale, avem experiența necesară pentru a te ajuta să <strong>valorifici întregul potențial al datelor tale</strong> și să obții rezultate concrete pentru afacere.",
+        ],
+      },
+      {
+        heading: "Transformă-ți organizația într-una bazată și potențată de date, cu Power BI",
+        subheading: "Ajutăm organizațiile să construiască în Power BI. <em>Tot ceea ce se poate construi </em>în Power BI.",
+        paragraphs: [
+          "Suntem experți în Power BI, unul dintre cele mai puternice instrumente de business intelligence disponibile. Dezvoltăm modele de date intuitive și ușor de folosit, adaptate exact nevoilor afacerii tale, astfel încât să înțelegi mai bine datele și să iei decizii mai bine fundamentate.",
+          "Avem experiență în proiectarea și dezvoltarea vizualizărilor personalizate, construirea unui semantic model și administrarea tenant-urilor Power BI, astfel încât datele tale să fie sigure și gestionate corect. Indiferent dacă vrei să îmbunătățești raportarea, să obții perspective mai bune sau să analizezi tendințe, avem experiența și procesele necesare pentru a te ajuta să-ți atingi obiectivele cu Power BI.",
+        ],
+      },
+    ],
+  },
+  portfolio: {
+    heading: "Portofoliu",
+    viewAll: "Vezi întregul portofoliu",
+  },
+  contact: {
+    heading: "Contactează-ne",
+    subheading: "Hai să discutăm despre ce îți dorești să obții cu Microsoft Fabric.",
+    body: "Spune-ne cu ce situație te confrunți. Îți vom spune sincer dacă Microsoft Fabric este potrivit, ce presupune proiectul și la ce te poți aștepta atunci când lucrezi cu noi.",
+    email: "info@storiesofdata.com",
+    phone: "+40 741 234 567",
+    phoneHref: "+40741234567",
+  },
+  form: {
+    name: "Nume",
+    email: "Email",
+    message: "Ce îți dorești să obții cu Microsoft Fabric?",
+    messagePlaceholder: "Descrie-ne situația datelor tale. Nu trebuie să ai deja toate răspunsurile.",
+    privacy: "Prin trimiterea formularului, ești de acord cu",
+    privacyLink: "Politica de confidențialitate",
+    submit: "Trimite mesajul",
+    unconfigured: "Formularul de contact nu este configurat în acest mediu.",
+  },
+};
+
 export const home: Record<Locale, HomeCopy> = {
   en,
-  ro: en,
+  ro,
 };

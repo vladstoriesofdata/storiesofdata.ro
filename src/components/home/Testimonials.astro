@@ -39,6 +39,7 @@ const desktopPages = Array.from(
   aria-labelledby="testimonials-heading"
 >
   <h2 id="testimonials-heading" class="testimonials-heading">{copy.heading}</h2>
+  {copy.translationNote && <p class="testimonials-translation-note">{copy.translationNote}</p>}
   <img
     class="testimonials-map-mobile"
     src={worldMapMobile.src}
@@ -116,3 +117,11 @@ const desktopPages = Array.from(
     )}
   </div>
 </section>
+
+<style>
+  .testimonials-translation-note {
+    margin: 0.25rem 0 0;
+    color: var(--color-muted);
+    font-size: 0.75rem;
+  }
+</style>

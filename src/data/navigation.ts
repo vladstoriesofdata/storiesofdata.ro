@@ -15,8 +15,16 @@ const en: NavItem[] = [
   { label: "contact", href: "/#contact", homeHref: "#contact" },
 ];
 
-/** Romanian copy pending; English until translated. */
+const ro: NavItem[] = [
+  { label: "ce facem", href: "/#what-we-do", homeHref: "#what-we-do" },
+  { label: "servicii", href: "/#services", homeHref: "#services" },
+  { label: "portofoliu", href: "/#portfolio", homeHref: "#portfolio" },
+  { label: "echipă", href: "/#team", homeHref: "#team" },
+  { label: "mărturii", href: "/#testimonials", homeHref: "#testimonials" },
+  { label: "contact", href: "/#contact", homeHref: "#contact" },
+];
+
 export const navigation: Record<Locale, NavItem[]> = {
   en,
-  ro: en,
+  ro,
 };

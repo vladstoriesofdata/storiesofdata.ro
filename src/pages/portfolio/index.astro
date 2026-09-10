@@ -2,15 +2,20 @@
 import { getCollection } from "astro:content";
 import { getSiteConfig, withBase } from "../../lib/site";
 import { entrySlug, isLocaleEntry } from "../../lib/collections";
+import { ui } from "../../data/ui";
 import ArticleLayout from "../../layouts/ArticleLayout.astro";
 
 const site = getSiteConfig(import.meta.env);
+const copy = ui[site.locale];
+const description = site.locale === "ro"
+  ? "Portofoliul Stories of Data."
+  : "Portfolio from Stories of Data.";
 const entries = (
   await getCollection("portfolio", (entry) => isLocaleEntry(entry.id, site.locale))
 ).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<ArticleLayout title="Portfolio" description="Portfolio from Stories of Data." path="/portfolio" contentClass="work-index">
-  <h1>Portfolio</h1>
+<ArticleLayout title={copy.portfolio} description={description} path="/portfolio" contentClass="work-index">
+  <h1>{copy.portfolio}</h1>
   <ul>
     {entries.map((entry) => (
       <li>

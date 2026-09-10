@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import { getSiteConfig, withBase } from "../../lib/site";
 import { byPubDateDesc, entrySlug, isLocaleEntry } from "../../lib/collections";
+import { ui } from "../../data/ui";
 
 interface Props {
   path: string;
@@ -14,6 +15,7 @@ interface MenuLink {
 
 const { path } = Astro.props;
 const site = getSiteConfig(import.meta.env);
+const copy = ui[site.locale];
 
 function isCurrent(href: string): boolean {
   const norm = (value: string) => value.replace(/\/$/, "") || "/";
@@ -37,14 +39,14 @@ const [portfolio, articles, dataStories] = await Promise.all([
 ]);
 
 const groups = [
-  { id: "projects", label: "Projects", links: toLinks(portfolio, "/portfolio") },
-  { id: "articles", label: "Articles", links: toLinks(articles, "/articles") },
-  { id: "case-studies", label: "Case studies", links: toLinks(dataStories, "/data-stories") },
+  { id: "projects", label: copy.projects, links: toLinks(portfolio, "/portfolio") },
+  { id: "articles", label: copy.articles, links: toLinks(articles, "/articles") },
+  { id: "case-studies", label: copy.caseStudies, links: toLinks(dataStories, "/data-stories") },
 ];
 ---
 <div class="work-menu" id="work-menu" hidden>
-  <button type="button" class="work-menu-overlay" aria-label="Close menu"></button>
-  <nav class="work-menu-panel" aria-label="Work">
+  <button type="button" class="work-menu-overlay" aria-label={copy.closeMenu}></button>
+  <nav class="work-menu-panel" aria-label={copy.workMenuLabel}>
     {groups.map((group) => (
       <section class="work-menu-group" aria-labelledby={`work-menu-${group.id}`}>
         <h2 id={`work-menu-${group.id}`}>{group.label}</h2>

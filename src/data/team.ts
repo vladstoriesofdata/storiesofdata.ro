@@ -33,8 +33,27 @@ const en: TeamCopy = {
   ],
 };
 
-/** Romanian copy pending; English until translated. */
+const ro: TeamCopy = {
+  heading: "Echipa noastră",
+  members: [
+    {
+      name: "Vlad Mihanta",
+      role: "CEO ȘI FONDATOR",
+      bio: "Provin dintr-o familie de antreprenori și mi-am dorit dintotdeauna propria afacere. Stories of Data s-a născut din fascinația mea pentru date. Chiar și după 8 ani în industrie, mă uimește în continuare faptul că putem reprezenta și înțelege aspecte ale lumii prin intermediul datelor.\n\nPrin Stories of Data, îmi propun să înțeleg datele pe care le analizăm și să exprim această înțelegere cu precizie și într-o formă atrăgătoare pentru fiecare client alături de care lucrăm.",
+      email: "vlad@storiesofdata.com",
+      photo: "vlad",
+    },
+    {
+      name: "Irinel Cristea",
+      role: "ANALIST DE DATE",
+      bio: "Parcursul meu în lumea datelor a început în timpul studiilor de statistică, iar în ultimii ani mi-am transformat pasiunea într-o carieră. Am lucrat la proiecte diverse: de la construirea rapoartelor, planificarea obiectivelor și prognozarea vânzărilor cu tehnici de machine learning până la construirea de data pipelines și soluții BI. Acum mă concentrez pe dezvoltare BI și data engineering și, deși lucrez cu mai multe instrumente BI, Power BI este alegerea mea principală. Îmi place munca din culise: să preiau date brute și dezordonate, să le transform în data pipelines curate și să livrez perspective clare și valoroase, acordând o atenție deosebită experienței utilizatorului.",
+      email: "irinel@storiesofdata.com",
+      photo: "irinel",
+    },
+  ],
+};
+
 export const team: Record<Locale, TeamCopy> = {
   en,
-  ro: en,
+  ro,
 };
