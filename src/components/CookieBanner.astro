@@ -15,6 +15,7 @@ _iub.csConfiguration = ${JSON.stringify({
       cookiePolicyId: policyIdValue,
       lang: site.locale,
       storage: { useSiteId: true },
+      usPreferencesWidgetDisplay: false,
     })};`
   : "";
 ---
@@ -26,3 +27,9 @@ _iub.csConfiguration = ${JSON.stringify({
     <script is:inline async charset="UTF-8" src="https://cdn.iubenda.com/cs/iubenda_cs.js"></script>
   </>
 )}
+
+<style is:global>
+  .iub__us-widget {
+    display: none !important;
+  }
+</style>
