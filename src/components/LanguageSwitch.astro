@@ -1,5 +1,6 @@
 ---
 import { getSiteConfig, peerUrl } from "../lib/site";
+import { ui } from "../data/ui";
 
 interface Props {
   path: string;
@@ -7,6 +8,7 @@ interface Props {
 
 const { path } = Astro.props;
 const site = getSiteConfig(import.meta.env);
+const copy = ui[site.locale];
 const pair = [
   { locale: "en" as const, label: "EN" },
   { locale: "ro" as const, label: "RO" },
@@ -17,7 +19,7 @@ const pair = [
     if (item.locale === site.locale) {
       return <span aria-current="true">{item.label}</span>;
     }
-    const ariaLabel = item.locale === "ro" ? "Switch to Romanian" : "Switch to English";
+    const ariaLabel = item.locale === "ro" ? copy.switchToRomanian : copy.switchToEnglish;
     return (
       <a href={peerUrl(path, site)} hreflang={item.locale} aria-label={ariaLabel}>
         {item.label}

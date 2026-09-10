@@ -1,13 +1,15 @@
 ---
 import { home } from "../../data/home";
 import { getSiteConfig, withBase } from "../../lib/site";
-import { PORTFOLIO_STRIP_TABS } from "../../data/portfolioStrip";
+import { portfolioStrip } from "../../data/portfolioStrip";
+import { formatUi, ui } from "../../data/ui";
 import LottieGraphic from "./LottieGraphic.astro";
 import PortfolioCard from "./PortfolioCard.astro";
 import portfolioZoom from "../../assets/lottie/portfolio-zoom.json?url";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
+const uiCopy = ui[site.locale];
 const PAGE_SIZE = 4;
 
 function chunk<T>(items: T[], size: number): T[][] {
@@ -18,7 +20,7 @@ function chunk<T>(items: T[], size: number): T[][] {
   return pages;
 }
 
-const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
+const tabs = portfolioStrip[site.locale].map((tab) => ({
   ...tab,
   pages: chunk(tab.items, PAGE_SIZE),
 }));
@@ -79,7 +81,7 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
           {tab.pages.length > 1 && (
             <div class="portfolio-carousel-controls">
               <button type="button" class="portfolio-carousel-btn" data-carousel-prev>
-                Previous
+                {uiCopy.previous}
               </button>
               <div class="portfolio-carousel-dots">
                 {tab.pages.map((_, pageIndex) => (
@@ -87,12 +89,15 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
                     type="button"
                     class="portfolio-carousel-dot"
                     data-carousel-dot={String(pageIndex)}
-                    aria-label={`Show page ${pageIndex + 1} of ${tab.label}`}
+                    aria-label={formatUi(uiCopy.showPage, {
+                      page: pageIndex + 1,
+                      label: tab.label,
+                    })}
                   />
                 ))}
               </div>
               <button type="button" class="portfolio-carousel-btn" data-carousel-next>
-                Next
+                {uiCopy.next}
               </button>
             </div>
           )}
@@ -112,7 +117,7 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
           {tab.items.length > 1 && (
             <div class="portfolio-carousel-controls">
               <button type="button" class="portfolio-carousel-btn" data-carousel-prev>
-                Previous
+                {uiCopy.previous}
               </button>
               <div class="portfolio-carousel-dots">
                 {tab.items.map((entry, slideIndex) => (
@@ -120,12 +125,12 @@ const tabs = PORTFOLIO_STRIP_TABS.map((tab) => ({
                     type="button"
                     class="portfolio-carousel-dot"
                     data-carousel-dot={String(slideIndex)}
-                    aria-label={`Show ${entry.title}`}
+                    aria-label={formatUi(uiCopy.showItem, { title: entry.title })}
                   />
                 ))}
               </div>
               <button type="button" class="portfolio-carousel-btn" data-carousel-next>
-                Next
+                {uiCopy.next}
               </button>
             </div>
           )}

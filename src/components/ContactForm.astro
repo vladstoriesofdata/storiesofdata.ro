@@ -1,16 +1,18 @@
 ---
 import { getSiteConfig, withBase } from "../lib/site";
 import { home } from "../data/home";
+import { ui } from "../data/ui";
 
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale].form;
+const uiCopy = ui[site.locale];
 const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
 const disabled = !endpoint;
 ---
 <form class="contact-form" method="POST" action={endpoint || "#contact"} aria-disabled={disabled}>
   <label class="contact-field">
     {copy.name}
-    <input name="name" required disabled={disabled} placeholder="Your Name" />
+    <input name="name" required disabled={disabled} placeholder={uiCopy.namePlaceholder} />
   </label>
   <label class="contact-field">
     {copy.email}

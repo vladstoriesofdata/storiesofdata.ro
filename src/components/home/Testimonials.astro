@@ -1,6 +1,7 @@
 ---
 import { getSiteConfig } from "../../lib/site";
 import { testimonials, testimonialMapPins } from "../../data/testimonials";
+import { formatUi, ui } from "../../data/ui";
 import TestimonialCard from "./TestimonialCard.astro";
 import worldMap from "../../assets/testimonials/world-map.svg";
 import worldMapMobile from "../../assets/testimonials/world-map-mobile.svg";
@@ -13,6 +14,7 @@ import flowTraders from "../../assets/testimonials/flow-traders-logo.svg";
 
 const site = getSiteConfig(import.meta.env);
 const copy = testimonials[site.locale];
+const uiCopy = ui[site.locale];
 
 const photos = {
   jess,
@@ -91,7 +93,7 @@ const desktopPages = Array.from(
             type="button"
             class="testimonials-carousel-dot"
             data-carousel-dot={String(pageIndex)}
-            aria-label={`Show testimonials page ${pageIndex + 1}`}
+            aria-label={formatUi(uiCopy.showTestimonialsPage, { page: pageIndex + 1 })}
             aria-current={pageIndex === 0 ? "true" : "false"}
           />
         ))}
@@ -111,7 +113,7 @@ const desktopPages = Array.from(
             type="button"
             class="testimonials-carousel-dot"
             data-carousel-dot={String(index)}
-            aria-label={`Show testimonial from ${item.name}`}
+            aria-label={formatUi(uiCopy.showTestimonialFrom, { name: item.name })}
             aria-current={index === 0 ? "true" : "false"}
           />
         ))}

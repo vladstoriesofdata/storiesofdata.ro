@@ -88,7 +88,7 @@ const ro: TestimonialsCopy = {
     },
     {
       quote:
-        "Motivele pentru care mie îmi place să lucrez cu Vlad sunt aceleași care au făcut ca ultima lui colaborare cu Flow Traders să fie un succes. Comunică foarte bine și ascultă cu atenție nevoile clientului. Știe ce poate livra, își respectă întotdeauna angajamentele și face constant mai mult decât i se cere. De asemenea, a înțeles foarte repede ce avea nevoie de la el grupul divers de traderi și a dus proiectul la bun sfârșit, deși a primit foarte puține îndrumări. Îl recomand cu încredere pe Vlad Mihanta oricui își dorește ca treaba să fie făcută bine din prima. Livrează de fiecare dată!",
+        "Motivele pentru care mie îmi place să lucrez cu Vlad sunt aceleași care au făcut ca ultima lui colaborare cu Flow Traders să fie un succes. Comunică foarte bine și ascultă cu atenție nevoile clientului. Știe ce poate livra, își respectă întotdeauna angajamentele și face constant mai mult decât i se cere. De asemenea, a înțeles foarte repede de ce avea nevoie grupul divers de traderi și a dus proiectul la bun sfârșit, deși a primit foarte puține îndrumări. Îl recomand cu încredere pe Vlad Mihanta oricui își dorește ca treaba să fie făcută bine din prima. Livrează de fiecare dată!",
       name: "Timo Pentner",
       role: "director IT",
       company: "Flow Traders",

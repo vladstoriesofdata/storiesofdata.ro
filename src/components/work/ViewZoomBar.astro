@@ -1,5 +1,12 @@
-<nav class="views-nav" aria-label="View length">
-  <button type="button" class="views-nav-zoom" data-zoom-out title="Less detail" aria-label="Less detail"></button>
+---
+import { getSiteConfig } from "../../lib/site";
+import { ui } from "../../data/ui";
+
+const site = getSiteConfig(import.meta.env);
+const copy = ui[site.locale];
+---
+<nav class="views-nav" aria-label={copy.viewLength}>
+  <button type="button" class="views-nav-zoom" data-zoom-out title={copy.lessDetail} aria-label={copy.lessDetail}></button>
   <div class="view-status-wrapper">
     <div class="progress-line" aria-hidden="true"></div>
     <div class="dot-wrapper">
@@ -7,26 +14,26 @@
         type="button"
         class="views-nav-dot pv-dot"
         data-zoom-view="summary"
-        title="Summary view"
-        aria-label="Summary view"
+        title={copy.summaryView}
+        aria-label={copy.summaryView}
       ></button>
       <button
         type="button"
         class="views-nav-dot mv-dot"
         data-zoom-view="subjects"
-        title="Key subjects view"
-        aria-label="Key subjects view"
+        title={copy.keySubjectsView}
+        aria-label={copy.keySubjectsView}
       ></button>
       <button
         type="button"
         class="views-nav-dot gv-dot"
         data-zoom-view="detail"
-        title="Detailed view"
-        aria-label="Detailed view"
+        title={copy.detailedView}
+        aria-label={copy.detailedView}
       ></button>
     </div>
   </div>
-  <button type="button" class="views-nav-zoom" data-zoom-in title="More detail" aria-label="More detail"></button>
+  <button type="button" class="views-nav-zoom" data-zoom-in title={copy.moreDetail} aria-label={copy.moreDetail}></button>
 </nav>
 
 <script>
