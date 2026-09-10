@@ -38,8 +38,10 @@ const desktopPages = Array.from(
   data-section-name="testimonials"
   aria-labelledby="testimonials-heading"
 >
-  <h2 id="testimonials-heading" class="testimonials-heading">{copy.heading}</h2>
-  {copy.translationNote && <p class="testimonials-translation-note">{copy.translationNote}</p>}
+  <div class="testimonials-heading-group">
+    <h2 id="testimonials-heading" class="testimonials-heading">{copy.heading}</h2>
+    {copy.translationNote && <p class="testimonials-translation-note">{copy.translationNote}</p>}
+  </div>
   <img
     class="testimonials-map-mobile"
     src={worldMapMobile.src}
@@ -119,6 +121,10 @@ const desktopPages = Array.from(
 </section>
 
 <style>
+  .testimonials-heading-group {
+    z-index: 4;
+  }
+
   .testimonials-translation-note {
     margin: 0.25rem 0 0;
     color: var(--color-muted);
