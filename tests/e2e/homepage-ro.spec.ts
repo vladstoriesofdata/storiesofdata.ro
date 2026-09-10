@@ -12,6 +12,7 @@ test("renders the Romanian homepage copy", async ({ page }) => {
   await expect(
     page.getByText("O poveste despre date și Premiul Nobel", { exact: true }).first(),
   ).toBeVisible();
+  await expect(page.locator(".portfolio-card-more").first()).toHaveText(/MAI MULTE DETALII/);
   await expect(
     page.locator('#portfolio [data-tab-panel="portfolio"] [data-carousel-prev]').first(),
   ).toHaveText("Anterior");

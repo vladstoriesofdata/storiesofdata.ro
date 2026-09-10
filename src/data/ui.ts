@@ -8,6 +8,7 @@ export interface UiCopy {
   articles: string;
   caseStudies: string;
   portfolio: string;
+  portfolioMoreDetails: string;
   dataStories: string;
   privacyPolicy: string;
   terms: string;
@@ -38,6 +39,7 @@ const en: UiCopy = {
   articles: "Articles",
   caseStudies: "Case studies",
   portfolio: "Portfolio",
+  portfolioMoreDetails: "MORE DETAILS",
   dataStories: "Data stories",
   privacyPolicy: "Privacy policy",
   terms: "Terms",
@@ -68,6 +70,7 @@ const ro: UiCopy = {
   articles: "Articole",
   caseStudies: "Studii de caz",
   portfolio: "Portofoliu",
+  portfolioMoreDetails: "MAI MULTE DETALII",
   dataStories: "Povești bazate pe date",
   privacyPolicy: "Politica de confidențialitate",
   terms: "Termeni și condiții",
