@@ -1,11 +1,20 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { home } from "../../src/data/home";
 import { navigation } from "../../src/data/navigation";
 import { services } from "../../src/data/services";
 import { team } from "../../src/data/team";
 import { testimonials } from "../../src/data/testimonials";
+
+const localeData = [
+  ["home", home],
+  ["navigation", navigation],
+  ["services", services],
+  ["team", team],
+  ["testimonials", testimonials],
+] as const;
 
 const translatedEntries = [
   "articles/become-truly-data-driven-and-you-will-certainly-fail/ro.mdx",
@@ -28,16 +37,31 @@ const translatedEntries = [
   "legal/terms-and-conditions/ro.mdx",
 ] as const;
 
+const contentRoot = resolve(
+  fileURLToPath(new URL(".", import.meta.url)),
+  "../../src/content",
+);
+
 const readContent = (entry: string) =>
-  readFileSync(resolve(process.cwd(), "src/content", entry), "utf8");
+  readFileSync(resolve(contentRoot, entry), "utf8");
+
+const readFrontmatter = (entry: string) => {
+  const source = readContent(entry);
+  const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+
+  expect(match, `${entry} must start with fenced frontmatter`).not.toBeNull();
+
+  return Object.fromEntries(
+    match![1].split(/\r?\n/).flatMap((line) => {
+      const field = line.match(/^([A-Za-z][\w-]*):\s*(.*?)\s*$/);
+      return field ? [[field[1], field[2]]] : [];
+    }),
+  );
+};
 
 describe("Romanian locale data", () => {
-  it("does not alias English homepage objects", () => {
-    expect(home.ro).not.toBe(home.en);
-    expect(navigation.ro).not.toBe(navigation.en);
-    expect(services.ro).not.toBe(services.en);
-    expect(team.ro).not.toBe(team.en);
-    expect(testimonials.ro).not.toBe(testimonials.en);
+  it.each(localeData)("%s does not alias its English object", (_name, copy) => {
+    expect(copy.ro).not.toBe(copy.en);
   });
 
   it("marks translated testimonials", () => {
@@ -48,7 +72,7 @@ describe("Romanian locale data", () => {
 
 describe("Romanian content entries", () => {
   it.each(translatedEntries)("%s is marked translated", (entry) => {
-    expect(readContent(entry)).toContain("translationStatus: translated");
+    expect(readFrontmatter(entry).translationStatus).toBe("translated");
   });
 
   it("keeps Terms empty after translated metadata", () => {
