@@ -11,5 +11,9 @@ export default defineConfig({
   base,
   trailingSlash: "always",
   output: "static",
+  redirects: {
+    "/portfolio/btr-business-case-study/": "/data-stories/btr-business-case-study/",
+    "/portfolio/chainformation-business-case-study/": "/data-stories/chainformation-business-case-study/",
+  },
   integrations: [mdx(), sitemap(), copyContentImages()],
 });

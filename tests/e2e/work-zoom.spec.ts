@@ -79,7 +79,7 @@ test("embed portfolio pager is visible without overlapping the report", async ({
 
 test("portfolio zoom reveals a longer view", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto("/portfolio/btr-business-case-study/");
+  await page.goto("/data-stories/btr-business-case-study/");
   const host = page.locator("[data-view-zoom]");
   await expect(host).toBeVisible();
   await expect(host.locator(".cs-planetary-wrapper")).toBeVisible();
@@ -161,7 +161,7 @@ function contains(parent: { x: number; y: number; width: number; height: number 
 
 test("zoom bar keeps plus, minus, and dots on one row", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto("/portfolio/btr-business-case-study/");
+  await page.goto("/data-stories/btr-business-case-study/");
   const nav = page.locator(".views-nav");
   const zoomOut = nav.locator("[data-zoom-out]");
   const zoomIn = nav.locator("[data-zoom-in]");

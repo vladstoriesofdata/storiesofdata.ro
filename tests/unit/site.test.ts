@@ -61,8 +61,8 @@ describe("hreflangLinks", () => {
 
 describe("peerUrl", () => {
   it("points English pages at the .ro host", () => {
-    expect(peerUrl("/portfolio/btr-business-case-study", getSiteConfig(enEnv))).toBe(
-      "https://www.storiesofdata.ro/portfolio/btr-business-case-study",
+    expect(peerUrl("/data-stories/btr-business-case-study", getSiteConfig(enEnv))).toBe(
+      "https://www.storiesofdata.ro/data-stories/btr-business-case-study",
     );
   });
 });

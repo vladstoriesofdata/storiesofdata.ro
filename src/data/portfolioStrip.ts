@@ -62,18 +62,6 @@ const en: StripTab[] = [
         "A ROMANIAN DATA STORY",
         "A Romanian Data Story is an exploration of data about Romania. This is a series of visualizations exploring different topics, like demographics, income, migration, health, and more concerning Romanian citizens. The data is collected mainly from the national bureau of Statistics of Romania (INSS). The series also includes a running weekly post on LinkedIn where more details are shared about each topic.",
       ),
-      item(
-        "/portfolio",
-        "btr-business-case-study",
-        "Power BI and Data Management for a US-based Construction Company",
-        "How we helped a US construction company manage hundreds of sites effortlessly with Power BI - Beyond regular reporting in Power BI.",
-      ),
-      item(
-        "/portfolio",
-        "chainformation-business-case-study",
-        "How a Swedish SaaS Leveraged Power BI Embedded for Data Analytics in Their Mature Product",
-        "How we helped a platform revolutionize data insights for multi location brands and frenchises.",
-      ),
     ],
   },
   {
@@ -122,6 +110,18 @@ const en: StripTab[] = [
     id: "case-studies",
     label: "Case Studies",
     items: [
+      item(
+        "/data-stories",
+        "btr-business-case-study",
+        "Power BI and Data Management for a US-based Construction Company",
+        "How we helped a US construction company manage hundreds of sites effortlessly with Power BI - Beyond regular reporting in Power BI.",
+      ),
+      item(
+        "/data-stories",
+        "chainformation-business-case-study",
+        "How a Swedish SaaS Leveraged Power BI Embedded for Data Analytics in Their Mature Product",
+        "How we helped a platform revolutionize data insights for multi location brands and frenchises.",
+      ),
       item(
         "/data-stories",
         "lines-on-maps-in-power-bi",
@@ -173,18 +173,6 @@ const ro: StripTab[] = [
         "A ROMANIAN DATA STORY",
         "A Romanian Data Story este o explorare a datelor despre România. Seria cuprinde vizualizări despre diverse subiecte relevante pentru cetățenii români, precum demografia, veniturile, migrația și sănătatea. Datele provin în principal de la Institutul Național de Statistică din România (INS). Seria include și postări săptămânale pe LinkedIn, unde prezentăm mai multe detalii despre fiecare subiect.",
       ),
-      item(
-        "/portfolio",
-        "btr-business-case-study",
-        "Power BI și managementul datelor pentru o companie de construcții din SUA",
-        "Cum am ajutat o companie de construcții din SUA să gestioneze fără efort sute de șantiere cu Power BI, dincolo de raportarea obișnuită în Power BI.",
-      ),
-      item(
-        "/portfolio",
-        "chainformation-business-case-study",
-        "Cum a folosit un produs SaaS suedez Power BI Embedded pentru analiza datelor",
-        "Cum am ajutat o platformă să transforme radical perspectivele oferite de date pentru branduri și francize cu mai multe locații.",
-      ),
     ],
   },
   {
@@ -233,6 +221,18 @@ const ro: StripTab[] = [
     id: "case-studies",
     label: "Studii de caz",
     items: [
+      item(
+        "/data-stories",
+        "btr-business-case-study",
+        "Power BI și managementul datelor pentru o companie de construcții din SUA",
+        "Cum am ajutat o companie de construcții din SUA să gestioneze fără efort sute de șantiere cu Power BI, dincolo de raportarea obișnuită în Power BI.",
+      ),
+      item(
+        "/data-stories",
+        "chainformation-business-case-study",
+        "Cum a folosit un produs SaaS suedez Power BI Embedded pentru analiza datelor",
+        "Cum am ajutat o platformă să transforme radical perspectivele oferite de date pentru branduri și francize cu mai multe locații.",
+      ),
       item(
         "/data-stories",
         "lines-on-maps-in-power-bi",

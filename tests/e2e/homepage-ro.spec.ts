@@ -27,7 +27,7 @@ test("renders the Romanian homepage copy", async ({ page }) => {
 });
 
 test("renders Romanian work navigation labels", async ({ page }) => {
-  await page.goto("/portfolio/btr-business-case-study/");
+  await page.goto("/data-stories/btr-business-case-study/");
 
   const pager = page.getByRole("navigation", { name: "Navigare între articole" });
   await expect(pager.getByRole("link", { name: "Anterior", exact: true })).toBeVisible();
