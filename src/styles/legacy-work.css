@@ -8,8 +8,41 @@
   font-family: var(--font-mono);
 }
 
+[data-view-zoom][data-view="summary"] {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+}
+
+[data-view-zoom][data-view="subjects"],
+[data-view-zoom][data-view="detail"] {
+  display: block;
+  height: auto;
+  max-height: none;
+  min-height: auto;
+}
+
 [data-view-zoom] .legacy-html {
   min-height: 100vh;
+}
+
+[data-view-zoom][data-view="summary"] .legacy-html {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-view-zoom][data-view="summary"] > .post-pager {
+  flex: none;
+  padding: 0 1.5rem 1.25rem 120px;
+}
+
+[data-view-zoom][data-view="subjects"] > .post-pager,
+[data-view-zoom][data-view="detail"] > .post-pager {
+  padding: 1.5rem 1.5rem 2.5rem 120px;
 }
 
 [data-view-zoom] [hidden],
@@ -22,10 +55,17 @@
   z-index: 5;
   width: 100%;
   height: 100vh;
-  padding: 50px 50px 90px 70px;
+  padding: 50px 50px 50px 70px;
   display: block;
   position: relative;
   overflow: hidden;
+}
+
+[data-view-zoom][data-view="summary"] .cs-planetary-wrapper {
+  height: 100%;
+  flex: 1;
+  min-height: 0;
+  padding-bottom: 20px;
 }
 
 [data-view-zoom] .cs-planetary-wrapper.show {
@@ -43,26 +83,30 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   display: none;
 }
 
 [data-view-zoom] .cs-mountaintop-wrapper.show {
   display: flex;
+  padding-bottom: 4.5rem;
 }
 
 [data-view-zoom] .cs-grassroot-wrapper {
   box-sizing: border-box;
   z-index: 5;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   display: none;
   position: relative;
-  overflow: auto;
+  overflow: visible;
 }
 
 [data-view-zoom] .cs-grassroot-wrapper.show {
   display: flex;
+  padding-bottom: 4.5rem;
 }
 
 [data-view-zoom] .cs-grassroot-wrapper.analytics-blogpost {
@@ -259,13 +303,13 @@
   z-index: 500;
   background-color: var(--color-paper);
   width: 84%;
-  height: 90vh;
+  height: auto;
   margin-top: 5vh;
   margin-bottom: 90px;
   margin-right: 3%;
   padding-bottom: 30px;
   position: relative;
-  overflow: auto;
+  overflow: visible;
 }
 
 [data-view-zoom] .cs-grassroot-content {
@@ -549,6 +593,17 @@
   [data-view-zoom] .cs-planetary-wrapper {
     height: 100vh;
     padding: 30px 30px 150px;
+  }
+
+  [data-view-zoom][data-view="summary"] .cs-planetary-wrapper {
+    height: 100%;
+    padding: 30px 30px 20px;
+  }
+
+  [data-view-zoom][data-view="summary"] > .post-pager,
+  [data-view-zoom][data-view="subjects"] > .post-pager,
+  [data-view-zoom][data-view="detail"] > .post-pager {
+    padding-left: 10px;
   }
 
   [data-view-zoom] .cs-mountaintop-wrapper {

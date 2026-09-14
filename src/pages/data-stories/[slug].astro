@@ -43,6 +43,6 @@ const path = `/data-stories/${entrySlug(entry.id)}`;
     {entrySlug(entry.id) === "redesigning-linkedin-analytics" && (
       <ScrollScrubLottie />
     )}
+    {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
   </div>
-  {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
 </ArticleLayout>

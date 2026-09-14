@@ -8,6 +8,75 @@ const HIDDEN_ZOOM_PAGES = [
   "/portfolio/category-comparison-bar-chart-power-bi-custom-visual/",
 ];
 
+test("detail view scrolls the page, not the article wrapper", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/portfolio/building-a-better-matrix-visual-with-deneb-in-power-bi/");
+  const host = page.locator("[data-view-zoom]");
+  await host.locator("[data-zoom-in]").click();
+  await host.locator("[data-zoom-in]").click();
+  await expect(host).toHaveAttribute("data-view", "detail");
+
+  const grassroot = host.locator(".cs-grassroot-wrapper");
+  await expect(grassroot).toBeVisible();
+
+  const metrics = await grassroot.evaluate((el) => {
+    const style = getComputedStyle(el);
+    return {
+      overflowY: style.overflowY,
+      hasInnerScroll:
+        el.scrollHeight > el.clientHeight &&
+        (style.overflowY === "auto" || style.overflowY === "scroll"),
+    };
+  });
+  expect(metrics.overflowY).toBe("visible");
+  expect(metrics.hasInnerScroll).toBe(false);
+
+  const docScrollHeight = await page.evaluate(() => document.documentElement.scrollHeight);
+  expect(docScrollHeight).toBeGreaterThan(1200);
+
+  const pager = host.locator(".post-pager");
+  await expect(pager).toBeVisible();
+  const pagerTop = await pager.evaluate((el) => {
+    const grassroot = document.querySelector(".cs-grassroot-wrapper");
+    if (!grassroot) return -1;
+    return el.getBoundingClientRect().top - grassroot.getBoundingClientRect().bottom;
+  });
+  expect(pagerTop).toBeGreaterThanOrEqual(-1);
+  expect(pagerTop).toBeLessThan(32);
+});
+
+test("embed portfolio pager is visible without overlapping the report", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/portfolio/a-nobel-prize-data-story/");
+  const pager = page.locator("nav.post-pager");
+  await expect(pager).toBeVisible();
+
+  const metrics = await page.evaluate(() => {
+    const iframe = document.querySelector(".pv-embedd-wrapper iframe");
+    const pagerEl = document.querySelector(".post-pager");
+    if (!iframe || !pagerEl) return null;
+    const iframeBox = iframe.getBoundingClientRect();
+    const pagerBox = pagerEl.getBoundingClientRect();
+    const overlaps =
+      pagerBox.top < iframeBox.bottom &&
+      pagerBox.bottom > iframeBox.top &&
+      pagerBox.left < iframeBox.right &&
+      pagerBox.right > iframeBox.left;
+    return {
+      scrollHeight: document.documentElement.scrollHeight,
+      pagerBottom: pagerBox.bottom,
+      viewport: window.innerHeight,
+      overlaps,
+      gap: pagerBox.top - iframeBox.bottom,
+    };
+  });
+  expect(metrics).toBeTruthy();
+  expect(metrics!.scrollHeight).toBeLessThanOrEqual(metrics!.viewport + 1);
+  expect(metrics!.pagerBottom).toBeLessThanOrEqual(metrics!.viewport);
+  expect(metrics!.overlaps).toBe(false);
+  expect(metrics!.gap).toBeGreaterThanOrEqual(0);
+});
+
 test("portfolio zoom reveals a longer view", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/portfolio/btr-business-case-study/");

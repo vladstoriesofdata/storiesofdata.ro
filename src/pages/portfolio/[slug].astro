@@ -39,6 +39,6 @@ const path = `/portfolio/${entrySlug(entry.id)}`;
   <div data-view-zoom data-view="summary">
     <Content />
     {entry.data.zoom && <ViewZoomBar />}
+    {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
   </div>
-  {nav && <PostPager nav={nav} kindLabel={kindLabel} />}
 </ArticleLayout>
