@@ -13,7 +13,7 @@ const configScript = enabled
 _iub.csConfiguration = ${JSON.stringify({
       siteId: siteIdValue,
       cookiePolicyId: policyIdValue,
-      lang: site.locale,
+      lang: "en", // iubenda plan supports English only; keep "en" until RO is added in iubenda dashboard
       storage: { useSiteId: true },
       usPreferencesWidgetDisplay: false,
     })};`
