@@ -53,15 +53,11 @@ const uiCopy = ui[site.locale];
             <img src={iconEmail.src} alt="" width="25" height="25" />
             {copy.contact.email}
           </a>
-          <a class="contact-channel" href={`tel:${copy.contact.phoneHref}`}>
-            <img src={iconPhone.src} alt="" width="25" height="25" />
-            {copy.contact.phone}
-          </a>
         </div>
         <ContactForm />
         <nav class="contact-legal" aria-label={uiCopy.legalLabel}>
           <a href={withBase("/privacy-policy", import.meta.env.BASE_URL)}>{uiCopy.privacyPolicy}</a>
-          <a href={withBase("/terms-and-conditions", import.meta.env.BASE_URL)}>{uiCopy.terms}</a>
+          {/*<a href={withBase("/terms-and-conditions", import.meta.env.BASE_URL)}>{uiCopy.terms}</a>*/}
           <p class="contact-copyright">© Stories of Data 2026</p>
         </nav>
       </div>

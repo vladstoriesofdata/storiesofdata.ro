@@ -10,7 +10,14 @@ const endpoint = import.meta.env.PUBLIC_FORM_ENDPOINT;
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY;
 const disabled = !endpoint || !accessKey;
 ---
-<form class="contact-form" method="POST" action={endpoint || "#contact"} aria-disabled={disabled}>
+<p
+  id="contact-result"
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+  style="grid-column: 1 / -1; margin-top: 1rem;"
+></p>
+<form id="contact-form" class="contact-form" method="POST" action={endpoint || "#contact"} aria-disabled={disabled} data-locale={site.locale}>
 <input type="hidden" name="access_key" value={accessKey} />
 <input
   type="hidden"
@@ -43,3 +50,69 @@ const disabled = !endpoint || !accessKey;
   <button class="pill-button contact-submit" type="submit" disabled={disabled}>{copy.submit}</button>
   {disabled && <p class="contact-unconfigured">{copy.unconfigured}</p>}
 </form>
+<script>
+  const form = document.querySelector<HTMLFormElement>("#contact-form");
+  const result = document.querySelector<HTMLParagraphElement>("#contact-result");
+
+  if (form && result) {
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+
+    if (button) {
+      const messages = form.dataset.locale === "ro"
+        ? {
+            sending: "Se trimite...",
+            success: "Mulțumim! Mesajul tău a fost trimis.",
+            error: "Mesajul nu a putut fi trimis. Te rugăm să încerci din nou.",
+          }
+        : {
+            sending: "Sending...",
+            success: "Thank you! Your message has been sent.",
+            error: "Your message could not be sent. Please try again.",
+          };
+
+      let submitting = false;
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        if (submitting || form.getAttribute("aria-disabled") === "true") return;
+
+        const originalLabel = button.textContent;
+        const data = Object.fromEntries(new FormData(form));
+
+        submitting = true;
+        button.disabled = true;
+        button.textContent = messages.sending;
+        form.setAttribute("aria-busy", "true");
+        result.textContent = messages.sending;
+
+        try {
+          const response = await fetch(form.action, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const body = await response.json();
+
+          if (!response.ok || body.success !== true) {
+            throw new Error("Submission failed");
+          }
+
+          form.reset();
+          result.textContent = messages.success;
+        } catch {
+          result.textContent = messages.error;
+        } finally {
+          submitting = false;
+          button.disabled = false;
+          button.textContent = originalLabel;
+          form.removeAttribute("aria-busy");
+        }
+      });
+    }
+  }
+</script>
