@@ -8,6 +8,10 @@ const enabled = Boolean(siteId && policyId);
 
 const siteIdValue = Number(siteId) || siteId;
 const policyIdValue = Number(policyId) || policyId;
+const hostname = new URL(site.url).hostname;
+const githubPagesConsent = hostname.endsWith(".github.io")
+  ? { localConsentDomain: hostname, localConsentDomainExact: true }
+  : {};
 const configScript = enabled
   ? `var _iub = _iub || [];
 _iub.csConfiguration = ${JSON.stringify({
@@ -16,6 +20,7 @@ _iub.csConfiguration = ${JSON.stringify({
       lang: "en", // iubenda plan supports English only; keep "en" until RO is added in iubenda dashboard
       storage: { useSiteId: true },
       usPreferencesWidgetDisplay: false,
+      ...githubPagesConsent,
     })};`
   : "";
 ---
