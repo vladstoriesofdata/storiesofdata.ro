@@ -58,6 +58,10 @@
   padding: 0;
 }
 
+.menu-toggle-icon {
+  display: none;
+}
+
 .site-header.home-chrome {
   box-sizing: border-box;
   display: flex;
@@ -1576,6 +1580,22 @@ body[data-chrome="doc"] main {
 }
 
 @media (max-width: 765px) {
+  .home-menu-toggle,
+  .work-menu-toggle {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .menu-toggle-label {
+    display: none;
+  }
+
+  .menu-toggle-icon {
+    display: block;
+  }
+
   .portfolio-carousel-btn { display: none; }
   [data-carousel-viewport] { touch-action: pan-y pinch-zoom; }
   .hero-intro,
