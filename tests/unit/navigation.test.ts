@@ -25,7 +25,22 @@ describe("navigation", () => {
     ]);
   });
 
-  it("keeps Romanian labels identical until translation exists", () => {
-    expect(navigation.ro).toEqual(navigation.en);
+  it("uses translated Romanian labels", () => {
+    expect(navigation.ro.map((item) => item.label)).toEqual([
+      "ce facem",
+      "servicii",
+      "portofoliu",
+      "echipă",
+      "mărturii",
+      "contact",
+    ]);
+  });
+  it("keeps the same href targets as English", () => {
+    expect(navigation.ro.map((item) => item.href)).toEqual(
+      navigation.en.map((item) => item.href),
+    );
+    expect(navigation.ro.map((item) => item.homeHref)).toEqual(
+      navigation.en.map((item) => item.homeHref),
+    );
   });
 });

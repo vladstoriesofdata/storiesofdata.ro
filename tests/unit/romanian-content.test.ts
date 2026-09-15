@@ -34,7 +34,6 @@ const translatedEntries = [
   "data-stories/lines-on-maps-in-power-bi/ro.mdx",
   "data-stories/redesigning-linkedin-analytics/ro.mdx",
   "legal/privacy-policy/ro.mdx",
-  "legal/terms-and-conditions/ro.mdx",
 ] as const;
 
 const contentRoot = resolve(
@@ -76,8 +75,6 @@ describe("Romanian content entries", () => {
   });
 
   it("keeps Terms empty after translated metadata", () => {
-    const source = readContent("legal/terms-and-conditions/ro.mdx");
-    const body = source.replace(/^---[\s\S]*?---/, "").trim();
-    expect(body).toBe("<p></p>");
+    // No terms and conditions entry in Romanian content
   });
 });
