@@ -18,7 +18,7 @@
  *
  * Homepage Lottie nodes (data-animation-type="lottie"):
  *   desktop intro loop_2.json (hero desktop, loop+autoplay)
- *   mobil short intro.json (hero mobile, autoplay, no loop)
+ *   desktop intro loop_2.json (hero mobile, loop+autoplay in the header band)
  *   1-2-3-4-5.json (background-anim-wrapper, paused / IX2)
  *   portfolio zoom6.json (portfolio, paused / IX2)
  *   connected more dots_loop.json (team, paused / IX2)
@@ -50,6 +50,97 @@ export function stepsProgressForSection(sectionName: string | undefined): number
   const index = STEPS_SECTIONS.indexOf(sectionName as (typeof STEPS_SECTIONS)[number]);
   if (index === -1) return 1;
   return index / (STEPS_SECTIONS.length - 1);
+}
+
+/** Scroll progress (0–1) through a block, matching Webflow SCROLLING_IN_VIEW. */
+export function scrollProgressThroughBlock(
+  top: number,
+  height: number,
+  y: number,
+  viewportHeight: number,
+): number {
+  const max = height - viewportHeight;
+  if (max <= 0) return 0;
+  return Math.min(1, Math.max(0, (y - top) / max));
+}
+
+/** Maps what-we-do scroll progress to steps Lottie progress (legacy IX2 keyframes 25–70). */
+export function stepsProgressFromWhatWeDoScroll(scrollProgress: number): number {
+  if (scrollProgress <= 0.25) return 0;
+  if (scrollProgress >= 0.7) return 1;
+  return (scrollProgress - 0.25) / 0.45;
+}
+
+/** Viewport Y where chapter copy should sit on mobile (below the fixed animation band). */
+export function mobileReadingLine(root: ParentNode = document): number {
+  const docEl = root instanceof Document ? root.documentElement : document.documentElement;
+  const header = root.querySelector("header.home-chrome");
+  const headerBottom = header instanceof HTMLElement ? header.getBoundingClientRect().bottom : 60;
+  const animHeight =
+    Number.parseFloat(getComputedStyle(docEl).getPropertyValue("--mobile-anim-height")) || 250;
+  return headerBottom + animHeight + 48;
+}
+
+export function interpolateProgressAlongCenters(
+  readLine: number,
+  points: { progress: number; center: number }[],
+): number {
+  if (points.length === 0) return 0;
+  if (readLine <= points[0].center) return 0;
+  if (readLine >= points[points.length - 1].center) return 1;
+
+  for (let i = 0; i < points.length - 1; i++) {
+    const start = points[i];
+    const end = points[i + 1];
+    if (readLine >= start.center && readLine <= end.center) {
+      const t = (readLine - start.center) / (end.center - start.center);
+      return start.progress + t * (end.progress - start.progress);
+    }
+  }
+
+  return 1;
+}
+
+function sectionReadingAnchor(el: HTMLElement): number {
+  const anchor =
+    el.querySelector<HTMLElement>(".hero-heading, .hero-lede, .hero-chapter-heading") ?? el;
+  const rect = anchor.getBoundingClientRect();
+  return rect.top + rect.height / 2;
+}
+
+/** Scrub the steps morph to match whichever chapter headline is in the reading zone. */
+export function stepsProgressFromReadingLine(readLine: number, root: ParentNode = document): number {
+  const points = STEPS_SECTIONS.map((name, index) => {
+    const el =
+      root.querySelector<HTMLElement>(`[data-section-name="${name}"]`) ??
+      root.querySelector<HTMLElement>(`#${name}`);
+    if (!el) return null;
+    return {
+      progress: index / (STEPS_SECTIONS.length - 1),
+      center: sectionReadingAnchor(el),
+    };
+  }).filter((point): point is { progress: number; center: number } => point !== null);
+
+  return interpolateProgressAlongCenters(readLine, points);
+}
+
+function activeSectionAtReadingLine(readLine: number): string | undefined {
+  let best: string | undefined;
+  let bestDist = Infinity;
+  for (const name of STEPS_SECTIONS) {
+    const el = findSection(name);
+    if (!el) continue;
+    const dist = Math.abs(sectionReadingAnchor(el) - readLine);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = name;
+    }
+  }
+  return best;
+}
+
+export function stepsVisibleFromWhatWeDoScroll(scrollProgress: number): boolean {
+  return scrollProgress >= 0.24 && scrollProgress < 0.901;
 }
 
 export const HASH_TO_SECTION: Record<string, string> = {
@@ -97,6 +188,7 @@ let animating = false;
 let started = false;
 let pendingSnap: HTMLElement | null = null;
 let disableSnap: (() => void) | null = null;
+let disableMobileScroll: (() => void) | null = null;
 
 declare global {
   interface Window {
@@ -166,6 +258,60 @@ function applyBackground(sectionName: string | undefined): void {
 
 function applyStepsProgress(progress: number): void {
   setLottieProgress(progress);
+}
+
+function syncHomeHeaderHeight(): void {
+  const header = document.querySelector("header.home-chrome");
+  if (!(header instanceof HTMLElement)) return;
+  document.documentElement.style.setProperty("--home-header-height", `${header.offsetHeight}px`);
+}
+
+function stepsScrollBlock(): { top: number; height: number } | null {
+  const first = findSection(STEPS_SECTIONS[0]);
+  const last = findSection(STEPS_SECTIONS[STEPS_SECTIONS.length - 1]);
+  if (!(first instanceof HTMLElement) || !(last instanceof HTMLElement)) return null;
+  const top = scrollY() + first.getBoundingClientRect().top;
+  const bottom = scrollY() + last.getBoundingClientRect().bottom;
+  return { top, height: bottom - top };
+}
+
+function syncMobileScroll(): void {
+  if (snapEnabled || animating) return;
+  syncHomeHeaderHeight();
+  const block = stepsScrollBlock();
+  if (!block) return;
+
+  const whatWeDoProgress = scrollProgressThroughBlock(
+    block.top,
+    block.height,
+    scrollY(),
+    window.innerHeight,
+  );
+  const readLine = mobileReadingLine();
+  const services = findSection("services-and-products");
+  const inHero = !services || services.getBoundingClientRect().top > readLine - 48;
+  const progress = stepsProgressFromReadingLine(readLine);
+  const stepsSection = inHero ? activeSectionAtReadingLine(readLine) : undefined;
+  const sectionName = stepsSection ?? sections()[currentIndex()]?.dataset.sectionName;
+
+  applyBackground(sectionName);
+  syncNav(sectionName);
+  syncHeaderTone(sectionName);
+
+  const wrapper = document.querySelector(".background-anim-wrapper");
+  if (wrapper instanceof HTMLElement) {
+    wrapper.classList.toggle(
+      "mobile-steps-visible",
+      inHero && progress > 0,
+    );
+  }
+
+  applyStepsProgress(progress);
+  document.documentElement.style.setProperty(
+    "--mobile-intro-opacity",
+    String(inHero ? Math.max(0, 1 - progress / 0.2) : 0),
+  );
+  document.documentElement.style.setProperty("--what-we-do-scroll", String(whatWeDoProgress));
 }
 
 function syncNav(sectionName: string | undefined): void {
@@ -272,7 +418,7 @@ async function snapToElement(el: HTMLElement): Promise<void> {
 export function moveTo(sectionName: string): void {
   const el = findSection(sectionName);
   if (!el) return;
-  onActiveSection(el.dataset.sectionName, { scrub: !snapEnabled });
+  onActiveSection(el.dataset.sectionName, { scrub: false });
   if (!snapEnabled) {
     el.scrollIntoView({ behavior: "smooth", block: "start" });
     syncHash(el);
@@ -344,9 +490,34 @@ function enableSnap(): void {
   };
 }
 
+function enableMobileScroll(): void {
+  if (disableMobileScroll) return;
+  syncHomeHeaderHeight();
+  syncMobileScroll();
+  const onMobileLayout = () => {
+    syncHomeHeaderHeight();
+    syncMobileScroll();
+  };
+  window.addEventListener("scroll", syncMobileScroll, { passive: true });
+  window.addEventListener("resize", onMobileLayout);
+  disableMobileScroll = () => {
+    window.removeEventListener("scroll", syncMobileScroll);
+    window.removeEventListener("resize", onMobileLayout);
+    document.documentElement.style.removeProperty("--what-we-do-scroll");
+    document.documentElement.style.removeProperty("--mobile-intro-opacity");
+    document.querySelector(".background-anim-wrapper")?.classList.remove("mobile-steps-visible");
+    disableMobileScroll = null;
+  };
+}
+
 function setSnapFromMedia(matches: boolean): void {
-  if (matches) enableSnap();
-  else disableSnap?.();
+  if (matches) {
+    disableMobileScroll?.();
+    enableSnap();
+    return;
+  }
+  disableSnap?.();
+  enableMobileScroll();
 }
 
 function interceptPageHashes(): void {
@@ -376,7 +547,9 @@ export function initHomepageSnap(): void {
   const initial = sectionNameFromHash(location.hash);
   if (initial) {
     requestAnimationFrame(() => moveTo(initial));
-  } else {
+  } else if (media.matches) {
     onActiveSection(sections()[currentIndex()]?.dataset.sectionName);
+  } else {
+    syncMobileScroll();
   }
 }

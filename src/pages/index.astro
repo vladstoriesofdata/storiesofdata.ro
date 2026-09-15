@@ -11,6 +11,7 @@ import { getSiteConfig, withBase } from "../lib/site";
 import { home } from "../data/home";
 import { ui } from "../data/ui";
 import steps from "../assets/lottie/steps-1-2-3-4-5.json?url";
+import mobileIntro from "../assets/lottie/desktop-intro-loop.json?url";
 import logoWhite from "../assets/brand/logo-white.svg";
 import iconEmail from "../assets/brand/icon-email.svg";
 import iconPhone from "../assets/brand/icon-phone.svg";
@@ -20,8 +21,25 @@ const copy = home[site.locale];
 const uiCopy = ui[site.locale];
 ---
 <BaseLayout title={copy.title} description={copy.description} path="/" chrome="home">
+  <div class="mobile-intro-wrapper" aria-hidden="true">
+    <LottieGraphic
+      class="mobile-anim-lottie"
+      src={mobileIntro}
+      loop={true}
+      autoplay={true}
+      when="mobile"
+      preserveAspectRatio="xMidYMid meet"
+    />
+  </div>
   <div class="background-anim-wrapper" aria-hidden="true">
-    <LottieGraphic src={steps} loop={false} autoplay={false} scrub={true} />
+    <LottieGraphic
+      class="mobile-anim-lottie"
+      src={steps}
+      loop={false}
+      autoplay={false}
+      scrub={true}
+      preserveAspectRatio="xMidYMid slice"
+    />
   </div>
   <Hero />
   <Services />

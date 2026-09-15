@@ -36,12 +36,12 @@ const {
 </script>
 
 <style>
-  .lottie-graphic {
+  .lottie-graphic:not(.mobile-anim-lottie) {
     width: 100%;
     height: 100%;
   }
 
-  .lottie-graphic :global(svg) {
+  .lottie-graphic:not(.mobile-anim-lottie) :global(svg) {
     display: block;
     width: 100%;
     height: 100%;

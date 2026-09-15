@@ -1598,9 +1598,18 @@ body[data-chrome="doc"] main {
 
   .portfolio-carousel-btn { display: none; }
   [data-carousel-viewport] { touch-action: pan-y pinch-zoom; }
-  .hero-intro,
-  .hero-lede-section {
-    min-height: calc(100dvh - 4rem);
+  .hero-intro {
+    min-height: calc(100dvh - var(--home-header-height));
+    padding-bottom: 150px;
+  }
+
+  .hero-lede-section,
+  .hero-chapter {
+    min-height: 50vh;
+  }
+
+  .hero-section .section-lottie {
+    display: none;
   }
 
   .portfolio-tab {
@@ -1653,6 +1662,7 @@ body[data-chrome="doc"] main {
   .site-header.home-chrome {
     position: sticky;
     top: 0;
+    z-index: 503;
     width: 100%;
     height: auto;
     flex-direction: row;

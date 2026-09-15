@@ -3,8 +3,6 @@ import { getSiteConfig } from "../../lib/site";
 import { home } from "../../data/home";
 import LottieGraphic from "./LottieGraphic.astro";
 import desktopIntro from "../../assets/lottie/desktop-intro-loop.json?url";
-import mobileIntro from "../../assets/lottie/mobile-short-intro.json?url";
-
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale];
 
@@ -56,9 +54,6 @@ const ledeParts = splitHeroLede(copy.hero.lede);
       preserveAspectRatio="xMidYMid slice"
     />
   </div>
-  <div class="section-lottie lottie-mobile" aria-hidden="true">
-    <LottieGraphic src={mobileIntro} loop={false} autoplay={true} when="mobile" />
-  </div>
   <h1 id="hero-heading" class="hero-heading">
     <span class="hero-heading-heavy">{headingParts.heavy}</span>
     {headingParts.light && <span class="hero-heading-light">{headingParts.light}</span>}
@@ -108,10 +103,6 @@ const ledeParts = splitHeroLede(copy.hero.lede);
   @media (min-width: 766px) {
     .lottie-desktop {
       display: block;
-    }
-
-    .lottie-mobile {
-      display: none;
     }
   }
 </style>

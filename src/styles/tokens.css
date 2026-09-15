@@ -126,3 +126,10 @@
     --nav-pad-x: calc(0.4 * var(--nav-width));
   }
 }
+
+@media (max-width: 765px) {
+  :root {
+    --home-header-height: 60px;
+    --mobile-anim-height: 250px;
+  }
+}
