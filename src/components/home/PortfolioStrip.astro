@@ -65,19 +65,23 @@ const tabs = portfolioStrip[site.locale].map((tab) => ({
         hidden={index !== 0}
       >
         <div class="portfolio-carousel portfolio-carousel-desktop" data-carousel>
-          {tab.pages.map((page, pageIndex) => (
-            <div class="portfolio-grid" data-slide hidden={pageIndex !== 0}>
-              {page.map((entry) => (
-                <PortfolioCard
-                  href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
-                  title={entry.title}
-                  description={entry.description}
-                  cover={entry.cover}
-                  fit={entry.fit}
-                />
+          <div data-carousel-viewport>
+            <div data-carousel-track>
+              {tab.pages.map((page, pageIndex) => (
+                <div class="portfolio-grid" data-slide hidden={pageIndex !== 0}>
+                  {page.map((entry) => (
+                    <PortfolioCard
+                      href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
+                      title={entry.title}
+                      description={entry.description}
+                      cover={entry.cover}
+                      fit={entry.fit}
+                    />
+                  ))}
+                </div>
               ))}
             </div>
-          ))}
+          </div>
           {tab.pages.length > 1 && (
             <div class="portfolio-carousel-controls">
               <button type="button" class="portfolio-carousel-btn" data-carousel-prev>
@@ -89,6 +93,7 @@ const tabs = portfolioStrip[site.locale].map((tab) => ({
                     type="button"
                     class="portfolio-carousel-dot"
                     data-carousel-dot={String(pageIndex)}
+                    aria-current={pageIndex === 0 ? "true" : "false"}
                     aria-label={formatUi(uiCopy.showPage, {
                       page: pageIndex + 1,
                       label: tab.label,
@@ -103,17 +108,21 @@ const tabs = portfolioStrip[site.locale].map((tab) => ({
           )}
         </div>
         <div class="portfolio-carousel portfolio-carousel-mobile" data-carousel>
-          {tab.items.map((entry, slideIndex) => (
-            <PortfolioCard
-              href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
-              title={entry.title}
-              description={entry.description}
-              cover={entry.cover}
-              fit={entry.fit}
-              slide
-              hidden={slideIndex !== 0}
-            />
-          ))}
+          <div data-carousel-viewport>
+            <div data-carousel-track>
+              {tab.items.map((entry, slideIndex) => (
+                <PortfolioCard
+                  href={withBase(`${entry.hrefBase}/${entry.slug}`, import.meta.env.BASE_URL)}
+                  title={entry.title}
+                  description={entry.description}
+                  cover={entry.cover}
+                  fit={entry.fit}
+                  slide
+                  hidden={slideIndex !== 0}
+                />
+              ))}
+            </div>
+          </div>
           {tab.items.length > 1 && (
             <div class="portfolio-carousel-controls">
               <button type="button" class="portfolio-carousel-btn" data-carousel-prev>
@@ -125,6 +134,7 @@ const tabs = portfolioStrip[site.locale].map((tab) => ({
                     type="button"
                     class="portfolio-carousel-dot"
                     data-carousel-dot={String(slideIndex)}
+                    aria-current={slideIndex === 0 ? "true" : "false"}
                     aria-label={formatUi(uiCopy.showItem, { title: entry.title })}
                   />
                 ))}

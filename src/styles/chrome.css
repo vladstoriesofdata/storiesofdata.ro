@@ -746,6 +746,33 @@ body[data-chrome="doc"] main {
   display: none;
 }
 
+[data-carousel-viewport] {
+  overflow: hidden;
+  min-width: 0;
+  /* Leave room for card shadows and focus outlines without changing card width. */
+  padding: 16px;
+  margin: -16px;
+  box-sizing: content-box;
+}
+
+[data-carousel-track] {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  width: 100%;
+  transition: transform 500ms ease;
+}
+
+[data-carousel-track] > [data-slide] {
+  flex: 0 0 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-carousel-track] { transition: none; }
+}
+
 .portfolio-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -887,12 +914,12 @@ body[data-chrome="doc"] main {
   padding: 0;
   border: 0;
   border-radius: 50%;
-  background: #c8c8c8;
+  background: var(--color-ink);
   cursor: pointer;
 }
 
 .portfolio-carousel-dot[aria-current="true"] {
-  background: var(--color-ink);
+  background: var(--color-accent);
 }
 
 .team-section,
@@ -1549,6 +1576,8 @@ body[data-chrome="doc"] main {
 }
 
 @media (max-width: 765px) {
+  .portfolio-carousel-btn { display: none; }
+  [data-carousel-viewport] { touch-action: pan-y pinch-zoom; }
   .hero-intro,
   .hero-lede-section {
     min-height: calc(100dvh - 4rem);

@@ -79,13 +79,17 @@ const desktopPages = Array.from(
     </div>
   </div>
   <div class="testimonials-carousel testimonials-carousel-desktop" data-carousel>
-    {desktopPages.map((page, pageIndex) => (
-      <div class="testimonials-slide" data-slide hidden={pageIndex !== 0}>
-        {page.map((item) => (
-          <TestimonialCard item={item} photo={photos[item.person]} logo={logos[item.logo]} />
+    <div data-carousel-viewport>
+      <div data-carousel-track>
+        {desktopPages.map((page, pageIndex) => (
+          <div class="testimonials-slide" data-slide hidden={pageIndex !== 0}>
+            {page.map((item) => (
+              <TestimonialCard item={item} photo={photos[item.person]} logo={logos[item.logo]} />
+            ))}
+          </div>
         ))}
       </div>
-    ))}
+    </div>
     {desktopPages.length > 1 && (
       <div class="testimonials-carousel-dots">
         {desktopPages.map((_, pageIndex) => (
@@ -101,11 +105,15 @@ const desktopPages = Array.from(
     )}
   </div>
   <div class="testimonials-carousel testimonials-carousel-mobile" data-carousel>
-    {copy.items.map((item, index) => (
-      <div class="testimonials-slide" data-slide hidden={index !== 0}>
-        <TestimonialCard item={item} photo={photos[item.person]} logo={logos[item.logo]} />
+    <div data-carousel-viewport>
+      <div data-carousel-track>
+        {copy.items.map((item, index) => (
+          <div class="testimonials-slide" data-slide hidden={index !== 0}>
+            <TestimonialCard item={item} photo={photos[item.person]} logo={logos[item.logo]} />
+          </div>
+        ))}
       </div>
-    ))}
+    </div>
     {copy.items.length > 1 && (
       <div class="testimonials-carousel-dots">
         {copy.items.map((item, index) => (
