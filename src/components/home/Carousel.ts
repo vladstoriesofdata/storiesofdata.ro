@@ -99,8 +99,9 @@ export function initCarousel(root: ParentNode = document): void {
       const dx = event.clientX - gesture.x;
       const dy = event.clientY - gesture.y;
       resetGesture();
+      // A short drag may still generate a click even when it does not change slides.
+      if (Math.hypot(dx, dy) >= 10) suppressClickUntil = performance.now() + 500;
       if (Math.abs(dx) < 40 || Math.abs(dx) <= Math.abs(dy) * 1.25) return;
-      suppressClickUntil = performance.now() + 500;
       goTo(dx < 0 ? nextIndex(index, slides.length) : prevIndex(index, slides.length));
     });
     viewport.addEventListener("pointercancel", resetGesture);

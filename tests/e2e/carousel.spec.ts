@@ -68,6 +68,24 @@ test("Portfolio dots have the correct colors without JavaScript", async ({ brows
 
 test.describe("mobile touch navigation", () => {
   test.use({ viewport: { width: 375, height: 800 }, hasTouch: true, isMobile: true });
+  test("a short drag suppresses its click but preserves the next tap", async ({ page }) => {
+    await page.goto("/");
+    const root = carousel(page, "portfolio", "mobile");
+    await aligned(root, 0);
+    const link = root.locator("a[data-slide]").first();
+    const href = await link.getAttribute("href");
+    // Explicitly include the compatibility click: Chromium's touch slop differs by platform.
+    const clickAllowed = await link.evaluate((el) => {
+      const pointer = { bubbles: true, pointerId: 1, pointerType: "touch", isPrimary: true, clientY: 80 };
+      el.dispatchEvent(new PointerEvent("pointerdown", { ...pointer, clientX: 100 }));
+      el.dispatchEvent(new PointerEvent("pointerup", { ...pointer, clientX: 112 }));
+      return el.dispatchEvent(new MouseEvent("click", { bubbles: true, cancelable: true, detail: 1 }));
+    });
+    expect(clickAllowed).toBe(false);
+    await aligned(root, 0);
+    await link.tap();
+    await expect(page).toHaveURL(new RegExp(href!));
+  });
   test("a Portfolio card still opens on a normal tap after swiping", async ({ page, context }) => {
     await page.goto("/");
     const root = carousel(page, "portfolio", "mobile");
