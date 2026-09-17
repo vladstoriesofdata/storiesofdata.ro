@@ -486,6 +486,12 @@ body[data-chrome="doc"] main {
   }
 }
 
+@media (min-width: 766px) {
+  #we-are-power-bi-experts {
+    padding-bottom: 16px;
+  }
+}
+
 @media (min-width: 1440px) {
   .hero-heading,
   .hero-lede {
