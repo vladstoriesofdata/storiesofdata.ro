@@ -91,3 +91,17 @@ test("services use business-owner copy and the shared discovery CTA", async ({ p
     }
   }
 });
+
+test("embedded analytics remains a framed placeholder until a source is supplied", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+
+  const services = page.locator("#services");
+  await services.getByRole("tab", { name: "Embedded Analytics" }).click();
+
+  const visual = services.locator('[data-service-panel="embedded-analytics"] [data-embedded-visual]');
+  await expect(visual).toHaveAttribute("data-source", "");
+  await expect(visual.locator("[data-embed-frame]")).toBeHidden();
+  await expect(visual.locator("[data-embed-placeholder]")).toBeVisible();
+  await expect(visual.getByText("Analytics preview coming soon")).toBeVisible();
+});
