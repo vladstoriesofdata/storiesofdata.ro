@@ -1,16 +1,10 @@
 ---
+import { BOOKINGS_URL, services } from "../../data/services";
 import { getSiteConfig } from "../../lib/site";
-import { services } from "../../data/services";
+import ServiceVisual from "./services/ServiceVisual.astro";
 
 const site = getSiteConfig(import.meta.env);
 const copy = services[site.locale];
-
-function serviceTabId(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
 ---
 <section
   id="services"
@@ -18,60 +12,70 @@ function serviceTabId(title: string): string {
   data-section-name="services-and-products"
   aria-labelledby="services-heading"
 >
-  <h2 id="services-heading">{copy.heading}</h2>
-  <div class="services-tabs" data-tabs>
-    <div class="services-tablist" role="tablist" aria-label={copy.heading}>
-      {copy.items.map((item, index) => {
-        const id = serviceTabId(item.title);
-        const selected = index === 0;
-        return (
-          <button
-            type="button"
-            class="services-tab"
-            role="tab"
-            id={`services-tab-${id}`}
-            data-tab={id}
-            aria-selected={selected ? "true" : "false"}
-            aria-controls={`services-panel-${id}`}
-            tabindex={selected ? 0 : -1}
-          >
-            {item.title}
-          </button>
-        );
-      })}
+  <div class="services-stage" data-services data-services-mode="desktop">
+    <div class="services-stage-heading">
+      <h2 id="services-heading">{copy.heading}</h2>
+      <div class="services-stage-controls" role="tablist" data-services-controls aria-label={copy.heading}>
+        {copy.items.map((item, index) => {
+          const active = index === 0;
+          return (
+            <button
+              type="button"
+              class="services-tab"
+              role="tab"
+              id={`services-tab-${item.id}`}
+              data-service-control={item.id}
+              aria-selected={active ? "true" : "false"}
+              aria-controls={`services-panel-${item.id}`}
+              tabindex={active ? 0 : -1}
+            >
+              {item.tabLabel}
+            </button>
+          );
+        })}
+      </div>
     </div>
-    {copy.items.map((item, index) => {
-      const id = serviceTabId(item.title);
-      return (
-        <div
+
+    <div class="services-stage-panels">
+      {copy.items.map((item, index) => (
+        <section
           class="services-panel"
           role="tabpanel"
-          id={`services-panel-${id}`}
-          data-tab-panel={id}
-          aria-labelledby={`services-tab-${id}`}
+          id={`services-panel-${item.id}`}
+          data-service-panel={item.id}
+          aria-labelledby={`services-tab-${item.id}`}
           hidden={index !== 0}
         >
           <div class="services-panel-grid">
-            <div class="services-block">
-              <h3>{item.benefitsHeading}</h3>
-              <ul>
+            <div class="services-stage-copy">
+              <h3>{item.headline}</h3>
+              <p class="services-stage-summary">{item.summary}</p>
+              <ul class="services-stage-benefits">
                 {item.benefits.map((benefit) => (
                   <li>{benefit}</li>
                 ))}
               </ul>
+              <div class="services-stage-actions">
+                <a class="pill-button" href={BOOKINGS_URL}>{item.primaryCta}</a>
+                {item.exploration.url && (
+                  <a class="services-stage-exploration" href={item.exploration.url}>
+                    {item.exploration.label}
+                  </a>
+                )}
+              </div>
             </div>
-            <div class="services-block">
-              <h3>{item.helpHeading}</h3>
-              <ul>
-                {item.help.map((help) => (
-                  <li set:html={help} />
-                ))}
-              </ul>
+            <div class="services-stage-visual">
+              <ServiceVisual service={item} />
             </div>
           </div>
-        </div>
-      );
-    })}
+        </section>
+      ))}
+    </div>
   </div>
-  <a class="pill-button" href="#contact">{copy.cta}</a>
 </section>
+
+<script>
+  import { initServicesInteraction } from "./ServicesInteraction";
+
+  initServicesInteraction();
+</script>
