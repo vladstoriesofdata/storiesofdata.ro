@@ -25,6 +25,7 @@ const copy = services[site.locale];
               role="tab"
               id={`services-tab-${item.id}`}
               data-service-control={item.id}
+              data-service-control-kind="desktop"
               aria-selected={active ? "true" : "false"}
               aria-controls={`services-panel-${item.id}`}
               tabindex={active ? 0 : -1}
@@ -38,7 +39,19 @@ const copy = services[site.locale];
 
     <div class="services-stage-panels">
       {copy.items.map((item, index) => (
-        <section
+        <div class="services-accordion-item" data-service-accordion-item={item.id}>
+          <button
+            type="button"
+            class="services-accordion-trigger"
+            id={`services-accordion-${item.id}`}
+            data-service-control={item.id}
+            data-service-control-kind="mobile"
+            aria-expanded={index === 0 ? "true" : "false"}
+            aria-controls={`services-panel-${item.id}`}
+          >
+            {item.tabLabel}
+          </button>
+          <section
           class="services-panel"
           role="tabpanel"
           id={`services-panel-${item.id}`}
@@ -68,7 +81,8 @@ const copy = services[site.locale];
               <ServiceVisual service={item} />
             </div>
           </div>
-        </section>
+          </section>
+        </div>
       ))}
     </div>
   </div>

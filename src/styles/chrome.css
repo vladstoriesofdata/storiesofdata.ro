@@ -618,8 +618,41 @@ body[data-chrome="doc"] main {
   display: grid;
 }
 
+.services-accordion-trigger {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 0;
+  color: var(--color-paper);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-paper) 38%, transparent);
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 4vw, 1.4rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.services-accordion-trigger::after {
+  content: "+";
+  font-family: var(--font-sans);
+  font-size: 1.5em;
+  font-weight: 400;
+}
+
+.services-accordion-trigger[aria-expanded="true"]::after {
+  content: "−";
+}
+
+.services-accordion-trigger:focus-visible {
+  outline: 3px solid var(--color-paper);
+  outline-offset: 4px;
+}
+
 .services-panel {
-  padding: 2rem 0 0;
+  padding: 1.5rem 0 2.5rem;
 }
 
 .services-panel-grid {
@@ -722,7 +755,8 @@ body[data-chrome="doc"] main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .services-tab {
+  .services-tab,
+  .services-accordion-trigger {
     transition: none;
   }
 }
@@ -1553,6 +1587,14 @@ body[data-chrome="doc"] main {
     gap: 1rem;
   }
 
+  .services-accordion-item {
+    display: contents;
+  }
+
+  .services-accordion-trigger {
+    display: none;
+  }
+
   .services-stage-controls {
     display: flex;
     flex-wrap: wrap;
@@ -1569,14 +1611,33 @@ body[data-chrome="doc"] main {
   }
 
   .services-panel {
-    min-height: clamp(34rem, 60vh, 44rem);
+    min-height: min(25rem, calc(100dvh - 12rem));
     padding: 0;
   }
 
   .services-panel-grid {
     grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
-    gap: clamp(2rem, 4vw, 4rem);
+    gap: clamp(1.5rem, 3vw, 3rem);
     min-height: inherit;
+  }
+
+  .services-stage-copy h3 {
+    max-width: 18ch;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+  }
+
+  .services-stage-summary {
+    margin-top: 1rem;
+    font-size: 1rem;
+  }
+
+  .services-stage-benefits {
+    gap: 0.45rem;
+    margin-top: 1.15rem;
+  }
+
+  .services-stage-actions {
+    margin-top: 1.25rem;
   }
 
   .services-stage-visual {
@@ -1586,6 +1647,21 @@ body[data-chrome="doc"] main {
 
   .services-stage-visual > * {
     width: 100%;
+  }
+
+  .services-stage-visual .service-visual-frame {
+    min-height: min(24rem, calc(100dvh - 14rem)) !important;
+    padding: clamp(0.85rem, 2vw, 1.5rem);
+  }
+
+  @media (max-width: 1050px) {
+    .services-panel-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .services-panel {
+      min-height: 0;
+    }
   }
 
   .portfolio-section,

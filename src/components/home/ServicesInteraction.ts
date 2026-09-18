@@ -34,10 +34,11 @@ function modeForViewport(matchesDesktop: boolean): ServicesMode {
 export function initServicesInteraction(root: ParentNode = document): void {
   root.querySelectorAll<HTMLElement>("[data-services]").forEach((group) => {
     const controls = [...group.querySelectorAll<HTMLButtonElement>("[data-service-control]")];
+    const desktopControls = controls.filter((control) => control.dataset.serviceControlKind === "desktop");
     const panels = [...group.querySelectorAll<HTMLElement>("[data-service-panel]")];
     const controlsContainer = group.querySelector<HTMLElement>("[data-services-controls]");
     const media = window.matchMedia("(min-width: 766px)");
-    const initialId = controls.find((control) => control.dataset.serviceControl === "microsoft-fabric")
+    const initialId = desktopControls.find((control) => control.dataset.serviceControl === "microsoft-fabric")
       ?.dataset.serviceControl;
     let state = initialId && isServiceId(initialId)
       ? { activeId: initialId, mode: modeForViewport(media.matches) }
@@ -51,8 +52,10 @@ export function initServicesInteraction(root: ParentNode = document): void {
 
       controls.forEach((control) => {
         const active = isServiceActive(state, control.dataset.serviceControl ?? "");
-        control.tabIndex = isDesktop && !active ? -1 : 0;
-        if (isDesktop) {
+        const isDesktopControl = control.dataset.serviceControlKind === "desktop";
+        control.hidden = isDesktop ? !isDesktopControl : isDesktopControl;
+        control.tabIndex = isDesktopControl && isDesktop && !active ? -1 : 0;
+        if (isDesktopControl && isDesktop) {
           control.setAttribute("role", "tab");
           control.setAttribute("aria-selected", String(active));
           control.removeAttribute("aria-expanded");
@@ -67,6 +70,10 @@ export function initServicesInteraction(root: ParentNode = document): void {
         const active = isServiceActive(state, panel.dataset.servicePanel ?? "");
         panel.hidden = !active;
         panel.setAttribute("role", isDesktop ? "tabpanel" : "region");
+        panel.setAttribute(
+          "aria-labelledby",
+          `${isDesktop ? "services-tab" : "services-accordion"}-${panel.dataset.servicePanel}`,
+        );
       });
     };
 
@@ -86,19 +93,19 @@ export function initServicesInteraction(root: ParentNode = document): void {
       const control = (event.target as Element | null)?.closest<HTMLButtonElement>("[data-service-control]");
       if (!control || !group.contains(control)) return;
 
-      const index = controls.indexOf(control);
+      const index = desktopControls.indexOf(control);
       if (index < 0) return;
 
       let nextIndex: number | undefined;
       if (event.key === "Home") nextIndex = 0;
-      if (event.key === "End") nextIndex = controls.length - 1;
-      if (event.key === "ArrowLeft") nextIndex = (index - 1 + controls.length) % controls.length;
-      if (event.key === "ArrowRight") nextIndex = (index + 1) % controls.length;
+      if (event.key === "End") nextIndex = desktopControls.length - 1;
+      if (event.key === "ArrowLeft") nextIndex = (index - 1 + desktopControls.length) % desktopControls.length;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % desktopControls.length;
       if (event.key === "Enter" || event.key === " ") nextIndex = index;
       if (nextIndex === undefined) return;
 
       event.preventDefault();
-      const nextControl = controls[nextIndex];
+      const nextControl = desktopControls[nextIndex];
       if (!nextControl?.dataset.serviceControl) return;
       activate(nextControl.dataset.serviceControl);
       nextControl.focus();

@@ -28,6 +28,15 @@ test("desktop services tabs swap the active two-column panel within a 1366 by 76
     panel.getByRole("heading", { name: "Put AI to work on real business problems." }),
   ).toBeVisible();
 
+  await page.waitForFunction(() => typeof window.__homepageMoveTo === "function");
+  await page.evaluate(() => window.__homepageMoveTo?.("services"));
+  await expect
+    .poll(async () => services.evaluate((section) => {
+      const rect = section.getBoundingClientRect();
+      return rect.top < window.innerHeight * 0.45 && rect.bottom > 80;
+    }))
+    .toBe(true);
+
   const layout = await page.evaluate(() => {
     const controls = document.querySelector<HTMLElement>("#services [data-services-controls]");
     const copy = document.querySelector<HTMLElement>(
@@ -44,6 +53,7 @@ test("desktop services tabs swap the active two-column panel within a 1366 by 76
     return {
       controlsUseOneRow: Math.max(...tabRows) - Math.min(...tabRows) < 2,
       isTwoColumn: copyBox.right < visualBox.left,
+      activePanelFitsViewport: visualBox.bottom <= window.innerHeight,
       pageFitsViewportWidth: document.documentElement.scrollWidth <= window.innerWidth,
     };
   });
@@ -51,6 +61,7 @@ test("desktop services tabs swap the active two-column panel within a 1366 by 76
   expect(layout).toEqual({
     controlsUseOneRow: true,
     isTwoColumn: true,
+    activePanelFitsViewport: true,
     pageFitsViewportWidth: true,
   });
 });
@@ -61,17 +72,21 @@ test("mobile services act as a one-open-at-a-time accordion", async ({ page }) =
 
   const services = page.locator("#services [data-services]");
   const controls = services.locator("[data-services-controls]");
-  const fabric = controls.getByRole("button", { name: "Microsoft Fabric" });
-  const ai = controls.getByRole("button", { name: "AI Integrations" });
+  const fabricItem = services.locator('[data-service-accordion-item="microsoft-fabric"]');
+  const aiItem = services.locator('[data-service-accordion-item="ai-integrations"]');
+  const fabric = fabricItem.getByRole("button", { name: "Microsoft Fabric" });
+  const ai = aiItem.getByRole("button", { name: "AI Integrations" });
   await expect(services).toHaveAttribute("data-services-mode", "mobile");
   await expect(controls).not.toHaveAttribute("role", "tablist");
   await expect(fabric).toHaveAttribute("aria-expanded", "true");
   await expect(ai).toHaveAttribute("aria-expanded", "false");
+  await expect(fabric.locator("+ [data-service-panel]")).toHaveCount(1);
+  await expect(ai.locator("+ [data-service-panel]")).toHaveCount(1);
 
   await ai.click();
   await expect(fabric).toHaveAttribute("aria-expanded", "false");
   await expect(ai).toHaveAttribute("aria-expanded", "true");
-  await expect(services.locator('[data-service-panel="ai-integrations"]')).toBeVisible();
+  await expect(ai.locator("+ [data-service-panel]")).toBeVisible();
   await expect(services.locator('[data-service-panel]:not([hidden])')).toHaveCount(1);
 });
 
