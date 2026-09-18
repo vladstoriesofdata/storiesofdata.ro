@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { BOOKINGS_URL } from "../../src/data/services";
 
 test("homepage chapters keep original bold, italic, and embedsy link", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
@@ -50,4 +51,57 @@ test("services visualization tab keeps original visual links", async ({ page }) 
   ).toBeVisible();
   await expect(group.getByRole("link", { name: "Deneb" })).toBeVisible();
   await expect(group.getByRole("link", { name: /BI Samurai/ })).toBeVisible();
+});
+
+test("services use business-owner copy and the shared discovery CTA", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+
+  const services = page.locator("#services");
+  await expect(services.getByRole("tab")).toHaveText([
+    "Microsoft Fabric",
+    "Embedded Analytics",
+    "AI Integrations",
+    "CFO + BI",
+  ]);
+
+  const expected = [
+    {
+      tab: "Microsoft Fabric",
+      headline: "One connected view of your business.",
+      exploration: undefined,
+    },
+    {
+      tab: "Embedded Analytics",
+      headline: "Give customers analytics under your own brand.",
+      exploration: "https://embedsy.io/",
+    },
+    {
+      tab: "AI Integrations",
+      headline: "Put AI to work on real business problems.",
+      exploration: undefined,
+    },
+    {
+      tab: "CFO + BI",
+      headline: "Financial leadership and analytics, working as one team.",
+      exploration: "https://demo.embedsy.io/embed/studio/63",
+    },
+  ];
+
+  for (const item of expected) {
+    await services.getByRole("tab", { name: item.tab }).click();
+    const panel = services.locator('[role="tabpanel"]:not([hidden])');
+    await expect(panel.getByRole("heading", { name: item.headline })).toBeVisible();
+    await expect(panel.locator("li")).toHaveCount(3);
+
+    const cta = panel.getByRole("link", { name: "Book a discovery call" });
+    await expect(cta).toHaveAttribute("href", BOOKINGS_URL);
+
+    const exploration = panel.getByRole("link", { name: /Explore/ });
+    if (item.exploration) {
+      await expect(exploration).toHaveAttribute("href", item.exploration);
+    } else {
+      await expect(exploration).toHaveCount(0);
+    }
+  }
 });

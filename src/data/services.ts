@@ -3,20 +3,8 @@ import type { Locale } from "../lib/site";
 export const BOOKINGS_URL =
   "https://bookings.cloud.microsoft/bookwithme/user/440681fea4204d06ae738c987e7a2ba0%40storiesofdata.com?anonymous&ismsaljsauthenabled";
 
-export const SERVICE_IDS = [
-  "microsoft-fabric",
-  "embedded-analytics",
-  "ai-integrations",
-  "cfo-bi",
-] as const;
-
-export const VISUAL_KINDS = [
-  "fabric",
-  "embedded-analytics",
-  "ai-integrations",
-  "cfo-bi",
-] as const;
-
+export const SERVICE_IDS = ["microsoft-fabric", "embedded-analytics", "ai-integrations", "cfo-bi"] as const;
+export const VISUAL_KINDS = ["fabric", "embedded-analytics", "ai-integrations", "cfo-bi"] as const;
 export type ServiceId = (typeof SERVICE_IDS)[number];
 export type ServiceVisualKind = (typeof VISUAL_KINDS)[number];
 
@@ -25,19 +13,12 @@ export interface ServiceExploration {
   url?: string;
 }
 
-interface LegacyService {
-  title: string;
-  benefitsHeading: string;
-  benefits: string[];
-  helpHeading: string;
-  help: string[];
-}
-
-export interface Service extends LegacyService {
+export interface Service {
   id: ServiceId;
   tabLabel: string;
   headline: string;
   summary: string;
+  benefits: string[];
   primaryCta: string;
   exploration: ServiceExploration;
   visualKind: ServiceVisualKind;
@@ -52,182 +33,74 @@ export interface ServicesCopy {
   items: Service[];
 }
 
-interface LegacyServicesCopy {
-  heading: string;
-  cta: string;
-  items: LegacyService[];
+type ServiceSeed = Omit<Service, "id">;
+
+function withIds(items: ServiceSeed[]): Service[] {
+  return items.map((item, index) => ({ ...item, id: SERVICE_IDS[index] }));
 }
 
-function withContract(copy: LegacyServicesCopy): ServicesCopy {
-  return {
-    heading: copy.heading,
-    cta: copy.cta,
-    items: copy.items.map((item, index) => ({
-      ...item,
-      id: SERVICE_IDS[index],
-      tabLabel: item.title,
-      headline: item.title,
-      summary: item.help[0] ?? "",
-      primaryCta: copy.cta,
-      exploration: { label: copy.cta, url: BOOKINGS_URL },
-      visualKind: VISUAL_KINDS[index],
-      visualDescription: item.title,
-      visualTitle: item.title,
-    })),
-  };
-}
+const discoveryCta = "Book a discovery call";
 
-const en: LegacyServicesCopy = {
+const en: ServicesCopy = {
   heading: "Services and products",
-  cta: "start a project",
-  items: [
+  cta: discoveryCta,
+  items: withIds([
     {
-      title: "Data-Driven Apps",
-      benefitsHeading: "You benefit by",
-      benefits: [
-        "Transforming your idea into a product fast",
-        "Taking your product to market fast",
-      ],
-      helpHeading: "we help with",
-      help: [
-        "Designing and implementing full-fledged applications that use your data",
-        "Transforming those complex Excel spreadsheets into web apps",
-      ],
+      tabLabel: "Microsoft Fabric",
+      headline: "One connected view of your business.",
+      summary: "We connect finance, sales, operations, spreadsheets, and external systems in one dependable data foundation. Automated data movement and trusted business definitions lead to reports, dashboards, and data applications people can use.",
+      benefits: ["Make decisions using consistent, trusted numbers", "Replace repetitive reporting and spreadsheet work", "See business performance across departments in one place"],
+      primaryCta: discoveryCta,
+      exploration: { label: "Explore Microsoft Fabric" },
+      visualKind: "fabric",
+      visualDescription: "Connected business data flowing into trusted decisions",
+      visualTitle: "Microsoft Fabric",
     },
     {
-      title: "Contextual Analytics in your SaaS",
-      benefitsHeading: "You benefit by",
-      benefits: [
-        "Increasing the “stickyness” of your SaaS",
-        "Increasing revenues from the additional created value generated from your data",
-        "Using your data to its full potential",
-        "Empowering every user, not only the C-suite, with insights that matter to them",
-        "Putting your data to work faster than the competition",
-      ],
-      helpHeading: "we help with",
-      help: [
-        "Embedding programmatic visualizations that use your data and communicate with your application",
-        "Designing custom interactions between your application and data insights",
-        "Designing and building the data semantic model for your SaaS",
-      ],
+      tabLabel: "Embedded Analytics",
+      headline: "Give customers analytics under your own brand.",
+      summary: "We deliver secure reports and data experiences inside your branded portal or software product. Your customers and partners get useful analytics in the experience they already know.",
+      benefits: ["Launch a polished analytics experience faster", "Control branding, access, and customer experience", "Create more value and revenue from existing data"],
+      primaryCta: discoveryCta,
+      exploration: { label: "Explore Embedded Analytics", url: "https://embedsy.io/" },
+      visualKind: "embedded-analytics",
+      visualDescription: "Secure analytics embedded inside a branded product experience",
+      visualTitle: "Embedded Analytics",
     },
     {
-      title: "Data Visualization",
-      benefitsHeading: "You benefit by",
-      benefits: [
-        "Creating intellectual property",
-        "Expressing your values or insights in unique, eye-catching ways",
-        "Visualizing what you couldn’t visualize before",
-      ],
-      helpHeading: "we help with",
-      help: [
-        'Designing and developing custom visuals for Power BI using D3 & Typescript. Here are the visuals we already created:<br/>- <a href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual/" target="_blank" class="services-link">Multi Line Chart with Tooltips</a><br/>- <a href="/portfolio/category-comparison-bar-chart-power-bi-custom-visual/" target="_blank" class="services-link">Category Comparison Bar Chart</a>',
-        'Designing and developing personalized visuals for Power using <a href="https://bisamurai.com/product/html-vizcreator-cert-visual-for-power-bi/" target="_blank" rel="noreferrer" class="services-link">BI Samurai’s HTML Visual</a> and <a href="https://deneb-viz.github.io/" target="_blank" rel="noreferrer" class="services-link">Deneb</a>.',
-      ],
+      tabLabel: "AI Integrations",
+      headline: "Put AI to work on real business problems.",
+      summary: "We combine automation and assistants with forecasting and machine learning that support daily work. Practical use cases include document processing, knowledge assistants, workflow automation, demand forecasting, anomaly detection, and recommendations.",
+      benefits: ["Reduce repetitive manual work", "Help teams find and use company knowledge", "Anticipate changes and identify problems earlier"],
+      primaryCta: discoveryCta,
+      exploration: { label: "Explore AI Integrations" },
+      visualKind: "ai-integrations",
+      visualDescription: "Automation and assistants turning business data into action",
+      visualTitle: "AI Integrations",
     },
     {
-      title: "Power BI",
-      benefitsHeading: "You benefit by",
-      benefits: [
-        "Understanding & trusting your data",
-        "Making decisions with data you trust",
-        "Having a complete overview over your data landscape",
-        "Staying ahead of the competition by arriving to insights faster",
-        "Leveraging your data to achieve your business goals",
-        "Enabling your workforce with the facts they need to make data-driven decisions",
-      ],
-      helpHeading: "we help with",
-      help: [
-        "Building reports",
-        "Building semantic models",
-        "Managing Power BI tenants",
-        "Deploying Power BI apps and template apps",
-        "Migrating from other BI platforms to Power BI",
-        "Implementing Power BI Embedded",
-        "Building reports with Report Builder",
-        "Building Power BI custom visuals",
-        "Guidance on Power BI security, governance & licensing",
-      ],
+      tabLabel: "CFO + BI",
+      headline: "Financial leadership and analytics, working as one team.",
+      summary: "Flexible CFO leadership is supported by analysts and data specialists who bring the numbers together. We focus on meaningful financial metrics, planning and advice, reliable data, system integration, and ongoing business reviews.",
+      benefits: ["Understand what drives profitability and cash flow", "Plan ahead with stronger financial models", "Turn disconnected operational and financial data into clear decisions"],
+      primaryCta: discoveryCta,
+      exploration: { label: "Explore CFO + BI", url: "https://demo.embedsy.io/embed/studio/63" },
+      visualKind: "cfo-bi",
+      visualDescription: "Financial leadership and reliable data working together",
+      visualTitle: "CFO + BI",
     },
-  ],
+  ]),
 };
 
-const ro: LegacyServicesCopy = {
+const ro: ServicesCopy = {
   heading: "Servicii și produse",
-  cta: "începe un proiect",
-  items: [
-    {
-      title: "Aplicații bazate pe date",
-      benefitsHeading: "Beneficii pentru tine",
-      benefits: [
-        "Îți transformi rapid ideea într-un produs",
-        "Îți lansezi rapid produsul pe piață",
-      ],
-      helpHeading: "te ajutăm cu",
-      help: [
-        "Proiectarea și implementarea unor aplicații complete care folosesc datele tale",
-        "Transformarea foilor de calcul Excel complexe în aplicații web",
-      ],
-    },
-    {
-      title: "Analiză contextuală în produsul tău SaaS",
-      benefitsHeading: "Beneficii pentru tine",
-      benefits: [
-        "Crești gradul de retenție al produsului tău SaaS",
-        "Crești veniturile prin valoarea suplimentară generată din datele tale",
-        "Îți valorifici datele la întregul potențial",
-        "Oferi fiecărui utilizator, nu doar conducerii, perspective relevante pentru el",
-        "Îți pui datele la lucru mai repede decât concurența",
-      ],
-      helpHeading: "te ajutăm cu",
-      help: [
-        "Integrarea unor vizualizări programatice care folosesc datele tale și comunică cu aplicația",
-        "Proiectarea interacțiunilor personalizate dintre aplicație și perspectivele oferite de date",
-        "Proiectarea și construirea unui semantic model pentru produsul tău SaaS",
-      ],
-    },
-    {
-      title: "Vizualizarea datelor",
-      benefitsHeading: "Beneficii pentru tine",
-      benefits: [
-        "Creezi proprietate intelectuală",
-        "Îți exprimi valorile sau perspectivele în moduri unice, care atrag atenția",
-        "Vizualizezi ceea ce până acum nu puteai",
-      ],
-      helpHeading: "te ajutăm cu",
-      help: [
-        'Proiectarea și dezvoltarea de vizualizări personalizate pentru Power BI folosind D3 și TypeScript. Iată vizualizările pe care le-am creat deja:<br/>- <a href="/portfolio/multi-line-chart-with-custom-tooltips-power-bi-custom-visual/" target="_blank" class="services-link">Multi Line Chart with Tooltips</a><br/>- <a href="/portfolio/category-comparison-bar-chart-power-bi-custom-visual/" target="_blank" class="services-link">Category Comparison Bar Chart</a>',
-        'Proiectarea și dezvoltarea de vizualizări personalizate pentru Power BI folosind <a href="https://bisamurai.com/product/html-vizcreator-cert-visual-for-power-bi/" target="_blank" rel="noreferrer" class="services-link">BI Samurai’s HTML Visual</a> și <a href="https://deneb-viz.github.io/" target="_blank" rel="noreferrer" class="services-link">Deneb</a>.',
-      ],
-    },
-    {
-      title: "Power BI",
-      benefitsHeading: "Beneficii pentru tine",
-      benefits: [
-        "Îți înțelegi datele și ai încredere în ele",
-        "Iei decizii pe baza unor date în care ai încredere",
-        "Ai o imagine completă asupra întregului ecosistem de date",
-        "Rămâi înaintea concurenței obținând mai repede perspective relevante",
-        "Îți valorifici datele pentru a-ți atinge obiectivele de business",
-        "Le oferi colegilor informațiile de care au nevoie pentru a lua decizii bazate pe date",
-      ],
-      helpHeading: "te ajutăm cu",
-      help: [
-        "Construirea rapoartelor",
-        "Construirea unui semantic model",
-        "Administrarea tenant-urilor Power BI",
-        "Publicarea aplicațiilor Power BI și a aplicațiilor-șablon",
-        "Migrarea de la alte platforme BI la Power BI",
-        "Implementarea Power BI Embedded",
-        "Construirea rapoartelor cu Report Builder",
-        "Construirea vizualizărilor personalizate Power BI",
-        "Consultanță privind securitatea, guvernanța și licențierea Power BI",
-      ],
-    },
-  ],
+  cta: "Programează o discuție",
+  items: withIds([
+    { tabLabel: "Microsoft Fabric", headline: "O perspectivă conectată asupra afacerii tale.", summary: "Conectăm datele importante ale afacerii într-o bază de date clară și de încredere.", benefits: ["Decizii bazate pe date coerente", "Mai puțină muncă repetitivă", "O imagine comună asupra performanței"], primaryCta: "Programează o discuție", exploration: { label: "Explorează Microsoft Fabric" }, visualKind: "fabric", visualDescription: "Date de business conectate", visualTitle: "Microsoft Fabric" },
+    { tabLabel: "Analiză integrată", headline: "Oferă clienților analize sub propriul brand.", summary: "Livrăm rapoarte și experiențe de date sigure în portalul sau produsul tău.", benefits: ["Lansezi mai rapid o experiență de analiză", "Controlezi brandul și accesul", "Creezi valoare din datele existente"], primaryCta: "Programează o discuție", exploration: { label: "Explorează analiza integrată", url: "https://embedsy.io/" }, visualKind: "embedded-analytics", visualDescription: "Analize integrate într-un produs", visualTitle: "Analiză integrată" },
+    { tabLabel: "Integrări AI", headline: "Pune AI-ul la lucru pentru probleme reale.", summary: "Combinăm automatizarea și asistenții inteligenți cu prognoze și recomandări utile.", benefits: ["Reduci munca manuală", "Găsești mai ușor cunoștințele companiei", "Identifici mai devreme schimbările"], primaryCta: "Programează o discuție", exploration: { label: "Explorează integrările AI" }, visualKind: "ai-integrations", visualDescription: "Automatizare și asistenți inteligenți", visualTitle: "Integrări AI" },
+    { tabLabel: "CFO + BI", headline: "Leadership financiar și analiză, într-o singură echipă.", summary: "Leadership-ul financiar flexibil este susținut de analiști și specialiști în date.", benefits: ["Înțelegi profitabilitatea și fluxul de numerar", "Planifici cu modele financiare mai bune", "Transformi datele în decizii clare"], primaryCta: "Programează o discuție", exploration: { label: "Explorează CFO + BI", url: "https://demo.embedsy.io/embed/studio/63" }, visualKind: "cfo-bi", visualDescription: "Leadership financiar și date de încredere", visualTitle: "CFO + BI" },
+  ]),
 };
 
-export const services: Record<Locale, ServicesCopy> = {
-  en: withContract(en),
-  ro: withContract(ro),
-};
+export const services: Record<Locale, ServicesCopy> = { en, ro };
