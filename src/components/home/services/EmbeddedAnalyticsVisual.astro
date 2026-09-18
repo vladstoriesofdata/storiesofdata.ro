@@ -37,20 +37,30 @@ const { source, title } = Astro.props;
     const status = root.querySelector<HTMLElement>("[data-embed-status]");
     if (!source || !frame) return;
 
+    let fallbackTimer: number | undefined;
+    const clearFallbackTimer = () => {
+      if (fallbackTimer !== undefined) window.clearTimeout(fallbackTimer);
+    };
+    const showFallback = () => {
+      clearFallbackTimer();
+      frame.hidden = true;
+      if (fallback) fallback.hidden = false;
+      if (placeholder) placeholder.hidden = true;
+      if (status) status.textContent = "Analytics preview unavailable";
+    };
+
     const load = () => {
       if (frame.src) return;
       status && (status.textContent = "Loading analytics preview");
       frame.addEventListener("load", () => {
+        clearFallbackTimer();
         frame.hidden = false;
         if (placeholder) placeholder.hidden = true;
         status && (status.textContent = "Analytics preview ready");
       }, { once: true });
-      frame.addEventListener("error", () => {
-        if (fallback) fallback.hidden = false;
-        if (placeholder) placeholder.hidden = true;
-        status && (status.textContent = "Analytics preview unavailable");
-      }, { once: true });
+      frame.addEventListener("error", showFallback, { once: true });
       frame.src = source;
+      fallbackTimer = window.setTimeout(showFallback, 8000);
     };
 
     if ("IntersectionObserver" in window) {

@@ -25,3 +25,10 @@ The build retains the pre-existing `lottie-web` warning about `eval` in the depe
 ## Follow-up
 
 The embedded analytics source remains intentionally empty until a final source is supplied. The existing adapter will defer-load it and expose its configured fallback link when that data is added.
+
+## Review round 1 refinements
+
+- Replaced Fabric's shared three-line inbound connector with five named inbound path elements. Each source now has its own line into the trusted data layer, and selection highlights only that line plus the shared outbound path.
+- Replaced the generic CFO + BI connection selector with six named capability-to-capability links. The selected capability now highlights its three actual relationships; the other links remain muted.
+- Added an 8-second bounded fallback timer for configured Embedded Analytics sources. A successful iframe load clears it; an explicit iframe error also reveals the fallback. This covers loads that never dispatch a usable error event.
+- Added failing-first Playwright coverage in `tests/e2e/services-visuals.spec.ts` for the Fabric and CFO + BI visual states. Both checks failed against the prior markup and pass after the refinements.
