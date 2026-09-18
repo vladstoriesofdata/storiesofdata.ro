@@ -14,8 +14,19 @@ describe("services redesign contract", () => {
     }
   });
 
-  it("provides the shared booking link through service exploration", () => {
-    expect(services.en.items.every((service) => service.exploration.url === BOOKINGS_URL)).toBe(true);
+  it("provides the shared booking link through each primary CTA", () => {
+    expect(services.en.cta).toBe("Book a discovery call");
+    expect(services.en.items.every((service) => service.primaryCta === services.en.cta)).toBe(true);
+    expect(services.en.items.every((service) => service.primaryCtaUrl === BOOKINGS_URL)).toBe(true);
+  });
+
+  it("keeps only the supplied deeper exploration URLs", () => {
+    expect(services.en.items.map((service) => service.exploration.url)).toEqual([
+      undefined,
+      "https://embedsy.io/",
+      undefined,
+      "https://demo.embedsy.io/embed/studio/63",
+    ]);
   });
 
   it("allows embedded analytics visuals to omit their source while retaining an accessible title", () => {

@@ -39,20 +39,6 @@ test("hero lede keeps Bringing and clarity on one line", async ({ page }) => {
   await expect(page.locator(".hero-heading-light")).toHaveCSS("color", "rgb(51, 51, 51)");
 });
 
-test("services visualization tab keeps original visual links", async ({ page }) => {
-  await page.setViewportSize({ width: 1280, height: 800 });
-  await page.goto("/");
-
-  const group = page.locator("#services [data-tabs]");
-  await group.getByRole("tab", { name: "Data Visualization" }).click();
-
-  await expect(
-    group.getByRole("link", { name: "Multi Line Chart with Tooltips" }),
-  ).toBeVisible();
-  await expect(group.getByRole("link", { name: "Deneb" })).toBeVisible();
-  await expect(group.getByRole("link", { name: /BI Samurai/ })).toBeVisible();
-});
-
 test("services use business-owner copy and the shared discovery CTA", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");

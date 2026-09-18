@@ -17,10 +17,11 @@ Implemented the approved English business-owner copy in `src/data/services.ts` a
 
 ## Verification
 
-- The focused e2e suite was run before the data change; it failed against the legacy implementation as expected.
-- `npm run build:com` could not complete because parallel visual work currently imports the missing `src/components/home/services/EmbeddedAnalyticsVisual.astro`.
-- `npx vitest run tests/unit/services-contract.test.ts` reports one stale assertion: it requires every exploration URL to equal `BOOKINGS_URL`, conflicting with the Task 2B requirement that Fabric and AI have no exploration URL.
+- The focused e2e suite reaches the browser but cannot launch Chromium in this environment (`spawn EPERM`).
+- `npm test` passes: 13 test files and 89 tests.
+- `npm run build:com` passes: 23 pages built. Astro reports the existing `lottie-web` `eval` warning.
+- The contract assertions now verify the shared booking URL through `primaryCtaUrl` and verify only the supplied exploration URLs.
 
 ## Scope
 
-Only `src/data/services.ts`, `tests/e2e/homepage-copy.spec.ts`, and this report are included in this task commit. Parallel worktree changes were left untouched.
+The first copy commit was followed by a test-alignment fix removing the obsolete Data Visualization assertion and updating the service contract checks. Parallel worktree changes were left untouched.
