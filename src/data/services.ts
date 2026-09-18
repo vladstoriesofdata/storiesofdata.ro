@@ -1,11 +1,49 @@
 import type { Locale } from "../lib/site";
 
-export interface Service {
+export const BOOKINGS_URL =
+  "https://bookings.cloud.microsoft/bookwithme/user/440681fea4204d06ae738c987e7a2ba0%40storiesofdata.com?anonymous&ismsaljsauthenabled";
+
+export const SERVICE_IDS = [
+  "microsoft-fabric",
+  "embedded-analytics",
+  "ai-integrations",
+  "cfo-bi",
+] as const;
+
+export const VISUAL_KINDS = [
+  "fabric",
+  "embedded-analytics",
+  "ai-integrations",
+  "cfo-bi",
+] as const;
+
+export type ServiceId = (typeof SERVICE_IDS)[number];
+export type ServiceVisualKind = (typeof VISUAL_KINDS)[number];
+
+export interface ServiceExploration {
+  label: string;
+  url?: string;
+}
+
+interface LegacyService {
   title: string;
   benefitsHeading: string;
   benefits: string[];
   helpHeading: string;
   help: string[];
+}
+
+export interface Service extends LegacyService {
+  id: ServiceId;
+  tabLabel: string;
+  headline: string;
+  summary: string;
+  primaryCta: string;
+  exploration: ServiceExploration;
+  visualKind: ServiceVisualKind;
+  visualDescription: string;
+  visualTitle: string;
+  visualSource?: string;
 }
 
 export interface ServicesCopy {
@@ -14,7 +52,32 @@ export interface ServicesCopy {
   items: Service[];
 }
 
-const en: ServicesCopy = {
+interface LegacyServicesCopy {
+  heading: string;
+  cta: string;
+  items: LegacyService[];
+}
+
+function withContract(copy: LegacyServicesCopy): ServicesCopy {
+  return {
+    heading: copy.heading,
+    cta: copy.cta,
+    items: copy.items.map((item, index) => ({
+      ...item,
+      id: SERVICE_IDS[index],
+      tabLabel: item.title,
+      headline: item.title,
+      summary: item.help[0] ?? "",
+      primaryCta: copy.cta,
+      exploration: { label: copy.cta, url: BOOKINGS_URL },
+      visualKind: VISUAL_KINDS[index],
+      visualDescription: item.title,
+      visualTitle: item.title,
+    })),
+  };
+}
+
+const en: LegacyServicesCopy = {
   heading: "Services and products",
   cta: "start a project",
   items: [
@@ -89,7 +152,7 @@ const en: ServicesCopy = {
   ],
 };
 
-const ro: ServicesCopy = {
+const ro: LegacyServicesCopy = {
   heading: "Servicii și produse",
   cta: "începe un proiect",
   items: [
@@ -165,6 +228,6 @@ const ro: ServicesCopy = {
 };
 
 export const services: Record<Locale, ServicesCopy> = {
-  en,
-  ro,
+  en: withContract(en),
+  ro: withContract(ro),
 };
