@@ -32,3 +32,8 @@ The embedded analytics source remains intentionally empty until a final source i
 - Replaced the generic CFO + BI connection selector with six named capability-to-capability links. The selected capability now highlights its three actual relationships; the other links remain muted.
 - Added an 8-second bounded fallback timer for configured Embedded Analytics sources. A successful iframe load clears it; an explicit iframe error also reveals the fallback. This covers loads that never dispatch a usable error event.
 - Added failing-first Playwright coverage in `tests/e2e/services-visuals.spec.ts` for the Fabric and CFO + BI visual states. Both checks failed against the prior markup and pass after the refinements.
+
+## Review round 2 refinement
+
+- Added a scoped `.embedded-visual [hidden] { display: none !important; }` rule so the fallback and iframe respect their HTML `hidden` state even though their visual styles use grid layout.
+- Added a failing-first browser assertion that activates the empty-source Embedded Analytics panel, confirms its placeholder is visible, and confirms the fallback stays hidden until the error or timeout path reveals it.

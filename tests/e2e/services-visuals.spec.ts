@@ -31,3 +31,13 @@ test("CFO + BI highlights the selected capability's relationships", async ({ pag
     await expect(connection).toHaveCSS("background-color", "rgb(0, 209, 142)");
   }
 });
+
+test("Embedded Analytics keeps its fallback hidden until loading fails", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+  await page.getByRole("tab", { name: "Embedded Analytics" }).click();
+
+  const visual = page.locator('[data-service-visual="embedded-analytics"] [data-embedded-visual]');
+  await expect(visual.locator("[data-embed-placeholder]")).toBeVisible();
+  await expect(visual.locator("[data-embed-fallback]")).toBeHidden();
+});
