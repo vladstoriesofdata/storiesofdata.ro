@@ -1,0 +1,64 @@
+---
+import type { Service } from "../../../data/services";
+import AiIntegrationsVisual from "./AiIntegrationsVisual.astro";
+import CfoBiVisual from "./CfoBiVisual.astro";
+import EmbeddedAnalyticsVisual from "./EmbeddedAnalyticsVisual.astro";
+import FabricVisual from "./FabricVisual.astro";
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+---
+
+<figure
+  class="service-visual-frame"
+  data-service-visual={service.id}
+  aria-label={service.visualDescription}
+>
+  {service.visualKind === "fabric" && <FabricVisual />}
+  {service.visualKind === "embedded-analytics" && (
+    <EmbeddedAnalyticsVisual source={service.visualSource} title={service.visualTitle} />
+  )}
+  {service.visualKind === "ai-integrations" && <AiIntegrationsVisual />}
+  {service.visualKind === "cfo-bi" && <CfoBiVisual />}
+  <figcaption>{service.visualDescription}</figcaption>
+</figure>
+
+<style>
+  .service-visual-frame {
+    box-sizing: border-box;
+    display: grid;
+    min-height: min(31rem, 56vw);
+    margin: 0;
+    padding: clamp(1rem, 3vw, 2rem);
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent);
+    background: var(--color-canvas-2);
+    color: var(--color-ink);
+  }
+
+  .service-visual-frame > :global(*) {
+    min-width: 0;
+  }
+
+  figcaption {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  @media (max-width: 765px) {
+    .service-visual-frame {
+      min-height: 25rem;
+      padding: 1rem;
+    }
+  }
+</style>
