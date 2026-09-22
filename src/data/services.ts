@@ -18,7 +18,13 @@ export interface Service {
   tabLabel: string;
   headline: string;
   summary: string;
-  benefits: string[];
+  benefits: (
+    | string
+    | {
+        text: string;
+        link: { label: string; url: string };
+      }
+  )[];
   primaryCta: string;
   primaryCtaUrl: string;
   exploration: ServiceExploration;
@@ -47,13 +53,23 @@ const en: ServicesCopy = {
   cta: discoveryCta,
   items: withIds([
     {
-      tabLabel: "Microsoft Fabric",
+      tabLabel: "Microsoft Fabric & Power BI",
       headline: "One connected view of your business.",
-      summary: "We connect finance, sales, operations, spreadsheets, and external systems in one dependable data foundation. Automated data movement and trusted business definitions lead to reports, dashboards, and data applications people can use.",
-      benefits: ["Make decisions using consistent, trusted numbers", "Replace repetitive reporting and spreadsheet work", "See business performance across departments in one place"],
+      summary: "We've been working with Power BI since 2018 and with Fabric since its release. If you're building your data stack on Fabric and need help or need to take your Fabric to the next level, you came to the right people. But...do you even need a data agency? We've helped dozens of customers:",
+      benefits: [
+        "Advise on data architecture, licensing and reporting with Fabric and Power BI", 
+        "Build production-ready and scalable data platforms", 
+        {
+          text: "Reduce the cost of Fabric and Power BI licenses.",
+          link: {
+            label: "Here's a use case",
+            url: "/articles/microsoft-fabric-medallion-architecture-lessons-learned",
+          },
+        },
+      ],
       primaryCta: discoveryCta,
       primaryCtaUrl: BOOKINGS_URL,
-      exploration: { label: "Explore Microsoft Fabric" },
+      exploration: { label: "Is it worth hiring a consultancy?", url: "/articles/is-it-worth-hiring-a-microsoft-fabric-consultancy-in-2026" },
       visualKind: "fabric",
       visualDescription: "Connected business data flowing into trusted decisions",
       visualTitle: "Microsoft Fabric",
@@ -61,8 +77,12 @@ const en: ServicesCopy = {
     {
       tabLabel: "Embedded Analytics",
       headline: "Give customers analytics under your own brand.",
-      summary: "We deliver secure reports and data experiences inside your branded portal or software product. Your customers and partners get useful analytics in the experience they already know.",
-      benefits: ["Launch a polished analytics experience faster", "Control branding, access, and customer experience", "Create more value and revenue from existing data"],
+      summary: "We believe embedded analytics is the future of data analytics. We know the tools and we even built the tools to make embedded analytics easy and real in your business. We built embedsy.io where we give customers a data platform where they can embed Power BI reports securely without the hassle. We help +10 customers with:",
+      benefits: [
+        "Monetizing their data with embedded analytics", 
+        "Advise on Power BI Embedded implementations", 
+        "Building data portals and data products"
+      ],
       primaryCta: discoveryCta,
       primaryCtaUrl: BOOKINGS_URL,
       exploration: { label: "Explore Embedded Analytics", url: "https://embedsy.io/" },
@@ -71,10 +91,14 @@ const en: ServicesCopy = {
       visualTitle: "Embedded Analytics",
     },
     {
-      tabLabel: "AI Integrations",
+      tabLabel: "Data & AI",
       headline: "Put AI to work on real business problems.",
-      summary: "We combine automation and assistants with forecasting and machine learning that support daily work. Practical use cases include document processing, knowledge assistants, workflow automation, demand forecasting, anomaly detection, and recommendations.",
-      benefits: ["Reduce repetitive manual work", "Help teams find and use company knowledge", "Anticipate changes and identify problems earlier"],
+      summary: "We build AI on top of your data working on real problems where artificial intelligence and machine learning models are material to the solution. Our AI team helped so far on:",
+      benefits: [
+        "Detecting asphalt defects", 
+        "Detecting animals that use man-made crossings", 
+        "Processing clinical data for more accurate predictions"
+      ],
       primaryCta: discoveryCta,
       primaryCtaUrl: BOOKINGS_URL,
       exploration: { label: "Explore AI Integrations" },
@@ -85,8 +109,12 @@ const en: ServicesCopy = {
     {
       tabLabel: "CFO + BI",
       headline: "Financial leadership and analytics, working as one team.",
-      summary: "Flexible CFO leadership is supported by analysts and data specialists who bring the numbers together. We focus on meaningful financial metrics, planning and advice, reliable data, system integration, and ongoing business reviews.",
-      benefits: ["Understand what drives profitability and cash flow", "Plan ahead with stronger financial models", "Turn disconnected operational and financial data into clear decisions"],
+      summary: "We often work with CFOs. We found that we bring the most value to a business when we work together. CFOs know what to ask and what data they need, we know how to source it and model it, make it available, and trustworthy. We often help with:",
+      benefits: [
+        "Bringing clarity to operational and financial data", 
+        "Integrating data and insights in the thinking process of executives", 
+        "Just cleaning up the data and making it trustworthy"
+      ],
       primaryCta: discoveryCta,
       primaryCtaUrl: BOOKINGS_URL,
       exploration: { label: "Explore CFO + BI", url: "https://demo.embedsy.io/embed/studio/63" },
@@ -101,10 +129,76 @@ const ro: ServicesCopy = {
   heading: "Servicii și produse",
   cta: "Programează o discuție",
   items: withIds([
-    { tabLabel: "Microsoft Fabric", headline: "O perspectivă conectată asupra afacerii tale.", summary: "Conectăm datele importante ale afacerii într-o bază de date clară și de încredere.", benefits: ["Decizii bazate pe date coerente", "Mai puțină muncă repetitivă", "O imagine comună asupra performanței"], primaryCta: "Programează o discuție", primaryCtaUrl: BOOKINGS_URL, exploration: { label: "Explorează Microsoft Fabric" }, visualKind: "fabric", visualDescription: "Date de business conectate", visualTitle: "Microsoft Fabric" },
-    { tabLabel: "Analiză integrată", headline: "Oferă clienților analize sub propriul brand.", summary: "Livrăm rapoarte și experiențe de date sigure în portalul sau produsul tău.", benefits: ["Lansezi mai rapid o experiență de analiză", "Controlezi brandul și accesul", "Creezi valoare din datele existente"], primaryCta: "Programează o discuție", primaryCtaUrl: BOOKINGS_URL, exploration: { label: "Explorează analiza integrată", url: "https://embedsy.io/" }, visualKind: "embedded-analytics", visualDescription: "Analize integrate într-un produs", visualTitle: "Analiză integrată" },
-    { tabLabel: "Integrări AI", headline: "Pune AI-ul la lucru pentru probleme reale.", summary: "Combinăm automatizarea și asistenții inteligenți cu prognoze și recomandări utile.", benefits: ["Reduci munca manuală", "Găsești mai ușor cunoștințele companiei", "Identifici mai devreme schimbările"], primaryCta: "Programează o discuție", primaryCtaUrl: BOOKINGS_URL, exploration: { label: "Explorează integrările AI" }, visualKind: "ai-integrations", visualDescription: "Automatizare și asistenți inteligenți", visualTitle: "Integrări AI" },
-    { tabLabel: "CFO + BI", headline: "Leadership financiar și analiză, într-o singură echipă.", summary: "Leadership-ul financiar flexibil este susținut de analiști și specialiști în date.", benefits: ["Înțelegi profitabilitatea și fluxul de numerar", "Planifici cu modele financiare mai bune", "Transformi datele în decizii clare"], primaryCta: "Programează o discuție", primaryCtaUrl: BOOKINGS_URL, exploration: { label: "Explorează CFO + BI", url: "https://demo.embedsy.io/embed/studio/63" }, visualKind: "cfo-bi", visualDescription: "Leadership financiar și date de încredere", visualTitle: "CFO + BI" },
+    {
+      tabLabel: "Microsoft Fabric și Power BI",
+      headline: "O perspectivă unitară asupra afacerii tale.",
+      summary: "Lucrăm cu Power BI din 2018 și cu Fabric încă de la lansare. Dacă îți construiești ecosistemul de date pe Fabric și ai nevoie de ajutor sau vrei să duci platforma Fabric la următorul nivel, ai ajuns la oamenii potriviți. Dar... chiar ai nevoie de o agenție de date? Am ajutat zeci de clienți cu:",
+      benefits: [
+        "Consultanță pentru arhitectura datelor, licențiere și raportare cu Fabric și Power BI",
+        "Construirea unor platforme de date scalabile, pregătite pentru producție",
+        {
+          text: "Reducerea costurilor licențelor Fabric și Power BI.",
+          link: {
+            label: "Iată un exemplu",
+            url: "/articles/microsoft-fabric-medallion-architecture-lessons-learned",
+          },
+        },
+      ],
+      primaryCta: "Programează o discuție",
+      primaryCtaUrl: BOOKINGS_URL,
+      exploration: { label: "Merită să colaborezi cu o firmă de consultanță?", url: "/articles/is-it-worth-hiring-a-microsoft-fabric-consultancy-in-2026" },
+      visualKind: "fabric",
+      visualDescription: "Date de business conectate, transformate în decizii de încredere",
+      visualTitle: "Microsoft Fabric",
+    },
+    {
+      tabLabel: "Analiză integrată",
+      headline: "Oferă clienților analize sub propriul brand.",
+      summary: "Credem că analiza integrată reprezintă viitorul analizei de date. Cunoaștem instrumentele și chiar am construit soluții care fac analiza integrată ușor de implementat și de folosit în afacerea ta. Am creat embedsy.io, o platformă de date prin care clienții pot integra în siguranță rapoarte Power BI, fără bătăi de cap. Până acum, am ajutat peste 10 clienți cu:",
+      benefits: [
+        "Monetizarea datelor prin analiză integrată",
+        "Consultanță pentru implementări Power BI Embedded",
+        "Construirea de portaluri și produse de date",
+      ],
+      primaryCta: "Programează o discuție",
+      primaryCtaUrl: BOOKINGS_URL,
+      exploration: { label: "Explorează analiza integrată", url: "https://embedsy.io/" },
+      visualKind: "embedded-analytics",
+      visualDescription: "Analize sigure, integrate într-o experiență de produs sub propriul brand",
+      visualTitle: "Analiză integrată",
+    },
+    {
+      tabLabel: "Date și AI",
+      headline: "Pune AI-ul la lucru pentru probleme reale.",
+      summary: "Construim soluții AI bazate pe datele tale, pentru probleme reale în care inteligența artificială și modelele de învățare automată sunt esențiale. Până acum, echipa noastră de AI a contribuit la:",
+      benefits: [
+        "Detectarea defectelor din asfalt",
+        "Detectarea animalelor care folosesc pasajele construite de oameni",
+        "Prelucrarea datelor clinice pentru predicții mai precise",
+      ],
+      primaryCta: "Programează o discuție",
+      primaryCtaUrl: BOOKINGS_URL,
+      exploration: { label: "Explorează integrările AI" },
+      visualKind: "ai-integrations",
+      visualDescription: "Automatizări și asistenți care transformă datele companiei în acțiuni",
+      visualTitle: "Integrări AI",
+    },
+    {
+      tabLabel: "CFO + BI",
+      headline: "Leadership financiar și analiză, într-o singură echipă.",
+      summary: "Lucrăm adesea cu directori financiari și am constatat că aducem cea mai mare valoare unei companii atunci când lucrăm împreună. Directorii financiari știu ce întrebări să pună și de ce date au nevoie, iar noi știm cum să le colectăm și să le modelăm, astfel încât să fie disponibile și de încredere. Îi ajutăm adesea cu:",
+      benefits: [
+        "Clarificarea datelor operaționale și financiare",
+        "Integrarea datelor și informațiilor în procesul decizional al conducerii",
+        "Curățarea datelor și transformarea lor într-o sursă de încredere",
+      ],
+      primaryCta: "Programează o discuție",
+      primaryCtaUrl: BOOKINGS_URL,
+      exploration: { label: "Explorează CFO + BI", url: "https://demo.embedsy.io/embed/studio/63" },
+      visualKind: "cfo-bi",
+      visualDescription: "Leadership financiar și date de încredere care lucrează împreună",
+      visualTitle: "CFO + BI",
+    },
   ]),
 };
 

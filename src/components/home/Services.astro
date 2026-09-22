@@ -65,7 +65,18 @@ const copy = services[site.locale];
               <p class="services-stage-summary">{item.summary}</p>
               <ul class="services-stage-benefits">
                 {item.benefits.map((benefit) => (
-                  <li>{benefit}</li>
+                  <li>
+                    {typeof benefit === "string" ? (
+                      benefit
+                    ) : (
+                      <span>
+                        {benefit.text}{" "}
+                        <a href={benefit.link.url} style="text-decoration: underline;">
+                          {benefit.link.label}
+                        </a>
+                      </span>
+                    )}
+                  </li>
                 ))}
               </ul>
               <div class="services-stage-actions">
