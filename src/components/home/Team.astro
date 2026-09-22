@@ -5,6 +5,7 @@ import LottieGraphic from "./LottieGraphic.astro";
 import connectedDots from "../../assets/lottie/connected-dots-loop.json?url";
 import teamVlad from "../../assets/brand/team-vlad.png";
 import teamIrinel from "../../assets/brand/team-irinel.png";
+import teamAttila from "../../assets/brand/team-attila.png";
 import iconEmail from "../../assets/brand/icon-email.svg";
 
 const site = getSiteConfig(import.meta.env);
@@ -13,6 +14,7 @@ const copy = team[site.locale];
 const photos = {
   vlad: teamVlad,
   irinel: teamIrinel,
+  attila: teamAttila,
 } as const;
 ---
 <section

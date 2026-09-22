@@ -5,7 +5,7 @@ export interface TeamMember {
   role: string;
   bio: string;
   email: string;
-  photo: "vlad" | "irinel";
+  photo: "vlad" | "irinel" | "attila";
 }
 
 export interface TeamCopy {
@@ -30,6 +30,13 @@ const en: TeamCopy = {
       email: "irinel@storiesofdata.com",
       photo: "irinel",
     },
+    {
+      name: "Attila Csukás",
+      role: "DATA ANALYST",
+      bio: "I’ve always been interested in data. During my studies, statistics was my favourite subject because it showed me how patterns can be uncovered, assumptions tested, and conclusions grounded in evidence. With a background in marketing, I’ve worked in a variety of roles, applying my skills and creativity in different situations. Throughout that journey, my curiosity about data has remained a constant. At Stories of Data, I now bring these interests together. Using Microsoft Fabric, I collect and process data to turn it into practical, useful information.",
+      email: "attila@storiesofdata.com",
+      photo: "attila",
+    },
   ],
 };
 
@@ -49,6 +56,13 @@ const ro: TeamCopy = {
       bio: "Parcursul meu în lumea datelor a început în timpul studiilor de statistică, iar în ultimii ani mi-am transformat pasiunea într-o carieră. Am lucrat la proiecte diverse: de la construirea rapoartelor, planificarea obiectivelor și prognozarea vânzărilor cu tehnici de machine learning până la construirea de data pipelines și soluții BI. Acum mă concentrez pe dezvoltare BI și data engineering și, deși lucrez cu mai multe instrumente BI, Power BI este alegerea mea principală. Îmi place munca din culise: să preiau date brute și dezordonate, să le transform în data pipelines curate și să livrez perspective clare și valoroase, acordând o atenție deosebită experienței utilizatorului.",
       email: "irinel@storiesofdata.com",
       photo: "irinel",
+    },
+    {
+      name: "Attila Csukás",
+      role: "ANALIST DE DATE",
+      bio: "Datele m-au interesat dintotdeauna. În timpul studiilor, statistica a fost materia mea preferată, deoarece mi-a arătat cum putem descoperi tipare, testa ipoteze și formula concluzii bazate pe dovezi. Cu o pregătire în marketing, am lucrat în diverse roluri, folosindu-mi abilitățile și creativitatea în situații variate. Pe tot acest parcurs, curiozitatea mea față de date a rămas o constantă. La Stories of Data, îmbin acum aceste interese. Folosesc Microsoft Fabric pentru a colecta și prelucra date, transformându-le în informații utile, cu aplicabilitate practică.",
+      email: "attila@storiesofdata.com",
+      photo: "attila",
     },
   ],
 };
