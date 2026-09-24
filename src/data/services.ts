@@ -16,7 +16,6 @@ export interface ServiceExploration {
 export interface Service {
   id: ServiceId;
   tabLabel: string;
-  headline: string;
   summary: string;
   benefits: (
     | string
@@ -54,8 +53,7 @@ const en: ServicesCopy = {
   items: withIds([
     {
       tabLabel: "Microsoft Fabric & Power BI",
-      headline: "One connected view of your business.",
-      summary: "We've been working with Power BI since 2018 and with Fabric since its release. If you're building your data stack on Fabric and need help or need to take your Fabric to the next level, you came to the right people. But...do you even need a data agency? We've helped dozens of customers:",
+      summary: "We've been working with Power BI since 2018 and with Fabric since its release. If you're building your data stack on Fabric and need help or need to take your Fabric to the next level, you came to the right people. We've helped dozens of customers:",
       benefits: [
         "Advise on data architecture, licensing and reporting with Fabric and Power BI", 
         "Build production-ready and scalable data platforms", 
@@ -76,7 +74,6 @@ const en: ServicesCopy = {
     },
     {
       tabLabel: "Embedded Analytics",
-      headline: "Give customers analytics under your own brand.",
       summary: "We believe embedded analytics is the future of data analytics. We know the tools and we even built the tools to make embedded analytics easy and real in your business. We built embedsy.io where we give customers a data platform where they can embed Power BI reports securely without the hassle. We help +10 customers with:",
       benefits: [
         "Monetizing their data with embedded analytics", 
@@ -92,7 +89,6 @@ const en: ServicesCopy = {
     },
     {
       tabLabel: "Data & AI",
-      headline: "Put AI to work on real business problems.",
       summary: "We build AI on top of your data working on real problems where artificial intelligence and machine learning models are material to the solution. Our AI team helped so far on:",
       benefits: [
         "Detecting asphalt defects", 
@@ -108,7 +104,6 @@ const en: ServicesCopy = {
     },
     {
       tabLabel: "CFO + BI",
-      headline: "Financial leadership and analytics, working as one team.",
       summary: "We often work with CFOs. We found that we bring the most value to a business when we work together. CFOs know what to ask and what data they need, we know how to source it and model it, make it available, and trustworthy. We often help with:",
       benefits: [
         "Bringing clarity to operational and financial data", 
@@ -131,8 +126,7 @@ const ro: ServicesCopy = {
   items: withIds([
     {
       tabLabel: "Microsoft Fabric și Power BI",
-      headline: "O perspectivă unitară asupra afacerii tale.",
-      summary: "Lucrăm cu Power BI din 2018 și cu Fabric încă de la lansare. Dacă îți construiești ecosistemul de date pe Fabric și ai nevoie de ajutor sau vrei să duci platforma Fabric la următorul nivel, ai ajuns la oamenii potriviți. Dar... chiar ai nevoie de o agenție de date? Am ajutat zeci de clienți cu:",
+      summary: "Lucrăm cu Power BI din 2018 și cu Fabric încă de la lansare. Dacă îți construiești ecosistemul de date pe Fabric și ai nevoie de ajutor sau vrei să duci platforma Fabric la următorul nivel, ai ajuns la oamenii potriviți. Am ajutat zeci de clienți cu:",
       benefits: [
         "Consultanță pentru arhitectura datelor, licențiere și raportare cu Fabric și Power BI",
         "Construirea unor platforme de date scalabile, pregătite pentru producție",
@@ -153,7 +147,6 @@ const ro: ServicesCopy = {
     },
     {
       tabLabel: "Analiză integrată",
-      headline: "Oferă clienților analize sub propriul brand.",
       summary: "Credem că analiza integrată reprezintă viitorul analizei de date. Cunoaștem instrumentele și chiar am construit soluții care fac analiza integrată ușor de implementat și de folosit în afacerea ta. Am creat embedsy.io, o platformă de date prin care clienții pot integra în siguranță rapoarte Power BI, fără bătăi de cap. Până acum, am ajutat peste 10 clienți cu:",
       benefits: [
         "Monetizarea datelor prin analiză integrată",
@@ -169,7 +162,6 @@ const ro: ServicesCopy = {
     },
     {
       tabLabel: "Date și AI",
-      headline: "Pune AI-ul la lucru pentru probleme reale.",
       summary: "Construim soluții AI bazate pe datele tale, pentru probleme reale în care inteligența artificială și modelele de învățare automată sunt esențiale. Până acum, echipa noastră de AI a contribuit la:",
       benefits: [
         "Detectarea defectelor din asfalt",
@@ -185,7 +177,6 @@ const ro: ServicesCopy = {
     },
     {
       tabLabel: "CFO + BI",
-      headline: "Leadership financiar și analiză, într-o singură echipă.",
       summary: "Lucrăm adesea cu directori financiari și am constatat că aducem cea mai mare valoare unei companii atunci când lucrăm împreună. Directorii financiari știu ce întrebări să pună și de ce date au nevoie, iar noi știm cum să le colectăm și să le modelăm, astfel încât să fie disponibile și de încredere. Îi ajutăm adesea cu:",
       benefits: [
         "Clarificarea datelor operaționale și financiare",
