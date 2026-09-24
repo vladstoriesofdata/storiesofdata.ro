@@ -1,0 +1,87 @@
+---
+interface Props {
+  source?: string;
+  title: string;
+}
+
+const { source, title } = Astro.props;
+---
+
+<div class="embedded-visual" data-embedded-visual data-source={source ?? ""}>
+  <div class="embed-toolbar">
+    <span class="embed-brand">Your brand</span>
+    <span class="embed-status" data-embed-status aria-live="polite">
+      {source ? "Preparing analytics preview" : "Analytics preview coming soon"}
+    </span>
+  </div>
+  <div class="embed-panel">
+    <div class="embed-placeholder" data-embed-placeholder>
+      <span class="mini-kicker">Embedded analytics</span>
+      <strong>{source ? "Analytics, inside your product" : "A branded analytics experience is being prepared."}</strong>
+      <p>{source ? "The preview will load when this visual is ready." : "This panel supports a secure analytics experience without disrupting the service stage."}</p>
+    </div>
+    <iframe title={title} data-embed-frame hidden></iframe>
+    <div class="embed-fallback" data-embed-fallback hidden>
+      <strong>We could not load this analytics preview.</strong>
+      {source ? <a href={source} target="_blank" rel="noreferrer">Open the full analytics experience</a> : <span>Please check back when the preview is available.</span>}
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-embedded-visual]").forEach((root) => {
+    const source = root.dataset.source;
+    const frame = root.querySelector<HTMLIFrameElement>("[data-embed-frame]");
+    const placeholder = root.querySelector<HTMLElement>("[data-embed-placeholder]");
+    const fallback = root.querySelector<HTMLElement>("[data-embed-fallback]");
+    const status = root.querySelector<HTMLElement>("[data-embed-status]");
+    if (!source || !frame) return;
+
+    let fallbackTimer: number | undefined;
+    const clearFallbackTimer = () => {
+      if (fallbackTimer !== undefined) window.clearTimeout(fallbackTimer);
+    };
+    const showFallback = () => {
+      clearFallbackTimer();
+      frame.hidden = true;
+      if (fallback) fallback.hidden = false;
+      if (placeholder) placeholder.hidden = true;
+      if (status) status.textContent = "Analytics preview unavailable";
+    };
+
+    const load = () => {
+      if (frame.src) return;
+      status && (status.textContent = "Loading analytics preview");
+      frame.addEventListener("load", () => {
+        clearFallbackTimer();
+        frame.hidden = false;
+        if (placeholder) placeholder.hidden = true;
+        status && (status.textContent = "Analytics preview ready");
+      }, { once: true });
+      frame.addEventListener("error", showFallback, { once: true });
+      frame.src = source;
+      fallbackTimer = window.setTimeout(showFallback, 8000);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          load();
+          observer.disconnect();
+        }
+      }, { rootMargin: "160px" });
+      observer.observe(root);
+    } else {
+      load();
+    }
+  });
+</script>
+
+<style>
+  .embedded-visual { display: grid; grid-template-rows: auto 1fr; min-height: 100%; overflow: hidden; border: 1px solid var(--color-ink); background: var(--color-paper); font-family: var(--font-sans); }
+  .embedded-visual [hidden] { display: none !important; }
+  .embed-toolbar { display: flex; justify-content: space-between; gap: 1rem; padding: 0.75rem 1rem; border-bottom: 1px solid color-mix(in srgb, var(--color-ink) 22%, transparent); font-size: 0.75rem; }.embed-brand { font-family: var(--font-display); font-size: 0.9rem; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; }.embed-status { color: var(--color-muted); text-align: right; }
+  .embed-panel { position: relative; min-height: 17rem; }.embed-placeholder, .embed-fallback { position: absolute; inset: 0; display: grid; align-content: center; justify-items: start; gap: 0.85rem; padding: clamp(1.5rem, 6vw, 4rem); background: linear-gradient(135deg, var(--color-canvas-2), color-mix(in srgb, var(--color-accent) 12%, var(--color-canvas-2))); }.embed-placeholder strong, .embed-fallback strong { max-width: 18rem; font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 3.2rem); font-weight: 900; line-height: 0.9; }.embed-placeholder p { max-width: 27rem; margin: 0; font-size: clamp(0.85rem, 1.4vw, 1rem); line-height: 1.45; }.mini-kicker { color: var(--color-muted); font-family: var(--font-display); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .embed-panel iframe { width: 100%; height: 100%; min-height: 17rem; border: 0; }.embed-fallback { background: var(--color-paper); }.embed-fallback a { color: var(--color-ink); font-weight: 700; }.embed-fallback a:focus-visible { outline: 3px solid var(--color-accent); outline-offset: 3px; }
+  @media (max-width: 480px) { .embed-toolbar { align-items: flex-start; flex-direction: column; gap: 0.25rem; }.embed-status { text-align: left; }.embed-panel, .embed-panel iframe { min-height: 20rem; } }
+</style>

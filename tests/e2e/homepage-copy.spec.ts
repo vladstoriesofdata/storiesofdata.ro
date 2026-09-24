@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { BOOKINGS_URL } from "../../src/data/services";
 
 test("homepage chapters keep original bold, italic, and embedsy link", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
@@ -38,16 +39,69 @@ test("hero lede keeps Bringing and clarity on one line", async ({ page }) => {
   await expect(page.locator(".hero-heading-light")).toHaveCSS("color", "rgb(51, 51, 51)");
 });
 
-test("services visualization tab keeps original visual links", async ({ page }) => {
+test("services use business-owner copy and the shared discovery CTA", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
 
-  const group = page.locator("#services [data-tabs]");
-  await group.getByRole("tab", { name: "Data Visualization" }).click();
+  const services = page.locator("#services");
+  await expect(services.getByRole("tab")).toHaveText([
+    "Microsoft Fabric",
+    "Embedded Analytics",
+    "AI Integrations",
+    "CFO + BI",
+  ]);
 
-  await expect(
-    group.getByRole("link", { name: "Multi Line Chart with Tooltips" }),
-  ).toBeVisible();
-  await expect(group.getByRole("link", { name: "Deneb" })).toBeVisible();
-  await expect(group.getByRole("link", { name: /BI Samurai/ })).toBeVisible();
+  const expected = [
+    {
+      tab: "Microsoft Fabric",
+      headline: "One connected view of your business.",
+      exploration: undefined,
+    },
+    {
+      tab: "Embedded Analytics",
+      headline: "Give customers analytics under your own brand.",
+      exploration: "https://embedsy.io/",
+    },
+    {
+      tab: "AI Integrations",
+      headline: "Put AI to work on real business problems.",
+      exploration: undefined,
+    },
+    {
+      tab: "CFO + BI",
+      headline: "Financial leadership and analytics, working as one team.",
+      exploration: "https://demo.embedsy.io/embed/studio/63",
+    },
+  ];
+
+  for (const item of expected) {
+    await services.getByRole("tab", { name: item.tab }).click();
+    const panel = services.locator('[role="tabpanel"]:not([hidden])');
+    await expect(panel.getByRole("heading", { name: item.headline })).toBeVisible();
+    await expect(panel.locator("li")).toHaveCount(3);
+
+    const cta = panel.getByRole("link", { name: "Book a discovery call" });
+    await expect(cta).toHaveAttribute("href", BOOKINGS_URL);
+
+    const exploration = panel.getByRole("link", { name: /Explore/ });
+    if (item.exploration) {
+      await expect(exploration).toHaveAttribute("href", item.exploration);
+    } else {
+      await expect(exploration).toHaveCount(0);
+    }
+  }
+});
+
+test("embedded analytics remains a framed placeholder until a source is supplied", async ({ page }) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await page.goto("/");
+
+  const services = page.locator("#services");
+  await services.getByRole("tab", { name: "Embedded Analytics" }).click();
+
+  const visual = services.locator('[data-service-panel="embedded-analytics"] [data-embedded-visual]');
+  await expect(visual).toHaveAttribute("data-source", "");
+  await expect(visual.locator("[data-embed-frame]")).toBeHidden();
+  await expect(visual.locator("[data-embed-placeholder]")).toBeVisible();
+  await expect(visual.getByText("Analytics preview coming soon")).toBeVisible();
 });

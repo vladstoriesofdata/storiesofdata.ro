@@ -1,0 +1,42 @@
+<div class="ai-visual" data-ai-visual data-active-state="automate">
+  <p class="eyebrow">AI in the flow of work</p>
+  <div class="ai-choices" role="group" aria-label="Choose an AI use case">
+    <button type="button" aria-pressed="true" data-ai-state="automate" data-input="Invoice and request queue" data-capability="Workflow automation" data-outcome="A prepared next step, ready for your team.">Automate repetitive work</button>
+    <button type="button" aria-pressed="false" data-ai-state="knowledge" data-input="Policies, files and project notes" data-capability="Knowledge assistant" data-outcome="A dependable answer with the right business context.">Find and use company knowledge</button>
+    <button type="button" aria-pressed="false" data-ai-state="predict" data-input="Sales, inventory and operations data" data-capability="Forecasting and anomaly detection" data-outcome="An early signal your team can act on.">Predict and detect change</button>
+  </div>
+  <div class="ai-flow" aria-live="polite">
+    <article><span>Business input</span><strong data-ai-input>Invoice and request queue</strong></article>
+    <span class="flow-arrow" aria-hidden="true">→</span>
+    <article class="ai-capability"><span>AI capability</span><strong data-ai-capability>Workflow automation</strong></article>
+    <span class="flow-arrow" aria-hidden="true">→</span>
+    <article><span>Concrete outcome</span><strong data-ai-outcome>A prepared next step, ready for your team.</strong></article>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-ai-visual]").forEach((root) => {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-ai-state]")];
+    const input = root.querySelector<HTMLElement>("[data-ai-input]");
+    const capability = root.querySelector<HTMLElement>("[data-ai-capability]");
+    const outcome = root.querySelector<HTMLElement>("[data-ai-outcome]");
+
+    const selectState = (button: HTMLButtonElement) => {
+      root.dataset.activeState = button.dataset.aiState ?? "";
+      buttons.forEach((choice) => choice.setAttribute("aria-pressed", String(choice === button)));
+      if (input) input.textContent = button.dataset.input ?? "";
+      if (capability) capability.textContent = button.dataset.capability ?? "";
+      if (outcome) outcome.textContent = button.dataset.outcome ?? "";
+    };
+
+    buttons.forEach((button) => button.addEventListener("click", () => selectState(button)));
+  });
+</script>
+
+<style>
+  .ai-visual { display: grid; align-content: space-between; gap: clamp(1rem, 4vw, 2rem); min-height: 100%; font-family: var(--font-sans); }.eyebrow { margin: 0; color: var(--color-muted); font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .ai-choices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; }.ai-choices button { min-height: 4.5rem; padding: 0.65rem; border: 1px solid color-mix(in srgb, var(--color-ink) 25%, transparent); background: var(--color-paper); color: var(--color-ink); font: inherit; font-size: clamp(0.75rem, 1.35vw, 0.95rem); font-weight: 600; line-height: 1.2; text-align: left; cursor: pointer; }.ai-choices button:hover, .ai-choices button[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-accent); }.ai-choices button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+  .ai-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: stretch; gap: 0.5rem; }.ai-flow article { display: grid; align-content: space-between; min-height: 9rem; padding: 1rem; border: 1px solid var(--color-ink); background: var(--color-paper); }.ai-flow article span { color: var(--color-muted); font-family: var(--font-display); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.07em; text-transform: uppercase; }.ai-flow article strong { font-size: clamp(0.85rem, 1.6vw, 1.1rem); line-height: 1.2; }.ai-capability { background: color-mix(in srgb, var(--color-accent) 32%, var(--color-paper)) !important; }.flow-arrow { align-self: center; color: var(--color-ink); font-size: 1.5rem; }
+  @media (max-width: 580px) { .ai-choices { grid-template-columns: 1fr; }.ai-choices button { min-height: 3.2rem; }.ai-flow { grid-template-columns: 1fr; gap: 0.35rem; }.ai-flow article { min-height: 5.4rem; }.flow-arrow { justify-self: center; transform: rotate(90deg); } }
+  @media (prefers-reduced-motion: no-preference) { .ai-choices button, .ai-flow article { transition: background-color 160ms ease, border-color 160ms ease; } }
+</style>

@@ -1,0 +1,71 @@
+<div class="fabric-visual" data-fabric-visual data-active-source="finance">
+  <p class="eyebrow">Connected business data</p>
+  <div class="fabric-diagram">
+    <div class="fabric-sources" aria-label="Business data sources">
+      <button type="button" aria-pressed="true" data-source="finance" data-outcome="See cash flow and profitability from trusted finance data.">Finance</button>
+      <button type="button" aria-pressed="false" data-source="crm" data-outcome="Connect customer activity to the decisions your teams make.">CRM</button>
+      <button type="button" aria-pressed="false" data-source="operations" data-outcome="Spot operational changes before they become reporting work.">Operations</button>
+      <button type="button" aria-pressed="false" data-source="spreadsheets" data-outcome="Replace disconnected spreadsheet handoffs with one shared view.">Spreadsheets</button>
+      <button type="button" aria-pressed="false" data-source="external" data-outcome="Bring important outside signals into the same business picture.">External systems</button>
+    </div>
+
+    <div class="fabric-inbound-paths" aria-hidden="true">
+      <span class="fabric-inbound-path fabric-inbound-path--finance"></span>
+      <span class="fabric-inbound-path fabric-inbound-path--crm"></span>
+      <span class="fabric-inbound-path fabric-inbound-path--operations"></span>
+      <span class="fabric-inbound-path fabric-inbound-path--spreadsheets"></span>
+      <span class="fabric-inbound-path fabric-inbound-path--external"></span>
+    </div>
+
+    <div class="trusted-layer">
+      <span class="layer-mark">◆</span>
+      <strong>Trusted data layer</strong>
+      <small>Shared definitions and automated movement</small>
+    </div>
+
+    <div class="fabric-outbound-paths" aria-hidden="true"><span></span><span></span><span></span></div>
+
+    <div class="fabric-outcomes" aria-label="Business outcomes">
+      <span>Reports</span>
+      <span>Applications</span>
+      <span>Decisions</span>
+    </div>
+  </div>
+  <p class="fabric-outcome" data-fabric-outcome aria-live="polite">See cash flow and profitability from trusted finance data.</p>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-fabric-visual]").forEach((root) => {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>("[data-source]")];
+    const outcome = root.querySelector<HTMLElement>("[data-fabric-outcome]");
+
+    const selectSource = (button: HTMLButtonElement) => {
+      root.dataset.activeSource = button.dataset.source ?? "";
+      buttons.forEach((source) => source.setAttribute("aria-pressed", String(source === button)));
+      if (outcome) outcome.textContent = button.dataset.outcome ?? "";
+    };
+
+    buttons.forEach((button) => button.addEventListener("click", () => selectSource(button)));
+  });
+</script>
+
+<style>
+  .fabric-visual { display: grid; grid-template-rows: auto 1fr auto; gap: 1rem; min-height: 100%; font-family: var(--font-sans); }
+  .eyebrow { margin: 0; color: var(--color-muted); font-family: var(--font-display); font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+  .fabric-diagram { display: grid; grid-template-columns: minmax(6.5rem, 1fr) 1.5rem minmax(9rem, 1.25fr) 1.5rem minmax(5rem, 0.8fr); align-items: center; }
+  .fabric-sources, .fabric-outcomes { display: grid; gap: 0.5rem; }
+  .fabric-sources button, .fabric-outcomes span { box-sizing: border-box; min-height: 2.15rem; border: 1px solid color-mix(in srgb, var(--color-ink) 30%, transparent); background: var(--color-paper); color: var(--color-ink); font: inherit; font-size: clamp(0.68rem, 1.25vw, 0.85rem); line-height: 1.1; }
+  .fabric-sources button { padding: 0.35rem 0.5rem; text-align: left; cursor: pointer; }
+  .fabric-sources button:hover, .fabric-sources button[aria-pressed="true"] { border-color: var(--color-ink); background: var(--color-accent); }
+  .fabric-sources button:focus-visible { outline: 3px solid var(--color-ink); outline-offset: 2px; }
+  .fabric-inbound-paths { display: grid; grid-template-rows: repeat(5, minmax(2.15rem, 1fr)); gap: 0.5rem; }
+  .fabric-inbound-path, .fabric-outbound-paths span { display: block; align-self: center; height: 1px; background: color-mix(in srgb, var(--color-ink) 58%, transparent); }
+  .trusted-layer { display: grid; gap: 0.45rem; padding: 1.25rem 0.75rem; border: 1px solid var(--color-ink); background: var(--color-paper); text-align: center; }
+  .trusted-layer strong { font-family: var(--font-display); font-size: clamp(1.15rem, 2.2vw, 1.75rem); line-height: 0.9; }.trusted-layer small { color: var(--color-muted); font-size: 0.72rem; }.layer-mark { color: var(--color-accent); font-size: 1.5rem; }
+  .fabric-outbound-paths { display: grid; gap: 0.85rem; align-content: center; }.fabric-outcomes span { display: grid; place-items: center; padding: 0.35rem; font-family: var(--font-display); font-weight: 800; text-align: center; }
+  .fabric-outcome { min-height: 2.6em; margin: 0; padding-top: 1rem; border-top: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent); font-size: clamp(0.8rem, 1.5vw, 1rem); line-height: 1.35; }
+  .fabric-visual[data-active-source] .trusted-layer, .fabric-visual[data-active-source] .fabric-outcomes span { box-shadow: inset 0 0 0 1px var(--color-accent); }
+  .fabric-visual[data-active-source="finance"] .fabric-inbound-path--finance, .fabric-visual[data-active-source="crm"] .fabric-inbound-path--crm, .fabric-visual[data-active-source="operations"] .fabric-inbound-path--operations, .fabric-visual[data-active-source="spreadsheets"] .fabric-inbound-path--spreadsheets, .fabric-visual[data-active-source="external"] .fabric-inbound-path--external, .fabric-visual[data-active-source] .fabric-outbound-paths span { height: 2px; background: var(--color-accent); }
+  @media (max-width: 480px) { .fabric-diagram { grid-template-columns: 1fr; gap: 0.65rem; }.fabric-inbound-paths, .fabric-outbound-paths { grid-template-columns: repeat(5, 1fr); grid-template-rows: none; gap: 0.25rem; }.fabric-outbound-paths { grid-template-columns: repeat(3, 1fr); }.fabric-inbound-path, .fabric-outbound-paths span { align-self: center; }.fabric-outcomes { grid-template-columns: repeat(3, 1fr); }.fabric-outcomes span { min-height: 2.8rem; } }
+  @media (prefers-reduced-motion: no-preference) { .fabric-sources button, .trusted-layer, .fabric-outcomes span { transition: background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease; } }
+</style>
