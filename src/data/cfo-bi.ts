@@ -49,7 +49,7 @@ const en = {
 };
 
 const ro: typeof en = {
-  title: "CFO & BI la o fracțiune din costuri pentru afacerea ta.",
+  title: "CFO sau BI la o fracțiune din costuri pentru afacerea ta.",
   intro: "Echipa noastră de experți financiari și analiști de date te ajută să obții claritate asupra finanțelor companiei tale și să fructifici datele cu care operezi în fiecare zi.",
   back: "← Toate serviciile", nav: ["Testimoniale", "Asistent AI de date", "Proces", "Contact"],
   cards: [
