@@ -9,14 +9,14 @@ test("desktop services tabs swap the active two-column panel within a 1366 by 76
   await expect(services).toHaveAttribute("data-services-mode", "desktop");
   await expect(controls).toHaveRole("tablist");
   await expect(controls.getByRole("tab")).toHaveText([
-    "Microsoft Fabric",
+    "Microsoft Fabric & Power BI",
     "Embedded Analytics",
-    "AI Integrations",
+    "Data & AI",
     "CFO + BI",
   ]);
 
-  await controls.getByRole("tab", { name: "AI Integrations" }).click();
-  await expect(controls.getByRole("tab", { name: "AI Integrations" })).toHaveAttribute(
+  await controls.getByRole("tab", { name: "Data & AI" }).click();
+  await expect(controls.getByRole("tab", { name: "Data & AI" })).toHaveAttribute(
     "aria-selected",
     "true",
   );
@@ -25,7 +25,7 @@ test("desktop services tabs swap the active two-column panel within a 1366 by 76
   const panel = services.locator('[data-service-panel="ai-integrations"]');
   await expect(panel).toBeVisible();
   await expect(
-    panel.getByRole("heading", { name: "Put AI to work on real business problems." }),
+    panel.locator(".services-stage-summary"),
   ).toBeVisible();
 
   await page.waitForFunction(() => typeof window.__homepageMoveTo === "function");
@@ -74,8 +74,8 @@ test("mobile services act as a one-open-at-a-time accordion", async ({ page }) =
   const controls = services.locator("[data-services-controls]");
   const fabricItem = services.locator('[data-service-accordion-item="microsoft-fabric"]');
   const aiItem = services.locator('[data-service-accordion-item="ai-integrations"]');
-  const fabric = fabricItem.getByRole("button", { name: "Microsoft Fabric" });
-  const ai = aiItem.getByRole("button", { name: "AI Integrations" });
+  const fabric = fabricItem.getByRole("button", { name: "Microsoft Fabric & Power BI" });
+  const ai = aiItem.getByRole("button", { name: "Data & AI" });
   await expect(services).toHaveAttribute("data-services-mode", "mobile");
   await expect(controls).not.toHaveAttribute("role", "tablist");
   await expect(fabric).toHaveAttribute("aria-expanded", "true");
