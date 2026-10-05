@@ -21,26 +21,26 @@ const anchors = ["client-stories", "ai-video", "process", "contact"];
   initCfoHero();
 </script>
 <style is:global>
-  .cfo-hero-original { --ink:#14213D; --muted:#565F73; --line:#DCDDD6; --yellow:#E8B93F; --green:#1F7A5C; --green-bg:#E7F3EE; --red:#B23A3A; --red-bg:#FBEBEB; border:1.5px solid var(--yellow); border-radius:16px; padding:36px 40px; max-width:980px; margin:0 auto; height:380px; overflow:hidden; display:flex; gap:40px; align-items:stretch; opacity:0; transform:translateY(14px); animation:cfoFrameIn .6s ease-out forwards; font-family:Inter,sans-serif; }
+  .cfo-hero-original { --ink:var(--color-ink); --muted:var(--color-muted); --line:var(--cfo-line); --yellow:var(--color-accent); --green:#1F7A5C; --green-bg:#E7F3EE; --red:#B23A3A; --red-bg:#FBEBEB; border:1.5px solid var(--yellow); border-radius:16px; padding:36px 40px; max-width:980px; margin:0 auto; height:380px; overflow:hidden; display:flex; gap:40px; align-items:stretch; opacity:0; transform:translateY(14px); animation:cfoFrameIn .6s ease-out forwards; font-family:var(--font-sans); }
   @keyframes cfoFrameIn { to { opacity:1; transform:translateY(0); } }
   .cfo-hero-original .hero-main { flex:1.4; min-width:0; display:flex; flex-direction:column; }
-  .cfo-hero-original h1 { font-family:Fraunces,Georgia,serif; font-size:32px; line-height:1.2; font-weight:600; color:var(--ink); margin:0 0 16px; }
+  .cfo-hero-original h1 { font-family:var(--font-display); font-size:32px; line-height:1.2; font-weight:600; color:var(--ink); margin:0 0 16px; }
   .cfo-hero-original p.sub { font-size:15px; line-height:1.6; color:var(--muted); margin:0 0 28px; }
   .cfo-hero-original .nav-pills { display:flex; flex-wrap:nowrap; gap:10px; margin-top:auto; }
-  .cfo-hero-original .nav-pill { font-family:'IBM Plex Mono',monospace; font-size:12px; font-weight:600; letter-spacing:.02em; color:var(--ink); border:1.5px solid var(--line); border-radius:8px; padding:9px 16px; cursor:pointer; background:white; transition:border-color .2s,background .2s; text-decoration:none; display:inline-block; }
-  .cfo-hero-original .nav-pill:hover { border-color:var(--yellow); background:rgba(232,185,63,.1); }
+  .cfo-hero-original .nav-pill { font-family:var(--font-sans); font-size:12px; font-weight:600; letter-spacing:.02em; color:var(--ink); border:1.5px solid var(--line); border-radius:8px; padding:9px 16px; cursor:pointer; background:white; transition:border-color .2s,background .2s; text-decoration:none; display:inline-block; }
+  .cfo-hero-original .nav-pill:hover { border-color:var(--yellow); background:var(--cfo-tint); }
   .cfo-hero-original .capability-col { flex:1; min-width:220px; display:flex; flex-direction:column; justify-content:center; }
   .cfo-hero-original .capability-box { border:1px solid var(--line); border-radius:10px; padding:20px 22px; height:200px; display:flex; flex-direction:column; justify-content:center; background:white; overflow:hidden; }
   .cfo-hero-original #capability-inner { transition:opacity .3s ease; width:100%; }
   .cfo-hero-original .cap-text-wrap { margin:0 0 20px; }
-  .cfo-hero-original .cap-eyebrow { display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink); background:rgba(232,185,63,.22); padding:4px 9px; border-radius:5px; margin:0 0 8px; transition:opacity .25s ease; }
+  .cfo-hero-original .cap-eyebrow { display:inline-block; font-family:var(--font-sans); font-size:10px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; color:var(--ink); background:var(--cfo-tint); padding:4px 9px; border-radius:5px; margin:0 0 8px; transition:opacity .25s ease; }
   .cfo-hero-original .cap-text { font-size:13px; line-height:1.5; color:var(--muted); margin:0; transition:opacity .25s ease; height:39px; overflow:hidden; }
   .cfo-hero-original .cap-dots { display:flex; justify-content:center; gap:8px; margin-top:14px; }
   .cfo-hero-original .cap-dot { width:6px; height:6px; border:0; padding:0; border-radius:50%; background:var(--line); cursor:pointer; transition:background .3s ease,transform .15s ease; }
   .cfo-hero-original .cap-dot:hover { transform:scale(1.4); }.cfo-hero-original .cap-dot.active { background:var(--yellow); }
-  .cfo-hero-original .axis text { font-family:'IBM Plex Mono',monospace; font-size:8px; fill:var(--muted); }.cfo-hero-original .axis path,.cfo-hero-original .axis line { stroke:none; }
-  .cfo-hero-original .mini-kpi { font-family:'IBM Plex Mono',monospace; font-variant-numeric:tabular-nums; font-size:22px; font-weight:600; color:var(--ink); margin:0 0 4px; }
-  .cfo-hero-original .mini-delta { display:inline-flex; align-items:center; font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; }.cfo-hero-original .mini-delta.pos { color:var(--green); background:var(--green-bg); }.cfo-hero-original .mini-delta.neg { color:var(--red); background:var(--red-bg); }
+  .cfo-hero-original .axis text { font-family:var(--font-sans); font-size:8px; fill:var(--muted); }.cfo-hero-original .axis path,.cfo-hero-original .axis line { stroke:none; }
+  .cfo-hero-original .mini-kpi { font-family:var(--font-sans); font-variant-numeric:tabular-nums; font-size:22px; font-weight:600; color:var(--ink); margin:0 0 4px; }
+  .cfo-hero-original .mini-delta { display:inline-flex; align-items:center; font-family:var(--font-sans); font-size:11px; font-weight:600; padding:2px 8px; border-radius:20px; }.cfo-hero-original .mini-delta.pos { color:var(--green); background:var(--green-bg); }.cfo-hero-original .mini-delta.neg { color:var(--red); background:var(--red-bg); }
   .cfo-hero-original .mini-track { position:relative; width:100%; height:7px; border-radius:4px; background:#EDEEEA; margin-top:8px; }.cfo-hero-original .mini-fill { height:100%; border-radius:4px; width:0; }
   @media(max-width:700px) { .cfo-hero-original { flex-direction:column; height:auto; padding:24px; gap:22px; }.cfo-hero-original .hero-main { display:contents; }.cfo-hero-original h1 { order:1; }.cfo-hero-original p.sub { order:2; }.cfo-hero-original .cap-text-wrap { order:3; }.cfo-hero-original .cap-text { height:auto; }.cfo-hero-original .capability-col { order:4; width:100%; }.cfo-hero-original .nav-pills { order:5; margin-top:20px; flex-wrap:wrap; gap:10px; }.cfo-hero-original .nav-pill { flex:1 1 120px; text-align:center; }.cfo-hero-original .capability-box { padding:16px; border-radius:12px; height:180px; } }
   @media(prefers-reduced-motion:reduce) { .cfo-hero-original { animation:none; opacity:1; transform:none; } }

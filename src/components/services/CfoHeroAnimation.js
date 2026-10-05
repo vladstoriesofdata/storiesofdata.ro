@@ -8,7 +8,9 @@ export async function initCfoHero() {
     script.onload = resolve; script.onerror = reject; document.head.append(script);
   });
   const d3 = window.d3, ro = root.dataset.locale === 'ro';
-  const ink = '#14213D', muted = '#565F73', red = '#B23A3A', amber = '#C6801B';
+  const tokens = getComputedStyle(root);
+  const ink = tokens.getPropertyValue('--color-ink').trim(), muted = tokens.getPropertyValue('--color-muted').trim(), red = '#B23A3A', amber = '#C6801B';
+  const font = tokens.getPropertyValue('--font-sans').trim();
   const el = root.querySelector('#capability-inner');
   const labels = ro ? ['Benchmark creștere venituri','EBITDA% vs target','Alertă Cash Balance','Reconciliere','Realizat vs. buget'] : ['Revenue growth benchmark','EBITDA% vs target','Cash Balance alert','Reconciliation','Actual vs. budget'];
   const descriptions = ro ? [
@@ -18,7 +20,7 @@ export async function initCfoHero() {
     'Vezi momentul în care sistemele tale încep să nu mai fie de acord, înainte să devină o problemă reală.',
     'Află încă din timpul lunii dacă ești peste sau sub plan.',
   ] : ['See your growth rate alongside the market average, in context.','Track your margin against your target, updated automatically.','Get warned months before your balance falls below the threshold.','See when your systems start to disagree, before it becomes a real problem.','Know during the month whether you are above or below plan.'];
-  const textStyle = (s, size = 9) => s.attr('font-family','IBM Plex Mono, monospace').attr('font-size',size).attr('fill',ink);
+  const textStyle = (s, size = 9) => s.attr('font-family',font).attr('font-size',size).attr('fill',ink);
   function render(index) {
     const width = el.clientWidth || 260;
     if (index === 0) {
@@ -27,7 +29,7 @@ export async function initCfoHero() {
       const svg = d3.select(el).append('svg').attr('width',width).attr('height',62);
       data.forEach((item,i) => {
         const g = svg.append('g').attr('transform',`translate(96,${i*28+8})`);
-        g.append('text').attr('x',-8).attr('y',12).attr('text-anchor','end').attr('font-family','Inter, sans-serif').attr('font-size',10).attr('fill',ink).text(item.label);
+        g.append('text').attr('x',-8).attr('y',12).attr('text-anchor','end').attr('font-family',font).attr('font-size',10).attr('fill',ink).text(item.label);
         g.append('rect').attr('height',13).attr('width',0).attr('fill',item.color).attr('rx',2).transition().delay(100+i*150).duration(700).ease(d3.easeCubicOut).attr('width',x(item.value));
         textStyle(g.append('text').attr('x',6).attr('y',10).attr('opacity',0),10).attr('font-weight',600).text('0%').transition().delay(100+i*150).duration(700).ease(d3.easeCubicOut).attr('opacity',1).attr('x',x(item.value)+6).tween('text',function(){const n=d3.interpolateNumber(0,item.value);return t=>this.textContent=n(t).toFixed(1)+'%';});
       });

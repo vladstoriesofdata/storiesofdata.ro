@@ -3,6 +3,9 @@ import { getSiteConfig, withBase } from "../lib/site";
 import { home } from "../data/home";
 import { ui } from "../data/ui";
 
+interface Props { subject?: string; messageLabel?: string; messagePlaceholder?: string; }
+const { subject = "New enquiry — Stories of Data", messageLabel, messagePlaceholder } = Astro.props;
+
 const site = getSiteConfig(import.meta.env);
 const copy = home[site.locale].form;
 const uiCopy = ui[site.locale];
@@ -22,7 +25,7 @@ const disabled = !endpoint || !accessKey;
 <input
   type="hidden"
   name="subject"
-  value="New enquiry — Stories of Data"
+  value={subject}
 />
   <label class="contact-field">
     {copy.name}
@@ -33,12 +36,12 @@ const disabled = !endpoint || !accessKey;
     <input type="email" name="email" required disabled={disabled} placeholder="your@company.com" />
   </label>
   <label class="contact-field contact-field-message">
-    {copy.message}
+    {messageLabel ?? copy.message}
     <textarea
       name="message"
       required
       disabled={disabled}
-      placeholder={copy.messagePlaceholder}></textarea>
+      placeholder={messagePlaceholder ?? copy.messagePlaceholder}></textarea>
   </label>
   <p class="contact-privacy">
     <label>

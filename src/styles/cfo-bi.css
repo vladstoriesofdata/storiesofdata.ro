@@ -1,0 +1,102 @@
+/* Service-page surfaces share the site's typography and color tokens. */
+body[data-chrome="doc"] main:has(.cfo-page) { max-width: none; padding: 0; margin: 0; }
+.cfo-page {
+  --cfo-line: #dedede;
+  --cfo-tint: color-mix(in srgb, var(--color-accent) 12%, var(--color-paper));
+  font-family: var(--font-sans);
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+.cfo-page .cfo-wrap { max-width: 1100px; }
+.cfo-page .cfo-hero-original {
+  max-width: none;
+  height: auto;
+  min-height: 420px;
+  background: var(--color-canvas);
+  border: 0;
+  border-radius: 0;
+  padding: 48px;
+}
+.cfo-page .cfo-hero-original h1 {
+  font-family: var(--font-display);
+  font-size: clamp(38px, 4.5vw, 58px);
+  font-weight: 800;
+  line-height: 1.06;
+  margin-bottom: 24px;
+}
+.cfo-page .cfo-hero-original .sub { font-size: 16px; }
+.cfo-page .cfo-hero-original .cap-text { height: auto; min-height: 39px; }
+.cfo-page .cfo-hero-original .cap-eyebrow,
+.cfo-page .eyebrow,
+.cfo-page .ai-section-label {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 0;
+  background: transparent;
+  padding-left: 0;
+  color: var(--color-ink);
+}
+.cfo-page .cfo-hero-original .nav-pills { flex-wrap: wrap; margin-top: 24px; }
+.cfo-page .cfo-hero-original .nav-pill,
+.cfo-page .option-buttons button,
+.cfo-page .cfo-button {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 40px;
+  padding: 12px 22px;
+}
+.cfo-page .cfo-hero-original .nav-pill { background: var(--color-paper); }
+.cfo-page .capability { border: 0; border-radius: 0; background: var(--color-canvas); padding: 36px; }
+.cfo-page .card-tag {
+  font: 800 26px/1.15 var(--font-display);
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--color-ink);
+  border-radius: 0;
+  padding: 0;
+}
+.cfo-page .capability-visual,
+.cfo-page .cfo-hero-original .capability-box { border: 0; border-radius: 0; background: var(--color-paper); }
+.cfo-page .option-buttons button[aria-pressed="true"],
+.cfo-page .option-buttons button:hover { background: var(--color-accent); border-color: var(--color-accent); }
+.cfo-page .client-story { border-radius: 0; }
+.cfo-page .client-chip { border-radius: 0; font-family: var(--font-display); text-transform: uppercase; font-size: 20px; }
+.cfo-page .cfo-button,
+.cfo-page .client-story .cfo-button { background: var(--color-accent); color: var(--color-ink); border: 1px solid var(--color-accent); }
+.cfo-page .cfo-button:hover { background: var(--color-paper); }
+.cfo-page .ai-video h2,
+.cfo-page .process > h2,
+.cfo-page .cfo-contact h2 { font: 800 clamp(32px, 4vw, 44px)/1.1 var(--font-display); text-transform: uppercase; }
+.cfo-page .video-panel,
+.cfo-page .eai-card,
+.cfo-page .process li { background: var(--color-canvas); border-radius: 0; }
+.cfo-page .video-frame { border-radius: 0; }
+.cfo-page .cfo-contact { background: var(--color-canvas); border: 0; border-radius: 0; }
+.cfo-page .duration { border-radius: 40px; }
+.cfo-page .cfo-contact .contact-form { text-align: left; margin-top: 24px; }
+.cfo-page .cfo-contact .contact-field-message,
+.cfo-page .cfo-contact .contact-privacy,
+.cfo-page .cfo-contact .contact-submit,
+.cfo-page .cfo-contact .contact-unconfigured { grid-column: 1 / -1; }
+.cfo-page .cfo-contact .contact-submit { justify-self: start; margin-top: 0; }
+.cfo-page .cfo-contact .contact-field,
+.cfo-page .cfo-contact .contact-privacy,
+.cfo-page .cfo-contact .contact-privacy a,
+.cfo-page .cfo-contact input,
+.cfo-page .cfo-contact textarea { color: var(--color-ink); }
+.cfo-page .cfo-contact input:not([type="checkbox"]),
+.cfo-page .cfo-contact textarea { border-bottom-color: var(--color-muted); }
+.cfo-page .cfo-contact input::placeholder,
+.cfo-page .cfo-contact textarea::placeholder { color: var(--color-muted); }
+.cfo-page .cfo-contact input:focus,
+.cfo-page .cfo-contact textarea:focus { border-bottom-color: var(--color-accent); }
+.cfo-page svg text { font-family: var(--font-sans); }
+.cfo-page :focus-visible { outline-color: var(--color-ink); }
+@media (max-width: 700px) {
+  .cfo-page .cfo-hero-original { padding: 24px; min-height: 0; }
+  .cfo-page .capability { padding: 24px; }
+  .cfo-page .cfo-hero-original h1 { font-size: 38px; }
+}

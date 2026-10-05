@@ -13,36 +13,36 @@ const nodes = [
 ---
 <div class="eai-card d1 eai-diagram-card">
   <div class="eai-diagram-scroll">
-    <svg id="eaiDiagramSvg" viewBox="0 0 1102 231" preserveAspectRatio="xMidYMid meet" style="font-family:Inter,system-ui,sans-serif;background:transparent;">
-      <defs><marker id="eai-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L9 5L2 9" fill="none" stroke="#14213D" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></marker></defs>
+    <svg id="eaiDiagramSvg" viewBox="0 0 1102 231" preserveAspectRatio="xMidYMid meet" style="font-family:var(--font-sans);background:transparent;">
+      <defs><marker id="eai-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L9 5L2 9" fill="none" stroke="var(--color-ink)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></marker></defs>
       {nodes.map((node,i) => {const cx=99+i*210;return <g>
-        <rect x={cx-75} y="40" width="150" height="115" rx="14" fill="#FFFFFF" stroke="#DCDDD6" stroke-width="1.5" />
+        <rect x={cx-75} y="40" width="150" height="115" rx="14" fill="#FFFFFF" stroke="var(--cfo-line)" stroke-width="1.5" />
         {node.image ? <image href={node.image} x={cx-26} y="52" width="52" height="52" preserveAspectRatio="xMidYMid meet" /> : <text x={cx} y="81.4" text-anchor="middle" dominant-baseline="middle" font-size="30">👤</text>}
-        <text x={cx} y={node.image ? 120 : 113.6} text-anchor="middle" fill="#14213D" font-size="13" font-weight="700">{node.label}</text>
-        {node.sub.map((line,j) => <text x={cx} y={(node.image ? 135 : 129.6)+j*13} text-anchor="middle" fill="#565F73" font-size="10.5">{line}</text>)}
+        <text x={cx} y={node.image ? 120 : 113.6} text-anchor="middle" fill="var(--color-ink)" font-size="13" font-weight="700">{node.label}</text>
+        {node.sub.map((line,j) => <text x={cx} y={(node.image ? 135 : 129.6)+j*13} text-anchor="middle" fill="var(--color-muted)" font-size="10.5">{line}</text>)}
       </g>;})}
-      {[178,388,598,808].map(x => <><line x1={x} y1="97.5" x2={x+48} y2="97.5" stroke="#14213D" stroke-width="2" marker-end="url(#eai-arr)" /><line class="eai-flow-line" x1={x} y1="97.5" x2={x+48} y2="97.5" stroke="#E8B93F" stroke-width="3" /></>)}
-      <rect x="864" y="24" width="214" height="187" rx="16" fill="rgba(232,185,63,0.10)" stroke="#E8B93F" stroke-width="2.2" />
-      <text x="971" y="51" text-anchor="middle" fill="#14213D" font-size="13" font-weight="700">{ro ? 'Asistent AI de date' : 'AI data assistant'}</text>
-      <g><rect x="880" y="64" width="182" height="69" rx="10" fill="#FFFFFF" stroke="#EAD08A" stroke-width="1.6" />
+      {[178,388,598,808].map(x => <><line x1={x} y1="97.5" x2={x+48} y2="97.5" stroke="var(--color-ink)" stroke-width="2" marker-end="url(#eai-arr)" /><line class="eai-flow-line" x1={x} y1="97.5" x2={x+48} y2="97.5" stroke="var(--color-accent)" stroke-width="3" /></>)}
+      <rect x="864" y="24" width="214" height="187" rx="16" fill="var(--cfo-tint)" stroke="var(--color-accent)" stroke-width="2.2" />
+      <text x="971" y="51" text-anchor="middle" fill="var(--color-ink)" font-size="13" font-weight="700">{ro ? 'Asistent AI de date' : 'AI data assistant'}</text>
+      <g><rect x="880" y="64" width="182" height="69" rx="10" fill="#FFFFFF" stroke="var(--color-accent)" stroke-width="1.6" />
         <text x="971" y="84.7" text-anchor="middle" dominant-baseline="middle" font-size="20">💬</text>
-        <text x="971" y="105.4" text-anchor="middle" fill="#14213D" font-size="12" font-weight="700">{ro ? 'Răspuns în limbaj natural' : 'Natural-language answer'}</text>
-        <text x="971" y="120.58" text-anchor="middle" fill="#565F73" font-size="10">{ro ? 'Q&A pe modelul semantic' : 'Q&A on the semantic model'}</text>
+        <text x="971" y="105.4" text-anchor="middle" fill="var(--color-ink)" font-size="12" font-weight="700">{ro ? 'Răspuns în limbaj natural' : 'Natural-language answer'}</text>
+        <text x="971" y="120.58" text-anchor="middle" fill="var(--color-muted)" font-size="10">{ro ? 'Q&A pe modelul semantic' : 'Q&A on the semantic model'}</text>
       </g>
-      <g><rect x="880" y="149" width="182" height="46" rx="10" fill="#FFFFFF" stroke="#EAD08A" stroke-width="1.4" />
+      <g><rect x="880" y="149" width="182" height="46" rx="10" fill="#FFFFFF" stroke="var(--color-accent)" stroke-width="1.4" />
         <image href="https://cdn-icons-png.flaticon.com/512/4856/4856668.png" x="891" y="159" width="26" height="26" preserveAspectRatio="xMidYMid meet" />
-        <text x="924" y="168" dominant-baseline="middle" fill="#14213D" font-size="11.5" font-weight="700">{ro ? 'Prompturi salvate' : 'Saved prompts'}</text>
-        <text x="924" y="184" dominant-baseline="middle" fill="#565F73" font-size="10">{ro ? 'Reutilizabile între sesiuni' : 'Reusable across sessions'}</text>
+        <text x="924" y="168" dominant-baseline="middle" fill="var(--color-ink)" font-size="11.5" font-weight="700">{ro ? 'Prompturi salvate' : 'Saved prompts'}</text>
+        <text x="924" y="184" dominant-baseline="middle" fill="var(--color-muted)" font-size="10">{ro ? 'Reutilizabile între sesiuni' : 'Reusable across sessions'}</text>
       </g>
-      <g><rect x="24" y="235" width="380" height="66" rx="10" fill="#FBF7EE" stroke="#DCDDD6" stroke-width="1.4" /><circle cx="38" cy="250" r="5" fill="#E8B93F" />
-        <text x="50" y="254" fill="#14213D" font-size="11.5" font-weight="700">{ro ? 'Asistent AI de date' : 'AI data assistant'}</text>
-        {(ro ? ['Întrebări și răspunsuri conversaționale, fundamentate pe','metadatele modelului semantic. Răspunde în limbaj natural și','explică măsurile.'] : ['Conversational questions and answers grounded in','semantic model metadata. It responds in natural language','and explains measures.']).map((line,i) => <text x="35" y={269+i*13} fill="#565F73" font-size="10">{line}</text>)}
+      <g><rect x="24" y="235" width="380" height="66" rx="10" fill="var(--color-canvas-2)" stroke="var(--cfo-line)" stroke-width="1.4" /><circle cx="38" cy="250" r="5" fill="var(--color-accent)" />
+        <text x="50" y="254" fill="var(--color-ink)" font-size="11.5" font-weight="700">{ro ? 'Asistent AI de date' : 'AI data assistant'}</text>
+        {(ro ? ['Întrebări și răspunsuri conversaționale, fundamentate pe','metadatele modelului semantic. Răspunde în limbaj natural și','explică măsurile.'] : ['Conversational questions and answers grounded in','semantic model metadata. It responds in natural language','and explains measures.']).map((line,i) => <text x="35" y={269+i*13} fill="var(--color-muted)" font-size="10">{line}</text>)}
       </g>
     </svg>
   </div>
 </div>
 <style>
-  .eai-card { background:#FBF7EE; border-radius:12px; opacity:0; transform:translateY(14px); animation:eaiStepIn .5s ease-out forwards; }
+  .eai-card { background:var(--color-canvas-2); border-radius:12px; opacity:0; transform:translateY(14px); animation:eaiStepIn .5s ease-out forwards; }
   .d1 { animation-delay:.05s; }.eai-diagram-card { padding:14px; }.eai-diagram-scroll { overflow-x:auto; -webkit-overflow-scrolling:touch; }
   svg { display:block; width:100%; min-width:820px; height:auto; }
   .eai-flow-line { stroke-dasharray:6 10; opacity:.9; animation:eaiDash 1.25s linear infinite; pointer-events:none; }

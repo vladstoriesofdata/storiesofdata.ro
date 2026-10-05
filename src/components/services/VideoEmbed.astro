@@ -1,0 +1,40 @@
+---
+import type { Locale } from "../../lib/site";
+interface Props { locale: Locale; }
+const ro = Astro.props.locale === "ro";
+---
+<div class="consent-video" data-consent-video>
+  <iframe src="https://www.youtube.com/embed/aajHzak8Ujc" title={ro ? "Prezentare Asistent AI de date" : "AI data assistant presentation"} loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <div class="video-consent" data-video-consent hidden>
+    <span class="play-icon" aria-hidden="true">▶</span>
+    <p>{ro ? "Pentru a reda acest videoclip YouTube, permite conținutul video în preferințele de cookie-uri." : "To play this YouTube video, allow video content in your cookie preferences."}</p>
+    <button type="button" class="iubenda-cs-preferences-link">{ro ? "Preferințe cookie-uri" : "Cookie preferences"}</button>
+    <a href="https://www.youtube.com/watch?v=aajHzak8Ujc" target="_blank" rel="noopener noreferrer">{ro ? "Vezi pe YouTube ↗" : "Watch on YouTube ↗"}</a>
+  </div>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-consent-video]').forEach(root => {
+    const notice = root.querySelector<HTMLElement>('[data-video-consent]');
+    if (!notice) return;
+    const sync = () => {
+      const frame = root.querySelector('iframe');
+      const source = frame?.getAttribute('src');
+      notice.hidden = Boolean(source && source !== 'about:blank');
+      if (frame && !frame.allowFullscreen) frame.allowFullscreen = true;
+    };
+    // Iubenda replaces the iframe on activation, stripping Astro's scope attribute.
+    new MutationObserver(sync).observe(root, { childList: true, subtree: true, attributes: true, attributeFilter: ['src'] });
+    sync();
+  });
+</script>
+<style>
+  .consent-video { position:relative; width:100%; aspect-ratio:16 / 9; background:var(--color-ink); }
+  .consent-video :global(iframe) { position:absolute; inset:0; display:block; width:100%; height:100%; border:0; }
+  .video-consent { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:14px; padding:24px; text-align:center; background:var(--color-canvas-2); color:var(--color-ink); }
+  .play-icon { color:var(--color-accent); font-size:32px; }
+  p { max-width:440px; margin:0; font:14px/1.6 var(--font-sans); }
+  button { cursor:pointer; border:1px solid var(--color-accent); background:var(--color-accent); color:var(--color-ink); border-radius:40px; padding:10px 24px; font:700 17px var(--font-display); text-transform:uppercase; }
+  a { font:13px var(--font-sans); color:var(--color-ink); }
+  [hidden] { display:none !important; }
+  @media(max-width:480px) { .consent-video { min-height:280px; }.video-consent { gap:10px; padding:16px; } }
+</style>
