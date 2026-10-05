@@ -1,0 +1,177 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getSiteConfig, withBase } from "../../lib/site";
+import { cfoBi, integrations, clients } from "../../data/cfo-bi";
+import { BOOKINGS_URL } from "../../data/services";
+import btrImage from "../../assets/covers/btr.png";
+import CompanyBand from "../../components/services/CompanyBand.astro";
+import CapabilityAnimation from "../../components/services/CapabilityAnimation.astro";
+import AiAssistantDiagram from "../../components/services/AiAssistantDiagram.astro";
+import CfoHero from "../../components/services/CfoHero.astro";
+
+const site = getSiteConfig(import.meta.env);
+const copy = cfoBi[site.locale];
+const storyAssets = [
+  { image: "https://aviairfresh.com/wp-content/uploads/2025/02/fresh-freight-cargo-plane-4.webp", href: "https://aviairfresh.com" },
+  { image: btrImage.src, href: "https://www.thebtr.group" },
+];
+---
+
+<BaseLayout title="CFO + BI | Stories of Data" description={copy.intro} path="/services/cfo-bi/">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" />
+  <div class="cfo-page">
+    <div class="cfo-wrap">
+      <a class="back-link" href={withBase("/#services", import.meta.env.BASE_URL)}>{copy.back}</a>
+      <CfoHero locale={site.locale} />
+
+      <div class="capabilities">
+        {copy.cards.map((card, i) => (
+          <section class="capability" aria-labelledby={`capability-${i}`} data-capability>
+            <div class="capability-copy">
+              <h2 id={`capability-${i}`} class="card-tag">{card.title}</h2>
+              {card.options.map((option, j) => <p data-option={j} hidden={j !== 0}>{option[1]}</p>)}
+            </div>
+            <div class="capability-visual">
+              {card.options.map((_, j) => <CapabilityAnimation card={i} option={j} locale={site.locale} />)}
+            </div>
+            <div class="option-buttons" aria-label={card.title}>
+              {card.options.map((option, j) => <button type="button" data-option-button={j} aria-pressed={j === 0 ? "true" : "false"}>{option[0]}</button>)}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <CompanyBand label={copy.software} companies={integrations} />
+
+      <section id="client-stories" class="client-stories" aria-label={copy.nav[0]}>
+        {copy.stories.map((story, i) => (
+          <article class="client-story" data-story={i} hidden={i !== 0} style={`--story-image: url("${storyAssets[i].image}")`}>
+            <div class="story-content">
+              <span class="client-chip">{story.name}</span>
+              <h2>{story.title}</h2>
+              <p>{story.body}</p>
+              <a class="cfo-button" href={storyAssets[i].href} target="_blank" rel="noopener noreferrer">{copy.visit}</a>
+            </div>
+          </article>
+        ))}
+        <div class="story-buttons" aria-label={copy.nav[0]}>
+          {copy.stories.map((story, i) => <button type="button" data-story-button={i} aria-pressed={i === 0 ? "true" : "false"}>{story.name}</button>)}
+        </div>
+      </section>
+
+      <CompanyBand label={copy.clients} companies={clients} />
+
+      <section id="ai-video" class="ai-video" aria-labelledby="ai-heading">
+        <span class="eyebrow">{copy.ai}</span>
+        <h2 id="ai-heading">{copy.aiTitle}</h2>
+        <p>{copy.aiIntro}</p>
+        <h3 class="ai-section-label">{copy.howItWorks}</h3>
+        <AiAssistantDiagram locale={site.locale} />
+        <h3 class="ai-section-label">{copy.liveDemo}</h3>
+        <div class="video-panel">
+          <h3>{copy.video}</h3>
+          <div class="video-frame"><iframe src="https://www.youtube.com/embed/aajHzak8Ujc" title={site.locale === "ro" ? "Prezentare Asistent AI de date" : "AI data assistant presentation"} loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+        </div>
+      </section>
+
+      <section id="process" class="process" aria-labelledby="process-heading">
+        <h2 id="process-heading">{copy.process}</h2>
+        <ol>
+          {copy.steps.map(([duration, title, description], i) => (
+            <li><span class="step-number" aria-hidden="true">{i + 1}</span><span class="duration">{duration}</span><h3>{title}</h3><p>{description}</p></li>
+          ))}
+        </ol>
+      </section>
+
+      <section id="contact" class="cfo-contact" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">{copy.contact}</h2>
+        <p>{copy.contactIntro}</p>
+        <div class="contact-actions"><a class="cfo-button" href="mailto:vlad@embedsy.io">{copy.email} ↗</a><a href={BOOKINGS_URL}>{copy.book} ↗</a></div>
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-capability]").forEach((card) => {
+    card.querySelectorAll<HTMLButtonElement>("[data-option-button]").forEach((button) => {
+      button.addEventListener("click", () => {
+        card.querySelectorAll<HTMLButtonElement>("[data-option-button]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+        card.querySelectorAll<HTMLElement>("[data-option-visual]").forEach((item) => { item.hidden = item.dataset.optionVisual !== button.dataset.optionButton; });
+        card.querySelectorAll<HTMLElement>("[data-option]").forEach((item) => { item.hidden = item.dataset.option !== button.dataset.optionButton; });
+      });
+    });
+  });
+  document.querySelectorAll<HTMLButtonElement>("[data-story-button]").forEach((button) => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll<HTMLButtonElement>("[data-story-button]").forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+      document.querySelectorAll<HTMLElement>("[data-story]").forEach((item) => { item.hidden = item.dataset.story !== button.dataset.storyButton; });
+    });
+  });
+</script>
+
+<style>
+  :global(body[data-chrome="doc"] main:has(.cfo-page)) { max-width: none; padding: 0; margin: 0; }
+  .cfo-page { --ink: #14213d; --muted: #565f73; --gold: #e8b93f; --cream: #fbf7ee; --line: #dcddd6; background: var(--cream); color: var(--ink); padding: 32px 24px 80px; }
+  .cfo-page :global(*) { box-sizing: border-box; }
+  .cfo-wrap { max-width: 1100px; margin: auto; }
+  .cfo-page h1, .cfo-page h2 { font-family: Georgia, serif; font-weight: 600; text-transform: none; line-height: 1.2; color: var(--ink); }
+  .cfo-page h1 { font-size: clamp(30px, 3.5vw, 44px); margin: 16px 0 22px; }
+  .cfo-page h2 { font-size: clamp(26px, 3vw, 34px); }
+  .cfo-page h3 { font-family: var(--font-sans); font-size: 16px; font-weight: 700; line-height: 1.4; text-transform: none; color: var(--ink); margin: 0 0 8px; }
+  .cfo-page p { font-size: 15px; line-height: 1.7; color: var(--muted); }
+  .cfo-page a, .cfo-page button { transition: background .2s, border-color .2s; }
+  .cfo-page :global(:focus-visible) { outline: 3px solid #2952f5; outline-offset: 4px; }
+  .cfo-page section[id] { scroll-margin-top: 40px; }
+  .back-link { display: inline-block; font-size: 13px; text-decoration: none; margin-bottom: 24px; }
+  .back-link:hover { text-decoration: underline; }
+  .cfo-hero { background: white; border: 1.5px solid var(--gold); border-radius: 18px; padding: 40px; display: grid; grid-template-columns: 1.4fr 1fr; gap: 40px; align-items: center; }
+  .eyebrow { font-family: ui-monospace, monospace; font-size: 11px; letter-spacing: .07em; text-transform: uppercase; }
+  .eyebrow { display: inline-block; background: #f8efd4; padding: 6px 10px; border-radius: 5px; }
+  .jump-links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+  .jump-links a { font-family: ui-monospace, monospace; font-size: 11px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; text-decoration: none; }
+  .jump-links a:hover { border-color: var(--gold); background: var(--cream); }
+  .hero-metric p { font-size: 13px; }
+  .metric-chart { background: white; border: 1px solid var(--line); border-radius: 12px; padding: 28px 22px; margin-top: 24px; }
+  .metric-chart strong { display: block; font-family: ui-monospace, monospace; font-size: 28px; }
+  .delta { display: inline-block; background: #fbebeb; color: #b23a3a; border-radius: 20px; padding: 4px 9px; font-family: ui-monospace, monospace; font-size: 11px; margin: 8px 0 14px; }
+  .metric-track { height: 10px; background: #f0f0ec; border-radius: 4px; position: relative; }
+  .metric-track span { display: block; width: 65%; background: #b23a3a; height: 100%; border-radius: 4px; }
+  .metric-track i { position: absolute; left: 80%; top: -8px; height: 28px; border-left: 2px dotted var(--muted); }
+  .metric-chart small { display: block; margin: 12px 0 0 73%; font-size: 10px; }
+  .capabilities { display: grid; gap: 40px; padding: 60px 0; }
+  .capability { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 40px; padding: 30px; border: 1.5px solid var(--gold); border-radius: 16px; background: white; }
+  .cfo-page .card-tag { font: 600 12px/1.5 ui-monospace, monospace; background: var(--ink); color: white; display: inline-block; border-radius: 24px; padding: 6px 12px; }
+  .capability-copy p { font-size: 18px; min-height: 85px; }
+  .capability-visual { min-height: 170px; border: 1px solid var(--line); border-radius: 10px; display: grid; align-items: center; justify-items: center; padding: 20px; }
+  .option-buttons { display: flex; flex-wrap: wrap; grid-column: 1 / -1; gap: 10px; }
+  .option-buttons button, .story-buttons button { cursor: pointer; color: var(--muted); border: 1px solid var(--line); background: white; border-radius: 8px; padding: 12px 16px; font: 600 12px var(--font-sans); }
+  .option-buttons button[aria-pressed="true"], .option-buttons button:hover { color: var(--ink); background: #f8efd4; border-color: var(--gold); }
+  .client-stories { margin: 25px 0 55px; }
+  .client-story { position: relative; min-height: 490px; padding: 52px; border-radius: 16px; overflow: hidden; background: #14213d; color: white; }
+  .client-story::before { content: ""; position: absolute; inset: 0; background-image: linear-gradient(90deg, rgba(6,10,20,.94), rgba(6,10,20,.6) 55%, rgba(6,10,20,.1)), var(--story-image); background-size: cover; background-position: center; }
+  .story-content { position: relative; max-width: 550px; }.client-chip { display: inline-block; background: white; color: var(--ink); padding: 10px 16px; border-radius: 6px; font-weight: 700; margin-bottom: 24px; }
+  .cfo-page .client-story h2 { color: white; font-family: var(--font-sans); font-size: 34px; }.cfo-page .client-story p { color: #e4e7ee; }
+  .cfo-button { display: inline-block; background: var(--ink); color: white; border-radius: 8px; padding: 14px 24px; font-size: 14px; font-weight: 600; text-decoration: none; }.cfo-button:hover { background: #253c69; }.client-story .cfo-button { background: #2952f5; }
+  .story-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; margin-top: 22px; }.story-buttons button { border: 0; border-top: 3px solid var(--line); border-radius: 0; background: transparent; }.story-buttons button[aria-pressed="true"] { color: var(--ink); border-color: #2952f5; }
+  .ai-video { font-family:Inter,system-ui,sans-serif; max-width:900px; margin:45px auto 60px; padding:20px; line-height:1.5; }
+  .ai-video .eyebrow { font-family:'IBM Plex Mono',monospace; font-size:11px; font-weight:600; letter-spacing:.08em; background:rgba(232,185,63,.28); padding:5px 11px; border-radius:20px; }
+  .ai-video h2 { font-family:Fraunces,Georgia,serif; font-weight:600; font-size:clamp(24px,4.5vw,34px); margin:16px 0 10px; line-height:1.15; }
+  .ai-video > p { font-size:clamp(14px,2vw,16px); max-width:620px; margin:0; line-height:1.5; }
+  .video-panel { background:#FBF7EE; border-radius:12px; padding:18px; display:flex; flex-direction:column; opacity:0; transform:translateY(14px); animation:eaiStepIn .5s ease-out .18s forwards; transition:transform .25s ease,box-shadow .25s ease; }
+  .video-panel:hover { transform:translateY(-4px); box-shadow:0 8px 20px rgba(20,33,61,.10); }
+  .video-panel h3 { font-family:Inter,sans-serif; font-weight:700; font-size:16px; margin:0; }
+  .video-frame { position:relative; width:100%; padding-bottom:56.25%; border-radius:10px; overflow:hidden; background:#000; margin-top:14px; }
+  .video-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  @keyframes eaiStepIn { to { opacity:1; transform:translateY(0); } }
+  .cfo-page .ai-section-label { font:600 11px/1.5 'IBM Plex Mono',monospace; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin:34px 0 12px; }
+  .ai-section-label + .video-panel { margin-top:0; }
+  @media(max-width:720px) { .ai-video { padding:24px 14px 32px; }.cfo-page .ai-section-label { margin:26px 0 10px; }.video-panel { padding:14px; } }
+  @media(prefers-reduced-motion:reduce) { .video-panel { animation:none; opacity:1; transform:none; }.video-panel:hover { transform:none; } }
+  .process { max-width: 760px; margin: auto; }.process > h2 { text-align: center; margin-bottom: 30px; }.process ol { list-style: none; padding: 0; display: grid; gap: 16px; }.process li { position: relative; border-radius: 12px; background: #f2ead7; padding: 24px; }.process p { margin: 0; }.step-number { display: grid; place-items: center; width: 30px; height: 30px; background: #e4dcc6; border-radius: 50%; margin-bottom: 16px; font: 600 13px ui-monospace, monospace; }.duration { position: absolute; right: 24px; top: 24px; background: #ead8a6; padding: 6px 12px; border-radius: 20px; font: 600 11px ui-monospace, monospace; }
+  .cfo-contact { max-width: 760px; text-align: center; background: white; border: 1.5px solid var(--gold); border-radius: 20px; padding: 48px; margin: 65px auto 0; }.contact-actions { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 26px; }.contact-actions > a:last-child { font-size: 13px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 700px) {
+    .cfo-page { padding: 24px 16px 50px; }.cfo-hero { grid-template-columns: 1fr; padding: 24px; gap: 28px; }.jump-links a { flex: 1 1 40%; text-align: center; }.capability { grid-template-columns: 1fr; padding: 22px; gap: 18px; }.capability-copy p { min-height: 0; font-size: 16px; }.capabilities { padding: 40px 0; gap: 28px; }.option-buttons button { flex: 1 1 40%; padding: 10px; }.client-story { padding: 28px; min-height: 530px; }.cfo-page .client-story h2 { font-size: 28px; }.cfo-contact { padding: 28px; }.video-panel { padding: 14px; }
+  }
+</style>

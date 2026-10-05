@@ -1,0 +1,38 @@
+---
+import { companyLogos } from "../../data/cfo-bi";
+interface Props { label: string; companies: string[][]; }
+const { label, companies } = Astro.props;
+---
+<section class="company-band" aria-label={label}>
+  <p>{label}</p>
+  <div class="company-names">
+    {companies.map(([name, href]) => (
+      <a href={href} target="_blank" rel="noopener noreferrer" aria-label={name}>
+        {companyLogos[name] && <img src={companyLogos[name]} alt="" loading="lazy" data-company-logo />}
+        <span hidden={Boolean(companyLogos[name])}>{name}</span>
+      </a>
+    ))}
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLImageElement>("[data-company-logo]").forEach((image) => {
+    const showName = () => {
+      image.hidden = true;
+      const fallback = image.nextElementSibling;
+      if (fallback instanceof HTMLElement) fallback.hidden = false;
+    };
+    image.addEventListener("error", showName);
+    if (image.complete && image.naturalWidth === 0) showName();
+  });
+</script>
+<style>
+  .company-band { border-top: 1px solid #dcddd6; padding: 28px 0 40px; text-align: center; }
+  p { font: 11px/1.7 ui-monospace, monospace; letter-spacing: .07em; text-transform: uppercase; color: #565f73; margin-bottom: 28px; }
+  .company-names { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 26px 34px; }
+  a { display: flex; align-items: center; justify-content: center; text-decoration: none; font-size: 18px; font-weight: 700; color: #565f73; min-height: 36px; }
+  a:hover { color: #14213d; }
+  img { max-width: 130px; max-height: 36px; object-fit: contain; filter: grayscale(1); opacity: .65; }
+  a:hover img { filter: none; opacity: 1; }
+  [hidden] { display: none !important; }
+  @media (max-width: 700px) { .company-names { gap: 22px; } a { font-size: 16px; } img { max-width: 110px; } }
+</style>
