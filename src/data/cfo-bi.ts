@@ -76,7 +76,7 @@ const ro: typeof en = {
     ] },
   ],
   software: "Software financiar, ERP și CRM pe care îl putem integra",
-  clients: "Companii pentru care am livrat soluții CFO & BI",
+  clients: "Companii pentru care am livrat soluții CFO sau BI",
   stories: [
     { name: "Avi Air Fresh", title: "Logistică în timp real, la nivel global", body: "Avi Air Fresh este o companie din Amsterdam care transportă sute de tone de produse proaspete anual pe cale aeriană în toată lumea. Am construit împreună cu Avi Air platforma inteligentă de date care le permite să-și urmărească operațiunile în timp real, să-și consolideze veniturile și cheltuielile și să-și consolideze relațiile cu clienții lor." },
     { name: "BTR Construction Group", title: "Corelăm șantierul cu finanțele, în timp real", body: "BTR este un dezvoltator american cu proiecte de peste $100M în desfășurare. Împreună cu un CFO fracționar și echipa de BI am consolidat toate rapoartele financiare necesare pentru operațiunile șantierelor individuale și a grupului, conectate la un sistem de urmărire a etapelor de construcție." },
